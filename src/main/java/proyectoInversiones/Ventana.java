@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -21,7 +22,7 @@ public class Ventana extends JFrame implements ActionListener {
 		panel = new JPanel();
 		
 		texto = new JLabel();
-		texto.setText("<html><body> Ingrese una empresa y seleccione 'Leer Empresa' <br> para visualizar aquí sus cuentas: <body><html>");
+		texto.setText("<html><body> Ingrese una empresa y seleccione 'Leer Empresa' <br> para visualizar aqui su empresa: <body><html>");
 		texto.setPreferredSize(new Dimension (350,100));
 		texto.setBackground(Color.yellow);
 		
@@ -41,38 +42,14 @@ public class Ventana extends JFrame implements ActionListener {
 	}
 		
 	public void actionPerformed(ActionEvent evento) { 
+		String datos;
+		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		//datos = archivo.leerArchivo();
 		
-		Collection<Double> cuentas;
-	    String cadenaFinal = "";
-		NuevoLeerArchivo objetoLector = new NuevoLeerArchivo();
-		cuentas = objetoLector.leerArchivo(cuadroDeTexto.getText());
-		int i = 0;
-		
-		for(Double cuenta : cuentas){
-			i ++;
-			switch(i){
-				
-				case 1:
-			cadenaFinal += "<html><body>" + "Cuenta EBITDA: " + Double.toString(cuenta) + "<br>";
-			break;
-				case 2:
-			cadenaFinal += "<html><body>" + "Cuenta FDS: " + Double.toString(cuenta) + "<br>";	
-			break;
-				case 3:
-			cadenaFinal += "<html><body>" + "Cuenta FreeCashFlow: " + Double.toString(cuenta) + "<br>";	
-			break;
-				case 4:
-			cadenaFinal += "<html><body>" + "Cuenta IngresoNetoCont: " + Double.toString(cuenta) + "<br>";	
-			break;
-				case 5:
-			cadenaFinal += "<html><body>" + "Cuenta IngresoNetoDisc: " + Double.toString(cuenta) + "<br>";	
-			break;
-				default:
-				System.out.println("Hubo conflictos con las cuentas");
-			} 
-		}
-	texto.setText(cadenaFinal);		
-	}
-}
 
+	
+	}
+		
+	
+}
 

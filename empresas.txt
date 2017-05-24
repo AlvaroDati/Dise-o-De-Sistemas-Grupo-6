@@ -1,0 +1,662 @@
+
+ [
+        {
+            "nombre":"America Movil",
+            "inicioActividad":2000,
+            "Cuentas":
+             [
+
+            {"periodo": 2006,
+             "ebitda": 44591,
+              "fds": 0,
+              "fCashFlow":955,
+              "ingNetoOpCont": 2221,
+	      "ingNetoOpDiscont": 1051,
+              "deuda": 15},
+
+            {"periodo": 2007,
+             "ebitda": 77691,
+              "fds": 0,
+              "fCashFlow":1096,
+              "ingNetoOpCont": 3221,
+	      "ingNetoOpDiscont": 1221,
+              "deuda": 12
+		},
+            {"periodo": 2008,
+             "ebitda": 85291,
+              "fds": 1,
+              "fCashFlow":1198,
+              "ingNetoOpCont": 4568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 14
+		},
+            {"periodo": 2009,
+             "ebitda": 79463,
+              "fds": 2,
+              "fCashFlow":1234,
+              "ingNetoOpCont": 2789,
+	      "ingNetoOpDiscont": 987,
+              "deuda": 13
+		},
+            {"periodo": 2010,
+             "ebitda": 74961,
+              "fds": 3,
+              "fCashFlow":1078,
+              "ingNetoOpCont": 2034,
+	      "ingNetoOpDiscont": 1001,
+              "deuda": 12
+		},
+            {"periodo": 2011,
+             "ebitda": 86431,
+              "fds": 4,
+              "fCashFlow":2468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 11
+		},
+         
+            {"periodo": 2012,
+             "ebitda": 86431,
+              "fds": 4,
+              "fCashFlow":3468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 10
+		},
+
+            {"periodo": 2013,
+             "ebitda": 88888,
+              "fds": 5,
+              "fCashFlow":4468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 1859,
+              "deuda": 9
+		},
+
+            {"periodo": 2014,
+             "ebitda": 89765,
+              "fds": 6,
+              "fCashFlow":2468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 8
+		},
+
+            {"periodo": 2015,
+             "ebitda": 86431,
+              "fds": 5,
+              "fCashFlow":2468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 11
+		},
+            {"periodo": 2016,
+             "ebitda": 91234,
+              "fds": 5,
+              "fCashFlow":2468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 11
+		}
+
+
+	]
+            
+        },
+
+        {
+            "nombre":"Berkshire Hathaway",
+            "inicioActividad":1955,
+            "Cuentas":
+            [
+
+            {"periodo": 2006,
+             "ebitda": 12345,
+              "fds": 1,
+              "fCashFlow":789,
+              "ingNetoOpCont": 2345,
+	      "ingNetoOpDiscont": 1234,
+              "deuda": 7
+             },
+
+            {"periodo": 2007,
+             "ebitda": 23456,
+              "fds": 3,
+              "fCashFlow":978,
+              "ingNetoOpCont": 3456,
+	      "ingNetoOpDiscont": 2123,
+              "deuda": 6
+		},
+            {"periodo": 2008,
+             "ebitda": 34567,
+              "fds": 5,
+              "fCashFlow":1012,
+              "ingNetoOpCont": 3232,
+	      "ingNetoOpDiscont": 1331,
+              "deuda": 4
+		},
+            {"periodo": 2009,
+             "ebitda": 29291,
+              "fds": 7,
+              "fCashFlow":999,
+              "ingNetoOpCont": 2929,
+	      "ingNetoOpDiscont": 778,
+              "deuda": 7
+		},
+            {"periodo": 2010,
+             "ebitda": 54961,
+              "fds": 9,
+              "fCashFlow":3078,
+              "ingNetoOpCont": 4034,
+	      "ingNetoOpDiscont": 1001,
+              "deuda": 5
+		},
+            {"periodo": 2011,
+             "ebitda": 66431,
+              "fds": 9,
+              "fCashFlow":5468,
+              "ingNetoOpCont": 4114,
+	      "ingNetoOpDiscont": 1859,
+              "deuda": 8
+		},
+         
+          {"periodo": 2012,
+             "ebitda": 66531,
+              "fds": 9,
+              "fCashFlow":5368,
+              "ingNetoOpCont": 4444,
+	      "ingNetoOpDiscont": 1759,
+              "deuda": 8
+		},
+          
+            {"periodo": 2013,
+             "ebitda": 67431,
+              "fds": 11,
+              "fCashFlow":6468,
+              "ingNetoOpCont": 4224,
+	      "ingNetoOpDiscont": 2859,
+              "deuda": 6
+		},
+         
+          {"periodo": 2014,
+             "ebitda": 66866,
+              "fds": 10,
+              "fCashFlow":5468,
+              "ingNetoOpCont": 4114,
+	      "ingNetoOpDiscont": 1859,
+              "deuda": 5
+		},
+         {"periodo": 2015,
+             "ebitda": 66866,
+              "fds": 12,
+              "fCashFlow":5658,
+              "ingNetoOpCont": 4114,
+	      "ingNetoOpDiscont": 1859,
+              "deuda": 5
+		},
+          {"periodo": 2016,
+             "ebitda": 71866,
+              "fds": 13,
+              "fCashFlow":7468,
+              "ingNetoOpCont": 5114,
+	      "ingNetoOpDiscont": 2159,
+              "deuda": 4
+		}
+       
+	]
+        },
+        {
+            "nombre":"General Electric",
+            "inicioActividad":1892,
+            "Cuentas":            
+            [
+
+            {"periodo": 2006,
+             "ebitda": 44591,
+              "fds": 2,
+              "fCashFlow":955,
+              "ingNetoOpCont": 2221,
+	      "ingNetoOpDiscont": 1051,
+              "deuda": 15},
+
+            {"periodo": 2007,
+             "ebitda": 77691,
+              "fds": 4,
+              "fCashFlow":1096,
+              "ingNetoOpCont": 3221,
+	      "ingNetoOpDiscont": 1221,
+              "deuda": 12
+		},
+            {"periodo": 2008,
+             "ebitda": 85291,
+              "fds": 6,
+              "fCashFlow":1198,
+              "ingNetoOpCont": 4568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 14
+		},
+            {"periodo": 2009,
+             "ebitda": 79463,
+              "fds": 5,
+              "fCashFlow":1234,
+              "ingNetoOpCont": 2789,
+	      "ingNetoOpDiscont": 987,
+              "deuda": 13
+		},
+            {"periodo": 2010,
+             "ebitda": 74961,
+              "fds": 6,
+              "fCashFlow":1078,
+              "ingNetoOpCont": 2034,
+	      "ingNetoOpDiscont": 1001,
+              "deuda": 12
+		},
+
+            {"periodo": 2011,
+             "ebitda": 85291,
+              "fds": 7,
+              "fCashFlow":2298,
+              "ingNetoOpCont": 4568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 14
+		},
+            {"periodo": 2012,
+             "ebitda": 79463,
+              "fds": 8,
+              "fCashFlow":2934,
+              "ingNetoOpCont": 2789,
+	      "ingNetoOpDiscont": 987,
+              "deuda": 11
+		},
+            {"periodo": 2013,
+             "ebitda": 74961,
+              "fds": 6,
+              "fCashFlow":2078,
+              "ingNetoOpCont": 2034,
+	      "ingNetoOpDiscont": 1001,
+              "deuda": 12
+		},
+
+            {"periodo": 2014,
+             "ebitda": 86444,
+              "fds": 7,
+              "fCashFlow":3468,
+              "ingNetoOpCont": 2299,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 10
+		},
+            {"periodo": 2015,
+             "ebitda": 79555,
+              "fds": 8,
+              "fCashFlow":2934,
+              "ingNetoOpCont": 2789,
+	      "ingNetoOpDiscont": 987,
+              "deuda": 9
+		},
+            {"periodo": 2016,
+             "ebitda": 74961,
+              "fds": 9,
+              "fCashFlow":3078,
+              "ingNetoOpCont": 2034,
+	      "ingNetoOpDiscont": 1001,
+              "deuda": 7
+		}
+         
+	]
+
+        },
+        
+	{   "nombre":"Hewlett-Packard",
+            "inicioActividad":1939,
+            "Cuentas":
+            [
+
+            {"periodo": 2006,
+             "ebitda": 33333,
+              "fds": 6,
+              "fCashFlow":1234,
+              "ingNetoOpCont": 979,
+	      "ingNetoOpDiscont": 435,
+              "deuda": 18},
+
+            {"periodo": 2007,
+             "ebitda": 44444,
+              "fds": 7,
+              "fCashFlow":2222,
+              "ingNetoOpCont": 1728,
+	      "ingNetoOpDiscont": 924,
+              "deuda": 15
+		},
+            {"periodo": 2008,
+             "ebitda": 55555,
+              "fds": 8,
+              "fCashFlow":1198,
+              "ingNetoOpCont": 4568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 11
+		},
+            {"periodo": 2009,
+             "ebitda": 66666,
+              "fds": 8,
+              "fCashFlow":3333,
+              "ingNetoOpCont": 2345,
+	      "ingNetoOpDiscont": 1234,
+              "deuda": 9
+		},
+            {"periodo": 2010,
+             "ebitda": 69696,
+              "fds": 10,
+              "fCashFlow":3939,
+              "ingNetoOpCont": 2929,
+	      "ingNetoOpDiscont": 1231,
+              "deuda": 8
+		},
+            {"periodo": 2011,
+             "ebitda": 77777,
+              "fds": 14,
+              "fCashFlow":6545,
+              "ingNetoOpCont": 3434,
+	      "ingNetoOpDiscont": 1234,
+              "deuda": 4
+		},
+       
+
+            {"periodo": 2012,
+             "ebitda": 64444,
+              "fds": 12,
+              "fCashFlow":5222,
+              "ingNetoOpCont": 4728,
+	      "ingNetoOpDiscont": 1984,
+              "deuda": 5
+		},
+            {"periodo": 2013,
+             "ebitda": 55555,
+              "fds": 10,
+              "fCashFlow":3198,
+              "ingNetoOpCont": 4568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 7
+		},
+            {"periodo": 2014,
+             "ebitda": 46666,
+              "fds": 9,
+              "fCashFlow":3333,
+              "ingNetoOpCont": 2345,
+	      "ingNetoOpDiscont": 1234,
+              "deuda": 8
+		},
+            {"periodo": 2015,
+             "ebitda": 79696,
+              "fds": 10,
+              "fCashFlow":4939,
+              "ingNetoOpCont": 3929,
+	      "ingNetoOpDiscont": 1231,
+              "deuda": 6
+		},
+            {"periodo": 2016,
+             "ebitda": 79977,
+              "fds": 11,
+              "fCashFlow":6545,
+              "ingNetoOpCont": 5454,
+	      "ingNetoOpDiscont": 1234,
+              "deuda": 4
+		}
+
+	]
+        },
+        {
+            "nombre":"IBM",
+            "inicioActividad":1911,
+            "Cuentas":
+            [
+
+            {"periodo": 2006,
+             "ebitda": 55555,
+              "fds": 11,
+              "fCashFlow":1000,
+              "ingNetoOpCont": 1500,
+	      "ingNetoOpDiscont": 500,
+              "deuda": 2},
+
+            {"periodo": 2007,
+             "ebitda": 66766,
+              "fds": 12,
+              "fCashFlow":2000,
+              "ingNetoOpCont": 1800,
+	      "ingNetoOpDiscont": 700,
+              "deuda": 1
+		},
+            {"periodo": 2008,
+             "ebitda": 77677,
+              "fds": 13,
+              "fCashFlow":4000,
+              "ingNetoOpCont": 2568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 2
+		},
+            {"periodo": 2009,
+             "ebitda": 79463,
+              "fds": 12,
+              "fCashFlow":3333,
+              "ingNetoOpCont": 2222,
+	      "ingNetoOpDiscont": 999,
+              "deuda": 3
+		},
+            {"periodo": 2010,
+             "ebitda": 74961,
+              "fds": 9,
+              "fCashFlow":1111,
+              "ingNetoOpCont": 2024,
+	      "ingNetoOpDiscont": 1221,
+              "deuda": 2
+		},
+            {"periodo": 2011,
+             "ebitda": 72723,
+              "fds": 10,
+              "fCashFlow":3453,
+              "ingNetoOpCont": 1212,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 2
+		},
+         
+            {"periodo": 2012,
+             "ebitda": 77877,
+              "fds": 14,
+              "fCashFlow":4478,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 1359,
+              "deuda": 3
+		},
+
+            {"periodo": 2013,
+             "ebitda": 88888,
+              "fds": 12,
+              "fCashFlow":4949,
+              "ingNetoOpCont": 2999,
+	      "ingNetoOpDiscont": 1798,
+              "deuda": 3
+		},
+
+            {"periodo": 2014,
+             "ebitda": 89777,
+              "fds": 13,
+              "fCashFlow":5468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 1478,
+              "deuda": 2
+		},
+
+            {"periodo": 2015,
+             "ebitda": 90431,
+              "fds": 13,
+              "fCashFlow":5566,
+              "ingNetoOpCont": 4334,
+	      "ingNetoOpDiscont": 1150,
+              "deuda": 1
+		},
+            {"periodo": 2016,
+             "ebitda": 91234,
+              "fds": 14,
+              "fCashFlow":5968,
+              "ingNetoOpCont": 5959,
+	      "ingNetoOpDiscont": 1010,
+              "deuda": 1
+		}
+
+
+        ]
+
+        },
+        {
+	    "nombre":"Netflix",
+            "inicioActividad":1997,       
+            "Cuentas":
+            [
+
+            {"periodo": 2006,
+             "ebitda": 55555,
+              "fds": 11,
+              "fCashFlow":1000,
+              "ingNetoOpCont": 1500,
+	      "ingNetoOpDiscont": 500,
+              "deuda": 2},
+
+            {"periodo": 2007,
+             "ebitda": 66766,
+              "fds": 12,
+              "fCashFlow":2000,
+              "ingNetoOpCont": 1800,
+	      "ingNetoOpDiscont": 700,
+              "deuda": 1
+		},
+            {"periodo": 2008,
+             "ebitda": 77677,
+              "fds": 13,
+              "fCashFlow":4000,
+              "ingNetoOpCont": 2568,
+	      "ingNetoOpDiscont": 2112,
+              "deuda": 2
+		},
+            {"periodo": 2009,
+             "ebitda": 79463,
+              "fds": 12,
+              "fCashFlow":3333,
+              "ingNetoOpCont": 2222,
+	      "ingNetoOpDiscont": 999,
+              "deuda": 3
+		},
+            {"periodo": 2010,
+             "ebitda": 74961,
+              "fds": 9,
+              "fCashFlow":1111,
+              "ingNetoOpCont": 2024,
+	      "ingNetoOpDiscont": 1221,
+              "deuda": 2
+		},
+            {"periodo": 2011,
+             "ebitda": 72723,
+              "fds": 10,
+              "fCashFlow":3453,
+              "ingNetoOpCont": 1212,
+	      "ingNetoOpDiscont": 859,
+              "deuda": 2
+		},
+         
+            {"periodo": 2012,
+             "ebitda": 77877,
+              "fds": 14,
+              "fCashFlow":4478,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 1359,
+              "deuda": 3
+		},
+
+            {"periodo": 2013,
+             "ebitda": 88888,
+              "fds": 12,
+              "fCashFlow":4949,
+              "ingNetoOpCont": 2999,
+	      "ingNetoOpDiscont": 1798,
+              "deuda": 3
+		},
+
+            {"periodo": 2014,
+             "ebitda": 89777,
+              "fds": 13,
+              "fCashFlow":5468,
+              "ingNetoOpCont": 3214,
+	      "ingNetoOpDiscont": 1478,
+              "deuda": 2
+		},
+
+            {"periodo": 2015,
+             "ebitda": 90431,
+              "fds": 13,
+              "fCashFlow":5566,
+              "ingNetoOpCont": 4334,
+	      "ingNetoOpDiscont": 1150,
+              "deuda": 1
+		},
+            {"periodo": 2016,
+             "ebitda": 91234,
+              "fds": 14,
+              "fCashFlow":5968,
+              "ingNetoOpCont": 5959,
+	      "ingNetoOpDiscont": 1010,
+              "deuda": 1
+		}
+
+
+        ]
+        },
+        
+
+	{
+            "nombre":"LATAM Airlines Group",
+            "inicioActividad":2012,
+             "Cuentas":
+            [
+
+            {"periodo": 2012,
+             "ebitda": 986,
+              "fds": 0,
+              "fCashFlow":78,
+              "ingNetoOpCont": 158,
+	      "ingNetoOpDiscont": 25,
+              "deuda": 18},
+
+            {"periodo": 2013,
+             "ebitda": 2113,
+              "fds": 0,
+              "fCashFlow":135,
+              "ingNetoOpCont": 200,
+	      "ingNetoOpDiscont": 46,
+              "deuda": 15
+		},
+            {"periodo": 2014,
+             "ebitda": 3729,
+              "fds": 0,
+              "fCashFlow":1597,
+              "ingNetoOpCont": 456,
+	      "ingNetoOpDiscont": 89,
+              "deuda": 15
+		},
+            {"periodo": 2015,
+             "ebitda": 10463,
+              "fds": 0,
+              "fCashFlow":3456,
+              "ingNetoOpCont": 1346,
+	      "ingNetoOpDiscont": 498,
+              "deuda": 11
+		},
+            {"periodo": 2016,
+             "ebitda": 24961,
+              "fds": 0,
+              "fCashFlow":6543,
+              "ingNetoOpCont": 4321,
+	      "ingNetoOpDiscont": 1643,
+              "deuda": 9
+		}
+            ]
+       }
+]
