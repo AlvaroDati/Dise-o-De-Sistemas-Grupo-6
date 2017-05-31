@@ -57,16 +57,18 @@ public class Cuenta{
 		return getPeriodo() + "";
 	}
 	
-	public String mostrarTodo (){
+	public void mostrarTodo (){
 		
-		String datosCuentas;
+		//String datosCuentas;
 		
-		datosCuentas = "<html><body>" + "Periodo: " + Integer.toString(this.getPeriodo()) + "<br>" + "Ebitda: " + Integer.toString (this.getEbitda())
+	/*	datosCuentas = "<html><body>" + "Periodo: " + Integer.toString(this.getPeriodo()) + "<br>" + "Ebitda: " + Integer.toString (this.getEbitda())
 		+  "<br>" + Integer.toString(this.getFds()) +  "<br>" + Integer.toString(this.getfCashFlow()) + "<br>" + Integer.toString(this.getIngNetoOpCont()) + "<br>" + this.getIngNetoOpDiscont() 
 		+  "<br>" + Integer.toString(this.getDeuda()) 
- 		+  "<br>" + "---------------------------------------";
+ 		+  "<br>" + "---------------------------------------";*/
 		
-		/*System.out.print("Periodo: ");
+		System.out.println("---------------------------------------");
+		
+		System.out.print("Periodo: ");
 		System.out.println(this.getPeriodo());
 		System.out.print("Ebitda: ");
 		System.out.println(this.getEbitda());
@@ -81,14 +83,14 @@ public class Cuenta{
 		System.out.print("deuda: ");
 		System.out.println(this.getDeuda());
 
-		System.out.println("---------------------------------------");*/
+		System.out.println("---------------------------------------");
 	
-		return datosCuentas;
+	//	return datosCuentas;
 
 	}
 	public static void main(String args[]){
 		Cuenta cuenta = new Cuenta();
-		System.out.println(cuenta.mostrarTodo());
+		cuenta.mostrarTodo();
 	}
 	
  }

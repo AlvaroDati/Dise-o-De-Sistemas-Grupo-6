@@ -46,8 +46,8 @@ public class NuevoLeerArchivo{
 	}
 	
 	public static void main(String args[]){
-		/*NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-		archivo.leerArchivo().forEach(empresa -> empresa.mostrarTodo());*/
+		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		archivo.leerArchivo().forEach(empresa -> empresa.mostrarTodo());
 		
 	}
 	
