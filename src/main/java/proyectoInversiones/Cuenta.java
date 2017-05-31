@@ -59,12 +59,6 @@ public class Cuenta{
 	
 	public void mostrarTodo (){
 		
-		//String datosCuentas;
-		
-	/*	datosCuentas = "<html><body>" + "Periodo: " + Integer.toString(this.getPeriodo()) + "<br>" + "Ebitda: " + Integer.toString (this.getEbitda())
-		+  "<br>" + Integer.toString(this.getFds()) +  "<br>" + Integer.toString(this.getfCashFlow()) + "<br>" + Integer.toString(this.getIngNetoOpCont()) + "<br>" + this.getIngNetoOpDiscont() 
-		+  "<br>" + Integer.toString(this.getDeuda()) 
- 		+  "<br>" + "---------------------------------------";*/
 		
 		System.out.println("---------------------------------------");
 		
@@ -85,9 +79,10 @@ public class Cuenta{
 
 		System.out.println("---------------------------------------");
 	
-	//	return datosCuentas;
-
 	}
+	
+	
+	
 	public static void main(String args[]){
 		Cuenta cuenta = new Cuenta();
 		cuenta.mostrarTodo();

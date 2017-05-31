@@ -7,7 +7,7 @@ public class Empresa {
 
 	private String nombre;
 	private int inicioActividad;
-	private List<Cuenta> Cuentas;
+	private ArrayList<Cuenta> Cuentas;
 
 	public Empresa() {
 		Cuentas = new ArrayList<Cuenta>();
@@ -29,11 +29,11 @@ public class Empresa {
 		inicioActividad = inicoActividad;
 	}
 
-	public List<Cuenta> getCuentas() {
+	public ArrayList<Cuenta> getCuentas() {
 		return Cuentas;
 	}
 
-	public void setCuentas(List<Cuenta> Cuentas) {
+	public void setCuentas(ArrayList<Cuenta> Cuentas) {
 		this.Cuentas = Cuentas;
 	}
 

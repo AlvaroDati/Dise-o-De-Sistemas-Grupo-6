@@ -17,11 +17,16 @@ public class Ventana extends JFrame implements ActionListener {
 	JPanel panelInterfaz;
 	JPanel panelEmpresas;
 	JPanel panelIndicadores;
-	JLabel texto;
-	JButton botonLeer;
-	JButton botonIndicadores;
-	JButton botonVerEmpresas;
-	JTextField cuadroDeTexto;
+	JPanel panelCuentas;
+	JList listaEmpresas;	
+	JList listaCuentas;
+	JScrollPane scrollListaCuentas;
+	DefaultListModel modelo;
+	DefaultListModel modeloCuentas;
+	JLabel descripcionCuentas;
+	JButton botonVerInformacion;
+	JButton botonAgregarIndicador;
+	JButton botonBorrarIndicador;
 	
 	Toolkit instanciarToolKit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -43,74 +48,132 @@ public class Ventana extends JFrame implements ActionListener {
 	//Carga los elementos en la ventana
 	public void InicializarVentana(){
 		
+		
+
+		NuevoLeerArchivo archivoEmpresas = new NuevoLeerArchivo();
+		ArrayList<Empresa> empresasDescargadas = new ArrayList<Empresa>();
+		empresasDescargadas = archivoEmpresas.leerArchivo();
+		listaEmpresas = new JList();
+		modelo = new DefaultListModel();
+		
+		listaEmpresas.setModel(modelo);
+		empresasDescargadas.forEach(empresa ->  modelo.addElement(empresa));
+		listaEmpresas.setPreferredSize(new Dimension(ancho/3-10,150));
+		
+				
 		panelPrincipal = new JPanel(new BorderLayout());
 		panelPrincipal.setVisible(true);
 		
-		
-		panelInterfaz = new JPanel();
-		panelInterfaz.setVisible(true);
-		panelInterfaz.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Menu principal"),
-                BorderFactory.createEmptyBorder(5,5,5,5)));
-		
-		panelIndicadores = new JPanel();
-		panelIndicadores.setVisible(true);
-		panelIndicadores.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Lista Indicadores"),
-                BorderFactory.createEmptyBorder(5,5,5,5)));
-		panelIndicadores.setSize(500, 500);
-		
-		
-		
+				
 		panelEmpresas = new JPanel();
 		panelEmpresas.setVisible(true);
 		panelEmpresas.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createTitledBorder("Lista Empresas"),
                 BorderFactory.createEmptyBorder(5,5,5,5)));
-		panelEmpresas.setSize(500, 500);
+		panelEmpresas.setPreferredSize(new Dimension(ancho/3,alto/4));
+		
+		
+		panelCuentas = new JPanel();
+		panelCuentas.setVisible(true);
+		panelCuentas.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Cuentas:"),
+                BorderFactory.createEmptyBorder(5,5,5,5)));
+		panelCuentas.setPreferredSize(new Dimension(ancho/3,alto/4));
+
+
+		panelIndicadores = new JPanel();
+		panelIndicadores.setVisible(true);
+		panelIndicadores.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Lista Indicadores"),
+                BorderFactory.createEmptyBorder(15,15,15,15)));
+		panelIndicadores.setPreferredSize(new Dimension(ancho/3,alto/4));
 
 		
-		
-		texto = new JLabel();
-		//texto.setText("<html><body> Ingrese una empresa y seleccione 'Leer Empresa' <br> para visualizar aqui su empresa: <body><html>");
-		texto.setText("Ya veremos que mostrar aca");
-		texto.setPreferredSize(new Dimension (350,100));
+			
+		descripcionCuentas = new JLabel();
+		descripcionCuentas.setText("<html><body>" + "Período: " + "<br>"
+												  + "Ebitda: " + "<br>"
+												  + "FDS: " + "<br>"
+												  + "CashFlow: " + "<br>"
+												  + "Ing Neto OpCont: " + "<br>"
+												  + "Ing Neto OpDisCont: " + "<br>"
+												  + "Deuda: " );
+		descripcionCuentas.setPreferredSize(new Dimension (100,500));
+		descripcionCuentas.setFont(new Font ("Dialog",Font.BOLD, 12));
 	
-		botonLeer = new JButton();
-		botonLeer.setText("Ver Cuentas");
-		this.botonLeer.addActionListener(this);
+		botonVerInformacion = new JButton();
+		botonVerInformacion.setText("Ver informacion de la empresa");
+		this.botonVerInformacion.addActionListener(this);
 		
-		botonIndicadores = new JButton();
-		botonIndicadores.setText("Agregar Indicador");
-		this.botonIndicadores.addActionListener(this);
+		botonAgregarIndicador = new JButton();
+		botonAgregarIndicador.setText("Agregar Indicador");
+		this.botonAgregarIndicador.addActionListener(this);
 		
-		botonVerEmpresas = new JButton();
-		botonVerEmpresas.setText("Borrar Indicador");
-		this.botonVerEmpresas.addActionListener(this);
-
-		
-		cuadroDeTexto = new JTextField();
-		cuadroDeTexto.setPreferredSize(new Dimension(250,25));
+		botonBorrarIndicador = new JButton();
+		botonBorrarIndicador.setText("Borrar Indicador");
+		this.botonBorrarIndicador.addActionListener(this);
 		
 				
 		this.add(panelPrincipal);
-		panelPrincipal.add(panelInterfaz,BorderLayout.NORTH);
-		panelInterfaz.add(cuadroDeTexto);
-		panelInterfaz.add(botonLeer);
-		panelInterfaz.add(botonIndicadores);
 		panelPrincipal.add(panelEmpresas,BorderLayout.WEST);	// el tamanio de los paneles es automatico, dependen de lo que contienen
-		panelPrincipal.add(panelIndicadores,BorderLayout.EAST); // los objetos pueden instanciarse solo una vez
-		panelEmpresas.add(botonVerEmpresas);
-		panelIndicadores.add(texto);
+		panelPrincipal.add(panelIndicadores,BorderLayout.EAST); // los objetos "j" pueden instanciarse solo una vez
+		panelPrincipal.add(panelCuentas, BorderLayout.CENTER);
+		panelEmpresas.add(listaEmpresas);
+		panelEmpresas.add(botonVerInformacion);
+		panelIndicadores.add(botonAgregarIndicador);
+		panelIndicadores.add(botonBorrarIndicador);
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 		
 public void actionPerformed(ActionEvent evento) { 
-	NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-	archivo.leerArchivo();
+	if (evento.getSource()==botonVerInformacion){
 		
+		panelCuentas.removeAll();
+		
+		panelCuentas.add(descripcionCuentas);
+
+		
+		modeloCuentas = new DefaultListModel();
+		listaCuentas = new JList();
+		listaCuentas.setModel(modeloCuentas);
+		listaCuentas.setLayoutOrientation(JList.VERTICAL_WRAP);
+		listaCuentas.setVisibleRowCount(7);
+		
+		
+		scrollListaCuentas = new JScrollPane(listaCuentas);
+		listaCuentas.setPreferredSize(new Dimension(ancho/3-150,130));
+		//scrollListaCuentas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//scrollListaCuentas.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollListaCuentas.setViewportView(listaCuentas);
+	
+		
+		
+		
+		
+		Object empresaSeleccionada = new Empresa();
+		empresaSeleccionada = listaEmpresas.getSelectedValue();
+		
+		ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
+		cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
+		for(Cuenta cuenta: cuentasRequeridas){
+			modeloCuentas.addElement(cuenta.getPeriodo());
+			modeloCuentas.addElement(cuenta.getEbitda());
+			modeloCuentas.addElement(cuenta.getFds());
+			modeloCuentas.addElement(cuenta.getfCashFlow());
+			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
+			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
+			modeloCuentas.addElement(cuenta.getDeuda());
+		//	modeloCuentas.addElement(null);
+		}
+	
+	//	panelCuentas.add(listaCuentas);
+		panelCuentas.add(scrollListaCuentas);
+		panelCuentas.revalidate();
+		panelCuentas.repaint();
+		
+	}
 }
 
 public int GetAncho(){
