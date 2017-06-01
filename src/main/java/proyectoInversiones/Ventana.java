@@ -8,21 +8,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
-
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends JFrame implements ActionListener {
 
-//	private static final long serialVersionUID = 1L;
 	JPanel panelPrincipal;
 	JPanel panelInterfaz;
 	JPanel panelEmpresas;
 	JPanel panelIndicadores;
 	JPanel panelCuentas;
 	JList listaEmpresas;	
+	DefaultListModel modelo;
 	JList listaCuentas;
 	JScrollPane scrollListaCuentas;
-	DefaultListModel modelo;
 	DefaultListModel modeloCuentas;
+	//DefaultTableModel modeloTablaCuentas;
+	//JTable tablaCuentas;
+	//JScrollPane scrollTablaCuentas;
 	JLabel descripcionCuentas;
 	JButton botonVerInformacion;
 	JButton botonAgregarIndicador;
@@ -131,9 +134,8 @@ public void actionPerformed(ActionEvent evento) {
 	if (evento.getSource()==botonVerInformacion){
 		
 		panelCuentas.removeAll();
-		
 		panelCuentas.add(descripcionCuentas);
-
+		
 		
 		modeloCuentas = new DefaultListModel();
 		listaCuentas = new JList();
@@ -143,13 +145,20 @@ public void actionPerformed(ActionEvent evento) {
 		
 		
 		scrollListaCuentas = new JScrollPane(listaCuentas);
-		listaCuentas.setPreferredSize(new Dimension(ancho/3-150,130));
-		//scrollListaCuentas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		//scrollListaCuentas.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollListaCuentas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollListaCuentas.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollListaCuentas.setViewportView(listaCuentas);
-	
+		scrollListaCuentas.setPreferredSize(new Dimension(ancho/3-150,150));
+		
+		/*modeloTablaCuentas = new DefaultTableModel();
+		tablaCuentas = new JTable (modeloTablaCuentas);
+		String [] encabezadosDeFilas = {"Período", "Ebitda", "FDS", "CashFlow", "Ing Neto OpCont", "Ing Neto", "OpDisCont","Deuda"};
 		
 		
+		scrollTablaCuentas = new JScrollPane(tablaCuentas);
+		scrollTablaCuentas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollTablaCuentas.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollTablaCuentas.setViewportView(tablaCuentas);*/
 		
 		
 		Object empresaSeleccionada = new Empresa();
@@ -158,6 +167,7 @@ public void actionPerformed(ActionEvent evento) {
 		ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
 		cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
 		for(Cuenta cuenta: cuentasRequeridas){
+		
 			modeloCuentas.addElement(cuenta.getPeriodo());
 			modeloCuentas.addElement(cuenta.getEbitda());
 			modeloCuentas.addElement(cuenta.getFds());
@@ -165,11 +175,21 @@ public void actionPerformed(ActionEvent evento) {
 			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
 			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
 			modeloCuentas.addElement(cuenta.getDeuda());
-		//	modeloCuentas.addElement(null);
+		
+			
+		/* modeloTablaCuentas.addColumn(cuenta.getPeriodo(),cuentasDelPeriodo);
+		 
+		 cuentasDelPeriodo.add(cuenta.getEbitda());
+		 modeloTablaCuentas.addColumn(cuenta.getFds());
+		 modeloTablaCuentas.addColumn(cuenta.getfCashFlow());
+		 modeloTablaCuentas.addColumn(cuenta.getIngNetoOpCont());
+		 modeloTablaCuentas.addColumn(cuenta.getIngNetoOpDiscont());
+		 modeloTablaCuentas.addColumn(cuenta.getDeuda());*/
+			
 		}
 	
-	//	panelCuentas.add(listaCuentas);
 		panelCuentas.add(scrollListaCuentas);
+		//panelCuentas.add(scrollTablaCuentas);
 		panelCuentas.revalidate();
 		panelCuentas.repaint();
 		
