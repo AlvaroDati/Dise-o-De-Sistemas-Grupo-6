@@ -33,6 +33,7 @@ public class Ventana extends JFrame implements ActionListener {
 	
 	
 	//Tomamos el tamanio de la pantalla
+	
 	Toolkit instanciarToolKit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int ancho = screenSize.width;
@@ -40,17 +41,20 @@ public class Ventana extends JFrame implements ActionListener {
 	
 	
 	//Constructor vacio
+	
 	Ventana(){
 	       super(); 
 	      }
 	
-	//Constructor con titulo		
+	//Constructor con titulo	
+	
 	public Ventana (String titulo){
 		super(titulo);
 	}
 	
 	
 	//Carga los elementos en la ventana
+	
 	public void InicializarVentana(){
 		
 		///////////////////////////////////////////////////////////////////////////////
@@ -130,9 +134,10 @@ public class Ventana extends JFrame implements ActionListener {
 	}
 
 	
-	///////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////ACCIONES DE LOS BOTONES///////////////////////////
-	///////////////////////////////////////////////////////////////////////////////	
+		///////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////ACCIONES DE LOS BOTONES///////////////////////////
+		///////////////////////////////////////////////////////////////////////////////	
+	
 public void actionPerformed(ActionEvent evento) { 
 	
 	if (evento.getSource()==botonVerInformacion){
@@ -146,6 +151,7 @@ public void actionPerformed(ActionEvent evento) {
 		
 	
 		//generamos la lista
+		
 		modeloCuentas = new DefaultListModel();
 		listaCuentas = new JList();
 		listaCuentas.setModel(modeloCuentas);
@@ -153,6 +159,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaCuentas.setVisibleRowCount(7);
 		
 		//Generamos el scrollbar para la lista
+		
 		scrollListaCuentas = new JScrollPane(listaCuentas);
 		scrollListaCuentas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollListaCuentas.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -160,6 +167,7 @@ public void actionPerformed(ActionEvent evento) {
 		scrollListaCuentas.setPreferredSize(new Dimension(ancho/3-150,150));
 		
 		//Aniadimos los encabezados de las filas
+		
 		modeloCuentas.addElement("Periodo:");
 		modeloCuentas.addElement("Ebitda:");
 		modeloCuentas.addElement("FDS:");
@@ -168,7 +176,9 @@ public void actionPerformed(ActionEvent evento) {
 		modeloCuentas.addElement("IngNetoOpDiscont:");
 		modeloCuentas.addElement("Deuda:");
 		
+		
 		//Rellenamos la lista con los datos de las cuentas
+		
 		for(Cuenta cuenta: cuentasRequeridas){
 		
 			modeloCuentas.addElement(cuenta.getPeriodo());
@@ -182,6 +192,7 @@ public void actionPerformed(ActionEvent evento) {
 		}
 	
 		//aniadimos los elementos al panel
+		
 		panelCuentas.add(scrollListaCuentas);
 		panelCuentas.revalidate();
 		panelCuentas.repaint();
