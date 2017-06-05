@@ -10,8 +10,7 @@ fuente: sentencia+ ;
 
 sentencia: 
 expresion SALTODELINEA {System.out.println( "\n" + $expresion.value );} 
-| OTROINDICADOR '=' expresion SALTODELINEA {memory.put( $OTROINDICADOR.text , new Double( $expresion.value )
-);} 
+| OTROINDICADOR '=' expresion SALTODELINEA {memory.put( $OTROINDICADOR.text , new Double( $expresion.value ));} 
 | SALTODELINEA;
 
 expresion returns [double value] : 
