@@ -14,7 +14,6 @@ public class Indicadores {
          * Esta hecho en un main para probarlo por consola y luego lo pasamos a la view
          * 
          * 
-         * */
         indicadoresLexer lexer = new indicadoresLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         indicadoresParser parser = new indicadoresParser(tokens);
@@ -22,5 +21,6 @@ public class Indicadores {
 
         IndVisitor eval = new IndVisitor();
         eval.visit(tree);
+         * */
     }
 }
