@@ -6,21 +6,38 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+
+
 public class Indicadores {
+
     public static void main(String[] args) throws Exception {
-        /*
-         * Acá tendría que ir lo que pone el usuario y de ahí que el parser lo pueda detectar
-         * Sería el uso que tendría la variable "input";
-         * Esta hecho en un main para probarlo por consola y luego lo pasamos a la view
-         * 
-         * 
+    	
+    	String inputFile = null; //En "Run Configurations, ponen en Java Application => Arguments => Program&Arguments => {dirDel indicadores.txt}"
+		if (args.length > 0)
+			inputFile = args[0];
+		
+		InputStream is = System.in;
+		if (inputFile != null)
+			is = new FileInputStream(inputFile);
+
+		@SuppressWarnings("deprecation")
+		ANTLRInputStream input = new ANTLRInputStream(is);
+   
         indicadoresLexer lexer = new indicadoresLexer(input);
+
         CommonTokenStream tokens = new CommonTokenStream(lexer);
+
         indicadoresParser parser = new indicadoresParser(tokens);
-        ParseTree tree = parser.fuente(); // parse
+
+        ParseTree tree = parser.sentencia(); // parse
 
         IndVisitor eval = new IndVisitor();
+
         eval.visit(tree);
-         * */
-    }
+        System.out.println(tree);
+
+
+
+	}
+
 }
