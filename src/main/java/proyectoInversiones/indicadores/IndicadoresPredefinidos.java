@@ -1,6 +1,6 @@
 package proyectoInversiones.indicadores;
 
-import proyectoInversiones.*;
+import proyectoInversiones.*; 
 
 import java.util.ArrayList;
 import java.util.Collection;

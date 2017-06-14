@@ -1,7 +1,12 @@
-import java.util.HashMap;
+package proyectoInversiones.indicadores;
+
+import proyectoInversiones.antlr4.*; 
+
+import java.util.HashMap; 
 import java.util.Map;
 
-import proyectoInversiones.indicadores.IndicadorPredefinido;
+
+
 
 
 
@@ -78,7 +83,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Double>{
 		
 	}
 	
-	
+}
 	/*
 	si recibimos una cadena OTROINDICADOR suceda
 	calculoNecesario = ctx.OTROINDICADOR.getText();

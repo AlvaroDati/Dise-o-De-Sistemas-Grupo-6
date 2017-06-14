@@ -1,7 +1,11 @@
 grammar indicadores;
-@header {
+@header {  
+package proyectoInversiones.antlr4;
 import java.util.HashMap;
 }
+
+
+
 @members {
 HashMap memory = new HashMap();
 }
