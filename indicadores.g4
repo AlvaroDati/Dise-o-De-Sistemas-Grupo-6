@@ -1,39 +1,36 @@
 grammar indicadores;
-@header {   
+@header {
+   
+package proyectoInversiones.antlr4;
 import java.util.HashMap;
 }
-//package proyectoInversiones.antlr4;
+//
 
 
 
 @members {
 HashMap memory = new HashMap();
 }
-// expresion
 
+prog: stat+ ;
+stat: expr NEWLINE # printExpr
+| INDICADOR '=' expr NEWLINE # assign
+| NEWLINE # blank
+;
 
+expr: expr op=('*'|'/') expr # MulDiv
+| expr op=('+'|'-') expr # SumRes
+| INT # int
+| INDICADOR # id
+| '(' expr ')' # parens
+;
+		 
 
-sentencia: expresion                                                      #Expr
-		 | OTROINDICADOR '=' expresion 	     							  #Asignar
-		 ;								  
-
-expresion:  expresionMultiple (op=( '+'|'-') expresionMultiple)*          #SumRes
-		 ;
-
-expresionMultiple :  operando  (op=( '*'|'/') operando)*                  #MulDiv
-				  ;
-
-operando :  CUENTA 														  #Cuenta
-		 | OTROINDICADOR                                                  #OtroIndicador
-		 | '(' expresion ')'                                              #Parentesis
-		 ;
-
-// reglas
-OTROINDICADOR : ( 'a' .. 'z' | 'A' .. 'Z' )+ ;
-CUENTA:  '0' .. '9'+ ;
-//SALTODELINEA: '\r' ? '\n';
 MUL : '*' ; 
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
-WS: [ \t\r\n]+ -> skip ;
+INDICADOR : [a-zA-Z]+ ; 
+INT : [0-9]+ ; 
+NEWLINE:'\r'? '\n' ; 
+WS : [ \t]+ -> skip ; 

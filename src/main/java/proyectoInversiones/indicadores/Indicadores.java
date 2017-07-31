@@ -28,7 +28,7 @@ public class Indicadores {
 
         indicadoresParser parser = new indicadoresParser(tokens);
 
-        ParseTree tree = parser.sentencia(); // parse
+        ParseTree tree = parser.prog(); // parse
 
         IndVisitor eval = new IndVisitor();
 
