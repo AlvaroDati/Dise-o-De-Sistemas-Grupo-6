@@ -17,8 +17,7 @@ public class Indicadores {
 			inputFile = args[0];
 		
 		InputStream is = System.in;
-		if (inputFile != null)
-			is = new FileInputStream(inputFile);
+		if (inputFile != null)is = new FileInputStream(inputFile);
 
 		@SuppressWarnings("deprecation")
 		ANTLRInputStream input = new ANTLRInputStream(is);
@@ -36,7 +35,7 @@ public class Indicadores {
         eval.visit(tree);
         System.out.println(tree);
 
-
+        
 
 	}
 

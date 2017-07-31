@@ -1,9 +1,7 @@
-// Generated from indicadores.g4 by ANTLR 4.4
-  
-
+// Generated from indicadores.g4 by ANTLR 4.7
+   
 import java.util.HashMap;
 
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -15,52 +13,52 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface indicadoresVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by the {@code SumRes}
-	 * labeled alternative in {@link indicadoresParser#expresion}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSumRes(@NotNull indicadoresParser.SumResContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code OtroIndicador}
-	 * labeled alternative in {@link indicadoresParser#operando}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOtroIndicador(@NotNull indicadoresParser.OtroIndicadorContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Expr}
 	 * labeled alternative in {@link indicadoresParser#sentencia}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(@NotNull indicadoresParser.ExprContext ctx);
+	T visitExpr(indicadoresParser.ExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Asignar}
 	 * labeled alternative in {@link indicadoresParser#sentencia}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAsignar(@NotNull indicadoresParser.AsignarContext ctx);
+	T visitAsignar(indicadoresParser.AsignarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code SumRes}
+	 * labeled alternative in {@link indicadoresParser#expresion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSumRes(indicadoresParser.SumResContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDiv}
 	 * labeled alternative in {@link indicadoresParser#expresionMultiple}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMulDiv(@NotNull indicadoresParser.MulDivContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Parentesis}
-	 * labeled alternative in {@link indicadoresParser#operando}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParentesis(@NotNull indicadoresParser.ParentesisContext ctx);
+	T visitMulDiv(indicadoresParser.MulDivContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Cuenta}
 	 * labeled alternative in {@link indicadoresParser#operando}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCuenta(@NotNull indicadoresParser.CuentaContext ctx);
+	T visitCuenta(indicadoresParser.CuentaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code OtroIndicador}
+	 * labeled alternative in {@link indicadoresParser#operando}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOtroIndicador(indicadoresParser.OtroIndicadorContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Parentesis}
+	 * labeled alternative in {@link indicadoresParser#operando}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParentesis(indicadoresParser.ParentesisContext ctx);
 }

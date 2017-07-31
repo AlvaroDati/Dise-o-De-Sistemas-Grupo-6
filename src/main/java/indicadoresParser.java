@@ -1,6 +1,5 @@
-// Generated from indicadores.g4 by ANTLR 4.4
-  
-
+// Generated from indicadores.g4 by ANTLR 4.7
+   
 import java.util.HashMap;
 
 import org.antlr.v4.runtime.atn.*;
@@ -14,29 +13,62 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class indicadoresParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__2=1, T__1=2, T__0=3, OTROINDICADOR=4, CUENTA=5, MUL=6, DIV=7, SUM=8, 
+		T__0=1, T__1=2, T__2=3, OTROINDICADOR=4, CUENTA=5, MUL=6, DIV=7, SUM=8, 
 		RES=9, WS=10;
-	public static final String[] tokenNames = {
-		"<INVALID>", "'('", "')'", "'='", "OTROINDICADOR", "CUENTA", "'*'", "'/'", 
-		"'+'", "'-'", "WS"
-	};
 	public static final int
 		RULE_sentencia = 0, RULE_expresion = 1, RULE_expresionMultiple = 2, RULE_operando = 3;
 	public static final String[] ruleNames = {
 		"sentencia", "expresion", "expresionMultiple", "operando"
 	};
 
-	@Override
-	public String getGrammarFileName() { return "indicadores.g4"; }
+	private static final String[] _LITERAL_NAMES = {
+		null, "'='", "'('", "')'", null, null, "'*'", "'/'", "'+'", "'-'"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, null, null, null, "OTROINDICADOR", "CUENTA", "MUL", "DIV", "SUM", 
+		"RES", "WS"
+	};
+	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
+
+	/**
+	 * @deprecated Use {@link #VOCABULARY} instead.
+	 */
+	@Deprecated
+	public static final String[] tokenNames;
+	static {
+		tokenNames = new String[_SYMBOLIC_NAMES.length];
+		for (int i = 0; i < tokenNames.length; i++) {
+			tokenNames[i] = VOCABULARY.getLiteralName(i);
+			if (tokenNames[i] == null) {
+				tokenNames[i] = VOCABULARY.getSymbolicName(i);
+			}
+
+			if (tokenNames[i] == null) {
+				tokenNames[i] = "<INVALID>";
+			}
+		}
+	}
 
 	@Override
-	public String[] getTokenNames() { return tokenNames; }
+	@Deprecated
+	public String[] getTokenNames() {
+		return tokenNames;
+	}
+
+	@Override
+
+	public Vocabulary getVocabulary() {
+		return VOCABULARY;
+	}
+
+	@Override
+	public String getGrammarFileName() { return "indicadores.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -94,21 +126,26 @@ public class indicadoresParser extends Parser {
 		enterRule(_localctx, 0, RULE_sentencia);
 		try {
 			setState(12);
+			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				_localctx = new ExprContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(8); expresion();
+				setState(8);
+				expresion();
 				}
 				break;
 			case 2:
 				_localctx = new AsignarContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(9); match(OTROINDICADOR);
-				setState(10); match(T__0);
-				setState(11); expresion();
+				setState(9);
+				match(OTROINDICADOR);
+				setState(10);
+				match(T__0);
+				setState(11);
+				expresion();
 				}
 				break;
 			}
@@ -159,7 +196,8 @@ public class indicadoresParser extends Parser {
 			_localctx = new SumResContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(14); expresionMultiple();
+			setState(14);
+			expresionMultiple();
 			setState(19);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -172,8 +210,13 @@ public class indicadoresParser extends Parser {
 				if ( !(_la==SUM || _la==RES) ) {
 					((SumResContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 				}
-				consume();
-				setState(16); expresionMultiple();
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(16);
+				expresionMultiple();
 				}
 				}
 				setState(21);
@@ -228,7 +271,8 @@ public class indicadoresParser extends Parser {
 			_localctx = new MulDivContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(22); operando();
+			setState(22);
+			operando();
 			setState(27);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -241,8 +285,13 @@ public class indicadoresParser extends Parser {
 				if ( !(_la==MUL || _la==DIV) ) {
 					((MulDivContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 				}
-				consume();
-				setState(24); operando();
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(24);
+				operando();
 				}
 				}
 				setState(29);
@@ -308,28 +357,34 @@ public class indicadoresParser extends Parser {
 		enterRule(_localctx, 6, RULE_operando);
 		try {
 			setState(36);
+			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CUENTA:
 				_localctx = new CuentaContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(30); match(CUENTA);
+				setState(30);
+				match(CUENTA);
 				}
 				break;
 			case OTROINDICADOR:
 				_localctx = new OtroIndicadorContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(31); match(OTROINDICADOR);
+				setState(31);
+				match(OTROINDICADOR);
 				}
 				break;
-			case T__2:
+			case T__1:
 				_localctx = new ParentesisContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(32); match(T__2);
-				setState(33); expresion();
-				setState(34); match(T__1);
+				setState(32);
+				match(T__1);
+				setState(33);
+				expresion();
+				setState(34);
+				match(T__2);
 				}
 				break;
 			default:
@@ -348,17 +403,17 @@ public class indicadoresParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\f)\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\f)\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2\5\2\17\n\2\3\3\3\3\3\3\7\3\24\n\3\f"+
 		"\3\16\3\27\13\3\3\4\3\4\3\4\7\4\34\n\4\f\4\16\4\37\13\4\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\5\5\'\n\5\3\5\2\2\6\2\4\6\b\2\4\3\2\n\13\3\2\b\t)\2\16\3\2"+
-		"\2\2\4\20\3\2\2\2\6\30\3\2\2\2\b&\3\2\2\2\n\17\5\4\3\2\13\f\7\6\2\2\f"+
-		"\r\7\5\2\2\r\17\5\4\3\2\16\n\3\2\2\2\16\13\3\2\2\2\17\3\3\2\2\2\20\25"+
+		"\5\3\5\3\5\5\5\'\n\5\3\5\2\2\6\2\4\6\b\2\4\3\2\n\13\3\2\b\t\2)\2\16\3"+
+		"\2\2\2\4\20\3\2\2\2\6\30\3\2\2\2\b&\3\2\2\2\n\17\5\4\3\2\13\f\7\6\2\2"+
+		"\f\r\7\3\2\2\r\17\5\4\3\2\16\n\3\2\2\2\16\13\3\2\2\2\17\3\3\2\2\2\20\25"+
 		"\5\6\4\2\21\22\t\2\2\2\22\24\5\6\4\2\23\21\3\2\2\2\24\27\3\2\2\2\25\23"+
 		"\3\2\2\2\25\26\3\2\2\2\26\5\3\2\2\2\27\25\3\2\2\2\30\35\5\b\5\2\31\32"+
 		"\t\3\2\2\32\34\5\b\5\2\33\31\3\2\2\2\34\37\3\2\2\2\35\33\3\2\2\2\35\36"+
-		"\3\2\2\2\36\7\3\2\2\2\37\35\3\2\2\2 \'\7\7\2\2!\'\7\6\2\2\"#\7\3\2\2#"+
-		"$\5\4\3\2$%\7\4\2\2%\'\3\2\2\2& \3\2\2\2&!\3\2\2\2&\"\3\2\2\2\'\t\3\2"+
+		"\3\2\2\2\36\7\3\2\2\2\37\35\3\2\2\2 \'\7\7\2\2!\'\7\6\2\2\"#\7\4\2\2#"+
+		"$\5\4\3\2$%\7\5\2\2%\'\3\2\2\2& \3\2\2\2&!\3\2\2\2&\"\3\2\2\2\'\t\3\2"+
 		"\2\2\6\16\25\35&";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());

@@ -1,8 +1,8 @@
 grammar indicadores;
-@header {  
-package proyectoInversiones.antlr4;
+@header {   
 import java.util.HashMap;
 }
+//package proyectoInversiones.antlr4;
 
 
 
@@ -14,7 +14,7 @@ HashMap memory = new HashMap();
 
 
 sentencia: expresion                                                      #Expr
-		 | OTROINDICADOR '=' expresion 									  #Asignar
+		 | OTROINDICADOR '=' expresion 	     							  #Asignar
 		 ;								  
 
 expresion:  expresionMultiple (op=( '+'|'-') expresionMultiple)*          #SumRes

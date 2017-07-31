@@ -1,9 +1,7 @@
-// Generated from indicadores.g4 by ANTLR 4.4
-  
-
+// Generated from indicadores.g4 by ANTLR 4.7
+   
 import java.util.HashMap;
 
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -21,47 +19,47 @@ public class indicadoresBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSumRes(@NotNull indicadoresParser.SumResContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpr(indicadoresParser.ExprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOtroIndicador(@NotNull indicadoresParser.OtroIndicadorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAsignar(indicadoresParser.AsignarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpr(@NotNull indicadoresParser.ExprContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSumRes(indicadoresParser.SumResContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAsignar(@NotNull indicadoresParser.AsignarContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulDiv(indicadoresParser.MulDivContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDiv(@NotNull indicadoresParser.MulDivContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCuenta(indicadoresParser.CuentaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParentesis(@NotNull indicadoresParser.ParentesisContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOtroIndicador(indicadoresParser.OtroIndicadorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCuenta(@NotNull indicadoresParser.CuentaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParentesis(indicadoresParser.ParentesisContext ctx) { return visitChildren(ctx); }
 }

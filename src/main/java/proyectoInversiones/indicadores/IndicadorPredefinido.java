@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class IndicadoresPredefinidos {
+public class IndicadorPredefinido {
 	
 	NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 	Collection<Empresa> empresas = archivo.leerArchivo();
@@ -45,7 +45,7 @@ public class IndicadoresPredefinidos {
 			return false;
 	}
 	public int calcularIngNeto(String empresa, int periodo){ //INDICADOR PREDEFINIDO POR EL USUARIO
-		int ingNeto = 0;
+		int ingNeto = 0 ;
 		
 			if(validarEmpresa(empresa))
 				this.inicializarCuentas();
@@ -58,8 +58,28 @@ public class IndicadoresPredefinidos {
 		return ingNeto;
 	} 
 	
+	public int calcularRoe(String empresa, int periodo){
+		int roe = 0;
+		if(validarEmpresa(empresa))
+			this.inicializarCuentas();
+		for(Cuenta head2:cuentas){
+			if(head2.getPeriodo() == periodo){
+				roe = this.calcularIngNeto(empresa,periodo) /
+						(head2.getEbitda() +
+						head2.getfCashFlow() +
+						head2.getFds() + 
+						head2.getIngNetoOpCont()
+						+head2.getIngNetoOpDiscont());
+			//Esta super suma se debería delegar en Cuenta.java, vendría a ser el capitalTotal
+			}
+		}
+
+		
+		return roe;
+	}
+	
 	public static void main (String args[]){
-		IndicadoresPredefinidos pre = new IndicadoresPredefinidos();
+		IndicadorPredefinido pre = new IndicadorPredefinido();
 		System.out.println(pre.getEmpresas());
 		pre.inicializarCuentas();
 		System.out.println(pre.getCuentas());

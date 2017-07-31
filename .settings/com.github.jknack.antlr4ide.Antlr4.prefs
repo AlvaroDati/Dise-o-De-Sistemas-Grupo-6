@@ -1,5 +1,5 @@
-antlr4.antlrRegisteredTools=4.4@C\:\\Users\\kimel\\AppData\\Local\\Temp\\antlr-4.4-complete.jar\:4.7@C\:\\Users\\kimel\\.m2\\repository\\org\\antlr\\antlr\\4.7-complete\\antlr-4.7-complete.jar
-antlr4.antlrToolPath=C\:\\Users\\kimel\\.m2\\repository\\org\\antlr\\antlr\\4.7-complete\\antlr-4.7-complete.jar
+antlr4.antlrRegisteredTools=4.4@C\:\\Users\\kimel\\AppData\\Local\\Temp\\antlr-4.4-complete.jar\:4.7@C\:\\Users\\kimel\\Downloads\\antlr-4.7-complete.jar
+antlr4.antlrToolPath=C\:\\Users\\kimel\\Downloads\\antlr-4.7-complete.jar
 antlr4.encoding=UTF-8
 antlr4.listener=false
 antlr4.visitor=true

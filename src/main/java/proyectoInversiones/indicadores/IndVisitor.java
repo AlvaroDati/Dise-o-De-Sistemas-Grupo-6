@@ -1,17 +1,18 @@
 package proyectoInversiones.indicadores;
 
-import proyectoInversiones.antlr4.*; 
+import proyectoInversiones.antlr4.*;
+import proyectoInversiones.Empresa;
+
+
 
 import java.util.HashMap; 
 import java.util.Map;
 
 
 
-
-
-
 public class IndVisitor extends indicadoresBaseVisitor<Double>{
-
+	
+	
 	Map<String, Double> memory = new HashMap<String, Double>();
 	
 	@Override
@@ -34,7 +35,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Double>{
 	public Double visitSumRes(indicadoresParser.SumResContext ctx){
 		Double resultado = 0.0;
 		Double izquierda = visit(ctx.expresionMultiple(0));
-		int i = 1;
+		int i = 0;
 		Double derecha;
 		while(!ctx.isEmpty()){
 			derecha = visit(ctx.expresionMultiple(i));
@@ -49,7 +50,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Double>{
 	public Double visitMulDiv(indicadoresParser.MulDivContext ctx){
 		
 		Double resultado = 0.0;
-		int i = 1;
+		int i = 0;
 		Double izquierda = visit(ctx.operando(0));
 		Double derecha;
 		while(!ctx.isEmpty()){
@@ -72,17 +73,37 @@ public class IndVisitor extends indicadoresBaseVisitor<Double>{
 	}
 	
 	public Double visisOtroIndicador(indicadoresParser.OtroIndicadorContext ctx){
-		/*
-		IndicadorPredefinido indicador = new IndicadorPredefenido();
-		indicador.indicadorSeleccionado(ctx.getText());
-		 * Aca hay que ver que hacer, porque hay millones de indicadores y no podemos hacer un switch-case para cada
-		 * indicador, para pensarlo..
-		 */
+	
+		String indicador;
+		//IndicadorPredefinido indicadorPredefinido = new IndicadorPredefinido();
 		
+		indicador = ctx.OTROINDICADOR().getText().toLowerCase();
+		
+		IndicadorPredefinido indPredefinido = new IndicadorPredefinido();
+		
+		
+		switch(indicador){
+			//IndicadorPredefinido indPredefinido = new IndicadorPredefinido();
+		
+		case "ingresoneto":
+			return (double) indPredefinido.calcularIngNeto("AmericaMovil", 2006);
+			
+		case "roa":
+			return (double) indPredefinido.calcularRoe("AmericaMovil", 2006);
+			
+		default:
+			//Tirar excepcion
+			break;
+		}
 		return null;
 		
 	}
 	
+	public static void main (String args[]){
+		IndVisitor ind = new IndVisitor();
+		
+	}
+
 }
 	/*
 	si recibimos una cadena OTROINDICADOR suceda
