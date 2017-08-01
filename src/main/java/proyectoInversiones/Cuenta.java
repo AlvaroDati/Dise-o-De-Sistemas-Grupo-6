@@ -3,17 +3,18 @@ package proyectoInversiones;
 
 public class Cuenta{
 	private int periodo;
-	private int ebitda;
-	private int fds;
-	private int fCashFlow;
-	private int ingNetoOpCont;
-	private int ingNetoOpDiscont;
-	private int deuda;
+	private float ebitda;
+	private float fds;
+	private float fCashFlow;
+	private float ingNetoOpCont;
+	private float ingNetoOpDiscont;
+	private float deuda;
+	private float capitalTotal;
 	
-	public int getDeuda() {
+	public float getDeuda() {
 		return deuda;
 	}
-	public void setDeuda(int deuda) {
+	public void setDeuda(float deuda) {
 		this.deuda = deuda;
 	}
 	public int getPeriodo() {
@@ -22,70 +23,42 @@ public class Cuenta{
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
-	public int getEbitda() {
+	public float getEbitda() {
 		return ebitda;
 	}
-	public void setEbitda(int ebitda) {
+	public void setEbitda(float ebitda) {
 		this.ebitda = ebitda;
 	}
-	public int getFds() {
+	public float getFds() {
 		return fds;
 	}
-	public void setFds(int fds) {
+	public void setFds(float fds) {
 		this.fds = fds;
 	}
-	public int getfCashFlow() {
+	public float getfCashFlow() {
 		return fCashFlow;
 	}
-	public void setfCashFlow(int fCashFlow) {
+	public void setfCashFlow(float fCashFlow) {
 		this.fCashFlow = fCashFlow;
 	}
-	public int getIngNetoOpCont() {
+	public float getIngNetoOpCont() {
 		return ingNetoOpCont;
 	}
-	public void setIngNetoOpCont(int ingNetoOpCont) {
+	public void setIngNetoOpCont(float ingNetoOpCont) {
 		this.ingNetoOpCont = ingNetoOpCont;
 	}
-	public int getIngNetoOpDiscont() {
+	public float getIngNetoOpDiscont() {
 		return ingNetoOpDiscont;
 	}
-	public void setIngNetoOpDiscont(int ingNetoOpDiscont) {
+	public void setIngNetoOpDiscont(float ingNetoOpDiscont) {
 		this.ingNetoOpDiscont = ingNetoOpDiscont;
 	}
 	
-	public String toString(){
-		return getPeriodo() + "";
+	public float capitalTotal(){
+		capitalTotal = this.getEbitda() + this.getfCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont();
+		return capitalTotal;
 	}
-	
-	public void mostrarTodo (){
-		
-		
-		System.out.println("---------------------------------------");
-		
-		System.out.print("Periodo: ");
-		System.out.println(this.getPeriodo());
-		System.out.print("Ebitda: ");
-		System.out.println(this.getEbitda());
-		System.out.print("FDS: ");
-		System.out.println(this.getFds());
-		System.out.print("FCashFlow: ");
-		System.out.println(this.getfCashFlow());
-		System.out.print("ingNetoOpCont: ");
-		System.out.println(this.getIngNetoOpCont());
-		System.out.print("ingNetoOpDiscont: ");
-		System.out.println(this.getIngNetoOpDiscont());
-		System.out.print("deuda: ");
-		System.out.println(this.getDeuda());
-
-		System.out.println("---------------------------------------");
-	
-	}
-	
-	
 	
 	public static void main(String args[]){
-		Cuenta cuenta = new Cuenta();
-		cuenta.mostrarTodo();
 	}
-	
  }

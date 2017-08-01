@@ -16,7 +16,9 @@ public class Ventana extends JFrame implements ActionListener {
 	JPanel panelPrincipal;
 	JPanel panelInterfaz;
 	JPanel panelEmpresas;
-	JPanel panelIndicadores;
+	JPanel panelIndicadoresYMetodologias;
+	JPanel panelIndPredefinidos;
+	JPanel panelIndUsuario;
 	JPanel panelCuentas;
 	JList listaEmpresas;	
 	DefaultListModel modelo;
@@ -30,6 +32,7 @@ public class Ventana extends JFrame implements ActionListener {
 	JButton botonVerInformacion;
 	JButton botonAgregarIndicador;
 	JButton botonBorrarIndicador;
+	JTextField textoIndicador;
 	
 	
 	//Tomamos el tamanio de la pantalla
@@ -58,7 +61,7 @@ public class Ventana extends JFrame implements ActionListener {
 	public void InicializarVentana(){
 		
 		///////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////LISTA EMPRESAS/////////////////////////////////
+		////////////////////////////////////LISTAS/////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
 			
 		
@@ -70,6 +73,8 @@ public class Ventana extends JFrame implements ActionListener {
 		listaEmpresas.setModel(modelo);
 		empresasDescargadas.forEach(empresa ->  modelo.addElement(empresa));
 		listaEmpresas.setPreferredSize(new Dimension(ancho/3-10,150));
+		
+		ArrayList<> IndicadoresPredefinidos = new ArrayList<>
 		
 				
 		///////////////////////////////////////////////////////////////////////////////
@@ -87,6 +92,12 @@ public class Ventana extends JFrame implements ActionListener {
 		botonBorrarIndicador = new JButton();
 		botonBorrarIndicador.setText("Borrar Indicador");
 		this.botonBorrarIndicador.addActionListener(this);
+		
+		///////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////CUADROS DE TEXTO//////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////
+		
+		textoIndicador = new JTextField("Introduzca un nuevo indicador",100);
 		
 		
 		///////////////////////////////////////////////////////////////////////////////
@@ -113,21 +124,39 @@ public class Ventana extends JFrame implements ActionListener {
 		panelCuentas.setPreferredSize(new Dimension(ancho/3,alto/4));
 
 
-		panelIndicadores = new JPanel();
-		panelIndicadores.setVisible(true);
-		panelIndicadores.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Lista Indicadores"),
+		panelIndicadoresYMetodologias = new JPanel();
+		panelIndicadoresYMetodologias.setVisible(true);
+		panelIndicadoresYMetodologias.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Indicadores y metodologías"),
                 BorderFactory.createEmptyBorder(15,15,15,15)));
-		panelIndicadores.setPreferredSize(new Dimension(ancho/3,alto/4));
+		panelIndicadoresYMetodologias.setPreferredSize(new Dimension(ancho/3,alto/4));
+		
+		panelIndPredefinidos = new JPanel();
+		panelIndPredefinidos.setVisible(true);
+		panelIndPredefinidos.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Indicadores Predefinidos"),
+                BorderFactory.createEmptyBorder(15,15,15,15)));
+		panelIndPredefinidos.setPreferredSize(new Dimension(ancho/3,alto/4));
+		
+		panelIndUsuario = new JPanel();
+		panelIndUsuario.setVisible(true);
+		panelIndUsuario.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Indicadores del Usuario"),
+                BorderFactory.createEmptyBorder(15,15,15,15)));
+		panelIndUsuario.setPreferredSize(new Dimension(ancho/3,alto/4));
 		
 		this.add(panelPrincipal);
-		panelPrincipal.add(panelEmpresas,BorderLayout.WEST);	// el tamanio de los paneles es automatico, dependen de lo que contienen
-		panelPrincipal.add(panelIndicadores,BorderLayout.EAST); // los objetos "j" pueden instanciarse solo una vez
-		panelPrincipal.add(panelCuentas, BorderLayout.CENTER);
+		panelPrincipal.add(panelEmpresas,BorderLayout.NORTH);	// el tamanio de los paneles es automatico, dependen de lo que contienen
+		panelPrincipal.add(panelIndicadoresYMetodologias,BorderLayout.SOUTH); // los objetos "j" pueden instanciarse solo una vez
+		panelPrincipal.add(panelCuentas, BorderLayout.WEST);
+		panelPrincipal.add(panelIndPredefinidos, BorderLayout.CENTER);
+		panelPrincipal.add(panelIndUsuario, BorderLayout.EAST);
+
 		panelEmpresas.add(listaEmpresas);
 		panelEmpresas.add(botonVerInformacion);
-		panelIndicadores.add(botonAgregarIndicador);
-		panelIndicadores.add(botonBorrarIndicador);
+		panelIndicadoresYMetodologias.add(textoIndicador);
+		panelIndicadoresYMetodologias.add(botonAgregarIndicador);
+		panelIndicadoresYMetodologias.add(botonBorrarIndicador);
 		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,7 +185,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaCuentas = new JList();
 		listaCuentas.setModel(modeloCuentas);
 		listaCuentas.setLayoutOrientation(JList.VERTICAL_WRAP);
-		listaCuentas.setVisibleRowCount(7);
+		listaCuentas.setVisibleRowCount(modeloCuentas.size());
 		
 		//Generamos el scrollbar para la lista
 		

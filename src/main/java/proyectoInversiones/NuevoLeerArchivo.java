@@ -20,12 +20,7 @@ public class NuevoLeerArchivo{
 	
 	public ArrayList<Empresa> leerArchivo (){
 		
-	/*	if (empresaSolicitada.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Ingrese una empresa en el cuadro de texto.", "Ingrese una empresa",JOptionPane.WARNING_MESSAGE);
-			}*/
 		String ruta = "empresas.txt"; 
-		//Collection<Empresa> empresas = new ArrayList<Empresa>();
-		
 		ArrayList<Empresa> empresas = new ArrayList<>();
 		
 	try {
@@ -46,7 +41,7 @@ public class NuevoLeerArchivo{
 	return empresas;
 	
 	}
-	
-
-	
 }
+
+/*JOptionPane.showMessageDialog(null, "Ingrese una empresa en el cuadro de texto.", "Ingrese una empresa",JOptionPane.WARNING_MESSAGE); (Ejemplo de mensaje
+ * de error para usar en el futuro con indicadores*/

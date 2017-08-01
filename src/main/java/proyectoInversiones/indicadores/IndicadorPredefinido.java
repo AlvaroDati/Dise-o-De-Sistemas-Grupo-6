@@ -73,8 +73,6 @@ public class IndicadorPredefinido {
 			//Esta super suma se debería delegar en Cuenta.java, vendría a ser el capitalTotal
 			}
 		}
-
-		
 		return roe;
 	}
 	
