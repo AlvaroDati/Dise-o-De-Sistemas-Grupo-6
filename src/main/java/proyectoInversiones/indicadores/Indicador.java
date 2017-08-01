@@ -2,15 +2,85 @@ package proyectoInversiones.indicadores;
 
 import proyectoInversiones.*; 
 
+import proyectoInversiones.Ventana;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class IndicadorPredefinido {
-	
-	NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-	Collection<Empresa> empresas = archivo.leerArchivo();
+public class Indicador {
 
+	
+	private String nombre;
+	private float valorIndicador;
+	
+	public Indicador(){ //Constructor vacio
+		
+	}
+	
+	public Indicador(String nombreIngresado){
+		nombre = nombreIngresado;
+	}
+	
+	public float getValorIndicador() {
+		return valorIndicador;
+	}
+
+	public void setValorIndicador(float valorIndicador) {
+		this.valorIndicador = valorIndicador;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombreIndicador) {
+		nombre = nombreIndicador;
+	}
+
+	Ventana ventana = new Ventana();
+	
+	ventana.getIndicadorIngresado();
+	
+	
+	Indicador indicadorDefinido = new Indicador("nombreIndicador",valor);
+	 
+	
+}
+	
+	/*
+	 * 
+	 * ArrayList<Empresa> empresaAsociada = new ArrayList<Empresa>();
+	ArrayList<Cuenta> cuentasAsociadas   = new ArrayList<Cuenta>();
+	empresaAsociada = this.leerArchivo();
+	 * 
+	 * public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa){
+		
+		String empresaAsoc = empresa.toString();
+		if(!validarEmpresa(empresaAsoc)){
+			for(Empresa head:empresaAsociada){
+				if(head.getNombre().equals(empresaAsoc)){
+					cuentasAsociadas = head.getCuentas();
+				}
+			}
+			
+		}
+	return cuentasAsociadas;
+	}
+	
+	public Integer obtenerPeriodosDeEmpresa(Empresa empresa){
+		ArrayList<Cuenta> cuentaTomada = this.
+		for(Cuenta head:cuentaTomada){
+		
+		}
+	}
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+	Collection<Empresa> empresas = archivo.leerArchivo();
 	List<Cuenta> cuentas = new ArrayList<Cuenta>();
 
 	public Collection<Empresa> getEmpresas() {
@@ -85,4 +155,4 @@ public class IndicadorPredefinido {
 		
 		System.out.print(pre.calcularIngNeto(amer, 2006));
 	}
-}
+}*/

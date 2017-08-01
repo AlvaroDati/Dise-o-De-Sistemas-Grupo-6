@@ -49,7 +49,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	@Override
 	public Integer visitId(indicadoresParser.IdContext ctx) {
 		String id = ctx.INDICADOR().getText();
-		IndicadorPredefinido indPredefinido = new IndicadorPredefinido();
+		Indicadores indPredefinido = new Indicadores();
 		
 		//if ( memory.containsKey(id) ) return memory.get(id);
 		int resultado = 0;

@@ -16,7 +16,7 @@ import com.google.gson.stream.JsonReader;
 
 
 
-public class NuevoLeerArchivo{
+public class NuevoLeerArchivo{	
 	
 	public ArrayList<Empresa> leerArchivo (){
 		
@@ -41,6 +41,7 @@ public class NuevoLeerArchivo{
 	return empresas;
 	
 	}
+	 
 }
 
 /*JOptionPane.showMessageDialog(null, "Ingrese una empresa en el cuadro de texto.", "Ingrese una empresa",JOptionPane.WARNING_MESSAGE); (Ejemplo de mensaje
