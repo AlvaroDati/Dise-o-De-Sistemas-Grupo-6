@@ -43,16 +43,48 @@ public class Indicador {
 		nombre = nombreIndicador;
 	}
 
-	public float ingresoNeto(Empresa empresa,int periodo){
-		float ingneto = 0;
-		cuentaAsociada = archivoEmpresas.obtenerCuentasSegunEmpresa(empresa);
-		
-	
-		return ingneto;
+	public ArrayList<Float> ingresoNeto(Empresa empresa){
+		ArrayList<Float>  ingNeto         = new ArrayList<Float>();
+		ArrayList<Float>  ingNetoOpCont   = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
+		ArrayList<Float>  ingNetoOpDis    = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
+		//Segun PDF de ENTREGA1 => IngresoNeto = IngresoNetoContinuo + IngresoNetoDiscontinuo
+		for(int i = 0;i<ingNetoOpCont.size() && i<ingNetoOpDis.size();i++){
+			ingNeto.add(ingNetoOpCont.get(i) + ingNetoOpDis.get(i));
+		}
+		return ingNeto;
 	}
 	
+	public ArrayList<Float> roe(Empresa empresa){
+		ArrayList<Float> roe     = new ArrayList<Float>();		
+		ArrayList<Float> ingNeto = this.ingresoNeto(empresa);
 	
+		float capitalTotal       = archivoEmpresas.sumaDeCuentasDe(empresa);
+		
+		//Segun PDF de ENTREGA2 => ROE = (ingNeto - dividendos)/capitalTotal
+		for(int i = 0;i<ingNeto.size();i++){
+			roe.add(ingNeto.get(i)/capitalTotal); //DIVIDENDOS ??
+		}
+	
+		
+		
+		return roe;
+	}
 	 
+	
+	
+	public static void main (String args[]){
+		
+		Indicador indicador     = new Indicador();
+		Empresa empresaAsociada = new Empresa("America Movil");
+		
+	
+		 System.out.printf("Ingreso Neto: ");
+		 System.out.print(indicador.ingresoNeto(empresaAsociada));
+		 System.out.printf("\nRetorno sobre Capital Total (ROE): ");
+		 System.out.print(indicador.roe(empresaAsociada));
+	
+		
+	}
 	
 }
 	

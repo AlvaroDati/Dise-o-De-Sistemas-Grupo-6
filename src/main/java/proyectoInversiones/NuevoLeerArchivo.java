@@ -114,6 +114,15 @@ public class NuevoLeerArchivo{
 		 return cuentaQuerida;
 	 }
 	 
+	 //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
+	 public float sumaDeCuentasDe(Empresa empresa){
+		 float sumaDeCuentas = 0;
+		 ArrayList<Cuenta> cuentita = this.obtenerCuentasSegunEmpresa(empresa);
+		 for(int i = 0;i<cuentita.size();i++){
+			 sumaDeCuentas +=cuentita.get(i).capitalTotal(); //capitalTotal() esta definido en la clase Cuenta.
+		 }
+		 return sumaDeCuentas;
+	 }
 	
 	 public static void main (String args[]){
 		 Empresa empresaAsoc = new Empresa("America Movil");
@@ -125,6 +134,12 @@ public class NuevoLeerArchivo{
 		 System.out.print(arch.obtenerPeriodosSegunEmpresa(empresaAsoc));
 		 System.out.printf("\nEBITDA: ");
 		 System.out.print(arch.obtenerCuentaDe(empresaAsoc, "EBITDA"));
+		 //PARA VER LAS OTRAS CUENTAS BASTA CON REEMPLAZAR EL "EBITDA" POR LA CUENTA DESEADA
+		 
+		 
+		 System.out.printf("\nSUMA DE TODAS LAS CUENTAS DE LA EMRPESA %s: ",empresaAsoc.getNombre());
+		 System.out.print(arch.sumaDeCuentasDe(empresaAsoc));
+		 arch.sumaDeCuentasDe(empresaAsoc);
 	 }
 	 /*
 	  * SI QUIEREN UN PERIODO O UN DATO EN ESPECIFICO, SE HACE UN for(int i = 0;i<cuentita.size();i++) 

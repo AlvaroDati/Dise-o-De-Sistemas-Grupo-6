@@ -55,7 +55,7 @@ public class Cuenta{
 	}
 	
 	public float capitalTotal(){
-		capitalTotal = this.getEbitda() + this.getfCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont();
+		capitalTotal = this.getEbitda() + this.getfCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont() - this.getDeuda();
 		return capitalTotal;
 	}
 	
