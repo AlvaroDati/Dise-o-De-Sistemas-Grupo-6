@@ -52,6 +52,10 @@ public class Indicador {
 		nombre = nombreIndicador;
 	}
 
+	public ArrayList<Integer> periodos(Empresa empresa){
+		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
+	}
+	
 	public ArrayList<Float> ingresoNeto(Empresa empresa){
 		ArrayList<Float>  ingNeto         = new ArrayList<Float>();
 		ArrayList<Float>  ingNetoOpCont   = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");

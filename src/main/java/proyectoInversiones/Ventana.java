@@ -103,7 +103,7 @@ public class Ventana extends JFrame implements ActionListener {
 		
 		textoNombreIndicador = new JTextField("Introduzca el nombre del indicador que desea crear",50);
 		textoIndicador = new JTextField("Introduzca el calculo del indicador",50);
-		
+	
 		///////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////PANELES//////////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
@@ -197,7 +197,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaIndPredefinidos = new JList();
 		listaIndPredefinidos.setModel(modeloIndPredefinidos);
 		listaIndPredefinidos.setLayoutOrientation(JList.VERTICAL_WRAP);
-		listaIndPredefinidos.setVisibleRowCount(2); //TODO VER COMO DESHARCODEAR ESTA COSA
+		listaIndPredefinidos.setVisibleRowCount(3); //TODO VER COMO DESHARCODEAR ESTA COSA
 		/*
 		 * listaIndPredefinidos.setVisibleRowCount(indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
 		System.out.printf("Size de modeloIndPredefinidos %d", indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
@@ -261,11 +261,12 @@ public void actionPerformed(ActionEvent evento) {
 
 		}
 		
-		
+		modeloIndPredefinidos.addElement("Periodo:");
 		modeloIndPredefinidos.addElement("Ingreso Neto:");
 		modeloIndPredefinidos.addElement("ROE:");
 		
 		for(int i = 0;i<cuentasRequeridas.size();i++){
+			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
 			modeloIndPredefinidos.addElement(indicadorPredefinido.ingresoNeto(((Empresa) empresaSeleccionada)).get(i));
 			modeloIndPredefinidos.addElement(indicadorPredefinido.roe(((Empresa) empresaSeleccionada)).get(i));
 			
@@ -334,6 +335,12 @@ public void actionPerformed(ActionEvent evento) {
 		panelIndUsuario.repaint();
 		
 	}
+	
+	
+	String texto = textoNombreIndicador.getText();
+	System.out.printf("INTRODUZCA EL NOMBRE DEL INDICADOR QUE DESEA CREAR %s\n", texto);
+	String texto2 =textoIndicador.getText();
+	System.out.printf("INTRODUZCA EL CALCULO DEL INDICADOR %s\n", texto2);
 	
 	
 }
