@@ -12,6 +12,10 @@ public class Empresa {
 	public Empresa() {
 		Cuentas = new ArrayList<Cuenta>();
 	}
+	
+	public Empresa(String nombreEmpresa){
+		nombre = nombreEmpresa;
+	}
 
 	public String getNombre() {
 		return nombre;

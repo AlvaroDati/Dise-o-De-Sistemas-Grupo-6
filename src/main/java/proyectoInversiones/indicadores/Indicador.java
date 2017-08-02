@@ -10,6 +10,11 @@ import java.util.List;
 
 public class Indicador {
 
+	NuevoLeerArchivo   archivoEmpresas  = new NuevoLeerArchivo();
+	ArrayList<Empresa> empresas 	    = new ArrayList<Empresa>();
+	ArrayList<Cuenta>  cuentaAsociada   = new ArrayList<Cuenta>();
+	Empresa            empresaAsociada 	= new Empresa();
+	
 	
 	private String nombre;
 	private float valorIndicador;
@@ -38,12 +43,15 @@ public class Indicador {
 		nombre = nombreIndicador;
 	}
 
-	Ventana ventana = new Ventana();
+	public float ingresoNeto(Empresa empresa,int periodo){
+		float ingneto = 0;
+		cuentaAsociada = archivoEmpresas.obtenerCuentasSegunEmpresa(empresa);
+		
 	
-	ventana.getIndicadorIngresado();
+		return ingneto;
+	}
 	
 	
-	Indicador indicadorDefinido = new Indicador("nombreIndicador",valor);
 	 
 	
 }
