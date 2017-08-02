@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.Dimension;*/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JTable;
@@ -341,7 +344,13 @@ public void actionPerformed(ActionEvent evento) {
 	System.out.printf("INTRODUZCA EL NOMBRE DEL INDICADOR QUE DESEA CREAR %s\n", texto);
 	String texto2 =textoIndicador.getText();
 	System.out.printf("INTRODUZCA EL CALCULO DEL INDICADOR %s\n", texto2);
-	
+	try( PrintStream out = new PrintStream( new File( "C:\\Users\\kimel\\Desktop\\text.txt" ) ) ) {
+	    out.print( texto );
+	    out.print( texto2 );
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
 }
 
