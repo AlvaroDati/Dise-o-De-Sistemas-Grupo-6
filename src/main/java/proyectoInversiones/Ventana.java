@@ -11,6 +11,8 @@ import java.util.Collection;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import proyectoInversiones.indicadores.Indicador;
+
 public class Ventana extends JFrame implements ActionListener {
 
 	JPanel panelPrincipal;
@@ -180,7 +182,7 @@ public void actionPerformed(ActionEvent evento) {
 		empresaSeleccionada = listaEmpresas.getSelectedValue();
 		ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
 		cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
-		
+		Indicador indicadorPredefinido = new Indicador();
 		//generamos la lista de cuentas
 		
 		modeloCuentas = new DefaultListModel();
@@ -195,7 +197,11 @@ public void actionPerformed(ActionEvent evento) {
 		listaIndPredefinidos = new JList();
 		listaIndPredefinidos.setModel(modeloIndPredefinidos);
 		listaIndPredefinidos.setLayoutOrientation(JList.VERTICAL_WRAP);
-		//listaIndPredefinidos.setVisibleRowCount(modeloIndPredefinidos.size());
+		listaIndPredefinidos.setVisibleRowCount(2); //TODO VER COMO DESHARCODEAR ESTA COSA
+		/*
+		 * listaIndPredefinidos.setVisibleRowCount(indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
+		System.out.printf("Size de modeloIndPredefinidos %d", indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
+		 */
 
 		//generamos la lista de indicadores de usuario
 
@@ -254,7 +260,17 @@ public void actionPerformed(ActionEvent evento) {
 			modeloCuentas.addElement(cuenta.getDeuda());
 
 		}
-
+		
+		
+		modeloIndPredefinidos.addElement("Ingreso Neto:");
+		modeloIndPredefinidos.addElement("ROE:");
+		
+		for(int i = 0;i<cuentasRequeridas.size();i++){
+			modeloIndPredefinidos.addElement(indicadorPredefinido.ingresoNeto(((Empresa) empresaSeleccionada)).get(i));
+			modeloIndPredefinidos.addElement(indicadorPredefinido.roe(((Empresa) empresaSeleccionada)).get(i));
+			
+		}
+		
 		/*Aniadimos los encabezados de las filas de la lista de indicadores predefinidos
 
 		modeloCuentas.addElement("Periodo:");

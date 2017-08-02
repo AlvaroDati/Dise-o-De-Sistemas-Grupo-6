@@ -18,7 +18,16 @@ public class Indicador {
 	
 	private String nombre;
 	private float valorIndicador;
+	public int cantidadDeIndicadoresPredefinidos = 0;
 	
+	public int getCantidadDeIndicadoresPredefinidos() {
+		return cantidadDeIndicadoresPredefinidos;
+	}
+
+	public void setCantidadDeIndicadoresPredefinidos(int cantidadDeIndicadoresPredefinidos) {
+		this.cantidadDeIndicadoresPredefinidos = cantidadDeIndicadoresPredefinidos;
+	}
+
 	public Indicador(){ //Constructor vacio
 		
 	}
@@ -51,6 +60,7 @@ public class Indicador {
 		for(int i = 0;i<ingNetoOpCont.size() && i<ingNetoOpDis.size();i++){
 			ingNeto.add(ingNetoOpCont.get(i) + ingNetoOpDis.get(i));
 		}
+		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
 		return ingNeto;
 	}
 	
@@ -65,7 +75,7 @@ public class Indicador {
 			roe.add(ingNeto.get(i)/capitalTotal); //DIVIDENDOS ??
 		}
 	
-		
+		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
 		
 		return roe;
 	}
