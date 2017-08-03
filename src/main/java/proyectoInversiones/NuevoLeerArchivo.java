@@ -44,29 +44,29 @@ public class NuevoLeerArchivo{
 	
 	}
 	
-	
-	public boolean validarEmpresa(String empresa){
+	//Verifica que la empresa solicitada pertenezca a la lista de empresas traidas del Json
+	public boolean contieneEmpresa(String empresa){
 		
 		for(Empresa head:empresaAsociada){
 			if(head.getNombre().contains(empresa)){ 
 				return true;
 				}
 			}
-			return false;
+		return false;
 	}
 	
 	//Dada una empresa, me devuelve todas las cuentas que tiene asociada a ella
 	 public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa){
-		 ArrayList<Cuenta> cuentasAsociadas = new ArrayList<Cuenta>();
+	
+		ArrayList<Cuenta> cuentasAsociadas = new ArrayList<Cuenta>();
 		String empresaAsoc = empresa.toString();
-		if(validarEmpresa(empresaAsoc)){
+		if(contieneEmpresa(empresaAsoc)){
 			for(Empresa head:empresaAsociada){
 				if(head.getNombre().equals(empresaAsoc)){
 					cuentasAsociadas = head.getCuentas();
 				}
 			}
-			
-		}
+		}	 
 	return cuentasAsociadas;
 	}
 	 
@@ -114,32 +114,37 @@ public class NuevoLeerArchivo{
 		 return cuentaQuerida;
 	 }
 	 
-	 //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
+	 //Sirve para obtener la cantidad de Cuentas de la empresa que se solicite
+	 //no tengo la mas puta idea de qué hace esto ni para que lo hace
 	 public float sumaDeCuentasDe(Empresa empresa){
+		 
 		 float sumaDeCuentas = 0;
-		 ArrayList<Cuenta> cuentita = this.obtenerCuentasSegunEmpresa(empresa);
-		 for(int i = 0;i<cuentita.size();i++){
-			 sumaDeCuentas +=cuentita.get(i).capitalTotal(); //capitalTotal() esta definido en la clase Cuenta.
+		 ArrayList<Cuenta> cuenta = this.obtenerCuentasSegunEmpresa(empresa);
+		 
+		 for(int i = 0;i<cuenta.size();i++){
+			 sumaDeCuentas +=cuenta.get(i).capitalTotal(); //capitalTotal() esta definido en la clase Cuenta.
 		 }
 		 return sumaDeCuentas;
 	 }
 	
 	 public static void main (String args[]){
+		 
+		 
 		 Empresa empresaAsoc = new Empresa("America Movil");
 		 NuevoLeerArchivo arch = new NuevoLeerArchivo();
-
-		 	 
+	 	 
 		 
 		 System.out.printf("PERIODOS: ");
 		 System.out.print(arch.obtenerPeriodosSegunEmpresa(empresaAsoc));
 		 System.out.printf("\nEBITDA: ");
 		 System.out.print(arch.obtenerCuentaDe(empresaAsoc, "EBITDA"));
 		 //PARA VER LAS OTRAS CUENTAS BASTA CON REEMPLAZAR EL "EBITDA" POR LA CUENTA DESEADA
-		 
-		 
 		 System.out.printf("\nSUMA DE TODAS LAS CUENTAS DE LA EMRPESA %s: ",empresaAsoc.getNombre());
-		 System.out.print(arch.sumaDeCuentasDe(empresaAsoc));
-		 arch.sumaDeCuentasDe(empresaAsoc);
+		 System.out.println(arch.sumaDeCuentasDe(empresaAsoc));
+		 System.out.print(empresaAsoc.cantidadDeCuentas());
+
+	
+		// arch.sumaDeCuentasDe(empresaAsoc);
 	 }
 	 /*
 	  * SI QUIEREN UN PERIODO O UN DATO EN ESPECIFICO, SE HACE UN for(int i = 0;i<cuentita.size();i++) 

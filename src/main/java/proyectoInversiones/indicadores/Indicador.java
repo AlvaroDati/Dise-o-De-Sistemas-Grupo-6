@@ -76,7 +76,7 @@ public class Indicador {
 		
 		//Segun PDF de ENTREGA2 => ROE = (ingNeto - dividendos)/capitalTotal
 		for(int i = 0;i<ingNeto.size();i++){
-			roe.add(ingNeto.get(i)/capitalTotal); //DIVIDENDOS ??
+			roe.add((ingNeto.get(i)/capitalTotal)*100); //DIVIDENDOS ??
 		}
 	
 		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);

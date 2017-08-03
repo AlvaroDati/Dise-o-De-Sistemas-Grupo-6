@@ -41,8 +41,8 @@ public class Empresa {
 		this.Cuentas = Cuentas;
 	}
 
-	public void addCuenta(Cuenta b) {
-		Cuentas.add(b);
+	public void addCuenta(Cuenta cuenta) {
+		Cuentas.add(cuenta);
 	}
 	
 	public String toString(){

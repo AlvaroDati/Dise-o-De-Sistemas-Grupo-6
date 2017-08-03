@@ -6,8 +6,11 @@ import java.awt.*;
 import java.awt.Dimension;*/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -175,6 +178,12 @@ public class Ventana extends JFrame implements ActionListener {
 	
 public void actionPerformed(ActionEvent evento) { 
 	
+	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
+	
+	filasListaCuentas = 7;
+	filasListaIndPredefinidos = 3;
+	filasListaIndUsuario = 1;
+	
 	if (evento.getSource()==botonVerInformacion){
 		
 		panelCuentas.removeAll(); 	//Borramos lo que haya quedado en el panel cuentas
@@ -192,7 +201,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaCuentas = new JList();
 		listaCuentas.setModel(modeloCuentas);
 		listaCuentas.setLayoutOrientation(JList.VERTICAL_WRAP);
-		listaCuentas.setVisibleRowCount(modeloCuentas.size());
+		listaCuentas.setVisibleRowCount(filasListaCuentas);
 		
 		//generamos la lista de indicadores predefinidos
 		
@@ -200,7 +209,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaIndPredefinidos = new JList();
 		listaIndPredefinidos.setModel(modeloIndPredefinidos);
 		listaIndPredefinidos.setLayoutOrientation(JList.VERTICAL_WRAP);
-		listaIndPredefinidos.setVisibleRowCount(3); //TODO VER COMO DESHARCODEAR ESTA COSA
+		listaIndPredefinidos.setVisibleRowCount(filasListaIndPredefinidos);
 		/*
 		 * listaIndPredefinidos.setVisibleRowCount(indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
 		System.out.printf("Size de modeloIndPredefinidos %d", indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
@@ -212,7 +221,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaIndUsuario = new JList();
 		listaIndUsuario.setModel(modeloIndUsuario);
 		listaIndUsuario.setLayoutOrientation(JList.VERTICAL_WRAP);
-		//listaIndPredefinidos.setVisibleRowCount(modeloIndUsuario.size());
+		listaIndUsuario.setVisibleRowCount(filasListaIndUsuario);
 		
 		//Generamos el scrollbar para la lista de cuentas
 		
@@ -263,10 +272,15 @@ public void actionPerformed(ActionEvent evento) {
 			modeloCuentas.addElement(cuenta.getDeuda());
 
 		}
+	
+		
+		//Aniadimos los encabezados de las filas de la lista de indicadores predefinidos
 		
 		modeloIndPredefinidos.addElement("Periodo:");
 		modeloIndPredefinidos.addElement("Ingreso Neto:");
 		modeloIndPredefinidos.addElement("ROE:");
+		
+		//rellenamos la lista con los datos de los indicadores
 		
 		for(int i = 0;i<cuentasRequeridas.size();i++){
 			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
@@ -275,55 +289,21 @@ public void actionPerformed(ActionEvent evento) {
 			
 		}
 		
-		/*Aniadimos los encabezados de las filas de la lista de indicadores predefinidos
-
-		modeloCuentas.addElement("Periodo:");
-		modeloCuentas.addElement("Ebitda:");
-		modeloCuentas.addElement("FDS:");
-		modeloCuentas.addElement("fCashFlow:");
-		modeloCuentas.addElement("IngNetoOpCont:");
-		modeloCuentas.addElement("IngNetoOpDiscont:");
-		modeloCuentas.addElement("Deuda:");*/
-
-
-		/*Rellenamos la lista con los datos de los indicadores predefinidos
-
-		for(Cuenta cuenta: cuentasRequeridas){
-
-			modeloCuentas.addElement(cuenta.getPeriodo());
-			modeloCuentas.addElement(cuenta.getEbitda());
-			modeloCuentas.addElement(cuenta.getFds());
-			modeloCuentas.addElement(cuenta.getfCashFlow());
-			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
-			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
-			modeloCuentas.addElement(cuenta.getDeuda());
-
-		}*/
 		
-		/*Aniadimos los encabezados de las filas de la lista de indicadores de usuario
+		
+		//Aniadimos los encabezados de las filas de la lista de indicadores de usuario
 
-		modeloCuentas.addElement("Periodo:");
-		modeloCuentas.addElement("Ebitda:");
-		modeloCuentas.addElement("FDS:");
-		modeloCuentas.addElement("fCashFlow:");
-		modeloCuentas.addElement("IngNetoOpCont:");
-		modeloCuentas.addElement("IngNetoOpDiscont:");
-		modeloCuentas.addElement("Deuda:");*/
+		modeloIndUsuario.addElement("Periodo: ");
+	
 
-
-		/*Rellenamos la lista con los datos de los indicadores de usuario
+		//Rellenamos la lista con los datos de los indicadores de usuario
 
 		for(Cuenta cuenta: cuentasRequeridas){
 
-			modeloCuentas.addElement(cuenta.getPeriodo());
-			modeloCuentas.addElement(cuenta.getEbitda());
-			modeloCuentas.addElement(cuenta.getFds());
-			modeloCuentas.addElement(cuenta.getfCashFlow());
-			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
-			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
-			modeloCuentas.addElement(cuenta.getDeuda());
-
-		}*/
+			modeloIndUsuario.addElement(cuenta.getPeriodo());
+		
+		}
+			
 
 		//aniadimos los elementos a los paneles
 		
@@ -336,22 +316,36 @@ public void actionPerformed(ActionEvent evento) {
 		panelCuentas.repaint();
 		panelIndPredefinidos.repaint();
 		panelIndUsuario.repaint();
+		String texto = textoNombreIndicador.getText();
+		String texto2 =textoIndicador.getText();
 		
+		try {
+
+			File file = new File("output.txt");
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(empresaSeleccionada.toString()+"("+texto+")" + "=");
+			bw.write(texto2 + "\n"); //numero + empresa(cuenta/indicador(periodo))
+			bw.close();
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+}
 	
-	
-	String texto = textoNombreIndicador.getText();
-	System.out.printf("INTRODUZCA EL NOMBRE DEL INDICADOR QUE DESEA CREAR %s\n", texto);
-	String texto2 =textoIndicador.getText();
-	System.out.printf("INTRODUZCA EL CALCULO DEL INDICADOR %s\n", texto2);
-	try( PrintStream out = new PrintStream( new File( "C:\\Users\\kimel\\Desktop\\text.txt" ) ) ) {
-	    out.print( texto );
-	    out.print( texto2 );
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
+
+private Object typeof(Object object) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 public int GetAncho(){
