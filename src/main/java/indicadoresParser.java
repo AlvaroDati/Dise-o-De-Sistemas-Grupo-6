@@ -289,6 +289,19 @@ public class indicadoresParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class EmpresaCuentaPeriodoContext extends ExprContext {
+		public List<TerminalNode> INDICADOR() { return getTokens(indicadoresParser.INDICADOR); }
+		public TerminalNode INDICADOR(int i) {
+			return getToken(indicadoresParser.INDICADOR, i);
+		}
+		public TerminalNode INT() { return getToken(indicadoresParser.INT, 0); }
+		public EmpresaCuentaPeriodoContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof indicadoresVisitor ) return ((indicadoresVisitor<? extends T>)visitor).visitEmpresaCuentaPeriodo(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class IdContext extends ExprContext {
 		public TerminalNode INDICADOR() { return getToken(indicadoresParser.INDICADOR, 0); }
 		public IdContext(ExprContext ctx) { copyFrom(ctx); }
@@ -324,10 +337,10 @@ public class indicadoresParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(29);
+			setState(36);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case INT:
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
 				{
 				_localctx = new IntContext(_localctx);
 				_ctx = _localctx;
@@ -337,7 +350,7 @@ public class indicadoresParser extends Parser {
 				match(INT);
 				}
 				break;
-			case INDICADOR:
+			case 2:
 				{
 				_localctx = new IdContext(_localctx);
 				_ctx = _localctx;
@@ -346,7 +359,7 @@ public class indicadoresParser extends Parser {
 				match(INDICADOR);
 				}
 				break;
-			case T__1:
+			case 3:
 				{
 				_localctx = new ParensContext(_localctx);
 				_ctx = _localctx;
@@ -359,11 +372,30 @@ public class indicadoresParser extends Parser {
 				match(T__2);
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
+			case 4:
+				{
+				_localctx = new EmpresaCuentaPeriodoContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(29);
+				match(INDICADOR);
+				setState(30);
+				match(T__1);
+				setState(31);
+				match(INDICADOR);
+				setState(32);
+				match(T__1);
+				setState(33);
+				match(INT);
+				setState(34);
+				match(T__2);
+				setState(35);
+				match(T__2);
+				}
+				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(39);
+			setState(46);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -371,16 +403,16 @@ public class indicadoresParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(37);
+					setState(44);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MulDivContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(31);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(32);
+						setState(38);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(39);
 						((MulDivContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==MUL || _la==DIV) ) {
@@ -391,17 +423,17 @@ public class indicadoresParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(33);
-						expr(6);
+						setState(40);
+						expr(7);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new SumResContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(34);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(35);
+						setState(41);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(42);
 						((SumResContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==SUM || _la==RES) ) {
@@ -412,14 +444,14 @@ public class indicadoresParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(36);
-						expr(5);
+						setState(43);
+						expr(6);
 						}
 						break;
 					}
 					} 
 				}
-				setState(41);
+				setState(48);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
@@ -446,27 +478,29 @@ public class indicadoresParser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 5);
+			return precpred(_ctx, 6);
 		case 1:
-			return precpred(_ctx, 4);
+			return precpred(_ctx, 5);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\r-\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\3\2\6\2\n\n\2\r\2\16\2\13\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\5\3\27\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4 \n\4\3\4\3\4\3\4\3\4\3\4"+
-		"\3\4\7\4(\n\4\f\4\16\4+\13\4\3\4\2\3\6\5\2\4\6\2\4\3\2\6\7\3\2\b\t\2\60"+
-		"\2\t\3\2\2\2\4\26\3\2\2\2\6\37\3\2\2\2\b\n\5\4\3\2\t\b\3\2\2\2\n\13\3"+
-		"\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\3\3\2\2\2\r\16\5\6\4\2\16\17\7\f\2"+
-		"\2\17\27\3\2\2\2\20\21\7\n\2\2\21\22\7\3\2\2\22\23\5\6\4\2\23\24\7\f\2"+
-		"\2\24\27\3\2\2\2\25\27\7\f\2\2\26\r\3\2\2\2\26\20\3\2\2\2\26\25\3\2\2"+
-		"\2\27\5\3\2\2\2\30\31\b\4\1\2\31 \7\13\2\2\32 \7\n\2\2\33\34\7\4\2\2\34"+
-		"\35\5\6\4\2\35\36\7\5\2\2\36 \3\2\2\2\37\30\3\2\2\2\37\32\3\2\2\2\37\33"+
-		"\3\2\2\2 )\3\2\2\2!\"\f\7\2\2\"#\t\2\2\2#(\5\6\4\b$%\f\6\2\2%&\t\3\2\2"+
-		"&(\5\6\4\7\'!\3\2\2\2\'$\3\2\2\2(+\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*\7\3\2"+
-		"\2\2+)\3\2\2\2\7\13\26\37\')";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\r\64\4\2\t\2\4\3"+
+		"\t\3\4\4\t\4\3\2\6\2\n\n\2\r\2\16\2\13\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\5\3\27\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
+		"\4\5\4\'\n\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4/\n\4\f\4\16\4\62\13\4\3\4\2\3"+
+		"\6\5\2\4\6\2\4\3\2\6\7\3\2\b\t\28\2\t\3\2\2\2\4\26\3\2\2\2\6&\3\2\2\2"+
+		"\b\n\5\4\3\2\t\b\3\2\2\2\n\13\3\2\2\2\13\t\3\2\2\2\13\f\3\2\2\2\f\3\3"+
+		"\2\2\2\r\16\5\6\4\2\16\17\7\f\2\2\17\27\3\2\2\2\20\21\7\n\2\2\21\22\7"+
+		"\3\2\2\22\23\5\6\4\2\23\24\7\f\2\2\24\27\3\2\2\2\25\27\7\f\2\2\26\r\3"+
+		"\2\2\2\26\20\3\2\2\2\26\25\3\2\2\2\27\5\3\2\2\2\30\31\b\4\1\2\31\'\7\13"+
+		"\2\2\32\'\7\n\2\2\33\34\7\4\2\2\34\35\5\6\4\2\35\36\7\5\2\2\36\'\3\2\2"+
+		"\2\37 \7\n\2\2 !\7\4\2\2!\"\7\n\2\2\"#\7\4\2\2#$\7\13\2\2$%\7\5\2\2%\'"+
+		"\7\5\2\2&\30\3\2\2\2&\32\3\2\2\2&\33\3\2\2\2&\37\3\2\2\2\'\60\3\2\2\2"+
+		"()\f\b\2\2)*\t\2\2\2*/\5\6\4\t+,\f\7\2\2,-\t\3\2\2-/\5\6\4\b.(\3\2\2\2"+
+		".+\3\2\2\2/\62\3\2\2\2\60.\3\2\2\2\60\61\3\2\2\2\61\7\3\2\2\2\62\60\3"+
+		"\2\2\2\7\13\26&.\60";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

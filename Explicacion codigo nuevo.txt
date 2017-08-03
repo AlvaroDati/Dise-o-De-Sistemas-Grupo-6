@@ -1,0 +1,25 @@
+IndVisitor
+Ya agregué que se pueda obtener un valor de una cuenta de una empresa 
+en un cierto periodo. Está un poco hardcore, porque no se me ocurria como hacer una gramatica
+potente para que me leyera la sintaxis que se me ocurrio para poder lograr este req.
+La sintaxis sería: empresa(cuenta(periodo)), en cuenta tambien puede ir un indicador predefinido.
+---------------------------------------------------------------------------
+NuevoLeerArchivo
+Agregue un metodo que me devuelta la cuenta que yo quiero segun el periodo,
+basicamente uso todos las cuentas y veo si matchea o no.
+-------------------------------------------------------------------------
+Indicadores
+Hice dos metodos que me permiten saber el ingreso neto o el roe segun el periodo
+Tomando el mismo criterio que a la hora de sacar las cuentas segun periodo
+----------------------------------------------------------------
+Tanto como para NuevoLeerArchivo e Indicadores
+Asumí que todos los periodos tienen cuenta/indicador, porque en caso de no tener
+el for que hice es inútil. Igual calculo que siempre va a ser así, en caso de que no haya
+se representa con un 0 y fue.
+------------------------------------------------------------------------------------
+Ventana
+Solo cambié la forma del guardado en el txt, antes borraba los cambios anteriores, ahora los guarda
+Sin embargo, hay un problema, cada vez que apreto cualquier boton, se agrega el texto en "output.txt"
+y eso no esta bueno porque puede entrar cualquier basura, habría que ver la manera de manejar eso
+Después van a ver que en la linea 206 hay un hardcore del size de los indicadoresPredefinidos
+Hay que ver como sacar eso.

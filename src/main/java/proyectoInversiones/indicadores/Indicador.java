@@ -56,6 +56,32 @@ public class Indicador {
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 	
+	
+	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
+		float roeAux = 0;
+		ArrayList<Float> roe = this.roe(empresa);
+		ArrayList<Integer> periodos    = this.periodos(empresa);
+		for(int i = 0;i<roe.size();i++){
+			if(periodos.get(i).equals(periodo)){
+				roeAux = roe.get(i);
+			}//ASUMO QUE TODOS LOS PERIODOS TIENEN ROE
+		}
+		return roeAux;
+	}
+	
+	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo){
+		float ingNetoAux = 0;
+		ArrayList<Float> ingresosNetos = this.ingresoNeto(empresa);
+		ArrayList<Integer> periodos    = this.periodos(empresa);
+		for(int i = 0;i<ingresosNetos.size();i++){
+			if(periodos.get(i).equals(periodo)){
+				ingNetoAux = ingresosNetos.get(i);
+			}//ASUMO QUE TODOS LOS PERIODOS TIENEN INGRESOS NETOS
+		}
+		
+		return ingNetoAux;
+	}
+	
 	public ArrayList<Float> ingresoNeto(Empresa empresa){
 		ArrayList<Float>  ingNeto         = new ArrayList<Float>();
 		ArrayList<Float>  ingNetoOpCont   = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");

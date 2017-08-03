@@ -2,3 +2,5 @@
 /indicadoresLexer.java
 /indicadoresParser.java
 /indicadoresVisitor.java
+/indicadores.tokens
+/indicadoresLexer.tokens

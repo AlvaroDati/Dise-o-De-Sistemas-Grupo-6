@@ -1,2 +1,2 @@
-asdfssdf
-123122
+Hola=121+America Movil(ingresoneto(2008))
+Introduzca el nombre del indicador que desea crear=Introduzca el calculo del indicador

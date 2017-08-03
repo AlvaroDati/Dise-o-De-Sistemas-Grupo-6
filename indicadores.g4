@@ -23,6 +23,7 @@ expr: expr op=('*'|'/') expr # MulDiv
 | INT # int
 | INDICADOR # id
 | '(' expr ')' # parens
+| INDICADOR '(' INDICADOR '(' INT ')'')' #EmpresaCuentaPeriodo
 ;
 		 
 
@@ -30,7 +31,7 @@ MUL : '*' ;
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
-INDICADOR : [a-zA-Z]+ ; 
+INDICADOR : [a-z' 'A-Z ]+ ; 
 INT : [0-9]+ ; 
 NEWLINE:'\r'? '\n' ; 
 WS : [ \t]+ -> skip ; 

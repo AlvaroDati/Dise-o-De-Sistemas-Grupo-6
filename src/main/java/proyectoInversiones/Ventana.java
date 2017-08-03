@@ -6,8 +6,11 @@ import java.awt.*;
 import java.awt.Dimension;*/
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -344,15 +347,41 @@ public void actionPerformed(ActionEvent evento) {
 	System.out.printf("INTRODUZCA EL NOMBRE DEL INDICADOR QUE DESEA CREAR %s\n", texto);
 	String texto2 =textoIndicador.getText();
 	System.out.printf("INTRODUZCA EL CALCULO DEL INDICADOR %s\n", texto2);
-	try( PrintStream out = new PrintStream( new File( "C:\\Users\\kimel\\Desktop\\text.txt" ) ) ) {
-	    out.print( texto );
+	//try( PrintStream out = new PrintStream( new File( "C:\\Users\\kimel\\Desktop\\text.txt" ) ) ) {
+	/*try( PrintStream out = new PrintStream( new File( "output.txt" ) ) ) {
+	    out.print( texto+"=" );
 	    out.print( texto2 );
+	    
+	    out.write(12);
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	}*/
+	try {
+
+		String content = "This is the content to write into file";
+
+		File file = new File("output.txt");
+
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(file,true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write(texto + "=");
+		bw.write(texto2 + "\n");
+		bw.close();
+
+		System.out.println("Done");
+
+	} catch (IOException e) {
+		e.printStackTrace();
 	}
-	
 }
+
+
 
 public int GetAncho(){
 	return ancho;

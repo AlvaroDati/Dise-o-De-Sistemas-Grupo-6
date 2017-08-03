@@ -62,6 +62,13 @@ public interface indicadoresVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMulDiv(indicadoresParser.MulDivContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code EmpresaCuentaPeriodo}
+	 * labeled alternative in {@link indicadoresParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEmpresaCuentaPeriodo(indicadoresParser.EmpresaCuentaPeriodoContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code id}
 	 * labeled alternative in {@link indicadoresParser#expr}.
 	 * @param ctx the parse tree

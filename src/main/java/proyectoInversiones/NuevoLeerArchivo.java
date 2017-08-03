@@ -114,6 +114,19 @@ public class NuevoLeerArchivo{
 		 return cuentaQuerida;
 	 }
 	 
+	 public float obtenerCuentaSegunPeriodo(Empresa empresa,String nombreCuenta,int periodo){
+		 float cuenta = 0;
+		 ArrayList<Float> cuentas = this.obtenerCuentaDe(empresa, nombreCuenta);
+		 ArrayList<Integer> periodos = this.obtenerPeriodosSegunEmpresa(empresa);
+		 for(int i = 0;i<cuentas.size();i++){
+			 if(periodos.get(i).equals(periodo)){
+				cuenta = cuentas.get(i);
+			 }
+		 }
+		 
+		return cuenta;
+	 }
+	 
 	 //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
 	 public float sumaDeCuentasDe(Empresa empresa){
 		 float sumaDeCuentas = 0;
