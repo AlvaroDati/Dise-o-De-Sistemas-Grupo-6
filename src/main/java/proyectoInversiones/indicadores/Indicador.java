@@ -18,8 +18,20 @@ public class Indicador {
 	
 	private String nombre;
 	private float valorIndicador;
+	private int periodo;
+	ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>(); /* ESTA LISTA ES PARA ALMACENAR LOS IDENTIFICADORES DEL USUARIO
+	 																	QUE SE VAN A OBTENER DE LA CLASE IndVisitor
+	 																	ESTO YA PINTA PARA UNA SUBCLASE....*/
 	public int cantidadDeIndicadoresPredefinidos = 0;
 	
+	public ArrayList<Float> getValorCuentaIndicador() {
+		return valor_cuenta_indicador;
+	}
+
+	public void setValorCuentaIndicador(ArrayList<Float> valor_cuenta_indicador) {
+		this.valor_cuenta_indicador = valor_cuenta_indicador;
+	}
+
 	public int getCantidadDeIndicadoresPredefinidos() {
 		return cantidadDeIndicadoresPredefinidos;
 	}
@@ -54,6 +66,13 @@ public class Indicador {
 
 	public ArrayList<Integer> periodos(Empresa empresa){
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
+	}
+	public int getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(int periodo) {
+		this.periodo = periodo;
 	}
 	
 	
@@ -98,11 +117,11 @@ public class Indicador {
 		ArrayList<Float> roe     = new ArrayList<Float>();		
 		ArrayList<Float> ingNeto = this.ingresoNeto(empresa);
 	
-		float capitalTotal       = archivoEmpresas.sumaDeCuentasDe(empresa);
+		ArrayList<Float> capitalTotal       = archivoEmpresas.sumaDeCuentasDe(empresa);
 		
 		//Segun PDF de ENTREGA2 => ROE = (ingNeto - dividendos)/capitalTotal
 		for(int i = 0;i<ingNeto.size();i++){
-			roe.add(ingNeto.get(i)/capitalTotal); //DIVIDENDOS ??
+			roe.add(ingNeto.get(i)/capitalTotal.get(i)); //DIVIDENDOS ??
 		}
 	
 		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
@@ -125,6 +144,7 @@ public class Indicador {
 	
 		
 	}
+
 	
 }
 	

@@ -128,11 +128,11 @@ public class NuevoLeerArchivo{
 	 }
 	 
 	 //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
-	 public float sumaDeCuentasDe(Empresa empresa){
-		 float sumaDeCuentas = 0;
+	 public ArrayList<Float> sumaDeCuentasDe(Empresa empresa){
+		 ArrayList<Float> sumaDeCuentas = new ArrayList<Float>();
 		 ArrayList<Cuenta> cuentita = this.obtenerCuentasSegunEmpresa(empresa);
 		 for(int i = 0;i<cuentita.size();i++){
-			 sumaDeCuentas +=cuentita.get(i).capitalTotal(); //capitalTotal() esta definido en la clase Cuenta.
+			 sumaDeCuentas.add(cuentita.get(i).capitalTotal()); //capitalTotal() esta definido en la clase Cuenta.
 		 }
 		 return sumaDeCuentas;
 	 }

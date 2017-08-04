@@ -1,2 +1,6 @@
-Hola=121+America Movil(ingresoneto(2008))
-Introduzca el nombre del indicador que desea crear=Introduzca el calculo del indicador
+America Movil(Hola)=12+America Movil(ebitda)
+America Movil(Parra)=12+America Movil(ebitda(2007))
+America Movil(Chau)=1233231
+IMB(JEJ)=IBM(ingresoneto(2006))
+IMB(JEJ)=12+IBM(ingresoneto(2006))
+

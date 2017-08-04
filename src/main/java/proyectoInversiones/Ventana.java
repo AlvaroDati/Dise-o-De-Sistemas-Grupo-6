@@ -340,13 +340,37 @@ public void actionPerformed(ActionEvent evento) {
 		panelIndPredefinidos.repaint();
 		panelIndUsuario.repaint();
 		
+		
+		String texto = textoNombreIndicador.getText();
+		String texto2 =textoIndicador.getText();
+		
+		try {
+
+			File file = new File("output.txt");
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(empresaSeleccionada.toString()+"("+texto+")" + "=");
+			bw.write(texto2 + "\n");
+			bw.close();
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
-	String texto = textoNombreIndicador.getText();
-	System.out.printf("INTRODUZCA EL NOMBRE DEL INDICADOR QUE DESEA CREAR %s\n", texto);
-	String texto2 =textoIndicador.getText();
+	/*
+	 * System.out.printf("INTRODUZCA EL NOMBRE DEL INDICADOR QUE DESEA CREAR %s\n", texto);
 	System.out.printf("INTRODUZCA EL CALCULO DEL INDICADOR %s\n", texto2);
+	 */
 	//try( PrintStream out = new PrintStream( new File( "C:\\Users\\kimel\\Desktop\\text.txt" ) ) ) {
 	/*try( PrintStream out = new PrintStream( new File( "output.txt" ) ) ) {
 	    out.print( texto+"=" );
@@ -357,28 +381,7 @@ public void actionPerformed(ActionEvent evento) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}*/
-	try {
-
-		String content = "This is the content to write into file";
-
-		File file = new File("output.txt");
-
-		// if file doesnt exists, then create it
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-
-		FileWriter fw = new FileWriter(file,true);
-		BufferedWriter bw = new BufferedWriter(fw);
-		bw.write(texto + "=");
-		bw.write(texto2 + "\n");
-		bw.close();
-
-		System.out.println("Done");
-
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+	
 }
 
 

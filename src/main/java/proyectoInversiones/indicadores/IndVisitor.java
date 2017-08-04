@@ -8,8 +8,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap; 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BufferedTokenStream;
@@ -20,21 +23,44 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	/** "memory" for our calculator; variable/value pairs go here */
-	Map<String, Integer> memory = new HashMap<String, Integer>();
+	 
+	Map<String,List<Indicador>> memory = new HashMap<String, List<Indicador>>();
+	List<Indicador> indicadorUsuario = new ArrayList<Indicador>();
+	Indicador indicadorAux           = new Indicador();
+	ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 	int resultado = 0;
-	public Map<String, Integer> getMemory() {
+	public Map<String, List<Indicador>> getMemory() {
 		return memory;
 	}
-	public void setMemory(Map<String, Integer> memory) {
+	public void setMemory(Map<String, List<Indicador>> memory) {
 		this.memory = memory;
 	}
-	/** ID '=' expr NEWLINE */
+	/**  INDICADOR '(' INDICADOR')' '=' expr NEWLINE */
 	@Override
 	public Integer visitAssign(indicadoresParser.AssignContext ctx) {
-		String id = ctx.INDICADOR().getText(); // id is left-hand side of '='
+		String id = ctx.getText(); // id is left-hand side of '='
+		int i = id.indexOf("(");
+		String empresa = id.substring(0, i);
+		String restante = id.substring(i+1);
+		int b = restante.indexOf(")");
+		String cuenta_indicador = restante.substring(0, b); 
+		indicadorAux.setNombre(cuenta_indicador);
 		int value = visit(ctx.expr()); // compute value of expression on right
-		memory.put(id, value); // store it in our memory
-		System.out.println(value);
+		indicadorAux.setValorIndicador(value);
+		indicadorAux.setValorCuentaIndicador(valor_cuenta_indicador);
+		indicadorUsuario.add(indicadorAux);
+		System.out.printf("Size de la lista %d\n", indicadorUsuario.size());
+		resultado = value;
+		System.out.printf("Resultado %d \n",resultado);
+		resultado = 0;
+		System.out.printf("Resultado %d \n",resultado);
+		memory.put(empresa, indicadorUsuario);
+		if(!memory.containsKey(empresa)){
+			
+		}
+		//memory.put(id, value); // store it in our memory
+		System.out.printf("Value %d \n",value);
+		
 		return value;
 	}
 	/** expr NEWLINE */
@@ -54,19 +80,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	@Override
 	public Integer visitId(indicadoresParser.IdContext ctx) {
 		String id = ctx.INDICADOR().getText();
-		/*Indicador indPredefinido = new Indicador();
-		
-		int resultado = 0;
-		switch(id){
-		case "ingresoneto":
-			resultado = indPredefinido.ingresoNeto(empresa);
-			//resultado = 3722;
-			break;
-		default:
-			break;
-		}
-		return resultado;*/
-		if ( memory.containsKey(id) ) return memory.get(id);
+		//if ( memory.containsKey(id) ) return memory.get(id);
 		return 0;
 	}
 	/** expr op=('*'|'/') expr */
@@ -115,15 +129,15 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		String empresa = id.substring(0, i);
 		String restante = id.substring(i+1);
 		int b = restante.indexOf("(");
-		String cuenta = restante.substring(0, b); //COMO CUENTA TAMBIEN ME REFIERO A INDICADOR PREDEFINIDO, YA QUE LOS INDICADORES PREDEFINIDOS SE PUEDEN USAR PARA HACER OTROS INDICADORES
+		String cuenta_indicador = restante.substring(0, b); //COMO CUENTA TAMBIEN ME REFIERO A INDICADOR PREDEFINIDO, YA QUE LOS INDICADORES PREDEFINIDOS SE PUEDEN USAR PARA HACER OTROS INDICADORES
 		String periodoAux = restante.substring(b+1);
 		int c = periodoAux.indexOf(")");
 		String periodo = periodoAux.substring(0, c);
 		int per = Integer.valueOf(periodo);
-		
+	
 		Empresa empresaAsociada = new Empresa(empresa); 
 		Indicador indicador = new Indicador();
-		String nombreCuenta = cuenta.toUpperCase();
+		String nombreCuenta = cuenta_indicador.toUpperCase();
 		switch(nombreCuenta){
 		/*
 		 * INICIO INDICADORES PREDEFINIDOS
@@ -169,38 +183,131 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		/*
 		 * FIN CUENTAS
 		 */
+		
 		return value;
+	}
+	
+	public Integer visitEmpresaCuenta(indicadoresParser.EmpresaCuentaContext ctx){
+		
+		int value = resultado;
+		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); //YA SE QUE NO ESTA MUY COPADO INSTANCIAR UN ARCHIVO ACA, PERO NO HAY OTRA MANERA DE SACAR LAS CUENTAS
+																 //AMENOS QUE LA CLASE INDICADOR HEREDE DE NUEVOLEERARCHIVO, QUE TAMPOCO TIENE MUCHO SENTIDO	
+		String id = ctx.getText();
+		int i = id.indexOf("(");
+		String empresa = id.substring(0, i);
+		String resultado = id.substring(i+1);
+		int b = resultado.indexOf(")");
+		String cuenta_indicador = resultado.substring(0, b); //COMO CUENTA TAMBIEN ME REFIERO A INDICADOR PREDEFINIDO, YA QUE LOS INDICADORES PREDEFINIDOS SE PUEDEN USAR PARA HACER OTROS INDICADORES
+		
+		Empresa empresaAsociada = new Empresa(empresa); 
+		Indicador indicador = new Indicador();
+		String nombreCuenta = cuenta_indicador.toUpperCase();
+		
+		switch(nombreCuenta){
+		/*
+		 * INICIO INDICADORES PREDEFINIDOS
+		 */
+		case "INGRESONETO":
+			 valor_cuenta_indicador =  indicador.ingresoNeto(empresaAsociada);
+			break;
+		case "ROE":
+			 valor_cuenta_indicador =  indicador.roe(empresaAsociada);
+			break;
+		/***
+		 * FIN INDICADORES PREDEFINIDOS
+		 * 	
+		 */
+		/*
+		 * INICIO CUENTAS	
+		 */
+		case("EBITDA"):
+			 valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+		break;
+		case("FDS"):
+			 valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+		break;
+		case("FCASHFLOW"):
+			 valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+		break;
+		case("INGNETOOPCONT"):
+			 valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+		break;
+		case("INGNETOOPDISC"):
+			 valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+		break;
+		case("DEUDA"):
+			 valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+		break;
+		default:
+			/* ACA HAY DOS OPCIONES
+			 * 1)Asumo que si no es un indicador predefinido, por default sea una cuenta, y solo llamo a un metodo, ó hago el case horrible que está arriba.
+			 */
+			//Tirar excepcion
+			break;
+		}
+		
+		/*
+		 * FIN CUENTAS
+		 */
+		
+		return 0;
 	}
 	
 	
 	
-	public static void main (String args[]) throws IOException{
-	  	
-    	String inputFile = null; //En "Run Configurations, ponen en Java Application => Arguments => Program&Arguments => {dirDel indicadores.txt}"
-		if (args.length > 0)
-			inputFile = args[0];
+	public Map<String,List<Indicador>> obtenerIndicadoresUsuario(String ruta) throws IOException{
 		
+		Map<String, List<Indicador>> usuario = new HashMap<String,List<Indicador>>();
+
+		String inputFile = null; //En "Run Configurations, ponen en Java Application => Arguments => Program&Arguments => {dirDel indicadores.txt}"
+		if (ruta.length() > 0)
+			inputFile = ruta;
+
 		InputStream is = System.in;
 		if (inputFile != null)is = new FileInputStream(inputFile);
 
 		@SuppressWarnings("deprecation")
 		ANTLRInputStream input = new ANTLRInputStream(is);
-   
-        indicadoresLexer lexer = new indicadoresLexer(input);
 
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
+		indicadoresLexer lexer = new indicadoresLexer(input);
 
-        indicadoresParser parser = new indicadoresParser(tokens);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-        ParseTree tree = parser.prog(); // parse
+		indicadoresParser parser = new indicadoresParser(tokens);
 
-        IndVisitor eval = new IndVisitor();
+		ParseTree tree = parser.prog(); // parse
 
-        eval.visit(tree);
+		IndVisitor eval = new IndVisitor();
+
+		eval.visit(tree);
+
+		usuario = eval.getMemory();
       
-       System.out.println(tree);
-       
-        
+		
+		
+		return usuario;
+	}
+	
+	public static void main (String args[]) throws IOException{
+	  	
+
+
+		IndVisitor visitor = new IndVisitor();
+		Map<String,List<Indicador>> usuario = visitor.obtenerIndicadoresUsuario("output.txt");
+
+		System.out.println(usuario);
+		System.out.println(usuario.size());
+	/*
+	 * 	usuario.forEach((x,y)->System.out.print(y.getNombre()));
+		usuario.forEach((x,y)->System.out.print(y.getValorIndicador()));
+		usuario.forEach((x,y)->System.out.print(y.getValorCuentaIndicador()));
+	 */
+
+		 for(Entry<String, List<Indicador>> entry : usuario.entrySet())
+		    {   //print keys and values
+			 for(int i = 0;i<entry.getValue().size();i++)
+		         System.out.println(entry.getKey() + " : " +entry.getValue().get(i).getNombre() +" "+entry.getValue().get(i).getValorIndicador() +""+entry.getValue().get(i).getValorCuentaIndicador() );
+		    }
 		
 	}
 
@@ -210,4 +317,12 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	calculoNecesario = ctx.OTROINDICADOR.getText();
 	indicadorPredefinido indi = new IndicadorPredefinido();
 	indi.
+	
+	
+	Map<campo1,campo2>; campo1 = Empresa
+						campo2 = HashMap<Cuenta/Indicador,Valor>
+	
+	map.hasKey(campo1), se fija, campo2.hasKey(cuenta2), se fijaaaa 
+	
+	
 	 * */

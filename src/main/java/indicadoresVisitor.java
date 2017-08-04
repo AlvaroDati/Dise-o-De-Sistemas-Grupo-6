@@ -82,4 +82,11 @@ public interface indicadoresVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInt(indicadoresParser.IntContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code EmpresaCuenta}
+	 * labeled alternative in {@link indicadoresParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEmpresaCuenta(indicadoresParser.EmpresaCuentaContext ctx);
 }
