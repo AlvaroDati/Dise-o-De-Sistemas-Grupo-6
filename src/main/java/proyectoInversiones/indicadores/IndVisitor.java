@@ -25,9 +25,8 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	/** "memory" for our calculator; variable/value pairs go here */
 	 
 	Map<String,List<Indicador>> memory = new HashMap<String, List<Indicador>>();
-	List<Indicador> indicadorUsuario = new ArrayList<Indicador>();
-	Indicador indicadorAux           = new Indicador();
-	ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
+	ArrayList<Float> vai = new ArrayList<Float>();
+	int periodoGlobal;
 	int resultado = 0;
 	public Map<String, List<Indicador>> getMemory() {
 		return memory;
@@ -38,37 +37,56 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	/**  INDICADOR '(' INDICADOR')' '=' expr NEWLINE */
 	@Override
 	public Integer visitAssign(indicadoresParser.AssignContext ctx) {
+		List<Indicador> indicadorUsuario = new ArrayList<Indicador>();
+		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 		String id = ctx.getText(); // id is left-hand side of '='
+		Indicador indicadorAux           = new Indicador();
+		int periodo = 0;
 		int i = id.indexOf("(");
 		String empresa = id.substring(0, i);
+		List<Indicador> list;
+		if(memory.containsKey(empresa)){
+			list = memory.get(empresa);
+			indicadorUsuario.addAll(list);
+		}
 		String restante = id.substring(i+1);
 		int b = restante.indexOf(")");
 		String cuenta_indicador = restante.substring(0, b); 
 		indicadorAux.setNombre(cuenta_indicador);
 		int value = visit(ctx.expr()); // compute value of expression on right
 		indicadorAux.setValorIndicador(value);
-		indicadorAux.setValorCuentaIndicador(valor_cuenta_indicador);
+		if(!vai.isEmpty()){
+			valor_cuenta_indicador = vai;
+			indicadorAux.setValorCuentaIndicador(valor_cuenta_indicador);
+			vai.clear();
+		}
+		periodo = periodoGlobal;
+		indicadorAux.setPeriodo(periodo);
+		
 		indicadorUsuario.add(indicadorAux);
+		
 		System.out.printf("Size de la lista %d\n", indicadorUsuario.size());
+		
 		resultado = value;
 		System.out.printf("Resultado %d \n",resultado);
 		resultado = 0;
+		
 		System.out.printf("Resultado %d \n",resultado);
 		memory.put(empresa, indicadorUsuario);
-		if(!memory.containsKey(empresa)){
-			
-		}
+		
+		
 		//memory.put(id, value); // store it in our memory
 		System.out.printf("Value %d \n",value);
-		
+	
+		periodoGlobal = 0;
 		return value;
 	}
 	/** expr NEWLINE */
 	@Override
 	public Integer visitPrintExpr(indicadoresParser.PrintExprContext ctx) {
 		Integer value = visit(ctx.expr()); // evaluate the expr child
-		System.out.println(value); // print the result
-		System.out.println(resultado); // print the result
+		/*System.out.println(value); // print the result
+		System.out.println(resultado); // print the result*/
 		return 0; // return dummy value
 	}
 	/** INT */
@@ -183,7 +201,8 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		/*
 		 * FIN CUENTAS
 		 */
-		
+		periodoGlobal = per;
+		//indicadorAux.setPeriodo(per);
 		return value;
 	}
 	
@@ -192,6 +211,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		int value = resultado;
 		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); //YA SE QUE NO ESTA MUY COPADO INSTANCIAR UN ARCHIVO ACA, PERO NO HAY OTRA MANERA DE SACAR LAS CUENTAS
 																 //AMENOS QUE LA CLASE INDICADOR HEREDE DE NUEVOLEERARCHIVO, QUE TAMPOCO TIENE MUCHO SENTIDO	
+		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 		String id = ctx.getText();
 		int i = id.indexOf("(");
 		String empresa = id.substring(0, i);
@@ -249,7 +269,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		/*
 		 * FIN CUENTAS
 		 */
-		
+		vai = valor_cuenta_indicador;
 		return 0;
 	}
 	
@@ -297,16 +317,16 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 
 		System.out.println(usuario);
 		System.out.println(usuario.size());
+		
 	/*
 	 * 	usuario.forEach((x,y)->System.out.print(y.getNombre()));
 		usuario.forEach((x,y)->System.out.print(y.getValorIndicador()));
 		usuario.forEach((x,y)->System.out.print(y.getValorCuentaIndicador()));
 	 */
 
-		 for(Entry<String, List<Indicador>> entry : usuario.entrySet())
-		    {   //print keys and values
+		 for(Entry<String, List<Indicador>> entry : usuario.entrySet()){   
 			 for(int i = 0;i<entry.getValue().size();i++)
-		         System.out.println(entry.getKey() + " : " +entry.getValue().get(i).getNombre() +" "+entry.getValue().get(i).getValorIndicador() +""+entry.getValue().get(i).getValorCuentaIndicador() );
+		         System.out.println(entry.getKey() + " : " + entry.getValue().get(i).getPeriodo() +""+entry.getValue().get(i).getNombre() +" "+entry.getValue().get(i).getValorIndicador() +""+entry.getValue().get(i).getValorCuentaIndicador() );
 		    }
 		
 	}

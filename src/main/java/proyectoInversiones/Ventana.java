@@ -14,9 +14,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import proyectoInversiones.indicadores.IndVisitor;
 import proyectoInversiones.indicadores.Indicador;
 
 public class Ventana extends JFrame implements ActionListener {
@@ -184,12 +190,20 @@ public void actionPerformed(ActionEvent evento) {
 		panelIndPredefinidos.removeAll();
 		panelIndUsuario.removeAll();
 	
-		Object empresaSeleccionada = new Empresa();
-		empresaSeleccionada = listaEmpresas.getSelectedValue();
-		ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
-		cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
-		Indicador indicadorPredefinido = new Indicador();
-		//generamos la lista de cuentas
+		Object                      empresaSeleccionada      = listaEmpresas.getSelectedValue();
+		ArrayList<Cuenta>           cuentasRequeridas        = ((Empresa) empresaSeleccionada).getCuentas();		 
+		Indicador                   indicadorPredefinido     = new Indicador();
+		IndVisitor                  indicadorVisitor         = new IndVisitor();
+		Map<String,List<Indicador>> indicadorUsuario         = new HashMap<String,List<Indicador>>();
+		
+		try {
+			indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		
 		modeloCuentas = new DefaultListModel();
 		listaCuentas = new JList();
@@ -215,7 +229,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaIndUsuario = new JList();
 		listaIndUsuario.setModel(modeloIndUsuario);
 		listaIndUsuario.setLayoutOrientation(JList.VERTICAL_WRAP);
-		//listaIndPredefinidos.setVisibleRowCount(modeloIndUsuario.size());
+		listaIndPredefinidos.setVisibleRowCount(3);
 		
 		//Generamos el scrollbar para la lista de cuentas
 		
@@ -278,55 +292,14 @@ public void actionPerformed(ActionEvent evento) {
 			
 		}
 		
-		/*Aniadimos los encabezados de las filas de la lista de indicadores predefinidos
-
-		modeloCuentas.addElement("Periodo:");
-		modeloCuentas.addElement("Ebitda:");
-		modeloCuentas.addElement("FDS:");
-		modeloCuentas.addElement("fCashFlow:");
-		modeloCuentas.addElement("IngNetoOpCont:");
-		modeloCuentas.addElement("IngNetoOpDiscont:");
-		modeloCuentas.addElement("Deuda:");*/
-
-
-		/*Rellenamos la lista con los datos de los indicadores predefinidos
-
-		for(Cuenta cuenta: cuentasRequeridas){
-
-			modeloCuentas.addElement(cuenta.getPeriodo());
-			modeloCuentas.addElement(cuenta.getEbitda());
-			modeloCuentas.addElement(cuenta.getFds());
-			modeloCuentas.addElement(cuenta.getfCashFlow());
-			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
-			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
-			modeloCuentas.addElement(cuenta.getDeuda());
-
-		}*/
-		
-		/*Aniadimos los encabezados de las filas de la lista de indicadores de usuario
-
-		modeloCuentas.addElement("Periodo:");
-		modeloCuentas.addElement("Ebitda:");
-		modeloCuentas.addElement("FDS:");
-		modeloCuentas.addElement("fCashFlow:");
-		modeloCuentas.addElement("IngNetoOpCont:");
-		modeloCuentas.addElement("IngNetoOpDiscont:");
-		modeloCuentas.addElement("Deuda:");*/
-
-
-		/*Rellenamos la lista con los datos de los indicadores de usuario
-
-		for(Cuenta cuenta: cuentasRequeridas){
-
-			modeloCuentas.addElement(cuenta.getPeriodo());
-			modeloCuentas.addElement(cuenta.getEbitda());
-			modeloCuentas.addElement(cuenta.getFds());
-			modeloCuentas.addElement(cuenta.getfCashFlow());
-			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
-			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
-			modeloCuentas.addElement(cuenta.getDeuda());
-
-		}*/
+		 for(Entry<String, List<Indicador>> entry : indicadorUsuario.entrySet()){
+			 if(entry.getKey().equals(empresaSeleccionada)){
+				 for(int i = 0;i<entry.getValue().size();i++){
+					 modeloIndUsuario.addElement(entry.getValue().get(i).getNombre());
+				 }
+				 
+			 }
+		 }
 
 		//aniadimos los elementos a los paneles
 		
