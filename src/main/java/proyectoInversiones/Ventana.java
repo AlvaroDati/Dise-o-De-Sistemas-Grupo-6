@@ -293,7 +293,7 @@ public void actionPerformed(ActionEvent evento) {
 		}
 		
 		 for(Entry<String, List<Indicador>> entry : indicadorUsuario.entrySet()){
-			 if(entry.getKey().equals(empresaSeleccionada)){
+			 if(entry.getKey().equals(empresaSeleccionada.toString())){
 				 for(int i = 0;i<entry.getValue().size();i++){
 					 modeloIndUsuario.addElement(entry.getValue().get(i).getNombre());
 				 }

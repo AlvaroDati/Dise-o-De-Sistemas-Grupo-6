@@ -27,7 +27,6 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	Map<String,List<Indicador>> memory = new HashMap<String, List<Indicador>>();
 	ArrayList<Float> vai = new ArrayList<Float>();
 	int periodoGlobal;
-	int resultado = 0;
 	public Map<String, List<Indicador>> getMemory() {
 		return memory;
 	}
@@ -39,6 +38,8 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	public Integer visitAssign(indicadoresParser.AssignContext ctx) {
 		List<Indicador> indicadorUsuario = new ArrayList<Indicador>();
 		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
+		ArrayList<Float> vAux = new ArrayList<Float>();
+		int resultado = 0;
 		String id = ctx.getText(); // id is left-hand side of '='
 		Indicador indicadorAux           = new Indicador();
 		int periodo = 0;
@@ -55,10 +56,26 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		indicadorAux.setNombre(cuenta_indicador);
 		int value = visit(ctx.expr()); // compute value of expression on right
 		indicadorAux.setValorIndicador(value);
+		resultado = value;
 		if(!vai.isEmpty()){
 			valor_cuenta_indicador = vai;
+			vAux = valor_cuenta_indicador;
+			float valorAux = 0;
+			/*for(int j = 0;j<vai.size();j++){
+				valorAux = valor_cuenta_indicador.get(i);
+				valorAux += resultado;
+				valor_cuenta_indicador.clear();
+				valor_cuenta_indicador.add(i,valorAux);
+				//valor_cuenta_indicador.replaceAll(valorAux);
+			}*/
+			int j = 0;
+			for(Float head:valor_cuenta_indicador){
+				head += resultado;
+				valor_cuenta_indicador.set(j,head);
+				j++;
+			}
 			indicadorAux.setValorCuentaIndicador(valor_cuenta_indicador);
-			vai.clear();
+			j=0;
 		}
 		periodo = periodoGlobal;
 		indicadorAux.setPeriodo(periodo);
@@ -67,7 +84,6 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		
 		System.out.printf("Size de la lista %d\n", indicadorUsuario.size());
 		
-		resultado = value;
 		System.out.printf("Resultado %d \n",resultado);
 		resultado = 0;
 		
@@ -112,7 +128,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		}else{
 			answer =left / right; 
 		}
-		resultado += answer;
+	
 		return answer; // must be DIV
 	}
 	/** expr op=('+'|'-') expr */
@@ -126,7 +142,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		}else{
 			answer = left - right;
 		}
-		resultado += answer;
+		
 		return answer; // must be RES
 	}
 	/** '(' expr ')' */
@@ -142,6 +158,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		int value = 0;
 		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); //YA SE QUE NO ESTA MUY COPADO INSTANCIAR UN ARCHIVO ACA, PERO NO HAY OTRA MANERA DE SACAR LAS CUENTAS
 																//AMENOS QUE LA CLASE INDICADOR HEREDE DE NUEVOLEERARCHIVO, QUE TAMPOCO TIENE MUCHO SENTIDO	
+		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 		String id = ctx.getText();
 		int i = id.indexOf("(");
 		String empresa = id.substring(0, i);
@@ -162,34 +179,42 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		 */
 		case "INGRESONETO":
 			value = (int) indicador.obtenerIngresoNetoSegunPeriodo(empresaAsociada,per);
+			valor_cuenta_indicador =  indicador.ingresoNeto(empresaAsociada);
 			break;
 		case "ROE":
 			value = (int) indicador.obtenerRoeSegunPeriodo(empresaAsociada,per);
+			valor_cuenta_indicador =  indicador.roe(empresaAsociada);
 			break;
 		/***
 		 * FIN INDICADORES PREDEFINIDOS
 		 * 	
 		 */
-		/*
-		 * INICIO CUENTAS	
-		 */
+			/*
+			 * INICIO CUENTAS	
+			 */
 		case("EBITDA"):
 			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+		valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 		break;
 		case("FDS"):
 			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+		valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 		break;
 		case("FCASHFLOW"):
 			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+		valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 		break;
 		case("INGNETOOPCONT"):
 			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+		valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 		break;
 		case("INGNETOOPDISC"):
 			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+		valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 		break;
 		case("DEUDA"):
 			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+		valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 		break;
 		default:
 			/* ACA HAY DOS OPCIONES
@@ -201,6 +226,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		/*
 		 * FIN CUENTAS
 		 */
+		vai = valor_cuenta_indicador;
 		periodoGlobal = per;
 		//indicadorAux.setPeriodo(per);
 		return value;
@@ -208,7 +234,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	
 	public Integer visitEmpresaCuenta(indicadoresParser.EmpresaCuentaContext ctx){
 		
-		int value = resultado;
+		int value;
 		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); //YA SE QUE NO ESTA MUY COPADO INSTANCIAR UN ARCHIVO ACA, PERO NO HAY OTRA MANERA DE SACAR LAS CUENTAS
 																 //AMENOS QUE LA CLASE INDICADOR HEREDE DE NUEVOLEERARCHIVO, QUE TAMPOCO TIENE MUCHO SENTIDO	
 		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
