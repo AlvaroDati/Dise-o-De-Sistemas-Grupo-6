@@ -22,7 +22,7 @@ public class NuevoLeerArchivo{
 
 	public ArrayList<Empresa> leerArchivo (){
 		
-		String ruta = "empresas.txt"; 
+		String ruta = "empresas2.txt"; 
 		ArrayList<Empresa> empresas = new ArrayList<>();
 		
 	try {
@@ -56,103 +56,103 @@ public class NuevoLeerArchivo{
 	}
 	
 	//Dada una empresa, me devuelve todas las cuentas que tiene asociada a ella
-	 public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa){
-		 ArrayList<Cuenta> cuentasAsociadas = new ArrayList<Cuenta>();
-		String empresaAsoc = empresa.toString();
-		if(validarEmpresa(empresaAsoc)){
-			for(Empresa head:empresaAsociada){
-				if(head.getNombre().equals(empresaAsoc)){
-					cuentasAsociadas = head.getCuentas();
-				}
-			}
-			
-		}
-	return cuentasAsociadas;
-	}
-	 
-	 //Obtiene una lista con todos los periodos en los que estuvo activo la empresa que es indicada
-	 public ArrayList<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa){
-		 ArrayList<Integer> periodos = new ArrayList<Integer>();
-		 ArrayList<Cuenta> cuentasAsociadas = this.obtenerCuentasSegunEmpresa(empresa);
-		 for(int i = 0; i<cuentasAsociadas.size();i++){
-			 periodos.add(cuentasAsociadas.get(i).getPeriodo());
-		 }
-		 return periodos;
-	 }
-	 
-	 //Obtiene una lista con la CUENTA solicitada (EBITDA,FDS,FCASHFOW,INGNETOCONT,INGNETODISC,DEUDA
-	 public ArrayList<Float> obtenerCuentaDe(Empresa empresa, String nombreCuenta){
-		 ArrayList<Float> cuentaQuerida = new ArrayList<Float>();
-		 ArrayList<Cuenta> cuentasAsociadas = this.obtenerCuentasSegunEmpresa(empresa);
-		 for(int i = 0;i<cuentasAsociadas.size();i++){
-			 switch(nombreCuenta){
-			 case("EBITDA"):
-				 cuentaQuerida.add(cuentasAsociadas.get(i).getEbitda());
-			 break;
-			 case("FDS"):
-				 cuentaQuerida.add(cuentasAsociadas.get(i).getFds());
-			 break;
-			 case("FCASHFLOW"):
-				 cuentaQuerida.add(cuentasAsociadas.get(i).getfCashFlow());
-			 break;
-			 case("INGNETOOPCONT"):
-				 cuentaQuerida.add(cuentasAsociadas.get(i).getIngNetoOpCont());
-			 break;
-			 case("INGNETOOPDISC"):
-				 cuentaQuerida.add(cuentasAsociadas.get(i).getIngNetoOpDiscont());
-			 break;
-			 case("DEUDA"):
-				 cuentaQuerida.add(cuentasAsociadas.get(i).getDeuda());
-			 break;
-			 default:
-				 //Tirar excepcion
-				 break;
-
-			 }
-		 }
-
-		 return cuentaQuerida;
-	 }
-	 
-	 public float obtenerCuentaSegunPeriodo(Empresa empresa,String nombreCuenta,int periodo){
-		 float cuenta = 0;
-		 ArrayList<Float> cuentas = this.obtenerCuentaDe(empresa, nombreCuenta);
-		 ArrayList<Integer> periodos = this.obtenerPeriodosSegunEmpresa(empresa);
-		 for(int i = 0;i<cuentas.size();i++){
-			 if(periodos.get(i).equals(periodo)){
-				cuenta = cuentas.get(i);
-			 }
-		 }
-		 
-		return cuenta;
-	 }
-	 
-	 //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
-	 public ArrayList<Float> sumaDeCuentasDe(Empresa empresa){
-		 ArrayList<Float> sumaDeCuentas = new ArrayList<Float>();
-		 ArrayList<Cuenta> cuentita = this.obtenerCuentasSegunEmpresa(empresa);
-		 for(int i = 0;i<cuentita.size();i++){
-			 sumaDeCuentas.add(cuentita.get(i).capitalTotal()); //capitalTotal() esta definido en la clase Cuenta.
-		 }
-		 return sumaDeCuentas;
-	 }
+//	 public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa){
+//		 ArrayList<Cuenta> cuentasAsociadas = new ArrayList<Cuenta>();
+//		String empresaAsoc = empresa.toString();
+//		if(validarEmpresa(empresaAsoc)){
+//			for(Empresa head:empresaAsociada){
+//				if(head.getNombre().equals(empresaAsoc)){
+//					cuentasAsociadas = head.getCuentas();
+//				}
+//			}
+//			
+//		}
+//	return cuentasAsociadas;
+//	}
+//	 
+//	 //Obtiene una lista con todos los periodos en los que estuvo activo la empresa que es indicada
+//	 public ArrayList<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa){
+//		 ArrayList<Integer> periodos = new ArrayList<Integer>();
+//		 ArrayList<Cuenta> cuentasAsociadas = this.obtenerCuentasSegunEmpresa(empresa);
+//		 for(int i = 0; i<cuentasAsociadas.size();i++){
+//			 periodos.add(cuentasAsociadas.get(i).getPeriodo());
+//		 }
+//		 return periodos;
+//	 }
+//	 
+//	 //Obtiene una lista con la CUENTA solicitada (EBITDA,FDS,FCASHFOW,INGNETOCONT,INGNETODISC,DEUDA
+//	 public ArrayList<Float> obtenerCuentaDe(Empresa empresa, String nombreCuenta){
+//		 ArrayList<Float> cuentaQuerida = new ArrayList<Float>();
+//		 ArrayList<Cuenta> cuentasAsociadas = this.obtenerCuentasSegunEmpresa(empresa);
+//		 for(int i = 0;i<cuentasAsociadas.size();i++){
+//			 switch(nombreCuenta){
+//			 case("EBITDA"):
+//				 cuentaQuerida.add(cuentasAsociadas.get(i).getEbitda());
+//			 break;
+//			 case("FDS"):
+//				 cuentaQuerida.add(cuentasAsociadas.get(i).getFds());
+//			 break;
+//			 case("FCASHFLOW"):
+//				 cuentaQuerida.add(cuentasAsociadas.get(i).getfCashFlow());
+//			 break;
+//			 case("INGNETOOPCONT"):
+//				 cuentaQuerida.add(cuentasAsociadas.get(i).getIngNetoOpCont());
+//			 break;
+//			 case("INGNETOOPDISC"):
+//				 cuentaQuerida.add(cuentasAsociadas.get(i).getIngNetoOpDiscont());
+//			 break;
+//			 case("DEUDA"):
+//				 cuentaQuerida.add(cuentasAsociadas.get(i).getDeuda());
+//			 break;
+//			 default:
+//				 //Tirar excepcion
+//				 break;
+//
+//			 }
+//		 }
+//
+//		 return cuentaQuerida;
+//	 }
+//	 
+//	 public float obtenerCuentaSegunPeriodo(Empresa empresa,String nombreCuenta,int periodo){
+//		 float cuenta = 0;
+//		 ArrayList<Float> cuentas = this.obtenerCuentaDe(empresa, nombreCuenta);
+//		 ArrayList<Integer> periodos = this.obtenerPeriodosSegunEmpresa(empresa);
+//		 for(int i = 0;i<cuentas.size();i++){
+//			 if(periodos.get(i).equals(periodo)){
+//				cuenta = cuentas.get(i);
+//			 }
+//		 }
+//		 
+//		return cuenta;
+//	 }
+//	 
+//	 //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
+//	 public ArrayList<Float> sumaDeCuentasDe(Empresa empresa){
+//		 ArrayList<Float> sumaDeCuentas = new ArrayList<Float>();
+//		 ArrayList<Cuenta> cuentita = this.obtenerCuentasSegunEmpresa(empresa);
+//		 for(int i = 0;i<cuentita.size();i++){
+//			 sumaDeCuentas.add(cuentita.get(i).capitalTotal()); //capitalTotal() esta definido en la clase Cuenta.
+//		 }
+//		 return sumaDeCuentas;
+//	 }
 	
 	 public static void main (String args[]){
 		 Empresa empresaAsoc = new Empresa("America Movil");
 		 NuevoLeerArchivo arch = new NuevoLeerArchivo();
 
 		 	 
-		 
-		 System.out.printf("PERIODOS: ");
-		 System.out.print(arch.obtenerPeriodosSegunEmpresa(empresaAsoc));
-		 System.out.printf("\nEBITDA: ");
-		 System.out.print(arch.obtenerCuentaDe(empresaAsoc, "EBITDA"));
-		 //PARA VER LAS OTRAS CUENTAS BASTA CON REEMPLAZAR EL "EBITDA" POR LA CUENTA DESEADA
-		 
-		 
-		 System.out.printf("\nSUMA DE TODAS LAS CUENTAS DE LA EMRPESA %s: ",empresaAsoc.getNombre());
-		 System.out.print(arch.sumaDeCuentasDe(empresaAsoc));
-		 arch.sumaDeCuentasDe(empresaAsoc);
+//		 
+//		 System.out.printf("PERIODOS: ");
+//		 System.out.print(arch.obtenerPeriodosSegunEmpresa(empresaAsoc));
+//		 System.out.printf("\nEBITDA: ");
+//		 System.out.print(arch.obtenerCuentaDe(empresaAsoc, "EBITDA"));
+//		 //PARA VER LAS OTRAS CUENTAS BASTA CON REEMPLAZAR EL "EBITDA" POR LA CUENTA DESEADA
+//		 
+//		 
+//		 System.out.printf("\nSUMA DE TODAS LAS CUENTAS DE LA EMRPESA %s: ",empresaAsoc.getNombre());
+//		 System.out.print(arch.sumaDeCuentasDe(empresaAsoc));
+//		 arch.sumaDeCuentasDe(empresaAsoc);
 	 }
 	 /*
 	  * SI QUIEREN UN PERIODO O UN DATO EN ESPECIFICO, SE HACE UN for(int i = 0;i<cuentita.size();i++) 

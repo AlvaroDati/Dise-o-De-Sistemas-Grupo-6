@@ -2,7 +2,7 @@ package proyectoInversiones;
 
 
 public class Cuenta{
-	private int periodo;
+
 	private float ebitda;
 	private float fds;
 	private float fCashFlow;
@@ -16,12 +16,6 @@ public class Cuenta{
 	}
 	public void setDeuda(float deuda) {
 		this.deuda = deuda;
-	}
-	public int getPeriodo() {
-		return periodo;
-	}
-	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
 	}
 	public float getEbitda() {
 		return ebitda;
