@@ -17,6 +17,8 @@ import java.util.Collection;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.jdesktop.xswingx.PromptSupport;
+
 import proyectoInversiones.indicadores.Indicador;
 
 public class Ventana extends JFrame implements ActionListener {
@@ -43,6 +45,7 @@ public class Ventana extends JFrame implements ActionListener {
 	JButton botonVerInformacion;
 	JButton botonAgregarIndicador;
 	JButton botonBorrarIndicador;
+	JButton botonGuiaIndicador;
 	JTextField textoIndicador;
 	JTextField textoNombreIndicador;
 	
@@ -103,12 +106,19 @@ public class Ventana extends JFrame implements ActionListener {
 		botonBorrarIndicador.setText("Borrar Indicador");
 		this.botonBorrarIndicador.addActionListener(this);
 		
+		botonGuiaIndicador = new JButton();
+		botonGuiaIndicador.setText("Ayuda!");
+		this.botonGuiaIndicador.addActionListener(this);
+		
 		///////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////CUADROS DE TEXTO//////////////////////////////////
 		///////////////////////////////////////////////////////////////////////////////
 		
-		textoNombreIndicador = new JTextField("Introduzca el nombre del indicador que desea crear",50);
-		textoIndicador = new JTextField("Introduzca el calculo del indicador",50);
+		textoNombreIndicador = new JTextField(50);
+		PromptSupport.setPrompt("Ingresar nombre del Indicador", textoNombreIndicador);
+		textoIndicador = new JTextField(50);
+		PromptSupport.setPrompt("Ingresar cuenta del indicador", textoIndicador);
+
 	
 		///////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////PANELES//////////////////////////////////////
@@ -137,7 +147,7 @@ public class Ventana extends JFrame implements ActionListener {
 		panelIndicadoresYMetodologias = new JPanel();
 		panelIndicadoresYMetodologias.setVisible(true);
 		panelIndicadoresYMetodologias.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Indicadores y metodologías"),
+                BorderFactory.createTitledBorder("Indicadores y metodologias"),
                 BorderFactory.createEmptyBorder(15,15,15,15)));
 		panelIndicadoresYMetodologias.setPreferredSize(new Dimension(ancho/3,alto/4));
 		
@@ -168,6 +178,7 @@ public class Ventana extends JFrame implements ActionListener {
 		panelIndicadoresYMetodologias.add(textoIndicador);
 		panelIndicadoresYMetodologias.add(botonAgregarIndicador);
 		panelIndicadoresYMetodologias.add(botonBorrarIndicador);
+		panelIndicadoresYMetodologias.add(botonGuiaIndicador);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -178,11 +189,20 @@ public class Ventana extends JFrame implements ActionListener {
 	
 public void actionPerformed(ActionEvent evento) { 
 	
+	Object empresaSeleccionada = new Empresa();
+	empresaSeleccionada = listaEmpresas.getSelectedValue();
+	
+	ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
+	cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
+	Indicador indicadorPredefinido = new Indicador();
+
 	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
 	
 	filasListaCuentas = 7;
 	filasListaIndPredefinidos = 3;
 	filasListaIndUsuario = 1;
+	
+	
 	
 	if (evento.getSource()==botonVerInformacion){
 		
@@ -190,11 +210,7 @@ public void actionPerformed(ActionEvent evento) {
 		panelIndPredefinidos.removeAll();
 		panelIndUsuario.removeAll();
 	
-		Object empresaSeleccionada = new Empresa();
-		empresaSeleccionada = listaEmpresas.getSelectedValue();
-		ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
-		cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
-		Indicador indicadorPredefinido = new Indicador();
+		
 		//generamos la lista de cuentas
 		
 		modeloCuentas = new DefaultListModel();
@@ -316,8 +332,14 @@ public void actionPerformed(ActionEvent evento) {
 		panelCuentas.repaint();
 		panelIndPredefinidos.repaint();
 		panelIndUsuario.repaint();
-		String texto = textoNombreIndicador.getText();
-		String texto2 =textoIndicador.getText();
+	
+	} // FINALIZA ACCION "VER INFO EMPRESA"
+	
+	
+	if (evento.getSource()==botonAgregarIndicador){
+		
+		String nombreIndicador = textoNombreIndicador.getText();
+		String cuentaIndicador =textoIndicador.getText();
 		
 		try {
 
@@ -330,15 +352,18 @@ public void actionPerformed(ActionEvent evento) {
 
 			FileWriter fw = new FileWriter(file,true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(empresaSeleccionada.toString()+"("+texto+")" + "=");
-			bw.write(texto2 + "\n"); //numero + empresa(cuenta/indicador(periodo))
+			bw.write(empresaSeleccionada.toString()+"("+nombreIndicador+")" + "=");
+			bw.write(cuentaIndicador + "\n"); //numero + empresa(cuenta/indicador(periodo))
 			bw.close();
 
-			System.out.println("Done");
+			System.out.println("Datos guardados en output");
+			textoIndicador.setText("");
+			textoNombreIndicador.setText("");
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 }
 	
