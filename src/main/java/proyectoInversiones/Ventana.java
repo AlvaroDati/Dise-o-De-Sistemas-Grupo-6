@@ -45,7 +45,7 @@ public class Ventana extends JFrame implements ActionListener {
 	JButton botonVerInformacion;
 	JButton botonAgregarIndicador;
 	JButton botonBorrarIndicador;
-	JButton botonGuiaIndicador;
+	JButton botonAyuda;
 	JTextField textoIndicador;
 	JTextField textoNombreIndicador;
 	
@@ -106,9 +106,9 @@ public class Ventana extends JFrame implements ActionListener {
 		botonBorrarIndicador.setText("Borrar Indicador");
 		this.botonBorrarIndicador.addActionListener(this);
 		
-		botonGuiaIndicador = new JButton();
-		botonGuiaIndicador.setText("Ayuda!");
-		this.botonGuiaIndicador.addActionListener(this);
+		botonAyuda = new JButton();
+		botonAyuda.setText("Ayuda!");
+		this.botonAyuda.addActionListener(this);
 		
 		///////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////CUADROS DE TEXTO//////////////////////////////////
@@ -178,7 +178,7 @@ public class Ventana extends JFrame implements ActionListener {
 		panelIndicadoresYMetodologias.add(textoIndicador);
 		panelIndicadoresYMetodologias.add(botonAgregarIndicador);
 		panelIndicadoresYMetodologias.add(botonBorrarIndicador);
-		panelIndicadoresYMetodologias.add(botonGuiaIndicador);
+		panelIndicadoresYMetodologias.add(botonAyuda);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -365,6 +365,11 @@ public void actionPerformed(ActionEvent evento) {
 		}
 		
 	}
+	
+	
+	if (evento.getSource()==botonAyuda){
+	JOptionPane.showMessageDialog(null, "La sintaxis tendria que ser la siguiente: Empresa(cuenta/indicador(periodo))", "Como ingreso un indicador?",JOptionPane.INFORMATION_MESSAGE);
+	} 
 }
 	
 
@@ -390,7 +395,7 @@ public static void main(String[] args){
 	ventana.pack();
 	ventana.setVisible(true);
 	ventana.setResizable(true);	
-	ventana.setBounds(0,0,ventana.GetAncho(),ventana.GetAlto()-100);
+	ventana.setBounds(0,0,ventana.GetAncho(),ventana.GetAlto()-50);
 					
 	}		
 }

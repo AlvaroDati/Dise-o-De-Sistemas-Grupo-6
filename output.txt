@@ -1,18 +1,2 @@
-
-America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Berkshire Hathaway(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-General Electric(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-IBM(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Netflix(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-LATAM Airlines Group(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Netflix(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-LATAM Airlines Group(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-General Electric(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-LATAM Airlines Group(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-General Electric(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Hewlett-Packard(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Netflix(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Hewlett-Packard(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-Hewlett-Packard(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-IBM(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
+IBM(asda)=asdas
+General Electric(asdas)=asasd
