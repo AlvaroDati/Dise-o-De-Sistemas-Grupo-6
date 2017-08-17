@@ -11,10 +11,8 @@
  
 ## Antlr4
 1. Seguir pasos de [GITHUB de ANTLR](https://github.com/antlr4ide/antlr4ide).  
-2. Para tener antlr en el proyectoInversiones, tienen que linkear el source del antlr.  
- Sería así: `Project` => `Properties` => `Java Build Path` => `Source` => `Link Source`, y acá lo linkean con el directorio del antlr.  
-3. Para ejecutar (Run):  
-  3.1 `Run` => `Run Configurations...` => `Java Aplication` => Apretan el iconito de New File => `Main`.  
+2. Para ejecutar (Run):  
+  2.1 `Run` => `Run Configurations...` => `Java Aplication` => Apretan el iconito de New File => `Main`.  
     Una vez en el `Main`:  
      * `Name`: Lo nombramos Antlr4 (se puede hacer más expresivo)
      * `&Project`: Lo nombramos proyectoInversiones  
@@ -24,7 +22,8 @@
      * `Program &arguments`: [ nombre del .g4 (sin poner el .g4)] [producción inicial] [ubicación absoluta del archivo de entrada] [árbol de parsing activado]    
       Por ejemplo: `hello r C:\\Users\text.txt -gui`  
         
-    Le damos a `Apply` y ¡Listo!
+    Le damos a `Apply` y ¡Listo!  
+    
  
   
   
