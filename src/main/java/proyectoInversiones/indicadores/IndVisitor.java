@@ -289,6 +289,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 			 * 1)Asumo que si no es un indicador predefinido, por default sea una cuenta, y solo llamo a un metodo, ó hago el case horrible que está arriba.
 			 */
 			//Tirar excepcion
+			
 			break;
 		}
 		

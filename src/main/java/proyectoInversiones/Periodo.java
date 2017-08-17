@@ -4,18 +4,18 @@ import java.util.*;
 
 public class Periodo {
 
-	private int año;
+	private int anio;
 	private ArrayList<Cuenta> Cuentas;
 	
 	public Periodo() {
 		Cuentas = new ArrayList<Cuenta>();
 	}
 	
-	public int getAño() { 
-		return año;
+	public int getAnio() { 
+		return anio;
 	}
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 	public ArrayList<Cuenta> getCuentas() {
 		return Cuentas;
