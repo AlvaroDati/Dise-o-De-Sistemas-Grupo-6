@@ -189,27 +189,28 @@ public void actionPerformed(ActionEvent evento) {
 		panelCuentas.removeAll(); 	//Borramos lo que haya quedado en el panel cuentas
 		panelIndPredefinidos.removeAll();
 		panelIndUsuario.removeAll();
-	
+		NuevoLeerArchivo				archivoAux		     = new NuevoLeerArchivo();
 		Object                      empresaSeleccionada      = listaEmpresas.getSelectedValue();
-		ArrayList<Cuenta>           cuentasRequeridas        = ((Empresa) empresaSeleccionada).getCuentas();		 
+		
+		ArrayList<Cuenta>           cuentasRequeridas        = archivoAux.obtenerCuentasSegunEmpresa((Empresa) empresaSeleccionada);//((Empresa) empresaSeleccionada).getCuentas();		 
 		Indicador                   indicadorPredefinido     = new Indicador();
 		IndVisitor                  indicadorVisitor         = new IndVisitor();
 		Map<String,List<Indicador>> indicadorUsuario         = new HashMap<String,List<Indicador>>();
-		
-		try {
-			indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+//		
+//		try {
+//			indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
 		
 		
 		modeloCuentas = new DefaultListModel();
 		listaCuentas = new JList();
 		listaCuentas.setModel(modeloCuentas);
 		listaCuentas.setLayoutOrientation(JList.VERTICAL_WRAP);
-		listaCuentas.setVisibleRowCount(modeloCuentas.size());
+		listaCuentas.setVisibleRowCount(archivoAux.cantidadDeCuentas((Empresa)empresaSeleccionada) + 1);
 		
 		//generamos la lista de indicadores predefinidos
 		
@@ -271,7 +272,7 @@ public void actionPerformed(ActionEvent evento) {
 
 		for(Cuenta cuenta: cuentasRequeridas){
 
-			modeloCuentas.addElement(cuenta.getPeriodo());
+			modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada));
 			modeloCuentas.addElement(cuenta.getEbitda());
 			modeloCuentas.addElement(cuenta.getFds());
 			modeloCuentas.addElement(cuenta.getfCashFlow());
@@ -285,13 +286,13 @@ public void actionPerformed(ActionEvent evento) {
 		modeloIndPredefinidos.addElement("Ingreso Neto:");
 		modeloIndPredefinidos.addElement("ROE:");
 		
-		for(int i = 0;i<cuentasRequeridas.size();i++){
-			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
-			modeloIndPredefinidos.addElement(indicadorPredefinido.ingresoNeto(((Empresa) empresaSeleccionada)).get(i));
-			modeloIndPredefinidos.addElement(indicadorPredefinido.roe(((Empresa) empresaSeleccionada)).get(i));
-			
-		}
-		
+//		for(int i = 0;i<cuentasRequeridas.size();i++){
+//			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
+//			modeloIndPredefinidos.addElement(indicadorPredefinido.ingresoNeto(((Empresa) empresaSeleccionada)).get(i));
+//			modeloIndPredefinidos.addElement(indicadorPredefinido.roe(((Empresa) empresaSeleccionada)).get(i));
+//			
+//		}
+//		
 		 for(Entry<String, List<Indicador>> entry : indicadorUsuario.entrySet()){
 			 if(entry.getKey().equals(empresaSeleccionada.toString())){
 				 for(int i = 0;i<entry.getValue().size();i++){

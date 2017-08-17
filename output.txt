@@ -4,3 +4,7 @@ America Movil(Parra)=12+America Movil(ebitda(2007))
 America Movil(Chau)=1233231
 IMB(JEJ)=12+IBM(ingresoneto(2006))
 
+America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
+America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
+America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
+America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador

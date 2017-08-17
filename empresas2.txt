@@ -11,8 +11,8 @@
                   "ingNetoOpCont": 2221,
 	              "ingNetoOpDiscont": 1051,
                   "deuda": 15
-                             }]
-       			"año":2007,
+                             }]},
+       			{"año":2007,
        			"Cuentas":[{
        					"ebitda": 77691,
               			"fds": 0,

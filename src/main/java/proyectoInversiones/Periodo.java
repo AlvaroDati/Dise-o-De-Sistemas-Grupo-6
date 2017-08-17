@@ -5,8 +5,11 @@ import java.util.*;
 public class Periodo {
 
 	private int año;
-	private List<Cuenta> Cuentas;
+	private ArrayList<Cuenta> Cuentas;
 	
+	public Periodo() {
+		Cuentas = new ArrayList<Cuenta>();
+	}
 	
 	public int getAño() { 
 		return año;
@@ -14,10 +17,10 @@ public class Periodo {
 	public void setAño(int año) {
 		this.año = año;
 	}
-	public List<Cuenta> getCuentas() {
+	public ArrayList<Cuenta> getCuentas() {
 		return Cuentas;
 	}
-	public void setCuentas(List<Cuenta> cuentas) {
+	public void setCuentas(ArrayList<Cuenta> cuentas) {
 		Cuentas = cuentas;
 	}
 	

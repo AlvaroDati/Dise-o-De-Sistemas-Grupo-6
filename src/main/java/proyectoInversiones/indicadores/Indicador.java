@@ -63,56 +63,42 @@ public class Indicador {
 	public void setNombre(String nombreIndicador) {
 		nombre = nombreIndicador;
 	}
-
 	public ArrayList<Integer> periodos(Empresa empresa){
+		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
+	}
+	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
+		float roeAux = 0;
+		return roeAux;
+	}
+	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo){
+		float ingNetoAux = 0;
+		return ingNetoAux;
+	}
+	
+	
+	public ArrayList<Integer> periodos1(Empresa empresa){
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 	public int getPeriodo() {
 		return periodo;
 	}
-
+	
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
 	
-	
-	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
-		float roeAux = 0;
-		ArrayList<Float> roe = this.roe(empresa);
-		ArrayList<Integer> periodos    = this.periodos(empresa);
-		for(int i = 0;i<roe.size();i++){
-			if(periodos.get(i).equals(periodo)){
-				roeAux = roe.get(i);
-			}//ASUMO QUE TODOS LOS PERIODOS TIENEN ROE
-		}
-		return roeAux;
-	}
-	
-	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo){
-		float ingNetoAux = 0;
-		ArrayList<Float> ingresosNetos = this.ingresoNeto(empresa);
-		ArrayList<Integer> periodos    = this.periodos(empresa);
-		for(int i = 0;i<ingresosNetos.size();i++){
-			if(periodos.get(i).equals(periodo)){
-				ingNetoAux = ingresosNetos.get(i);
-			}//ASUMO QUE TODOS LOS PERIODOS TIENEN INGRESOS NETOS
-		}
-		
-		return ingNetoAux;
-	}
-	
-	public ArrayList<Float> ingresoNeto(Empresa empresa){
-		ArrayList<Float>  ingNeto         = new ArrayList<Float>();
-		ArrayList<Float>  ingNetoOpCont   = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
-		ArrayList<Float>  ingNetoOpDis    = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
-		//Segun PDF de ENTREGA1 => IngresoNeto = IngresoNetoContinuo + IngresoNetoDiscontinuo
-		for(int i = 0;i<ingNetoOpCont.size() && i<ingNetoOpDis.size();i++){
+	public ArrayList<Float> ingresoNeto(Empresa empresa) {
+		ArrayList<Float> ingNeto = new ArrayList<Float>();
+		ArrayList<Float> ingNetoOpCont = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
+		ArrayList<Float> ingNetoOpDis = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
+		// Segun PDF de ENTREGA1 => IngresoNeto = IngresoNetoContinuo +
+		// IngresoNetoDiscontinuo
+		for (int i = 0; i < ingNetoOpCont.size() && i < ingNetoOpDis.size(); i++) {
 			ingNeto.add(ingNetoOpCont.get(i) + ingNetoOpDis.get(i));
 		}
 		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
 		return ingNeto;
 	}
-	
 	public ArrayList<Float> roe(Empresa empresa){
 		ArrayList<Float> roe     = new ArrayList<Float>();		
 		ArrayList<Float> ingNeto = this.ingresoNeto(empresa);
@@ -128,25 +114,88 @@ public class Indicador {
 		
 		return roe;
 	}
-	 
-	
-	
-	public static void main (String args[]){
-		
-		Indicador indicador     = new Indicador();
-		Empresa empresaAsociada = new Empresa("America Movil");
-		
-	
-		 System.out.printf("Ingreso Neto: ");
-		 System.out.print(indicador.ingresoNeto(empresaAsociada));
-		 System.out.printf("\nRetorno sobre Capital Total (ROE): ");
-		 System.out.print(indicador.roe(empresaAsociada));
-	
-		
-	}
-
-	
 }
+	//<<<<<<< Updated upstream
+	
+//	
+//	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
+//		float roeAux = 0;
+//		ArrayList<Float> roe = this.roe(empresa);
+//		ArrayList<Integer> periodos    = this.periodos(empresa);
+//		for(int i = 0;i<roe.size();i++){
+//			if(periodos.get(i).equals(periodo)){
+//				roeAux = roe.get(i);
+//			}//ASUMO QUE TODOS LOS PERIODOS TIENEN ROE
+//		}
+//		return roeAux;
+//	}
+//	
+//	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo){
+//		float ingNetoAux = 0;
+//		ArrayList<Float> ingresosNetos = this.ingresoNeto(empresa);
+//		ArrayList<Integer> periodos    = this.periodos(empresa);
+//		for(int i = 0;i<ingresosNetos.size();i++){
+//			if(periodos.get(i).equals(periodo)){
+//				ingNetoAux = ingresosNetos.get(i);
+//			}//ASUMO QUE TODOS LOS PERIODOS TIENEN INGRESOS NETOS
+//		}
+//		
+//		return ingNetoAux;
+//	}
+//=======
+//	public float ingresoNeto(Empresa empresa){
+//		float ingneto = 0;
+//		ArrayList<Float> cuentas = new ArrayList<Float>();
+//		cuentas = archivoEmpresas.obtenerCuentaDe(empresa, "INGINGNETOOPCONT");
+//		cuentas = archivoEmpresas.obtenerCuentaDe(empresa, "INGINGNETOOPDIS");
+//>>>>>>> Stashed changes
+//	
+//	public ArrayList<Float> ingresoNeto(Empresa empresa){
+//		ArrayList<Float>  ingNeto         = new ArrayList<Float>();
+//		ArrayList<Float>  ingNetoOpCont   = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
+//		ArrayList<Float>  ingNetoOpDis    = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
+//		//Segun PDF de ENTREGA1 => IngresoNeto = IngresoNetoContinuo + IngresoNetoDiscontinuo
+//		for(int i = 0;i<ingNetoOpCont.size() && i<ingNetoOpDis.size();i++){
+//			ingNeto.add(ingNetoOpCont.get(i) + ingNetoOpDis.get(i));
+//		}
+//		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
+//		return ingNeto;
+//	}
+//	
+//	public ArrayList<Float> roe(Empresa empresa){
+//		ArrayList<Float> roe     = new ArrayList<Float>();		
+//		ArrayList<Float> ingNeto = this.ingresoNeto(empresa);
+//	
+//		ArrayList<Float> capitalTotal       = archivoEmpresas.sumaDeCuentasDe(empresa);
+//		
+//		//Segun PDF de ENTREGA2 => ROE = (ingNeto - dividendos)/capitalTotal
+//		for(int i = 0;i<ingNeto.size();i++){
+//			roe.add(ingNeto.get(i)/capitalTotal.get(i)); //DIVIDENDOS ??
+//		}
+//	
+//		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
+//		
+//		return roe;
+//	}
+//	 
+//	
+//	
+//	public static void main (String args[]){
+//		
+//		Indicador indicador     = new Indicador();
+//		Empresa empresaAsociada = new Empresa("America Movil");
+//		
+//	
+//		 System.out.printf("Ingreso Neto: ");
+//		 System.out.print(indicador.ingresoNeto(empresaAsociada));
+//		 System.out.printf("\nRetorno sobre Capital Total (ROE): ");
+//		 System.out.print(indicador.roe(empresaAsociada));
+//	
+//		
+//	}
+//
+//	
+//}
 	
 	/*
 	 * 
