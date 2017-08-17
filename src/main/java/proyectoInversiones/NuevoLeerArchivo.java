@@ -92,15 +92,10 @@ public class NuevoLeerArchivo {
 		Iterator<Cuenta> cuentas = cuentaQuerida.iterator();
 		System.out.print(cuentas.next().getDeuda());
 
+		
+		
 		System.out.printf("La cantidad de cuentas es %d\n", cantidad);
-		// for(int i = 0;i<cuentaQuerida.size();i++){
-		// for(int j = 0; j<periodos.get(i).getCuentas().size();j++){
-		// cuentaQuerida2 = periodos.get(i).getCuentas().get(j);
-		//
-		// cantidad = j;
-		// }
-		// }
-
+		
 		return cantidad;
 	}
 
@@ -111,6 +106,7 @@ public class NuevoLeerArchivo {
 		ArrayList<Cuenta> cuentaQuerida2 = new ArrayList<Cuenta>();
 		for (int i = 0; i < periodos.size(); i++) {
 			cuentaQuerida.addAll(periodos.get(i).getCuentas());
+			System.out.printf("El size de las cuentas es %d",periodos.get(i).getCuentas());
 		}
 
 		return cuentaQuerida;

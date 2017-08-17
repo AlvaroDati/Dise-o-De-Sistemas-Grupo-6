@@ -1,15 +1,10 @@
-<<<<<<< HEAD
-IBM(asda)=asdas
-General Electric(asdas)=asasd
-=======
 America Movil(Hola)=12+America Movil(ebitda)
 IMB(joojo)=IBM(ingresoneto(2006))
 America Movil(Parra)=12+America Movil(ebitda(2007))
 America Movil(Chau)=1233231
 IMB(JEJ)=12+IBM(ingresoneto(2006))
-
-America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
-America Movil(Introduzca el nombre del indicador que desea crear)=Introduzca el calculo del indicador
->>>>>>> Entrega2-2.0
+America Movil(asd)=12+12+12
+America Movil(holaQueHace)=12+12+12+12
+America Movil(holaquehace2)=12+12+12+12+12
+America Movil(blabala)=12+12+12+12
+America Movil(tututut)=americamovil(ingresoneto)

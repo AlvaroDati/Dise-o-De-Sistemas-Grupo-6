@@ -204,7 +204,7 @@ public void actionPerformed(ActionEvent evento) {
 	Map<String,List<Indicador>> indicadorUsuario         = new HashMap<String,List<Indicador>>();
 
 	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
-	
+	System.out.print(cuentasRequeridas.iterator());
 	filasListaCuentas = 7;
 	filasListaIndPredefinidos = 3;
 	filasListaIndUsuario = 1;
@@ -289,17 +289,25 @@ public void actionPerformed(ActionEvent evento) {
 		
 		//Rellenamos la lista con los datos de las cuentas
 
-		for(Cuenta cuenta: cuentasRequeridas){
-			int i = 0;
-			modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
-			modeloCuentas.addElement(cuenta.getEbitda());
-			modeloCuentas.addElement(cuenta.getFds());
-			modeloCuentas.addElement(cuenta.getfCashFlow());
-			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
-			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
-			modeloCuentas.addElement(cuenta.getDeuda());
-			i++;
-		}
+//		for(Cuenta cuenta: cuentasRequeridas){
+//				modeloCuentas.addElement(cuenta.getEbitda());
+//				modeloCuentas.addElement(cuenta.getFds());
+//				modeloCuentas.addElement(cuenta.getfCashFlow());
+//				modeloCuentas.addElement(cuenta.getIngNetoOpCont());
+//				modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
+//				modeloCuentas.addElement(cuenta.getDeuda());
+//		}
+			for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
+				
+				modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
+				modeloCuentas.addElement(cuentasRequeridas.get(i).getEbitda());
+				modeloCuentas.addElement(cuentasRequeridas.get(i).getFds());
+				modeloCuentas.addElement(cuentasRequeridas.get(i).getfCashFlow());
+				modeloCuentas.addElement(cuentasRequeridas.get(i).getIngNetoOpCont());
+				modeloCuentas.addElement(cuentasRequeridas.get(i).getIngNetoOpDiscont());
+				modeloCuentas.addElement(cuentasRequeridas.get(i).getDeuda());
+			}
+			
 	
 		
 		//Aniadimos los encabezados de las filas de la lista de indicadores predefinidos
@@ -326,10 +334,10 @@ public void actionPerformed(ActionEvent evento) {
 
 		//Rellenamos la lista con los datos de los indicadores de usuario
 
-		for(Cuenta cuenta: cuentasRequeridas){
-			int i = 0;
-			modeloIndUsuario.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
-			i++;
+		for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
+			
+			modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
+			
 		}
 			
 
