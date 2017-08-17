@@ -1,0 +1,28 @@
+[
+	{
+	"nombre":"America Movil",
+    "inicioActividad":2000,
+    "Periodos":[ 
+    			{ "anio": 2006,
+    			  Cuentas: [{
+    			  "ebitda": 44591,
+             	  "fds": 0,
+                  "fCashFlow":955,
+                  "ingNetoOpCont": 2221,
+	              "ingNetoOpDiscont": 1051,
+                  "deuda": 15
+                             }]},
+       			{"anio":2007,
+       			"Cuentas":[{
+       					"ebitda": 77691,
+              			"fds": 0,
+              			"fCashFlow":1096,
+              			"ingNetoOpCont": 3221,
+	      				"ingNetoOpDiscont": 1221,
+              			"deuda": 12
+       			        }]
+       			
+                }
+              ]
+	}
+]

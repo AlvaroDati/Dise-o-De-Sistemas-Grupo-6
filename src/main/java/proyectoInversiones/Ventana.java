@@ -14,11 +14,16 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.xswingx.PromptSupport;
 
+import proyectoInversiones.indicadores.IndVisitor;
 import proyectoInversiones.indicadores.Indicador;
 
 public class Ventana extends JFrame implements ActionListener {
@@ -189,19 +194,26 @@ public class Ventana extends JFrame implements ActionListener {
 	
 public void actionPerformed(ActionEvent evento) { 
 	
-	Object empresaSeleccionada = new Empresa();
-	empresaSeleccionada = listaEmpresas.getSelectedValue();
+
+	NuevoLeerArchivo				archivoAux		     = new NuevoLeerArchivo();
+	Object                      empresaSeleccionada      = listaEmpresas.getSelectedValue();
 	
-	ArrayList<Cuenta> cuentasRequeridas = new ArrayList<Cuenta>();
-	cuentasRequeridas = ((Empresa) empresaSeleccionada).getCuentas();
-	Indicador indicadorPredefinido = new Indicador();
+	ArrayList<Cuenta>           cuentasRequeridas        = archivoAux.obtenerCuentasSegunEmpresa((Empresa) empresaSeleccionada);//((Empresa) empresaSeleccionada).getCuentas();		 
+	Indicador                   indicadorPredefinido     = new Indicador();
+	IndVisitor                  indicadorVisitor         = new IndVisitor();
+	Map<String,List<Indicador>> indicadorUsuario         = new HashMap<String,List<Indicador>>();
 
 	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
 	
 	filasListaCuentas = 7;
 	filasListaIndPredefinidos = 3;
 	filasListaIndUsuario = 1;
-	
+		try {
+			indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	
 	
 	if (evento.getSource()==botonVerInformacion){
@@ -278,15 +290,15 @@ public void actionPerformed(ActionEvent evento) {
 		//Rellenamos la lista con los datos de las cuentas
 
 		for(Cuenta cuenta: cuentasRequeridas){
-
-			modeloCuentas.addElement(cuenta.getPeriodo());
+			int i = 0;
+			modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
 			modeloCuentas.addElement(cuenta.getEbitda());
 			modeloCuentas.addElement(cuenta.getFds());
 			modeloCuentas.addElement(cuenta.getfCashFlow());
 			modeloCuentas.addElement(cuenta.getIngNetoOpCont());
 			modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
 			modeloCuentas.addElement(cuenta.getDeuda());
-
+			i++;
 		}
 	
 		
@@ -315,9 +327,9 @@ public void actionPerformed(ActionEvent evento) {
 		//Rellenamos la lista con los datos de los indicadores de usuario
 
 		for(Cuenta cuenta: cuentasRequeridas){
-
-			modeloIndUsuario.addElement(cuenta.getPeriodo());
-		
+			int i = 0;
+			modeloIndUsuario.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
+			i++;
 		}
 			
 
@@ -399,4 +411,3 @@ public static void main(String[] args){
 					
 	}		
 }
-

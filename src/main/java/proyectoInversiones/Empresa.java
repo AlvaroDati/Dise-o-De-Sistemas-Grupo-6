@@ -7,10 +7,10 @@ public class Empresa {
 
 	private String nombre;
 	private int inicioActividad;
-	private ArrayList<Cuenta> Cuentas;
+	private ArrayList<Periodo> Periodos;
 
 	public Empresa() {
-		Cuentas = new ArrayList<Cuenta>();
+		Periodos = new ArrayList<Periodo>();
 	}
 	
 	public Empresa(String nombreEmpresa){
@@ -33,24 +33,30 @@ public class Empresa {
 		inicioActividad = inicoActividad;
 	}
 
-	public ArrayList<Cuenta> getCuentas() {
-		return Cuentas;
+	public ArrayList<Periodo> getPeriodos() {
+		return Periodos;
 	}
 
-	public void setCuentas(ArrayList<Cuenta> Cuentas) {
-		this.Cuentas = Cuentas;
+	public void setPeriodos(ArrayList<Periodo> Cuentas) {
+		this.Periodos = Cuentas;
 	}
 
-	public void addCuenta(Cuenta cuenta) {
-		Cuentas.add(cuenta);
-	}
+//<<<<<<< HEAD
+//	public void addCuenta(Cuenta cuenta) {
+//		Cuentas.add(cuenta);
+//	}
+//=======
+////	public void addPeriodo(Periodo b) {
+////		Cuentas.add(b);
+////	}
+//>>>>>>> Entrega2-2.0
 	
 	public String toString(){
 		return getNombre();
 	}
 	
 	public int cantidadDeCuentas(){
-		return this.getCuentas().size();
+		return this.getPeriodos().size();
 	}
 }
 

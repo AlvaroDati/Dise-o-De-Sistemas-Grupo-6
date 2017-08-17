@@ -90,7 +90,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="G:/DdS/antlr-4.7-complete.jar"/>
-	<classpathentry kind="lib" path="G:/DdS/prompt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kimel/Downloads/antlr-4.7-complete.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kimel/Desktop/UTN/3UTN 2017/3-DISEÑO DE SISTEMAS/prompt.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
