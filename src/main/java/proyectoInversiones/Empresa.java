@@ -3,16 +3,37 @@ package proyectoInversiones;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "Empresas")
 public class Empresa {
 
+	@Id@GeneratedValue	
+	private int id;
+	
 	private String nombre;
 	private int inicioActividad;
 	private ArrayList<Periodo> Periodos;
-
+	
 	public Empresa() {
 		Periodos = new ArrayList<Periodo>();
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Empresa(String nombreEmpresa){
 		nombre = nombreEmpresa;
 	}
