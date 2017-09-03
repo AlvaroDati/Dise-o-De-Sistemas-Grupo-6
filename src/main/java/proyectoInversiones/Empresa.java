@@ -33,7 +33,7 @@ public class Empresa {
 	}
 
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-	private ArrayList<Periodo> periodos;
+	private ArrayList<Periodo> Periodos;
 	
 	
 	@Column(name = "nombreEmpresa")
@@ -51,7 +51,7 @@ public class Empresa {
 	
 	public Empresa(String nombreEmpresa,ArrayList<Periodo> periodosEmpresa){
 		nombre = nombreEmpresa;
-		periodos = periodosEmpresa;
+		Periodos = periodosEmpresa;
 		}
 
 	public String getNombre() {
@@ -71,11 +71,11 @@ public class Empresa {
 	}
 
 	public ArrayList<Periodo> getPeriodos() {
-		return periodos;
+		return Periodos;
 	}
 
 	public void setPeriodos(ArrayList<Periodo> Cuentas) {
-		this.periodos = Cuentas;
+		this.Periodos = Cuentas;
 	}
 
 //<<<<<<< HEAD

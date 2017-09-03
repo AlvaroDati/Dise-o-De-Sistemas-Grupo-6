@@ -19,14 +19,14 @@ public class Periodo {
     
 	private int anio;
 	@OneToMany
-	private ArrayList<Cuenta> cuentas;
+	private ArrayList<Cuenta> Cuentas;
 	
 	public Periodo() {
-		cuentas = new ArrayList<Cuenta>();
+		Cuentas = new ArrayList<Cuenta>();
 	}
 	
 	public Periodo(ArrayList<Cuenta> unasCuentas) {
-		cuentas = unasCuentas;
+		Cuentas = unasCuentas;
 	}
 	
 	public int getAnio() { 
@@ -36,10 +36,10 @@ public class Periodo {
 		this.anio = anio;
 	}
 	public ArrayList<Cuenta> getCuentas() {
-		return cuentas;
+		return Cuentas;
 	}
 	public void setCuentas(ArrayList<Cuenta> unasCuentas) {
-		cuentas = unasCuentas;
+		Cuentas = unasCuentas;
 	}
 	
 	
