@@ -3,49 +3,65 @@ package proyectoInversiones;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "Empresas")
 public class Empresa {
 
-	@Id@GeneratedValue	
-	private int id;
-	
-	private String nombre;
-	private int inicioActividad;
-	private ArrayList<Periodo> Periodos;
-	
-	public Empresa() {
-		Periodos = new ArrayList<Periodo>();
-	}
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	
 	
-	public int getId() {
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	private ArrayList<Periodo> periodos;
+	
+	
+	@Column(name = "nombreEmpresa")
+	private String nombre;
+	@Column(name = "inicioDeActividad")
+	private int inicioActividad;
+	
+	public Empresa(){
+		}
+	
 	public Empresa(String nombreEmpresa){
 		nombre = nombreEmpresa;
-	}
+		
+		}
+	
+	public Empresa(String nombreEmpresa,ArrayList<Periodo> periodosEmpresa){
+		nombre = nombreEmpresa;
+		periodos = periodosEmpresa;
+		}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public String setNombre(String arg) {
+     public String setNombre(String arg) {
 		return nombre = arg;
 	}
-
+	
 	public int getInicioActividad() {
 		return inicioActividad;
 	}
@@ -55,11 +71,11 @@ public class Empresa {
 	}
 
 	public ArrayList<Periodo> getPeriodos() {
-		return Periodos;
+		return periodos;
 	}
 
 	public void setPeriodos(ArrayList<Periodo> Cuentas) {
-		this.Periodos = Cuentas;
+		this.periodos = Cuentas;
 	}
 
 //<<<<<<< HEAD

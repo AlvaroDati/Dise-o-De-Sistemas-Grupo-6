@@ -10,14 +10,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "Periodos")
 public class Periodo {
-
+	
+    @Id @GeneratedValue
+	private int id;
+    
 	private int anio;
-	private ArrayList<Cuenta> Cuentas;
+	@OneToMany
+	private ArrayList<Cuenta> cuentas;
 	
 	public Periodo() {
-		Cuentas = new ArrayList<Cuenta>();
+		cuentas = new ArrayList<Cuenta>();
+	}
+	
+	public Periodo(ArrayList<Cuenta> unasCuentas) {
+		cuentas = unasCuentas;
 	}
 	
 	public int getAnio() { 
@@ -27,10 +36,10 @@ public class Periodo {
 		this.anio = anio;
 	}
 	public ArrayList<Cuenta> getCuentas() {
-		return Cuentas;
+		return cuentas;
 	}
-	public void setCuentas(ArrayList<Cuenta> cuentas) {
-		Cuentas = cuentas;
+	public void setCuentas(ArrayList<Cuenta> unasCuentas) {
+		cuentas = unasCuentas;
 	}
 	
 	

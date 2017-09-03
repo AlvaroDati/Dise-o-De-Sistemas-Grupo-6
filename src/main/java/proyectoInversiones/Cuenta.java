@@ -1,6 +1,8 @@
 package proyectoInversiones;
 
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,24 +15,25 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Cuenta")
-public class Cuenta{
-
-	@Id@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+public class Cuenta extends AlgoPersistible{
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "periodo_id", referencedColumnName = "id")
+	private Periodo periodoVinculado;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
+	@Column(name = "ebitda")
 	private float ebitda;
+	@Column(name = "fds")
 	private float fds;
+	@Column(name = "fCashflow")
 	private float fCashFlow;
+	@Column(name = "ingNetoOpCont")
 	private float ingNetoOpCont;
+	@Column(name = "ingNetoOpDisc")
 	private float ingNetoOpDiscont;
+	@Column(name = "deuda")
 	private float deuda;
+	@Column(name = "capitalTotal")
 	private float capitalTotal;
 	
 	public float getDeuda() {

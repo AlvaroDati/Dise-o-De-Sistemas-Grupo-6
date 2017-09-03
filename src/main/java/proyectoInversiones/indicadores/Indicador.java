@@ -1,12 +1,10 @@
 package proyectoInversiones.indicadores;
 
-import proyectoInversiones.*; 
-
-import proyectoInversiones.Ventana;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import proyectoInversiones.*;
 
 public class Indicador {
 
