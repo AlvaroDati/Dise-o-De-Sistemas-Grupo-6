@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Column;
@@ -31,7 +30,7 @@ public class Empresa extends AlgoPersistible {
 	/* 
 	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
 		nombre = nombreEmpresa;
-		periodos = periodosEmpresa;
+		Periodos = periodosEmpresa;
 		}
 */ 
 	
@@ -58,6 +57,7 @@ public class Empresa extends AlgoPersistible {
 		}
 		periodos.add(unPeriodo);
 	}
+	
 
 //
 //	public void addCuenta(Cuenta cuenta) {

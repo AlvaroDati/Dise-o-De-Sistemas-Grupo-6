@@ -25,7 +25,9 @@ public class Periodo implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
 	private Empresa empresa;
-	//@OneToMany
+	
+	
+
 	private ArrayList<Cuenta> cuentas;
 	
 	public Periodo() {
