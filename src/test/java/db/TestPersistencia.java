@@ -37,7 +37,9 @@ public class TestPersistencia {
 	public void setUp() throws Exception {
 		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		repositorio = new Repositorio(emFactory.createEntityManager());
-	}
+	}*/
+	
+	
 	
 	@Test
 	public void  persistirEmpresaConPeriodos() {
@@ -47,11 +49,12 @@ public class TestPersistencia {
 		unaEmpresa.setNombre("IBM");
 		unaEmpresa.addPeriodo(unPeriodo);
 		unaEmpresa.addPeriodo(otroPeriodo);
-		repositorio.empresasRepo().persistir(unaEmpresa);
-	
+	    repositorio.empresasRepo().persistir(unaEmpresa);
+		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
 	}
 	
-	@Test
+	
+/*	@Test
 	public void  buscarEmpresaPorNombre() {
 		List<Empresa> unasEmpresas = repositorio.empresasRepo().buscarEmpresaPorNombre("IB");
 		for(Empresa unaEmpresa : unasEmpresas){
@@ -59,7 +62,9 @@ public class TestPersistencia {
 		System.out.println(unaEmpresa.getPeriodos());
 		
 		}
-	}
+	}*/
+	
+	
 	
 	@After
 	public void tearDown() throws Exception {
