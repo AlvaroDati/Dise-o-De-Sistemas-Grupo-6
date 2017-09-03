@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import proyectoInversiones.Empresa;
 
 @Entity
-@Table(name = "Periodos")
+@Table(name = "periodos")
 public class Periodo implements Serializable{
 	
     @Id @GeneratedValue(strategy=GenerationType.AUTO)      
@@ -29,7 +29,7 @@ public class Periodo implements Serializable{
 	private ArrayList<Cuenta> cuentas;
 	
 	public Periodo() {
-		;
+		
 	}
 	
 	

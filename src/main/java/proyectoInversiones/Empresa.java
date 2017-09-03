@@ -17,8 +17,8 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "Empresas")
-//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM Empresas p WHERE p.nombre LIKE :pnombre")
+@Table (name = "empresas")
+//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM mpresas p WHERE p.nombre LIKE :pnombre")
 public class Empresa extends AlgoPersistible {
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private Set<Periodo> periodos;
@@ -40,16 +40,16 @@ public class Empresa extends AlgoPersistible {
 		return inicioActividad;
 	}
 
-	public void setInicioActividad(int inicoActividad) {
-		inicioActividad = inicoActividad;
+	public void setInicioActividad(int unInicioActividad) {
+		inicioActividad = unInicioActividad;
 	}
 
 	public Set<Periodo> getPeriodos() {
 		return periodos;
 	}
 
-	public void setPeriodos(Set<Periodo> Cuentas) {
-		this.periodos = Cuentas;
+	public void setPeriodos(Set<Periodo> cuentas) {
+		this.periodos = cuentas;
 	}
 	
 	public void addPeriodo(Periodo unPeriodo){
@@ -59,15 +59,15 @@ public class Empresa extends AlgoPersistible {
 		periodos.add(unPeriodo);
 	}
 
-//<<<<<<< HEAD
+//
 //	public void addCuenta(Cuenta cuenta) {
 //		Cuentas.add(cuenta);
 //	}
-//=======
-////	public void addPeriodo(Periodo b) {
-////		Cuentas.add(b);
-////	}
-//>>>>>>> Entrega2-2.0
+//
+//	public void addPeriodo(Periodo b) {
+//		Cuentas.add(b);
+//	}
+//Entrega2-2.0
 	
 	
 	public int cantidadDeCuentas(){
