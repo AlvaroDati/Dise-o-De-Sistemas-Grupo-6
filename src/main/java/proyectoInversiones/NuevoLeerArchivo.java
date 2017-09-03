@@ -177,7 +177,7 @@ public class NuevoLeerArchivo {
 
 	public static void main(String args[]) {
 
-		Empresa empresaAsoc = new Empresa("America Movil");
+	    Empresa empresaAsoc = new Empresa(/*"America Movil"*/);
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
 
 		System.out.printf("PERIODOS: ");

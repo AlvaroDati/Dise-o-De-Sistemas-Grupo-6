@@ -14,8 +14,11 @@ public class AlgoPersistible implements Serializable {
 	protected Long id;
 	protected String nombre;
 	
+	
 	protected AlgoPersistible(){
-		
+	}
+	protected AlgoPersistible(String unNombre){
+		nombre = unNombre;
 	}
 	
 	@Column(name = "id")

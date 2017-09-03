@@ -13,14 +13,14 @@ public class Repositorio {
 		this.emanager = emanager;
 	}
 	
-	public Empresas empresas(){
+	public Empresas empresasRepo(){
 		if (empresas == null) {
 			empresas = new Empresas(emanager);
 		}
 		return empresas;
 	}
 
-	public Periodos periodos() {
+	public Periodos periodosRepo() {
 		if (periodos == null) {
 			periodos = new Periodos(emanager);
 		}

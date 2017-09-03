@@ -1,7 +1,8 @@
 package proyectoInversiones;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,57 +11,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "Empresas")
-public class Empresa {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
-	
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM Empresas p WHERE p.nombre LIKE :pnombre")
+public class Empresa extends AlgoPersistible {
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-	private ArrayList<Periodo> periodos;
-	
-	
-	@Column(name = "nombreEmpresa")
-	private String nombre;
+	private Set<Periodo> periodos;
 	@Column(name = "inicioDeActividad")
 	private int inicioActividad;
 	
 	public Empresa(){
 		}
 	
-	public Empresa(String nombreEmpresa){
-		nombre = nombreEmpresa;
-		
-		}
-	
-	public Empresa(String nombreEmpresa,ArrayList<Periodo> periodosEmpresa){
+	/* 
+	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
 		nombre = nombreEmpresa;
 		periodos = periodosEmpresa;
 		}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-     public String setNombre(String arg) {
-		return nombre = arg;
-	}
+*/ 
+	
 	
 	public int getInicioActividad() {
 		return inicioActividad;
@@ -70,12 +44,19 @@ public class Empresa {
 		inicioActividad = inicoActividad;
 	}
 
-	public ArrayList<Periodo> getPeriodos() {
+	public Set<Periodo> getPeriodos() {
 		return periodos;
 	}
 
-	public void setPeriodos(ArrayList<Periodo> Cuentas) {
+	public void setPeriodos(Set<Periodo> Cuentas) {
 		this.periodos = Cuentas;
+	}
+	
+	public void addPeriodo(Periodo unPeriodo){
+		if (periodos == null){
+			periodos = new HashSet<Periodo>();
+		}
+		periodos.add(unPeriodo);
 	}
 
 //<<<<<<< HEAD
@@ -88,9 +69,6 @@ public class Empresa {
 ////	}
 //>>>>>>> Entrega2-2.0
 	
-	public String toString(){
-		return getNombre();
-	}
 	
 	public int cantidadDeCuentas(){
 		return this.getPeriodos().size();
