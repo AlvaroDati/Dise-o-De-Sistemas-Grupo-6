@@ -19,10 +19,4 @@ public class  Empresas extends Repositorio {
 		emanager.persist(unaEmpresa);
 		emanager.getTransaction().commit();
 	}
-	
-	public List<Empresa> buscarEmpresaPorNombre(String unNombreDeEmpresa) {
-		List<Empresa> unasEmpresas = null;
-		unasEmpresas = emanager.createNamedQuery("buscarEmpresaPorNombre").setParameter("nombre", "%" + unNombreDeEmpresa + "%").getResultList();
-		return unasEmpresas;
-	}
 }

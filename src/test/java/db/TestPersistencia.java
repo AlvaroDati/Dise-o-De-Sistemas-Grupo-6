@@ -71,34 +71,38 @@ public class TestPersistencia {
 	}*/
 	
 	
-	@Test
-	public void  persistirEmpresaConPeriodosYCuentas() {
-		Empresa unaEmpresa = new Empresa("America Movil");
-        Periodo unPeriodo = new Periodo(2006);
-        Cuenta unaCuenta = new Cuenta();
-        unaCuenta.setEbitda(200);
-        unPeriodo.setCuentas(unaCuenta);
-        unaCuenta.setPeriodoVinculado(unPeriodo);
-        unaEmpresa.addPeriodo(unPeriodo);
-        unPeriodo.setEmpresa(unaEmpresa);
-		//NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-		
-		
-		//Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
-       // periodos.forEach(unPeriodo -> unPeriodo.setEmpresa(unaEmpresa));
-       /* for(Periodo head:periodos){
-        	head.setEmpresa(unaEmpresa);
-        }*/
-		repositorio.empresasRepo().persistir(unaEmpresa);
-		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-	}
+//	@Test
+//	public void  persistirEmpresaConPeriodosYCuentas() {
+//		Empresa unaEmpresa = new Empresa("America Movil");
+//        Periodo unPeriodo = new Periodo(2006);
+//        Cuenta unaCuenta = new Cuenta();
+//        unaCuenta.setEbitda(200);
+//        unPeriodo.setCuentas(unaCuenta);
+//        unaCuenta.setPeriodoVinculado(unPeriodo);
+//        unaEmpresa.addPeriodo(unPeriodo);
+//        unPeriodo.setEmpresa(unaEmpresa);
+//		//NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+//		
+//		
+//		//Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
+//       // periodos.forEach(unPeriodo -> unPeriodo.setEmpresa(unaEmpresa));
+//       /* for(Periodo head:periodos){
+//        	head.setEmpresa(unaEmpresa);
+//        }*/
+//		repositorio.empresasRepo().persistir(unaEmpresa);
+//		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
+//	}
+//	
 	
-/*	public void persistirConJson(){
-		Empresa unaEmpresa = new Empresa("America Movil");
+	@Test
+      public void persistirConJson(){
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-		Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
-		
-	}*/
+		ArrayList<Empresa> empresa = archivo.leerArchivo();
+		for(int i = 0;i<empresa.size();i++){
+			empresa.get(i).getPeriodos().get(i).setEmpresa(empresa.get(i));
+			repositorio.empresasRepo().persistir(empresa.get(i));
+		}
+	}
 	
 	@After
 	public void tearDown() throws Exception {

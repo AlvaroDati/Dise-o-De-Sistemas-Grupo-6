@@ -62,7 +62,7 @@ public class Indicador {
 	public void setNombre(String nombreIndicador) {
 		nombre = nombreIndicador;
 	}
-	public Set<Integer> periodos(Empresa empresa){
+	public List<Integer> periodos(Empresa empresa){
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
@@ -75,7 +75,7 @@ public class Indicador {
 	}
 	
 	
-	public Set<Integer> periodos1(Empresa empresa){
+	public List<Integer> periodos1(Empresa empresa){
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 	public int getPeriodo() {

@@ -20,10 +20,8 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "empresas")
 //@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM Empresas p WHERE p.nombre LIKE :pnombre")
-public class Empresa  {
+public class Empresa extends AlgoPersistible {
 	
-	
-	private String nombre;
 	@Column(name = "inicioDeActividad")
 	private int inicioActividad;
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
@@ -35,12 +33,7 @@ public class Empresa  {
 	public Empresa(String nombreEmpresa){
 		nombre = nombreEmpresa;
 	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+
 	/* 
 	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
 		nombre = nombreEmpresa;

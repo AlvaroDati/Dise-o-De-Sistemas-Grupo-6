@@ -31,7 +31,7 @@ public class Repositorio {
 		if (cuentas == null) {
 			cuentas = new Cuentas(emanager);
 		}
-		return cuentas;
+		return cuentas; 
 	}*/
 	
 	

@@ -9,10 +9,11 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class AlgoPersistible implements Serializable {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-
-	//private Long id;
+	private Long id;
+	
 	protected String nombre;
 
 	protected AlgoPersistible() {
@@ -22,14 +23,14 @@ public class AlgoPersistible implements Serializable {
 		nombre = unNombre;
 	}
 
-//	@Column(name = "id")
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
+	@Column(name = "id")
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	@Column(name = "nombre")
 	public String getNombre() {
