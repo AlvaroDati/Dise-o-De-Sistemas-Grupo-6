@@ -95,14 +95,17 @@ public class TestPersistencia {
 //	
 	
 	@Test
-      public void persistirConJson(){
+    public void persistirConJson(){
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		ArrayList<Empresa> empresa = archivo.leerArchivo();
 		for(int i = 0;i<empresa.size();i++){
-			empresa.get(i).getPeriodos().get(i).setEmpresa(empresa.get(i));
-			repositorio.empresasRepo().persistir(empresa.get(i));
+			for(int j = 0;j<empresa.get(i).getPeriodos().size();j++){
+				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
+				repositorio.empresasRepo().persistir(empresa.get(i));
+		}
 		}
 	}
+	
 	
 	@After
 	public void tearDown() throws Exception {

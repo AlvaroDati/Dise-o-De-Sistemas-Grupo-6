@@ -5,18 +5,44 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import proyectoInversiones.*;
 
-public class Indicador {
+
+@Entity
+@Table(name = "Indicador")
+public class Indicador extends AlgoPersistible{
 
 	NuevoLeerArchivo   archivoEmpresas  = new NuevoLeerArchivo();
 	ArrayList<Empresa> empresas 	    = new ArrayList<Empresa>();
+	
+	
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
 	ArrayList<Cuenta>  cuentaAsociada   = new ArrayList<Cuenta>();
+    
+    //crear relacion con esto ?
 	Empresa            empresaAsociada 	= new Empresa();
 	
 	
-	private String nombre;
+//	private String nombre;
+	
+	@Column(name = "valorIndicador")
 	private float valorIndicador;
+	
+	
+	@Column(name = "anio")
 	private int periodo;
 	ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>(); /* ESTA LISTA ES PARA ALMACENAR LOS IDENTIFICADORES DEL USUARIO
 	 																	QUE SE VAN A OBTENER DE LA CLASE IndVisitor
