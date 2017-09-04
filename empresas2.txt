@@ -4,23 +4,23 @@
     "inicioActividad":2000,
     "periodos":[ 
     			{ "anio": 2006,
-    			  cuentas: [{
+    			  cuentas: {
     			  "ebitda": 44591,
              	  "fds": 0,
                   "fCashFlow":955,
                   "ingNetoOpCont": 2221,
 	              "ingNetoOpDiscont": 1051,
                   "deuda": 15
-                             }]},
+                             }},
        			{"anio":2007,
-       			"cuentas":[{
+       			"cuentas":{
        					"ebitda": 77691,
               			"fds": 0,
               			"fCashFlow":1096,
               			"ingNetoOpCont": 3221,
 	      				"ingNetoOpDiscont": 1221,
               			"deuda": 12
-       			        }]
+       			        }
        			
                 }
               ]

@@ -41,7 +41,7 @@ public class TestPersistencia {
 	}
 	
 	
-	
+/*
 	@Test
 	public void  persistirEmpresaConPeriodos() {
 		Periodo unPeriodo = new Periodo(2014);
@@ -57,7 +57,7 @@ public class TestPersistencia {
 		unaEmpresa.addPeriodo(p3);
 	    repositorio.empresasRepo().persistir(unaEmpresa);
 		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-	}
+	}*/
 	
 	
 /*	@Test
@@ -73,24 +73,32 @@ public class TestPersistencia {
 	
 	@Test
 	public void  persistirEmpresaConPeriodosYCuentas() {
-		Periodo unPeriodo = new Periodo(2014);
-		Empresa unaEmpresa = new Empresa();
-		Cuenta unaCuenta = new Cuenta();
-	
-		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		Empresa unaEmpresa = new Empresa("America Movil");
+        Periodo unPeriodo = new Periodo(2006);
+        Cuenta unaCuenta = new Cuenta();
+        unaCuenta.setEbitda(200);
+        unPeriodo.setCuentas(unaCuenta);
+        unaCuenta.setPeriodoVinculado(unPeriodo);
+        unaEmpresa.addPeriodo(unPeriodo);
+        unPeriodo.setEmpresa(unaEmpresa);
+		//NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		
 		
-		unaEmpresa.setNombre("America Movil");
-		unPeriodo.setEmpresa(unaEmpresa);
-		unaEmpresa.addPeriodo(unPeriodo);
-		
-		Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
-
+		//Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
+       // periodos.forEach(unPeriodo -> unPeriodo.setEmpresa(unaEmpresa));
+       /* for(Periodo head:periodos){
+        	head.setEmpresa(unaEmpresa);
+        }*/
 		repositorio.empresasRepo().persistir(unaEmpresa);
 		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
 	}
 	
-	
+/*	public void persistirConJson(){
+		Empresa unaEmpresa = new Empresa("America Movil");
+		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
+		
+	}*/
 	
 	@After
 	public void tearDown() throws Exception {

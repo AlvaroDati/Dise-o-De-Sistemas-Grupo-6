@@ -23,16 +23,16 @@ public class Periodo implements Serializable{
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO)      
 	protected Long id;
-    @Column(name = "Anio")
+    @Column(name = "anio")
 	protected int anio;  
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
+    private Cuenta cuentas;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
 	private Empresa empresa;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
-	private Cuenta cuentas2;
 	
-	private ArrayList<Cuenta> cuentas;
+	
 	
 
 	public Empresa getEmpresa() {
@@ -45,7 +45,7 @@ public class Periodo implements Serializable{
 	
 	
 	public Periodo() {
-		
+		cuentas = new Cuenta();
 	}
 	
 	
@@ -70,10 +70,10 @@ public class Periodo implements Serializable{
 		this.anio = anio;
 	}
 
-	public ArrayList<Cuenta> getCuentas() {
+	public Cuenta getCuentas() {
 		return cuentas;
 	}
-	public void setCuentas(ArrayList<Cuenta> unasCuentas) {
+	public void setCuentas(Cuenta unasCuentas) {
 		cuentas = unasCuentas;
 	}
 

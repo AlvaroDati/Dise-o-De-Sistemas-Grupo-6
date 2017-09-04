@@ -1,7 +1,9 @@
 package proyectoInversiones;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -17,17 +19,27 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "empresas")
-//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM mpresas p WHERE p.nombre LIKE :pnombre")
-public class Empresa extends AlgoPersistible {
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-	private Set<Periodo> periodos;
+//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM Empresas p WHERE p.nombre LIKE :pnombre")
+public class Empresa  {
+	
+	
+	private String nombre;
 	@Column(name = "inicioDeActividad")
 	private int inicioActividad;
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	private List<Periodo> periodos;
 	
 	public Empresa(){
+		periodos = new ArrayList<Periodo>();
 		}
 	public Empresa(String nombreEmpresa){
 		nombre = nombreEmpresa;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	/* 
 	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
@@ -35,6 +47,8 @@ public class Empresa extends AlgoPersistible {
 		Periodos = periodosEmpresa;
 		}
 */ 
+	
+	
 	
 	
 	public int getInicioActividad() {
@@ -45,17 +59,17 @@ public class Empresa extends AlgoPersistible {
 		inicioActividad = unInicioActividad;
 	}
 
-	public Set<Periodo> getPeriodos() {
+	public List<Periodo> getPeriodos() {
 		return periodos;
 	}
 
-	public void setPeriodos(Set<Periodo> cuentas) {
+	public void setPeriodos(List<Periodo> cuentas) {
 		this.periodos = cuentas;
 	}
 	
 	public void addPeriodo(Periodo unPeriodo){
 		if (periodos == null){
-			periodos = new HashSet<Periodo>();
+			periodos = new ArrayList<Periodo>();
 		}
 		periodos.add(unPeriodo);
 	}

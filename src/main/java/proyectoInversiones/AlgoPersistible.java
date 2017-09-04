@@ -10,35 +10,38 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class AlgoPersistible implements Serializable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+
+	//private Long id;
 	protected String nombre;
-	
-	
-	protected AlgoPersistible(){
+
+	protected AlgoPersistible() {
 	}
-	protected AlgoPersistible(String unNombre){
+
+	protected AlgoPersistible(String unNombre) {
 		nombre = unNombre;
 	}
-	
-	
-	public Long getId() {
-	return id;
-	}
-	public void setId(Long id) {
-	this.id = id;
-	}
+
+//	@Column(name = "id")
+//	public Long getId() {
+//		return id;
+//	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+
 	@Column(name = "nombre")
 	public String getNombre() {
-	return nombre;
+		return nombre;
 	}
+
 	public void setNombre(String nombre) {
-	this.nombre = nombre;
+		this.nombre = nombre;
 	}
-	public String toString() {
-	return getId() + "-" + getNombre();
-	}
-	
+
+//	public String toString() {
+//		return getId() + "-" + getNombre();
+//	}
 
 }
