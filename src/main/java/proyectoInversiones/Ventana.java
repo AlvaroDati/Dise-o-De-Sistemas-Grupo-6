@@ -299,7 +299,7 @@ public void actionPerformed(ActionEvent evento) {
 //		}
 			for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
 				
-				modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
+				//modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
 				modeloCuentas.addElement(cuentasRequeridas.get(i).getEbitda());
 				modeloCuentas.addElement(cuentasRequeridas.get(i).getFds());
 				modeloCuentas.addElement(cuentasRequeridas.get(i).getfCashFlow());
@@ -319,7 +319,7 @@ public void actionPerformed(ActionEvent evento) {
 		//rellenamos la lista con los datos de los indicadores
 		
 		for(int i = 0;i<cuentasRequeridas.size();i++){
-			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
+			//modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
 			modeloIndPredefinidos.addElement(indicadorPredefinido.ingresoNeto(((Empresa) empresaSeleccionada)).get(i));
 			modeloIndPredefinidos.addElement(indicadorPredefinido.roe(((Empresa) empresaSeleccionada)).get(i));
 			
@@ -336,7 +336,7 @@ public void actionPerformed(ActionEvent evento) {
 
 		for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
 			
-			modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
+			//modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
 			
 		}
 			

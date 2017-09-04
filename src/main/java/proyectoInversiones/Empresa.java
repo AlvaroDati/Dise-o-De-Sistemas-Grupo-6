@@ -26,7 +26,9 @@ public class Empresa extends AlgoPersistible {
 	
 	public Empresa(){
 		}
-	
+	public Empresa(String nombreEmpresa){
+		nombre = nombreEmpresa;
+	}
 	/* 
 	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
 		nombre = nombreEmpresa;

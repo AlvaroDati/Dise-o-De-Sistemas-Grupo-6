@@ -2,6 +2,8 @@ package db;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -20,7 +22,9 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import proyectoInversiones.repositorio.Repositorio;
 import proyectoInversiones.Empresa;
+import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
+import proyectoInversiones.Cuenta;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -41,11 +45,16 @@ public class TestPersistencia {
 	@Test
 	public void  persistirEmpresaConPeriodos() {
 		Periodo unPeriodo = new Periodo(2014);
-		Periodo otroPeriodo = new Periodo(2016);
+		Periodo otroPeriodo = new Periodo(2010);
+		Periodo p3 = new Periodo(2000);
 		Empresa unaEmpresa = new Empresa();
 		unaEmpresa.setNombre("IBM");
+		unPeriodo.setEmpresa(unaEmpresa);
+		otroPeriodo.setEmpresa(unaEmpresa);
+		p3.setEmpresa(unaEmpresa);
 		unaEmpresa.addPeriodo(unPeriodo);
 		unaEmpresa.addPeriodo(otroPeriodo);
+		unaEmpresa.addPeriodo(p3);
 	    repositorio.empresasRepo().persistir(unaEmpresa);
 		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
 	}
@@ -60,6 +69,26 @@ public class TestPersistencia {
 		
 		}
 	}*/
+	
+	
+	@Test
+	public void  persistirEmpresaConPeriodosYCuentas() {
+		Periodo unPeriodo = new Periodo(2014);
+		Empresa unaEmpresa = new Empresa();
+		Cuenta unaCuenta = new Cuenta();
+	
+		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		
+		
+		unaEmpresa.setNombre("America Movil");
+		unPeriodo.setEmpresa(unaEmpresa);
+		unaEmpresa.addPeriodo(unPeriodo);
+		
+		Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
+
+		repositorio.empresasRepo().persistir(unaEmpresa);
+		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
+	}
 	
 	
 	

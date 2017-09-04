@@ -10,25 +10,39 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import proyectoInversiones.Empresa;
+import proyectoInversiones.Cuenta;
 
 @Entity
 @Table(name = "periodos")
 public class Periodo implements Serializable{
 	
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)      
+    @Id 
+    @GeneratedValue(strategy=GenerationType.AUTO)      
 	protected Long id;
     @Column(name = "Anio")
 	protected int anio;  
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
 	private Empresa empresa;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
+	private Cuenta cuentas2;
 	
+	private ArrayList<Cuenta> cuentas;
 	
 
-	private ArrayList<Cuenta> cuentas;
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	
 	
 	public Periodo() {
 		

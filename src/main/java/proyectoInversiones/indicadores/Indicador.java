@@ -3,6 +3,7 @@ package proyectoInversiones.indicadores;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import proyectoInversiones.*;
 
@@ -61,7 +62,7 @@ public class Indicador {
 	public void setNombre(String nombreIndicador) {
 		nombre = nombreIndicador;
 	}
-	public ArrayList<Integer> periodos(Empresa empresa){
+	public Set<Integer> periodos(Empresa empresa){
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
@@ -74,7 +75,7 @@ public class Indicador {
 	}
 	
 	
-	public ArrayList<Integer> periodos1(Empresa empresa){
+	public Set<Integer> periodos1(Empresa empresa){
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 	public int getPeriodo() {

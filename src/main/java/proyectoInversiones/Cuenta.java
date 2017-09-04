@@ -1,41 +1,44 @@
 package proyectoInversiones;
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-/*@Entity
-@Table(name = "Cuenta") */
+@Entity
+@Table(name = "Cuenta") 
 public class Cuenta extends AlgoPersistible{
-/*	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "periodo_id", referencedColumnName = "id")*/
+	@OneToOne(mappedBy = "cuenta")
 	private Periodo periodoVinculado;
 	
 	
-//	@Column(name = "ebitda")
+	@Column(name = "ebitda")
 	private float ebitda;
-//	@Column(name = "fds")
+    @Column(name = "fds")
 	private float fds;
-//	@Column(name = "fCashflow")
+    @Column(name = "fCashflow")
 	private float fCashFlow;
-//	@Column(name = "ingNetoOpCont")
+    @Column(name = "ingNetoOpCont")
 	private float ingNetoOpCont;
-//	@Column(name = "ingNetoOpDisc")
+    @Column(name = "ingNetoOpDisc")
 	private float ingNetoOpDiscont;
-//	@Column(name = "deuda")
+    @Column(name = "deuda")
 	private float deuda;
-//	@Column(name = "capitalTotal")
+    @Column(name = "capitalTotal")
 	private float capitalTotal;
 	
+    public Periodo getPeriodoVinculado() {
+		return periodoVinculado;
+	}
+	public void setPeriodoVinculado(Periodo periodoVinculado) {
+		this.periodoVinculado = periodoVinculado;
+	}
+ 
 	public float getDeuda() {
 		return deuda;
 	}

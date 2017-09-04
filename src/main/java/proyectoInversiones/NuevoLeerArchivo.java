@@ -5,7 +5,9 @@ import java.io.FileReader;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.lang.reflect.Type;
 //import java.util.List;
 
@@ -55,9 +57,24 @@ public class NuevoLeerArchivo {
 
 	
 
-	public ArrayList<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa) {
-		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
-		ArrayList<Integer> periodosAux = new ArrayList<Integer>();
+//	public ArrayList<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa) {
+//		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
+//		ArrayList<Integer> periodosAux = new ArrayList<Integer>();
+//
+//		String empresaAsoc = empresa.toString();
+//		if (validarEmpresa(empresaAsoc)) {
+//			for (Empresa head : empresaAsociada) {
+//				periodos = (ArrayList<Periodo>) head.getPeriodos();
+//			}
+//
+//		}
+//		for (int i = 0; i < periodos.size(); i++) {
+//			periodosAux.add(periodos.get(i).getAnio());
+//		}
+//		return periodosAux;
+	public Set<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa) {
+		Set<Periodo> periodos = new HashSet<Periodo>();
+		Set<Integer> periodosAux = new HashSet<Integer>();
 
 		String empresaAsoc = empresa.toString();
 		if (validarEmpresa(empresaAsoc)) {
@@ -66,18 +83,23 @@ public class NuevoLeerArchivo {
 			}
 
 		}
-		for (int i = 0; i < periodos.size(); i++) {
-			periodosAux.add(periodos.get(i).getAnio());
+		// for (int i = 0; i < periodos.size(); i++) {
+		// periodosAux.add(periodos.get(i).getAnio());
+		// }
+
+		for (Periodo head : periodos) {
+			periodosAux.add(head.getAnio());
 		}
 		return periodosAux;
+
 	}
 
-	public ArrayList<Periodo> getPeriodos(Empresa empresa) {
-		ArrayList<Periodo> periodos = new ArrayList<Periodo>();
+	public Set<Periodo> getPeriodos(Empresa empresa) {
+		Set<Periodo> periodos = new HashSet<Periodo>();
 		String empresaAsoc = empresa.toString();
 		if (validarEmpresa(empresaAsoc)) {
 			for (Empresa head : empresaAsociada) {
-				periodos = head.getPeriodos();
+				periodos =  head.getPeriodos();
 			}
 		}
 
@@ -86,7 +108,7 @@ public class NuevoLeerArchivo {
 
 	public int cantidadDeCuentas(Empresa empresa) {
 		ArrayList<Cuenta> cuentaQuerida = this.obtenerCuentasSegunEmpresa(empresa);
-		ArrayList<Periodo> periodos = this.getPeriodos(empresa);
+		Set<Periodo> periodos = this.getPeriodos(empresa);
 		Cuenta cuentaQuerida2;
 		int cantidad = 0;
 		Iterator<Cuenta> cuentas = cuentaQuerida.iterator();
@@ -100,12 +122,17 @@ public class NuevoLeerArchivo {
 	}
 
 	public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa) {
-		ArrayList<Periodo> periodos = this.getPeriodos(empresa);
+		Set<Periodo> periodos = this.getPeriodos(empresa);
 
 		ArrayList<Cuenta> cuentaQuerida = new ArrayList<Cuenta>();
 		ArrayList<Cuenta> cuentaQuerida2 = new ArrayList<Cuenta>();
-		for (int i = 0; i < periodos.size(); i++) {
-			cuentaQuerida.addAll(periodos.get(i).getCuentas());
+//		for (int i = 0; i < periodos.size(); i++) {
+//			cuentaQuerida.addAll(periodos.get(i).getCuentas());
+//			System.out.printf("El size de las cuentas es \n");
+//			System.out.print(periodos.get(i).getCuentas());
+//		}
+		for (Periodo head:periodos) {
+			cuentaQuerida.addAll(head.getCuentas());
 //			System.out.printf("El size de las cuentas es \n");
 //			System.out.print(periodos.get(i).getCuentas());
 		}
@@ -152,13 +179,25 @@ public class NuevoLeerArchivo {
 	public float obtenerCuentaSegunPeriodo(Empresa empresa, String nombreCuenta, int periodo) {
 		float cuenta = 0;
 		ArrayList<Float> cuentas = this.obtenerCuentaDe(empresa, nombreCuenta);
-		ArrayList<Integer> periodos = this.obtenerPeriodosSegunEmpresa(empresa);
-		for (int i = 0; i < cuentas.size(); i++) {
-			if (periodos.get(i).equals(periodo)) {
-				cuenta = cuentas.get(i);
+		Set<Integer> periodos = this.obtenerPeriodosSegunEmpresa(empresa);
+//		for (int i = 0; i < cuentas.size(); i++) {
+//			if (periodos.get(i).equals(periodo)) {
+//				cuenta = cuentas.get(i);
+//			}
+//		}
+
+//		for (int i = 0; i < cuentas.size(); i++) {
+//		if (periodos.get(i).equals(periodo)) {
+//			cuenta = cuentas.get(i);
+//		}
+//	}
+		for(Integer head:periodos){
+			for(int i = 0;i<cuentas.size();i++){
+				if(periodos.equals(periodo)){
+					cuenta = cuentas.get(i);
+				}
 			}
 		}
-
 		return cuenta;
 	}
 
@@ -178,7 +217,7 @@ public class NuevoLeerArchivo {
 
 	public static void main(String args[]) {
 
-	    Empresa empresaAsoc = new Empresa(/*"America Movil"*/);
+	    Empresa empresaAsoc = new Empresa("America Movil");
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
 
 		System.out.printf("PERIODOS: ");
