@@ -101,7 +101,7 @@ public class TestPersistencia {
 		ArrayList<Empresa> empresa = archivo.leerArchivo();
 		for (int i = 0; i < empresa.size(); i++) {
 			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
-				empresa.get(i).getIndicadores().get(j).setEmpresa(empresa.get(i)); //Ya se que no tiene nada indicadores, pero queria ver si aunque sea tiraba null en la workbench
+			//	empresa.get(i).getIndicadores().get(j).setEmpresa(empresa.get(i)); //Ya se que no tiene nada indicadores, pero queria ver si aunque sea tiraba null en la workbench
 				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
 				repositorio.empresasRepo().persistir(empresa.get(i)); 
 				/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
@@ -118,13 +118,24 @@ public class TestPersistencia {
 	}
 	
 	@Test
+	public void buscarEmpresaNombre(){
+		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Amer");
+		for(Empresa unaEmpresa : empresasFiltradas){
+			System.out.println(unaEmpresa.getNombre());
+		}
+		Assert.assertFalse(empresasFiltradas.isEmpty());
+	}
+	
+	
+	
+/*	@Test
 	public void persistirIndicador(){
 		Empresa unaEmpresa = new Empresa("IBM");
 		Indicador indicador = new Indicador("Ingreso Neto");
 		indicador.ingresoNeto(unaEmpresa);
 		unaEmpresa.addIndicador(indicador);
 		repositorio.empresasRepo().persistir(unaEmpresa);
-	}
+	}*/
 	
 	@After
 	public void tearDown() throws Exception {

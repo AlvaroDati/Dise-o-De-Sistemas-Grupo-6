@@ -13,7 +13,7 @@ public class AlgoPersistible implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+	@Column(name = "nombre")
 	protected String nombre;
 
 	protected AlgoPersistible() {
@@ -32,7 +32,7 @@ public class AlgoPersistible implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "nombre")
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -41,8 +41,8 @@ public class AlgoPersistible implements Serializable {
 		this.nombre = nombre;
 	}
 
-//	public String toString() {
-//		return getId() + "-" + getNombre();
-//	}
+	public String toString() {
+		return getId() + "-" + getNombre();
+	}
 
 }

@@ -21,24 +21,24 @@ import javax.persistence.Table;
 import proyectoInversiones.*;
 
 
-@Entity
-@Table(name = "Indicador")
+/*@Entity
+@Table(name = "Indicador")*/
 public class Indicador extends AlgoPersistible{
 
 	
 	NuevoLeerArchivo   archivoEmpresas  = new NuevoLeerArchivo();
 	
 	
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
+  //  @ManyToOne(cascade = CascadeType.ALL)
+  //  @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
 	private Cuenta cuentaAsociada ;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "empresa_id",referencedColumnName = "id")
+ //  @ManyToOne(cascade = CascadeType.ALL)
+//   @JoinColumn(name = "empresa_id",referencedColumnName = "id")
     private Empresa empresa;
-    @Column(name = "valorIndicador")
+//    @Column(name = "valorIndicador")
     private float valorIndicador;    
-    @Column(name = "anio")
+//    @Column(name = "anio")
     private int periodo;
 
 	public Empresa getEmpresa() {

@@ -21,15 +21,16 @@ import proyectoInversiones.indicadores.Indicador;
 
 @Entity
 @Table (name = "empresas")
-//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM Empresas p WHERE p.nombre LIKE :pnombre")
+@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
+
 public class Empresa extends AlgoPersistible {
 	
 	@Column(name = "inicioDeActividad")
 	private int inicioActividad;
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-	private List<Indicador> indicadores;
+/*  @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Indicador> indicadores;
 	
 	public List<Indicador> getIndicadores() {
 		return indicadores;
@@ -40,7 +41,8 @@ public class Empresa extends AlgoPersistible {
 	public void addIndicador(Indicador indicador){
 		if(!this.getIndicadores().contains(indicador))
 			indicadores.add(indicador);
-	}
+	}*/
+	
 	public Empresa(){
 		periodos = new ArrayList<Periodo>();
 		}
