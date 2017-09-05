@@ -178,10 +178,9 @@ public class NuevoLeerArchivo {
 
 		System.out.printf("PERIODOS: ");
 		System.out.printf("\nNombre empresa: %s\n", empresaAsoc.getNombre());
-//		System.out.println(arch.getPeriodos(empresaAsoc));
+
 		System.out.println(arch.obtenerPeriodosSegunEmpresa(empresaAsoc));
 
-		//System.out.print(arch.obtenerCuentasSegunEmpresa(empresaAsoc));
 		System.out.printf("\nEBITDA: ");
 		System.out.print(arch.obtenerCuentaDe(empresaAsoc, "EBITDA"));
 		
@@ -205,10 +204,3 @@ public class NuevoLeerArchivo {
 	 * arch.obtenerPeriodosSegunEmpresa(empresaAsoc).get(i)
 	 */
 }
-
-/*
- * JOptionPane.showMessageDialog(null,
- * "Ingrese una empresa en el cuadro de texto.",
- * "Ingrese una empresa",JOptionPane.WARNING_MESSAGE); (Ejemplo de mensaje de
- * error para usar en el futuro con indicadores
- */

@@ -42,7 +42,39 @@ public class TestPersistencia {
 	}
 	
 	
-/*
+	@Test
+	public void persistirConJson() {
+		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		ArrayList<Empresa> empresa = archivo.leerArchivo();
+		for (int i = 0; i < empresa.size(); i++) {
+			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
+			//	empresa.get(i).getIndicadores().get(j).setEmpresa(empresa.get(i)); //Ya se que no tiene nada indicadores, pero queria ver si aunque sea tiraba null en la workbench
+				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
+				repositorio.empresasRepo().persistir(empresa.get(i)); 
+				/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
+				Ya que al no estar en json, siempre van a tiran el mismo error 
+			
+			Caused by: org.hibernate.MappingException: Could not determine type for: proyectoInversiones.NuevoLeerArchivo, at table: Indicador, for columns: [org.hibernate.mapping.Column(archivoEmpresas)]
+				Esto lo tira, porque en el json, no hay un campo Indicador/Metodologia 
+				Capaz si hacemos un persistir(Indicador/Metodologia) indicando la empresa a la que esta relacionada
+				Va a ser mas llevadero esto, y se pueden hacer mejores tests
+				 	*/
+			}
+			
+		}
+	}
+	
+	@Test
+	public void buscarEmpresaNombre(){
+		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Amer");
+		for(Empresa unaEmpresa : empresasFiltradas){
+			System.out.println(unaEmpresa.getNombre());
+		
+		}
+		Assert.assertFalse(empresasFiltradas.isEmpty());
+	}
+	
+	/*
 	@Test
 	public void  persistirEmpresaConPeriodos() {
 		Periodo unPeriodo = new Periodo(2014);
@@ -94,38 +126,6 @@ public class TestPersistencia {
 //		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
 //	}
 //	
-	
-	@Test
-	public void persistirConJson() {
-		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-		ArrayList<Empresa> empresa = archivo.leerArchivo();
-		for (int i = 0; i < empresa.size(); i++) {
-			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
-			//	empresa.get(i).getIndicadores().get(j).setEmpresa(empresa.get(i)); //Ya se que no tiene nada indicadores, pero queria ver si aunque sea tiraba null en la workbench
-				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
-				repositorio.empresasRepo().persistir(empresa.get(i)); 
-				/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
-				Ya que al no estar en json, siempre van a tiran el mismo error 
-			
-			Caused by: org.hibernate.MappingException: Could not determine type for: proyectoInversiones.NuevoLeerArchivo, at table: Indicador, for columns: [org.hibernate.mapping.Column(archivoEmpresas)]
-				Esto lo tira, porque en el json, no hay un campo Indicador/Metodologia 
-				Capaz si hacemos un persistir(Indicador/Metodologia) indicando la empresa a la que esta relacionada
-				Va a ser mas llevadero esto, y se pueden hacer mejores tests
-				 	*/
-			}
-			
-		}
-	}
-	
-	@Test
-	public void buscarEmpresaNombre(){
-		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Amer");
-		for(Empresa unaEmpresa : empresasFiltradas){
-			System.out.println(unaEmpresa.getNombre());
-		}
-		Assert.assertFalse(empresasFiltradas.isEmpty());
-	}
-	
 	
 	
 /*	@Test

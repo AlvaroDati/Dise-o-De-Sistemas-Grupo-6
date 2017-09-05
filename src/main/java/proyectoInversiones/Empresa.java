@@ -29,7 +29,8 @@ public class Empresa extends AlgoPersistible {
 	private int inicioActividad;
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
-/*  @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+
+	/*  @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
     private List<Indicador> indicadores;
 	
 	public List<Indicador> getIndicadores() {
@@ -50,16 +51,6 @@ public class Empresa extends AlgoPersistible {
 		nombre = nombreEmpresa;
 	}
 
-	/* 
-	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
-		nombre = nombreEmpresa;
-		Periodos = periodosEmpresa;
-		}
-*/ 
-	
-	
-	
-	
 	public int getInicioActividad() {
 		return inicioActividad;
 	}
@@ -83,6 +74,9 @@ public class Empresa extends AlgoPersistible {
 		periodos.add(unPeriodo);
 	}
 	
+	public int cantidadDeCuentas(){
+		return this.getPeriodos().size();
+	}
 
 //
 //	public void addCuenta(Cuenta cuenta) {
@@ -92,12 +86,14 @@ public class Empresa extends AlgoPersistible {
 //	public void addPeriodo(Periodo b) {
 //		Cuentas.add(b);
 //	}
+	 
+//	public Empresa(String nombreEmpresa, ArrayList<Periodo> periodosEmpresa){
+//		nombre = nombreEmpresa;
+//		Periodos = periodosEmpresa;
+//		}
+ 
 //Entrega2-2.0
 	
-	
-	public int cantidadDeCuentas(){
-		return this.getPeriodos().size();
-	}
 }
 
 

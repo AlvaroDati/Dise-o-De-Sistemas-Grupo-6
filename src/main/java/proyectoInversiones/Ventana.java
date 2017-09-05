@@ -203,11 +203,14 @@ public void actionPerformed(ActionEvent evento) {
 	IndVisitor                  indicadorVisitor         = new IndVisitor();
 	Map<String,List<Indicador>> indicadorUsuario         = new HashMap<String,List<Indicador>>();
 
-	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
 	System.out.print(cuentasRequeridas.iterator());
+	
+	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
 	filasListaCuentas = 7;
 	filasListaIndPredefinidos = 3;
 	filasListaIndUsuario = 1;
+	
+	
 		try {
 			indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
 		} catch (IOException e1) {
@@ -238,10 +241,7 @@ public void actionPerformed(ActionEvent evento) {
 		listaIndPredefinidos.setModel(modeloIndPredefinidos);
 		listaIndPredefinidos.setLayoutOrientation(JList.VERTICAL_WRAP);
 		listaIndPredefinidos.setVisibleRowCount(filasListaIndPredefinidos);
-		/*
-		 * listaIndPredefinidos.setVisibleRowCount(indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
-		System.out.printf("Size de modeloIndPredefinidos %d", indicadorPredefinido.getCantidadDeIndicadoresPredefinidos());
-		 */
+		
 
 		//generamos la lista de indicadores de usuario
 
@@ -365,7 +365,6 @@ public void actionPerformed(ActionEvent evento) {
 
 			File file = new File("output.txt");
 
-			// if file doesnt exists, then create it
 			if (!file.exists()) {
 				file.createNewFile();
 			}
