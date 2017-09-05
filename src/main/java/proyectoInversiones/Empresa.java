@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
+import proyectoInversiones.indicadores.Indicador;
+
 @Entity
 @Table (name = "empresas")
 //@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT p FROM Empresas p WHERE p.nombre LIKE :pnombre")
@@ -26,7 +28,19 @@ public class Empresa extends AlgoPersistible {
 	private int inicioActividad;
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	private List<Indicador> indicadores;
 	
+	public List<Indicador> getIndicadores() {
+		return indicadores;
+	}
+	public void setIndicadores(List<Indicador> indicadores) {
+		this.indicadores = indicadores;
+	}
+	public void addIndicador(Indicador indicador){
+		if(!this.getIndicadores().contains(indicador))
+			indicadores.add(indicador);
+	}
 	public Empresa(){
 		periodos = new ArrayList<Periodo>();
 		}

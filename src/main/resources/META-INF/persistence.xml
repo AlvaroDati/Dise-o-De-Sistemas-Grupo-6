@@ -10,9 +10,10 @@
 		<class>proyectoInversiones.Empresa</class>
 		<class>pryoectoInversiones.Periodo</class>
 		<class>pryoectoInversiones.AlgoPersistible</class>
-<!--    <class>proyectoInversiones.indicadores.Indicadores</class>
+		<class>proyectoInversiones.Cuenta</class>
+	<class>proyectoInversiones.indicadores.Indicadores</class>
+<!--   
 		<class>proyectoInversiones.metodologias.Metodologia</class>     
-		<class>proyectoInversiones.Cuenta</class>   
 		-->
 
 		<properties>

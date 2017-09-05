@@ -24,6 +24,7 @@ import proyectoInversiones.repositorio.Repositorio;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
+import proyectoInversiones.indicadores.Indicador;
 import proyectoInversiones.Cuenta;
 
 
@@ -95,17 +96,26 @@ public class TestPersistencia {
 //	
 	
 	@Test
-    public void persistirConJson(){
+	public void persistirConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		ArrayList<Empresa> empresa = archivo.leerArchivo();
-		for(int i = 0;i<empresa.size();i++){
-			for(int j = 0;j<empresa.get(i).getPeriodos().size();j++){
+		for (int i = 0; i < empresa.size(); i++) {
+			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
+				empresa.get(i).getIndicadores().get(j).setEmpresa(empresa.get(i)); //Ya se que no tiene nada indicadores, pero queria ver si aunque sea tiraba null en la workbench
 				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
 				repositorio.empresasRepo().persistir(empresa.get(i));
-		}
+			}
 		}
 	}
 	
+	@Test
+	public void persistirIndicador(){
+		Empresa unaEmpresa = new Empresa("IBM");
+		Indicador indicador = new Indicador("Ingreso Neto");
+		indicador.ingresoNeto(unaEmpresa);
+		unaEmpresa.addIndicador(indicador);
+		repositorio.empresasRepo().persistir(unaEmpresa);
+	}
 	
 	@After
 	public void tearDown() throws Exception {
