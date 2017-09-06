@@ -32,10 +32,13 @@ public class TestIndicadores {
 		indicador.setValorIndicador(indicadorArmar.obtenerValorIndicador(indicador));
 		assertEquals((int)3272.0,(int)indicador.getValorIndicador());
 	}
-
+	
+	@Test
 	public void indicadorDefinidoPorUsuario() throws IOException{
 		IndVisitor indicadorVisitor = new IndVisitor();
-		Map<String,List<ArmadorIndicador>> usuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+		Empresa unaEmpresa = new Empresa("America Movil");
+		List<Indicador> usuario = indicadorVisitor.obtenerIndicadoresUsuario2("output.txt");
+		
 		
 	}
 	

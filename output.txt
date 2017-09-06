@@ -1,2 +1,3 @@
 America Movil(Hola)=12+America Movil(ebitda(2006))
-
+America Movil(Chau)=America Movil(ebitda(2007))
+General Electric(jeje)=52+General Electric(ebitda(2008))
