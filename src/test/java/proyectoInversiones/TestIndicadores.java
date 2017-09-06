@@ -38,4 +38,10 @@ public class TestIndicadores {
 		Map<String,List<ArmadorIndicador>> usuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
 		
 	}
+	
+//	@Test
+//	public void indicador_de_usuario_valido() {
+//		
+//		
+//	}
 }
