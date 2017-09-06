@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -195,20 +196,25 @@ public class Ventana extends JFrame implements ActionListener {
 public void actionPerformed(ActionEvent evento) { 
 	
 
-	NuevoLeerArchivo				archivoAux		     = new NuevoLeerArchivo();
-	Object                      empresaSeleccionada      = listaEmpresas.getSelectedValue();
-	
-	ArrayList<Cuenta>           cuentasRequeridas        = archivoAux.obtenerCuentasSegunEmpresa((Empresa) empresaSeleccionada);//((Empresa) empresaSeleccionada).getCuentas();		 
+	NuevoLeerArchivo				   archivoAux		        = new NuevoLeerArchivo();
+	Object                             empresaSeleccionada      = listaEmpresas.getSelectedValue();
+	ArrayList<Cuenta>                  cuentasRequeridas        = archivoAux.obtenerCuentasSegunEmpresa((Empresa) empresaSeleccionada);//((Empresa) empresaSeleccionada).getCuentas();		 
 	ArmadorIndicador                   indicadorPredefinido     = new ArmadorIndicador();
-	IndVisitor                  indicadorVisitor         = new IndVisitor();
-	Map<String,List<ArmadorIndicador>> indicadorUsuario         = new HashMap<String,List<ArmadorIndicador>>();
+	IndVisitor                         indicadorVisitor         = new IndVisitor();
+	Map<String, List<ArmadorIndicador>> indicadorUsuario = null;
+	try {
+		indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+	} catch (IOException e2) {
+		// TODO Auto-generated catch block
+		e2.printStackTrace();
+	}
 
 	System.out.print(cuentasRequeridas.iterator());
 	
 	int filasListaCuentas, filasListaIndPredefinidos, filasListaIndUsuario;
 	filasListaCuentas = 7;
 	filasListaIndPredefinidos = 3;
-	filasListaIndUsuario = 1;
+	filasListaIndUsuario = 2;
 	
 	
 		try {
@@ -320,8 +326,8 @@ public void actionPerformed(ActionEvent evento) {
 		
 		for(int i = 0;i<cuentasRequeridas.size();i++){
 			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
-			modeloIndPredefinidos.addElement(indicadorPredefinido.ingresoNeto(((Empresa) empresaSeleccionada)).get(i));
-			modeloIndPredefinidos.addElement(indicadorPredefinido.roe(((Empresa) empresaSeleccionada)).get(i));
+			modeloIndPredefinidos.addElement(indicadorPredefinido.calcularIngresoNeto(((Empresa) empresaSeleccionada)).get(i));
+			modeloIndPredefinidos.addElement(indicadorPredefinido.calcularRoe(((Empresa) empresaSeleccionada)).get(i));
 			
 		}
 		
@@ -330,15 +336,36 @@ public void actionPerformed(ActionEvent evento) {
 		//Aniadimos los encabezados de las filas de la lista de indicadores de usuario
 
 		modeloIndUsuario.addElement("Periodo: ");
-	
+			for (Entry<String, List<ArmadorIndicador>> entry : indicadorUsuario.entrySet()) {
+				for (int i = 0; i < entry.getValue().size(); i++)
+					if(empresaSeleccionada.toString().contains(entry.getKey())){
+						
+						modeloIndUsuario.addElement(entry.getValue().get(i).getNombre().toString() + ": ");
+					}else{
+						modeloIndUsuario.addElement("N/A");
+					}
 
+					
+			}
+			for (Entry<String, List<ArmadorIndicador>> entry : indicadorUsuario.entrySet()) {
+				for (int i = 0; i < entry.getValue().size(); i++) {
+
+					modeloIndUsuario.addElement(entry.getValue().get(i).getPeriodo());
+					if (empresaSeleccionada.toString().contains(entry.getKey())) {
+
+						modeloIndUsuario.addElement(entry.getValue().get(i).getValorIndicador());
+					}
+				}
+
+			}
 		//Rellenamos la lista con los datos de los indicadores de usuario
 
-		for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
-			
-			modeloIndUsuario.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
-			
-		}
+//		for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
+//			
+//			modeloIndUsuario.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
+//			modeloIndUsuario.addElement(indicadorUsuario.get(empresaSeleccionada));
+//			
+//		}
 			
 
 		//aniadimos los elementos a los paneles
