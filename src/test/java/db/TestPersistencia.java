@@ -20,12 +20,15 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 
 
-import proyectoInversiones.repositorio.Repositorio;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
-import proyectoInversiones.indicadores.Indicador;
 import proyectoInversiones.Cuenta;
+import proyectoInversiones.Indicador;
+
+import proyectoInversiones.repositorio.Repositorio;
+
+import proyectoInversiones.indicadores.ArmadorIndicador;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -46,9 +49,21 @@ public class TestPersistencia {
 	public void persistirConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		ArrayList<Empresa> empresa = archivo.leerArchivo();
+		Empresa unaEmpresa = new Empresa("America Movil");
+		
+		Indicador indicador = new Indicador();
+		indicador.setNombre("Ingreso Neto");
+		indicador.setEmpresa(unaEmpresa);
+		indicador.setPeriodo(2006);
+		
+		ArmadorIndicador armarIndicador = new ArmadorIndicador(indicador);
+		
+		indicador.setValorIndicador(armarIndicador.obtenerValorIndicadorSegun(indicador)); 
+		//Indicador indicador = new Indicador();
 		for (int i = 0; i < empresa.size(); i++) {
 			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
-			//	empresa.get(i).getIndicadores().get(j).setEmpresa(empresa.get(i)); //Ya se que no tiene nada indicadores, pero queria ver si aunque sea tiraba null en la workbench
+				
+				empresa.get(i).addIndicador(indicador);
 				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
 				repositorio.empresasRepo().persistir(empresa.get(i)); 
 				/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 

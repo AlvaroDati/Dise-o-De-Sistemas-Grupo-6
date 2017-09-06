@@ -24,28 +24,28 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	/** "memory" for our calculator; variable/value pairs go here */
 	 
-	Map<String,List<Indicador>> memory = new HashMap<String, List<Indicador>>();
+	Map<String,List<ArmadorIndicador>> memory = new HashMap<String, List<ArmadorIndicador>>();
 	ArrayList<Float> vai = new ArrayList<Float>();
 	int periodoGlobal;
-	public Map<String, List<Indicador>> getMemory() {
+	public Map<String, List<ArmadorIndicador>> getMemory() {
 		return memory;
 	}
-	public void setMemory(Map<String, List<Indicador>> memory) {
+	public void setMemory(Map<String, List<ArmadorIndicador>> memory) {
 		this.memory = memory;
 	}
 	/**  INDICADOR '(' INDICADOR')' '=' expr NEWLINE */
 	@Override
 	public Integer visitAssign(indicadoresParser.AssignContext ctx) {
-		List<Indicador> indicadorUsuario = new ArrayList<Indicador>();
+		List<ArmadorIndicador> indicadorUsuario = new ArrayList<ArmadorIndicador>();
 		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 		ArrayList<Float> vAux = new ArrayList<Float>();
 		int resultado = 0;
 		String id = ctx.getText(); // id is left-hand side of '='
-		Indicador indicadorAux           = new Indicador();
+		ArmadorIndicador indicadorAux           = new ArmadorIndicador();
 		int periodo = 0;
 		int i = id.indexOf("(");
 		String empresa = id.substring(0, i);
-		List<Indicador> list;
+		List<ArmadorIndicador> list;
 		if(memory.containsKey(empresa)){
 			list = memory.get(empresa);
 			indicadorUsuario.addAll(list);
@@ -171,7 +171,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		int per = Integer.valueOf(periodo);
 	
 		Empresa empresaAsociada = new Empresa(empresa); 
-		Indicador indicador = new Indicador();
+		ArmadorIndicador indicador = new ArmadorIndicador();
 		String nombreCuenta = cuenta_indicador.toUpperCase();
 		switch(nombreCuenta){
 		/*
@@ -246,7 +246,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		String cuenta_indicador = resultado.substring(0, b); //COMO CUENTA TAMBIEN ME REFIERO A INDICADOR PREDEFINIDO, YA QUE LOS INDICADORES PREDEFINIDOS SE PUEDEN USAR PARA HACER OTROS INDICADORES
 		
 		Empresa empresaAsociada = new Empresa(empresa); 
-		Indicador indicador = new Indicador();
+		ArmadorIndicador indicador = new ArmadorIndicador();
 		String nombreCuenta = cuenta_indicador.toUpperCase();
 		
 		switch(nombreCuenta){
@@ -302,9 +302,9 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	
 	
 	
-	public Map<String,List<Indicador>> obtenerIndicadoresUsuario(String ruta) throws IOException{
+	public Map<String,List<ArmadorIndicador>> obtenerIndicadoresUsuario(String ruta) throws IOException{
 		
-		Map<String, List<Indicador>> usuario = new HashMap<String,List<Indicador>>();
+		Map<String, List<ArmadorIndicador>> usuario = new HashMap<String,List<ArmadorIndicador>>();
 
 		String inputFile = null; //En "Run Configurations, ponen en Java Application => Arguments => Program&Arguments => {dirDel indicadores.txt}"
 		if (ruta.length() > 0)
@@ -340,7 +340,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 
 
 		IndVisitor visitor = new IndVisitor();
-		Map<String,List<Indicador>> usuario = visitor.obtenerIndicadoresUsuario("output.txt");
+		Map<String,List<ArmadorIndicador>> usuario = visitor.obtenerIndicadoresUsuario("output.txt");
 
 		System.out.println(usuario);
 		System.out.println(usuario.size());
@@ -351,7 +351,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		usuario.forEach((x,y)->System.out.print(y.getValorCuentaIndicador()));
 	 */
 
-		 for(Entry<String, List<Indicador>> entry : usuario.entrySet()){   
+		 for(Entry<String, List<ArmadorIndicador>> entry : usuario.entrySet()){   
 			 for(int i = 0;i<entry.getValue().size();i++)
 		         System.out.println(entry.getKey() + " : " + entry.getValue().get(i).getPeriodo() +""+entry.getValue().get(i).getNombre() +" "+entry.getValue().get(i).getValorIndicador() +""+entry.getValue().get(i).getValorCuentaIndicador() );
 		    }

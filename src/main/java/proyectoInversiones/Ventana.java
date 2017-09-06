@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import org.jdesktop.xswingx.PromptSupport;
 
 import proyectoInversiones.indicadores.IndVisitor;
-import proyectoInversiones.indicadores.Indicador;
+import proyectoInversiones.indicadores.ArmadorIndicador;
 
 public class Ventana extends JFrame implements ActionListener {
 
@@ -199,9 +199,9 @@ public void actionPerformed(ActionEvent evento) {
 	Object                      empresaSeleccionada      = listaEmpresas.getSelectedValue();
 	
 	ArrayList<Cuenta>           cuentasRequeridas        = archivoAux.obtenerCuentasSegunEmpresa((Empresa) empresaSeleccionada);//((Empresa) empresaSeleccionada).getCuentas();		 
-	Indicador                   indicadorPredefinido     = new Indicador();
+	ArmadorIndicador                   indicadorPredefinido     = new ArmadorIndicador();
 	IndVisitor                  indicadorVisitor         = new IndVisitor();
-	Map<String,List<Indicador>> indicadorUsuario         = new HashMap<String,List<Indicador>>();
+	Map<String,List<ArmadorIndicador>> indicadorUsuario         = new HashMap<String,List<ArmadorIndicador>>();
 
 	System.out.print(cuentasRequeridas.iterator());
 	

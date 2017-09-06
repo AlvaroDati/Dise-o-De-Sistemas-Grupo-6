@@ -8,6 +8,7 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
-import proyectoInversiones.indicadores.Indicador;
+import proyectoInversiones.indicadores.ArmadorIndicador;
 
 @Entity
 @Table (name = "empresas")
@@ -30,7 +31,7 @@ public class Empresa extends AlgoPersistible {
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
-	/*  @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Indicador> indicadores;
 	
 	public List<Indicador> getIndicadores() {
@@ -40,9 +41,10 @@ public class Empresa extends AlgoPersistible {
 		this.indicadores = indicadores;
 	}
 	public void addIndicador(Indicador indicador){
-		if(!this.getIndicadores().contains(indicador))
-			indicadores.add(indicador);
-	}*/
+		if(indicadores == null) indicadores = new ArrayList<Indicador>();
+		
+		if(!this.getIndicadores().contains(indicador))indicadores.add(indicador);
+	}
 	
 	public Empresa(){
 		periodos = new ArrayList<Periodo>();
