@@ -1,20 +1,25 @@
 package proyectoInversiones;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "cuenta") 
+//@NamedQuery(name = "buscarCuentaPorNombreYEmpresa", query = "SELECT cuenta FROM Cuenta cuenta WHERE cuenta.nombre LIKE :filtro")
 public class Cuenta extends AlgoPersistible{
 	
-	@OneToOne(mappedBy = "cuentas")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "periodo_id", referencedColumnName = "id")
 	private Periodo periodoVinculado;
 	
 	@Column(name = "ebitda")

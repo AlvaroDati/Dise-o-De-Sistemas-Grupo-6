@@ -105,13 +105,23 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	
 	
 	@Test
-	public void buscarEmpresaNombre(){
+	public void buscarEmpresaPorNombre(){
+		
+		Empresa empresa = new Empresa("America Movil");
+		Empresa empresa2 = new Empresa("Amerga");
+		Empresa otraEmpresa = new Empresa("Alva Putin");
+		repositorio.empresasRepo().persistir(empresa);
+		repositorio.empresasRepo().persistir(empresa2);
+		repositorio.empresasRepo().persistir(otraEmpresa);
+		
+		
 		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Amer");
 		for(Empresa unaEmpresa : empresasFiltradas){
 			System.out.println(unaEmpresa.getNombre());
-		
 		}
-		Assert.assertFalse(empresasFiltradas.isEmpty());
+		
+		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
+		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
 	}
 	
 	/*

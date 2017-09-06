@@ -263,7 +263,7 @@ public void actionPerformed(ActionEvent evento) {
 		scrollListaCuentas.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollListaCuentas.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollListaCuentas.setViewportView(listaCuentas);
-		scrollListaCuentas.setPreferredSize(new Dimension(ancho/3-150,150));
+		scrollListaCuentas.setPreferredSize(new Dimension(ancho/3-100,150));
 		
 		//Generamos el scrollbar para la lista de indicadores predefinidos*
 		
@@ -271,7 +271,7 @@ public void actionPerformed(ActionEvent evento) {
 		scrollListaIndPredefinidos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollListaIndPredefinidos.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollListaIndPredefinidos.setViewportView(listaIndPredefinidos);
-		scrollListaIndPredefinidos.setPreferredSize(new Dimension(ancho/3-150,150));
+		scrollListaIndPredefinidos.setPreferredSize(new Dimension(ancho/3-100,150));
 		
 		//Generamos el scrollbar para la lista de indicadores de usuario
 		
@@ -279,7 +279,7 @@ public void actionPerformed(ActionEvent evento) {
 		scrollListaIndUsuario.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollListaIndUsuario.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollListaIndUsuario.setViewportView(listaIndUsuario);
-		scrollListaIndUsuario.setPreferredSize(new Dimension(ancho/3-150,150));
+		scrollListaIndUsuario.setPreferredSize(new Dimension(ancho/3-100,150));
 		
 		
 		//Aniadimos los encabezados de las filas de la lista de cuentas

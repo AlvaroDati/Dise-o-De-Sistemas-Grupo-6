@@ -26,9 +26,6 @@ public class Indicador extends AlgoPersistible{
 	}
 	
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
-//	private Cuenta cuentas;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
 	private Empresa empresa;
@@ -38,12 +35,6 @@ public class Indicador extends AlgoPersistible{
 	private int periodo;
 	
 	
-/*	public Cuenta getCuentas() {
-		return cuentas;
-	}
-	public void setCuentas(Cuenta cuentas) {
-		this.cuentas = cuentas;
-	}*/
 	public Empresa getEmpresa() {
 		return empresa;
 	}

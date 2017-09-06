@@ -3,6 +3,7 @@ package proyectoInversiones.repositorio;
 import javax.persistence.EntityManager;
 import java.util.List;
 import proyectoInversiones.Empresa;
+import proyectoInversiones.Cuenta;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 
 
@@ -42,6 +43,16 @@ public class  Empresas extends Repositorio {
 		listaEmpresasFiltradas = emanager.createNamedQuery("buscarEmpresaPorNombre").setParameter("filtro", "%" + nombre + "%").getResultList();
 		return listaEmpresasFiltradas;
 	}
+	
+/*	public List <Cuenta> buscarCuentaPorNombreYEmpresa(Cuenta cuentaBuscada, Empresa empresa){
+		
+		String nombreCuenta = cuentaBuscada.getNombre();
+		List<Cuenta> listaCuentasFiltradas = null;
+		
+		listaCuentasFiltradas = emanager.createNamedQuery("buscarCuentaPorNombreYEmpresa").setParameter("filtro", "%" + nombreCuenta + "%").getResultList();
+		
+		return listaCuentasFiltradas;
+	} */
 	
 }
 
