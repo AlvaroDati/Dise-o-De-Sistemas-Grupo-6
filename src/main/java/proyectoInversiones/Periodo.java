@@ -4,6 +4,7 @@ import java.util.*;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Periodo implements Serializable{
 	protected Long id;
     @Column(name = "anio")
 	protected int anio;  
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "periodoVinculado" , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
     private Cuenta cuentas;
 	@ManyToOne(cascade = CascadeType.ALL)
