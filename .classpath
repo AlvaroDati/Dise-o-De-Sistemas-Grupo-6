@@ -86,7 +86,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-validator/4.3.0.Final/hibernate-validator-4.3.0.Final.jar"/>
 	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.26/mysql-connector-java-5.1.26.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hsqldb/hsqldb/2.2.8/hsqldb-2.2.8.jar"/>
-	<classpathentry kind="lib" path="G:/DdS/antlr-4.7-complete.jar"/>
-	<classpathentry kind="lib" path="G:/DdS/prompt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tomas/Downloads/antlr-4.7-complete.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tomas/Downloads/prompt.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
