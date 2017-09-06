@@ -33,14 +33,37 @@ public class TestIndicadores {
 		assertEquals((int)3272.0,(int)indicador.getValorIndicador());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void indicadorDefinidoPorUsuario() throws IOException{
 		IndVisitor indicadorVisitor = new IndVisitor();
 		Empresa unaEmpresa = new Empresa("America Movil");
-		List<Indicador> usuario = indicadorVisitor.obtenerIndicadoresUsuario2("output.txt");
+		List<Indicador> usuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+		Indicador nuevoIndicador = new Indicador();
+		String nombreIndicador = "Testetetete";
+		Indicador otroIndicador = new Indicador();
+		
+		nuevoIndicador.setNombre(nombreIndicador);
+		nuevoIndicador.setValorIndicador(44603);
+		nuevoIndicador.setEmpresa(unaEmpresa);
+		nuevoIndicador.setPeriodo(2006);
 		
 		
-	}
+		for(int i = 0;i<usuario.size();i++){
+			if(usuario.get(i).getNombre().equals(nuevoIndicador.getNombre())){
+				otroIndicador.setEmpresa(usuario.get(i).getEmpresa());
+				otroIndicador.setNombre(usuario.get(i).getNombre());
+				otroIndicador.setValorIndicador(usuario.get(i).getValorIndicador());
+				otroIndicador.setPeriodo(usuario.get(i).getPeriodo());				
+			}
+		}
+		
+		assertEquals(nuevoIndicador.getEmpresa(),otroIndicador.getEmpresa());
+		assertEquals(nuevoIndicador.getNombre(),otroIndicador.getNombre());
+		assertEquals((int)nuevoIndicador.getValorIndicador(),(int)otroIndicador.getValorIndicador());
+		assertEquals(nuevoIndicador.getPeriodo(),otroIndicador.getPeriodo());
+		
+}
 	
 //	@Test
 //	public void indicador_de_usuario_valido() {

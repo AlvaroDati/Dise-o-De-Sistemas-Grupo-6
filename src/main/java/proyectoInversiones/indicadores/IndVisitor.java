@@ -25,7 +25,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	/** "memory" for our calculator; variable/value pairs go here */
 	 
-	Map<String,List<ArmadorIndicador>> memory = new HashMap<String, List<ArmadorIndicador>>();
 	List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
 	public List<Indicador> getListaDeIndicador() {
 		return listaDeIndicador;
@@ -36,48 +35,29 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 
 	ArrayList<Float> vai = new ArrayList<Float>();
 	int periodoGlobal;
-	public Map<String, List<ArmadorIndicador>> getMemory() {
-		return memory;
-	}
-	public void setMemory(Map<String, List<ArmadorIndicador>> memory) {
-		this.memory = memory;
-	}
 	/**  INDICADOR '(' INDICADOR')' '=' expr NEWLINE */
 	@Override
+	
 	public Integer visitAssign(indicadoresParser.AssignContext ctx) {
+		
 		List<ArmadorIndicador> indicadorUsuario = new ArrayList<ArmadorIndicador>();
 		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 		ArrayList<Float> vAux = new ArrayList<Float>();
 		Indicador indicadorAux           = new Indicador();
 
 		int resultado = 0;
+		
 		String id = ctx.getText(); // id is left-hand side of '='
+		
 		int periodo = 0;
+		
 		int i = id.indexOf("(");
 		String empresa = id.substring(0, i);
 		Empresa unaEmpresa = new Empresa(empresa);
-		List<ArmadorIndicador> list;
+		
+		
 		List<Indicador> listaUsuario = new ArrayList<Indicador>();
 		
-		
-		if(memory.containsKey(empresa)){
-			list = memory.get(empresa);
-			indicadorUsuario.addAll(list);
-		}
-		
-//		if(!listaDeIndicador.isEmpty()){	
-//			System.out.printf("Size de listaDeIndicador:%d", listaDeIndicador.size());
-//			for(int contador = 0;contador<this.getListaDeIndicador().size();contador++){
-//				if(listaDeIndicador.get(contador).getEmpresa().getNombre().contains(empresa)){
-//					listaUsuario = listaDeIndicador;
-//					System.out.print(listaDeIndicador);
-//				}
-//				
-//			}
-//			
-//		}else{
-//			System.out.println("La lista listaDeIndicador esta vacia");
-//		}
 		String restante = id.substring(i+1);
 		int b = restante.indexOf(")");
 		String cuenta_indicador = restante.substring(0, b); 
@@ -87,54 +67,19 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		indicadorAux.setValorIndicador(value);
 		resultado = value;
 		
-		if(!vai.isEmpty()){
-			valor_cuenta_indicador = vai;
-			vAux = valor_cuenta_indicador;
-			float valorAux = 0;
-			/*for(int j = 0;j<vai.size();j++){
-				valorAux = valor_cuenta_indicador.get(i);
-				valorAux += resultado;
-				valor_cuenta_indicador.clear();
-				valor_cuenta_indicador.add(i,valorAux);
-				//valor_cuenta_indicador.replaceAll(valorAux);
-			}*/
-			int j = 0;
-			for(Float head:valor_cuenta_indicador){
-				head += resultado;
-				valor_cuenta_indicador.set(j,head);
-				j++;
-			}
-//			indicadorAux.setValorCuentaIndicador(valor_cuenta_indicador);
-			j=0;
-		}
 		
 		periodo = periodoGlobal;
 		indicadorAux.setPeriodo(periodo);
 		indicadorAux.setEmpresa(unaEmpresa);
 		//indicadorUsuario.add(indicadorAux);
 		
-		System.out.printf("Size de la lista %d\n", indicadorUsuario.size());
-		
-		System.out.printf("Resultado %d \n",resultado);
-		resultado = 0;
-		
-		System.out.printf("Resultado %d \n",resultado);
-		memory.put(empresa, indicadorUsuario);
+		resultado = 0;		
 		
 		listaUsuario.add(indicadorAux);
 		
 		listaDeIndicador.addAll(listaUsuario);
-		System.out.println(listaUsuario);
-		for(int a = 0;a<listaUsuario.size();a++){
-			System.out.println(listaUsuario.get(a).getNombre());
-			System.out.println(listaUsuario.get(a).getValorIndicador());
-			System.out.println(listaUsuario.get(a).getEmpresa().getNombre());
-		}
-		
-		//memory.put(id, value); // store it in our memory
-		System.out.printf("Value %d \n",value);
+		//System.out.println(listaUsuario);
 	
-		periodoGlobal = 0;
 		return value;
 	}
 	/** expr NEWLINE */
@@ -346,52 +291,21 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	
 	
 	
-	public Map<String,List<ArmadorIndicador>> obtenerIndicadoresUsuario(String ruta) throws IOException{
-		
-		Map<String, List<ArmadorIndicador>> usuario = new HashMap<String,List<ArmadorIndicador>>();
-		List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
-		
-		String inputFile = null; //En "Run Configurations, ponen en Java Application => Arguments => Program&Arguments => {dirDel indicadores.txt}"
-		if (ruta.length() > 0)
-			inputFile = ruta;
-
-		InputStream is = System.in;
-		if (inputFile != null)is = new FileInputStream(inputFile);
-
-		@SuppressWarnings("deprecation")
-		ANTLRInputStream input = new ANTLRInputStream(is);
-
-		indicadoresLexer lexer = new indicadoresLexer(input);
-
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-		indicadoresParser parser = new indicadoresParser(tokens);
-
-		ParseTree tree = parser.prog(); // parse
-
-		IndVisitor eval = new IndVisitor();
-
-		eval.visit(tree);
-
-		usuario = eval.getMemory();
-      
-		listaDeIndicador = eval.getListaDeIndicador();
-		
-		
-		return usuario;
-	}
 	
-public List<Indicador> obtenerIndicadoresUsuario2(String ruta) throws IOException{
-		
-		Map<String, List<ArmadorIndicador>> usuario = new HashMap<String,List<ArmadorIndicador>>();
+	public List<Indicador> obtenerIndicadoresUsuario(String ruta) throws IOException {
+
 		List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
-		
-		String inputFile = null; //En "Run Configurations, ponen en Java Application => Arguments => Program&Arguments => {dirDel indicadores.txt}"
+
+		String inputFile = null; // En "Run Configurations, ponen en Java
+									// Application => Arguments =>
+									// Program&Arguments => {dirDel
+									// indicadores.txt}"
 		if (ruta.length() > 0)
 			inputFile = ruta;
 
 		InputStream is = System.in;
-		if (inputFile != null)is = new FileInputStream(inputFile);
+		if (inputFile != null)
+			is = new FileInputStream(inputFile);
 
 		@SuppressWarnings("deprecation")
 		ANTLRInputStream input = new ANTLRInputStream(is);
@@ -408,11 +322,8 @@ public List<Indicador> obtenerIndicadoresUsuario2(String ruta) throws IOExceptio
 
 		eval.visit(tree);
 
-		usuario = eval.getMemory();
-      
 		listaDeIndicador = eval.getListaDeIndicador();
-		
-		
+
 		return listaDeIndicador;
 	}
 	
@@ -421,12 +332,10 @@ public List<Indicador> obtenerIndicadoresUsuario2(String ruta) throws IOExceptio
 
 
 		IndVisitor visitor = new IndVisitor();
-		Map<String,List<ArmadorIndicador>> usuario = visitor.obtenerIndicadoresUsuario("output.txt");
-		List<Indicador> listaDeIndicador = visitor.obtenerIndicadoresUsuario2("output.txt");
+		
+		List<Indicador> listaDeIndicador = visitor.obtenerIndicadoresUsuario("output.txt");
 		
 		
-		System.out.print(usuario);
-		System.out.printf("\nUsuario.size(): %d\n",usuario.size());
 		System.out.print(listaDeIndicador);
 		System.out.printf("\nListaDeIndicador.size(): %d\n",listaDeIndicador.size());
 		
@@ -436,10 +345,6 @@ public List<Indicador> obtenerIndicadoresUsuario2(String ruta) throws IOExceptio
 		usuario.forEach((x,y)->System.out.print(y.getValorCuentaIndicador()));
 	 */
 
-		 for(Entry<String, List<ArmadorIndicador>> entry : usuario.entrySet()){   
-			 for(int i = 0;i<entry.getValue().size();i++)
-		         System.out.println(entry.getKey() + " : " + entry.getValue().get(i).getPeriodo() +""+entry.getValue().get(i).getNombre() +" "+entry.getValue().get(i).getValorIndicador() +""+entry.getValue().get(i).getValorCuentaIndicador() );
-		    }
 		
 		 for(int i = 0;i<listaDeIndicador.size();i++){
 			 System.out.println(listaDeIndicador.get(i).getEmpresa().getNombre());
