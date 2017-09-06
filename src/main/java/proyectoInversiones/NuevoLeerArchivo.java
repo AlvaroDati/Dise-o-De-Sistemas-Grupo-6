@@ -56,6 +56,7 @@ public class NuevoLeerArchivo {
 			}
 		}
 		return false;
+		
 	}
 
 	
@@ -70,11 +71,11 @@ public class NuevoLeerArchivo {
 //			for (Empresa head : empresaAsociada) {
 //				periodos = head.getPeriodos();
 //			}
-
+//
 //		}
-		// for (int i = 0; i < periodos.size(); i++) {
-		// periodosAux.add(periodos.get(i).getAnio());
-		// }
+//		 for (int i = 0; i < periodos.size(); i++) {
+//		 periodosAux.add(periodos.get(i).getAnio());
+//		 }
 
 		for (Periodo head : periodos) {
 			periodosAux.add(head.getAnio());
@@ -86,12 +87,13 @@ public class NuevoLeerArchivo {
 	public List<Periodo> getPeriodos(Empresa empresa) {
 		List<Periodo> periodos = new ArrayList<Periodo>();
 		String empresaAsoc = empresa.getNombre();
-		if (validarEmpresa(empresaAsoc)) {
-			for (Empresa head : empresaAsociada) {
-				periodos =  head.getPeriodos();
+		
+
+		for(int i = 0;i<empresaAsociada.size();i++){
+			if(empresaAsociada.get(i).getNombre().equals(empresa.getNombre())){
+				periodos = empresaAsociada.get(i).getPeriodos();
 			}
 		}
-
 		return periodos;
 	}
 
@@ -188,14 +190,7 @@ public class NuevoLeerArchivo {
 		System.out.print(arch.obtenerCuentaSegunPeriodo(empresaAsoc, "EBITDA", 2006));
 
 		
-		Empresa unaEmpresa = new Empresa("America Movil");
-		Repositorio repositorio = null;
-		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-		ArrayList<Empresa> empresa = archivo.leerArchivo();
-		for(int i = 0;i<empresa.size();i++){
-			empresa.get(i).getPeriodos().get(i).setEmpresa(empresa.get(i));
-			repositorio.empresasRepo().persistir(empresa.get(i));
-		}
+		
 
 	}
 	/*

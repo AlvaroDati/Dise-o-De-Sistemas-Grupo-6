@@ -58,7 +58,7 @@ public class TestPersistencia {
 		
 		ArmadorIndicador armarIndicador = new ArmadorIndicador(indicador);
 		
-		indicador.setValorIndicador(armarIndicador.obtenerValorIndicadorSegun(indicador)); 
+		indicador.setValorIndicador(armarIndicador.obtenerValorIndicador(indicador)); 
 		//Indicador indicador = new Indicador();
 		for (int i = 0; i < empresa.size(); i++) {
 			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
