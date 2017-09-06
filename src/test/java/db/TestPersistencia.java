@@ -49,9 +49,6 @@ public class TestPersistencia {
 	public void persistirConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		ArrayList<Empresa> empresas = archivo.leerArchivo();
-//	    Empresa unaEmpresa = new Empresa("America Movil");
-		
-	
 		ArmadorIndicador armarIndicador = new ArmadorIndicador();
 //		ArrayList<Float> ingresoNeto = new ArrayList<Float>();
 
