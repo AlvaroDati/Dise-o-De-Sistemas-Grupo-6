@@ -65,7 +65,7 @@ public class TestPersistencia {
 								
 				empresas.get(i).addIndicador(indicador);
 				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
-				
+				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
 				repositorio.empresasRepo().persistir(empresas.get(i)); 
 			}
 			
