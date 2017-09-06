@@ -53,16 +53,19 @@ public class TestPersistencia {
 		
 		Indicador indicador = new Indicador();
 		indicador.setNombre("Ingreso Neto");
-		indicador.setEmpresa(unaEmpresa);
-		indicador.setPeriodo(2006);
+//		indicador.setEmpresa(unaEmpresa);
+//		indicador.setPeriodo(2006);
 		
-		ArmadorIndicador armarIndicador = new ArmadorIndicador(indicador);
-		
-		indicador.setValorIndicador(armarIndicador.obtenerValorIndicador(indicador)); 
+		ArmadorIndicador armarIndicador = new ArmadorIndicador();
+		ArrayList<Float> ingresoNeto = new ArrayList<Float>();
+		//indicador.setValorIndicador(armarIndicador.obtenerValorIndicador(indicador)); 
 		//Indicador indicador = new Indicador();
 		for (int i = 0; i < empresa.size(); i++) {
 			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
 				
+				indicador.setEmpresa(empresa.get(i));
+				indicador.setPeriodo(empresa.get(i).getPeriodos().get(j).getAnio());
+				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresa.get(i)).get(j));
 				empresa.get(i).addIndicador(indicador);
 				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
 				repositorio.empresasRepo().persistir(empresa.get(i)); 
