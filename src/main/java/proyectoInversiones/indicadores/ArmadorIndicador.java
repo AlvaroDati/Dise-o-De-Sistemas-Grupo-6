@@ -147,11 +147,28 @@ public class ArmadorIndicador {
 	 * METODOS DE ArmarIndicadores
 	 * 
 	 * */
-	public List<Integer> periodos(Empresa empresa){
+	public List<Integer> periodos(Empresa empresa) {
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
-	
-	public float obtenerValorIndicadorSegun(Indicador indicador){
+
+	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo) {
+		float ingNetoAux = 0;
+		ArrayList<Float> ingNeto = this.calcularIngresoNeto(empresa);
+		List<Integer> periodosDeEmpresa = this.periodos(empresa);
+
+		for (int i = 0; i < ingNeto.size(); i++) {
+			if (periodosDeEmpresa.get(i).equals(periodo))
+				ingNetoAux = ingNeto.get(i);
+		}
+		return ingNetoAux;
+	}
+
+	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo) {
+		float roeAux = 0;
+		return roeAux;
+	}
+
+	public float obtenerValorIndicador(Indicador indicador) {
 		float indicadorDeseado = 0;
 		Empresa empresa = indicador.getEmpresa();
 		List<Integer> periodosDeEmpresa = this.periodos(empresa);
@@ -159,9 +176,13 @@ public class ArmadorIndicador {
 			if(periodosDeEmpresa.get(i).equals(indicador.getPeriodo())){				
 				switch(indicador.getNombre()){
 				case("Ingreso Neto"):
-					indicadorDeseado = this.ingresoNeto(empresa).get(i);
+					indicadorDeseado = this.calcularIngresoNeto(empresa).get(i);
+					break;
 				case("ROE"):
-					indicadorDeseado = this.roe(empresa).get(i);
+					indicadorDeseado = this.calcularRoe(empresa).get(i);
+					break;
+				default:
+					break;
 				}
 			}
 			
@@ -169,22 +190,9 @@ public class ArmadorIndicador {
 		return indicadorDeseado;
 	}
 	
-	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo){
-		float ingNetoAux = 0;
-		ArrayList<Float> ingNeto = this.ingresoNeto(empresa);
-		List<Integer> periodosDeEmpresa = this.periodos(empresa);
-		
-		for(int i = 0; i<ingNeto.size();i++){
-			if(periodosDeEmpresa.get(i).equals(periodo)) ingNetoAux = ingNeto.get(i);
-		}
-		return ingNetoAux;
-	}
-	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo){
-		float roeAux = 0;
-		return roeAux;
-	}
+
 	
-	public ArrayList<Float> ingresoNeto(Empresa empresa) {
+	public ArrayList<Float> calcularIngresoNeto(Empresa empresa) {
 		ArrayList<Float> ingNeto = new ArrayList<Float>();
 		ArrayList<Float> ingNetoOpCont = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
 		ArrayList<Float> ingNetoOpDis = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
@@ -196,9 +204,10 @@ public class ArmadorIndicador {
 		this.setCantidadDeIndicadoresPredefinidos(this.getCantidadDeIndicadoresPredefinidos() + 1);
 		return ingNeto;
 	}
-	public ArrayList<Float> roe(Empresa empresa){
+	
+	public ArrayList<Float> calcularRoe(Empresa empresa){
 		ArrayList<Float> roe     = new ArrayList<Float>();		
-		ArrayList<Float> ingNeto = this.ingresoNeto(empresa);
+		ArrayList<Float> ingNeto = this.calcularIngresoNeto(empresa);
 	
 		ArrayList<Float> capitalTotal       = archivoEmpresas.sumaDeCuentasDe(empresa);
 		
@@ -219,9 +228,9 @@ public class ArmadorIndicador {
 		switch(indicador.toString()){
 		
 		case("Ingreso Neto"):
-			this.ingresoNeto(empresa);
+			this.calcularIngresoNeto(empresa);
 		case("ROE"):
-			this.roe(empresa);
+			this.calcularRoe(empresa);
 		}
 		return indicadorPredefinido;
 	}
@@ -235,6 +244,6 @@ public class ArmadorIndicador {
 		indicador.setEmpresa(unaEmpresa);
 		indicador.setPeriodo(2006);
 		ArmadorIndicador indicadorA = new ArmadorIndicador(indicador);
-		System.out.println(indicadorA.obtenerValorIndicadorSegun(indicador));
+		System.out.println(indicadorA.obtenerValorIndicador(indicador));
 	}
 }
