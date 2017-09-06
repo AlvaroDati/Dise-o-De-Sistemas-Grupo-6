@@ -25,13 +25,9 @@ public class Indicador extends AlgoPersistible{
 		if(empresa == null) empresa = new Empresa(empresa.getNombre()); 
 	}
 	
-	
-	
-	
-	
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
 	private Cuenta cuentas;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")

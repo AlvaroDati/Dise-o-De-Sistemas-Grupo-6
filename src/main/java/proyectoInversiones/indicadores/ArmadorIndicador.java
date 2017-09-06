@@ -196,8 +196,7 @@ public class ArmadorIndicador {
 		ArrayList<Float> ingNeto = new ArrayList<Float>();
 		ArrayList<Float> ingNetoOpCont = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
 		ArrayList<Float> ingNetoOpDis = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
-		// Segun PDF de ENTREGA1 => IngresoNeto = IngresoNetoContinuo +
-		// IngresoNetoDiscontinuo
+		// Segun PDF de ENTREGA1 => IngresoNeto = IngresoNetoContinuo + IngresoNetoDiscontinuo
 		for (int i = 0; i < ingNetoOpCont.size() && i < ingNetoOpDis.size(); i++) {
 			ingNeto.add(ingNetoOpCont.get(i) + ingNetoOpDis.get(i));
 		}

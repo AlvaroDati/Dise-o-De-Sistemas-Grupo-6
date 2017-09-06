@@ -13,9 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cuenta") 
 public class Cuenta extends AlgoPersistible{
+	
 	@OneToOne(mappedBy = "cuentas")
 	private Periodo periodoVinculado;
-	
 	
 	@Column(name = "ebitda")
 	private float ebitda;

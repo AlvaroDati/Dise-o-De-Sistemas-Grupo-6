@@ -48,39 +48,64 @@ public class TestPersistencia {
 	@Test
 	public void persistirConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-		ArrayList<Empresa> empresa = archivo.leerArchivo();
-		Empresa unaEmpresa = new Empresa("America Movil");
+		ArrayList<Empresa> empresas = archivo.leerArchivo();
+//	    Empresa unaEmpresa = new Empresa("America Movil");
 		
-		Indicador indicador = new Indicador();
-		indicador.setNombre("Ingreso Neto");
-//		indicador.setEmpresa(unaEmpresa);
-//		indicador.setPeriodo(2006);
-		
+	
 		ArmadorIndicador armarIndicador = new ArmadorIndicador();
-		ArrayList<Float> ingresoNeto = new ArrayList<Float>();
-		//indicador.setValorIndicador(armarIndicador.obtenerValorIndicador(indicador)); 
-		//Indicador indicador = new Indicador();
-		for (int i = 0; i < empresa.size(); i++) {
-			for (int j = 0; j < empresa.get(i).getPeriodos().size(); j++) {
+//		ArrayList<Float> ingresoNeto = new ArrayList<Float>();
+
+		for (int i = 0; i < empresas.size(); i++) {
+	
+			for (int j = 0; j < empresas.get(i).getPeriodos().size(); j++) {
 				
-				indicador.setEmpresa(empresa.get(i));
-				indicador.setPeriodo(empresa.get(i).getPeriodos().get(j).getAnio());
-				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresa.get(i)).get(j));
-				empresa.get(i).addIndicador(indicador);
-				empresa.get(i).getPeriodos().get(j).setEmpresa(empresa.get(i));
-				repositorio.empresasRepo().persistir(empresa.get(i)); 
-				/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
-				Ya que al no estar en json, siempre van a tiran el mismo error 
+				Indicador indicador = new Indicador();
+
+				indicador.setNombre("Ingreso Neto");
+				indicador.setEmpresa(empresas.get(i));
+				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
+				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresas.get(i)).get(j));
+								
+				empresas.get(i).addIndicador(indicador);
+				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
+				
+				repositorio.empresasRepo().persistir(empresas.get(i)); 
+			}
 			
-			Caused by: org.hibernate.MappingException: Could not determine type for: proyectoInversiones.NuevoLeerArchivo, at table: Indicador, for columns: [org.hibernate.mapping.Column(archivoEmpresas)]
-				Esto lo tira, porque en el json, no hay un campo Indicador/Metodologia 
-				Capaz si hacemos un persistir(Indicador/Metodologia) indicando la empresa a la que esta relacionada
-				Va a ser mas llevadero esto, y se pueden hacer mejores tests
-				 	*/
+		}
+		
+		for (int i = 0; i < empresas.size(); i++) {
+			
+			for (int j = 0; j < empresas.get(i).getPeriodos().size(); j++) {
+				
+				Indicador indicador = new Indicador();
+
+				indicador.setNombre("ROE");
+				indicador.setEmpresa(empresas.get(i));
+				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
+				indicador.setValorIndicador(armarIndicador.calcularRoe(empresas.get(i)).get(j));
+								
+				empresas.get(i).addIndicador(indicador);
+				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
+				
+				repositorio.empresasRepo().persistir(empresas.get(i)); 
 			}
 			
 		}
 	}
+	
+
+	
+	/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
+	Ya que al no estar en json, siempre van a tiran el mismo error 
+
+Caused by: org.hibernate.MappingException: Could not determine type for: proyectoInversiones.NuevoLeerArchivo, at table: Indicador, for columns: [org.hibernate.mapping.Column(archivoEmpresas)]
+	Esto lo tira, porque en el json, no hay un campo Indicador/Metodologia 
+	Capaz si hacemos un persistir(Indicador/Metodologia) indicando la empresa a la que esta relacionada
+	Va a ser mas llevadero esto, y se pueden hacer mejores tests
+	 	*/
+	
+	
 	
 	@Test
 	public void buscarEmpresaNombre(){
