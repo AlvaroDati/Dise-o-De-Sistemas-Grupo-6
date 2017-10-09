@@ -44,7 +44,7 @@ public class TestPersistencia {
 		repositorio = new Repositorio(emFactory.createEntityManager());
 	}
 	
-	
+/*	
 	@Test
 	public void persistirConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
@@ -90,7 +90,7 @@ public class TestPersistencia {
 			
 		}
 	}
-	
+	*/
 
 	
 	/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
@@ -124,7 +124,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
 	}
 	
-	/*
+	
 	@Test
 	public void  persistirEmpresaConPeriodos() {
 		Periodo unPeriodo = new Periodo(2014);
@@ -132,15 +132,15 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 		Periodo p3 = new Periodo(2000);
 		Empresa unaEmpresa = new Empresa();
 		unaEmpresa.setNombre("IBM");
-		unPeriodo.setEmpresa(unaEmpresa);
-		otroPeriodo.setEmpresa(unaEmpresa);
-		p3.setEmpresa(unaEmpresa);
+	//	unPeriodo.setEmpresa(unaEmpresa);
+	//	otroPeriodo.setEmpresa(unaEmpresa);
+	//	p3.setEmpresa(unaEmpresa);
 		unaEmpresa.addPeriodo(unPeriodo);
 		unaEmpresa.addPeriodo(otroPeriodo);
 		unaEmpresa.addPeriodo(p3);
 	    repositorio.empresasRepo().persistir(unaEmpresa);
 		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-	}*/
+	}
 	
 	
 /*	@Test
