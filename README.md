@@ -24,6 +24,12 @@
         
     Le damos a `Apply` y ¡Listo!  
     
- 
+## Spring
+1. Cambiar los directorios de antlr y prompt en el Build Path
+2. Ir a cmd y ejecutar los siguientes comandos:  
+  2.2. mvn eclipse:eclipse  
+  2.3. mvn dependency:tree  
+  2.4. mvn spring-boot:run  
+3. Ir al browser que más le guste (si usan chrome son unos logis), y poner `localhost:8080` (por default spring te crea el host en el puerto 8080, se puede cambiar)
   
   
