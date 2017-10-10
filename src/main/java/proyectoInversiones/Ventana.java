@@ -413,9 +413,11 @@ public int GetAncho(){
 
 public int GetAlto(){
 	return alto;
-}
 	
+}}
 	
+
+/*
 public static void main(String[] args){
 		
 	Ventana ventana = new Ventana("Donde Invierto?");
@@ -427,4 +429,4 @@ public static void main(String[] args){
 	ventana.setBounds(0,0,ventana.GetAncho(),ventana.GetAlto()-50);
 					
 	}		
-}
+}*/

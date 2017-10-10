@@ -172,7 +172,7 @@ public class NuevoLeerArchivo {
 		}
 		return sumaDeCuentas;
 	}
-
+/*
 	public static void main(String args[]) {
 
 	    Empresa empresaAsoc = new Empresa("America Movil");
@@ -192,7 +192,7 @@ public class NuevoLeerArchivo {
 		
 		
 
-	}
+	}*/
 	/*
 	 * SI QUIEREN UN PERIODO O UN DATO EN ESPECIFICO, SE HACE UN for(int i =
 	 * 0;i<cuentita.size();i++)

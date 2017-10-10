@@ -326,7 +326,8 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 
 		return listaDeIndicador;
 	}
-	
+
+/*	
 	public static void main (String args[]) throws IOException{
 	  	
 
@@ -339,11 +340,11 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		System.out.print(listaDeIndicador);
 		System.out.printf("\nListaDeIndicador.size(): %d\n",listaDeIndicador.size());
 		
-	/*
-	 * 	usuario.forEach((x,y)->System.out.print(y.getNombre()));
+	
+	  	usuario.forEach((x,y)->System.out.print(y.getNombre()));
 		usuario.forEach((x,y)->System.out.print(y.getValorIndicador()));
 		usuario.forEach((x,y)->System.out.print(y.getValorCuentaIndicador()));
-	 */
+	 
 
 		
 		 for(int i = 0;i<listaDeIndicador.size();i++){
@@ -355,7 +356,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		 
 		 
 		 
-	}
+	}*/
 
 }
 	/*

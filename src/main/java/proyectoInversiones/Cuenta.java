@@ -85,7 +85,8 @@ public class Cuenta extends AlgoPersistible{
 		capitalTotal = this.getEbitda() + this.getfCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont() - this.getDeuda();
 		return capitalTotal;
 	}
-	
+}
+	/*
 	public static void main(String args[]){
 	}
- }
+ */
