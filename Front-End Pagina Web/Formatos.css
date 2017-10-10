@@ -1,0 +1,29 @@
+body{
+	text-align: center;
+	background-color: #F5FFFA;
+	color:#FFF;
+}
+
+strong{
+	font-weight: 500;
+}
+
+h1{
+	margin-top: 10px;
+	font-size: 38px;
+	font-weight: 100;
+	line-height: 50px;
+}
+
+.btn{
+	font-size: 22px;
+}
+
+.contenedorFormulario{
+	margin-top: 200px;
+	width: 500px;
+}
+
+.contenedorTextoFormulario{
+	margin-bottom: 60px;
+}
