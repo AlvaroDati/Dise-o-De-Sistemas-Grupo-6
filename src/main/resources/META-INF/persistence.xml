@@ -8,11 +8,17 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<class>proyectoInversiones.Empresa</class>
+		<class>proyectoInversiones.Periodo</class>
+		<class>proyectoInversiones.AlgoPersistible</class>
+		<class>proyectoInversiones.Cuenta</class>
+
+	<!--  
+		<class>proyectoInversiones.Empresa</class>
 		<class>pryoectoInversiones.Periodo</class>
 		<class>pryoectoInversiones.AlgoPersistible</class>
 		<class>proyectoInversiones.Cuenta</class>
-	    <class>proyectoInversiones.indicadores.Indicadores</class>
-
+	<class>proyectoInversiones.indicadores.Indicadores</class>
+	-->	
 <!--   
 		<class>proyectoInversiones.metodologias.Metodologia</class>     
 		-->

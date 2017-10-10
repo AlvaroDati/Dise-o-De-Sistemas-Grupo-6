@@ -172,27 +172,7 @@ public class NuevoLeerArchivo {
 		}
 		return sumaDeCuentas;
 	}
-/*
-	public static void main(String args[]) {
 
-	    Empresa empresaAsoc = new Empresa("America Movil");
-		NuevoLeerArchivo arch = new NuevoLeerArchivo();
-
-		System.out.printf("PERIODOS: ");
-		System.out.printf("\nNombre empresa: %s\n", empresaAsoc.getNombre());
-
-		System.out.println(arch.obtenerPeriodosSegunEmpresa(empresaAsoc));
-
-		System.out.printf("\nEBITDA: ");
-		System.out.print(arch.obtenerCuentaDe(empresaAsoc, "EBITDA"));
-		
-		System.out.printf("\nEBITDA: ");
-		System.out.print(arch.obtenerCuentaSegunPeriodo(empresaAsoc, "EBITDA", 2006));
-
-		
-		
-
-	}*/
 	/*
 	 * SI QUIEREN UN PERIODO O UN DATO EN ESPECIFICO, SE HACE UN for(int i =
 	 * 0;i<cuentita.size();i++)

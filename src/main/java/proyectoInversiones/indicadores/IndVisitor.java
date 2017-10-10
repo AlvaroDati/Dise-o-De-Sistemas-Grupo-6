@@ -205,7 +205,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 			/*
 			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador
 			 * predefinido, por default sea una cuenta, y solo llamo a un
-			 * metodo, ó hago el case horrible que está arriba.
+			 * metodo,  hago el case horrible que est arriba.
 			 */
 			// Tirar excepcion
 			break;
@@ -275,7 +275,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 			/*
 			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador
 			 * predefinido, por default sea una cuenta, y solo llamo a un
-			 * metodo, ó hago el case horrible que está arriba.
+			 * metodo,  hago el case horrible que est arriba.
 			 */
 			// Tirar excepcion
 
@@ -326,37 +326,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 
 		return listaDeIndicador;
 	}
-
-/*	
-	public static void main (String args[]) throws IOException{
-	  	
-
-
-		IndVisitor visitor = new IndVisitor();
-		
-		List<Indicador> listaDeIndicador = visitor.obtenerIndicadoresUsuario("output.txt");
-		
-		
-		System.out.print(listaDeIndicador);
-		System.out.printf("\nListaDeIndicador.size(): %d\n",listaDeIndicador.size());
-		
 	
-	  	usuario.forEach((x,y)->System.out.print(y.getNombre()));
-		usuario.forEach((x,y)->System.out.print(y.getValorIndicador()));
-		usuario.forEach((x,y)->System.out.print(y.getValorCuentaIndicador()));
-	 
-
-		
-		 for(int i = 0;i<listaDeIndicador.size();i++){
-			 System.out.println(listaDeIndicador.get(i).getEmpresa().getNombre());
-			 System.out.println(listaDeIndicador.get(i).getNombre());
-			 System.out.println(listaDeIndicador.get(i).getValorIndicador());
-			 System.out.println(listaDeIndicador.get(i).getPeriodo());
-		 }
-		 
-		 
-		 
-	}*/
 
 }
 	/*
