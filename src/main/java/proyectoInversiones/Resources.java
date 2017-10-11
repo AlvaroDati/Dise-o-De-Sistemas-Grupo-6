@@ -32,6 +32,10 @@ public class Resources {
         return this.factory;
     }
     
+    public RepoEmpresas getRepoEmpresas() {
+        return this.repoEmpresas;
+    }
+    
     public boolean crearRepoEmpresas(Set<Empresa> initialData) {
         this.repoEmpresas = new RepoEmpresas(initialData);
         return true;

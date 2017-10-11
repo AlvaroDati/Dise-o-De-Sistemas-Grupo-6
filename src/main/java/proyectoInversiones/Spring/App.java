@@ -22,12 +22,12 @@ import proyectoInversiones.servlet.DataHandler;
 public class App {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        URL empresasURL = App.class.getClassLoader().getResource("empresas.json");
+        URL empresasURL = App.class.getClassLoader().getResource("empresas2.txt");
         URL usersURL = App.class.getClassLoader().getResource("usuarios.properties");
 
         DataHandler initializer = new DataHandler();
         initializer.initEmpresas(empresasURL);
-
+        
         Properties usuariosProps = new Properties();
         usuariosProps.load(new FileInputStream(new File(usersURL.toURI())));
         LoginRegistry.getInstance().setUsuarios(usuariosProps);

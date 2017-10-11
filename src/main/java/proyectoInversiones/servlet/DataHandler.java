@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-
 public class DataHandler {
 
     public void initEmpresas(URL configURL) {
