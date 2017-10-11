@@ -11,5 +11,13 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <context:component-scan base-package="proyectoInversiones.servlet"/>
+    
+    <bean id="staticPagesViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/static"/>
+    <property name="suffix" value=".html"/>
+</bean>
+<mvc:view-controller path="/api/cuenta" view-name="Cuentas"/>
+<mvc:view-controller path="/login" view-name="Index"/>
+<mvc:view-controller path="/api/Indicadores" view-name="Indicadores"/>
     <mvc:annotation-driven/>
 </beans>

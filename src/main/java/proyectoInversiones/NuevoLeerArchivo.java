@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 
 import proyectoInversiones.repositorio.Repositorio;
 
+
 public class NuevoLeerArchivo {
 
 	ArrayList<Empresa> empresaAsociada = this.leerArchivo();

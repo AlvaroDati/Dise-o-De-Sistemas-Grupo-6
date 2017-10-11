@@ -14,17 +14,18 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
 
+import proyectoInversiones.servlet.DataHandler;
+
 @SpringBootApplication
 @ServletComponentScan
 public class App {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
-        URL empresasURL = App.class.getClassLoader().getResource("empresas2.txt");
+        URL empresasURL = App.class.getClassLoader().getResource("empresas.json");
         URL usersURL = App.class.getClassLoader().getResource("usuarios.properties");
 
-//        DataInitializer initializer = new DataInitializer();
-//        initializer.initCentrosData(centrosURL);
-//        initializer.initBancosData(bancosURL);
+        DataHandler initializer = new DataHandler();
+        initializer.initEmpresas(empresasURL);
 
         Properties usuariosProps = new Properties();
         usuariosProps.load(new FileInputStream(new File(usersURL.toURI())));
