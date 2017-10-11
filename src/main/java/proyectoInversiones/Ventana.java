@@ -1,6 +1,7 @@
 package proyectoInversiones;
 
 import javax.swing.*;
+
 import java.awt.*;
 /*import java.awt.Color;
 import java.awt.Dimension;*/
@@ -416,15 +417,15 @@ public int GetAlto(){
 }
 	
 	
-public static void main(String[] args){
-		
-	Ventana ventana = new Ventana("Donde Invierto?");
-	
-	ventana.InicializarVentana();
-	ventana.pack();
-	ventana.setVisible(true);
-	ventana.setResizable(true);	
-	ventana.setBounds(0,0,ventana.GetAncho(),ventana.GetAlto()-50);
-					
-	}		
+//public static void main(String[] args){
+//		
+//	Ventana ventana = new Ventana("Donde Invierto?");
+//	
+//	ventana.InicializarVentana();
+//	ventana.pack();
+//	ventana.setVisible(true);
+//	ventana.setResizable(true);	
+//	ventana.setBounds(0,0,ventana.GetAncho(),ventana.GetAlto()-50);
+//					
+//	}		
 }

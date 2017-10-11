@@ -6,10 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Trabajo práctico D.D.S.: Cómo Invierto">
     <meta name="author" content="Grupo 6">
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="stylesheet" href="Formatos.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family-Raleway:100,300,400,500">
+=======
+ 	    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>
+    <script>
+        function addBanco() {
+            $.ajax({
+                url: "banco",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: $("#bancoArea").html()
+            }).done(function( data, textStatus, jqXHR ) {
+                alert("created");
+            }).fail(function( jqXHR, textStatus, errorThrown ) {
+                alert("failed");
+            });
+        }
+    </script>
+>>>>>>> fbd7f80ee4c0e9b33ca310760470b2fdabe97a6f
   </head>
   <body>
 

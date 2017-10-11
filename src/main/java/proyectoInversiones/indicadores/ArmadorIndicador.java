@@ -236,13 +236,5 @@ public class ArmadorIndicador {
 	
 
 	
-	public static void main (String args[]){
-		Empresa unaEmpresa = new Empresa("America Movil");
-		Indicador indicador = new Indicador();
-		indicador.setNombre("Ingreso Neto");
-		indicador.setEmpresa(unaEmpresa);
-		indicador.setPeriodo(2006);
-		ArmadorIndicador indicadorA = new ArmadorIndicador(indicador);
-		System.out.println(indicadorA.obtenerValorIndicador(indicador));
-	}
+	
 }

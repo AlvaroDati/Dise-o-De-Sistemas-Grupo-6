@@ -86,6 +86,5 @@ public class Cuenta extends AlgoPersistible{
 		return capitalTotal;
 	}
 	
-	public static void main(String args[]){
-	}
+
  }
