@@ -1,7 +1,12 @@
 package proyectoInversiones;
 
 import proyectoInversiones.Empresa;
-import proyectoInversiones.RepoEmpresas;
+
+import proyectoInversiones.repos.RepoEmpresas;
+import proyectoInversiones.Cuenta;
+import proyectoInversiones.repos.RepoCuentas;
+
+
 import java.util.Set;
 
 public class Resources {
@@ -10,6 +15,7 @@ public class Resources {
     private static Resources instance = null;
 
     private RepoEmpresas repoEmpresas;
+   // private RepoCuentas  repoCuentas;
     private Factory factory = new Factory();
 
     public static Resources getInstance() {
@@ -25,11 +31,10 @@ public class Resources {
     public Factory getFactory() {
         return this.factory;
     }
-
-
-//    public boolean createRepoEmpresas(Set<Empresa> initialData) {
-//        this.repoEmpresas = new RepoEmpresas(initialData);
-//        return true;
-//    }
+    
+    public boolean crearRepoEmpresas(Set<Empresa> initialData) {
+        this.repoEmpresas = new RepoEmpresas(initialData);
+        return true;
+    }
 
 }

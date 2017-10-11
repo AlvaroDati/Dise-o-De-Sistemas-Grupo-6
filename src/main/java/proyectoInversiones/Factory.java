@@ -17,21 +17,13 @@ import org.springframework.boot.json.JsonParserFactory;
 import proyectoInversiones.NuevoLeerArchivo;
 
 public class Factory {
-	
-	/**
-     * Creates "BancoDTO" entries for given file in JSON format
-     *
-     * @param filename
-     * @return
-     * @throws IOException
-     */
-    public List<Empresa> createEmpresasFromConfig(String filename) throws IOException {
-        List<Empresa> result = new ArrayList<>();
+
+    public Set<Empresa> createEmpresasFromConfig(String filename) throws IOException {
+        Set<Empresa> result = new HashSet<>();
         NuevoLeerArchivo archivo = new NuevoLeerArchivo();
         
-        result = archivo.leerArchivo();
+        result = (Set<Empresa>) archivo.leerArchivo();
         return result;
     }
-	
 	
 }

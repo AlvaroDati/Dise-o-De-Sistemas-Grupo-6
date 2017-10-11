@@ -80,7 +80,7 @@ public class Cuenta extends AlgoPersistible{
 	public void setIngNetoOpDiscont(float ingNetoOpDiscont) {
 		this.ingNetoOpDiscont = ingNetoOpDiscont;
 	}
-	
+		
 	public float capitalTotal(){
 		capitalTotal = this.getEbitda() + this.getfCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont() - this.getDeuda();
 		return capitalTotal;

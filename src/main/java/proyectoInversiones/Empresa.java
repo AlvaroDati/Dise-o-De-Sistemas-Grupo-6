@@ -50,6 +50,7 @@ public class Empresa extends AlgoPersistible {
 	public Empresa(){
 		periodos = new ArrayList<Periodo>();
 		}
+	
 	public Empresa(String nombreEmpresa){
 		nombre = nombreEmpresa;
 	}

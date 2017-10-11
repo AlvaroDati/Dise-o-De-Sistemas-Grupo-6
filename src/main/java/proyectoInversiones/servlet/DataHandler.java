@@ -1,6 +1,7 @@
 package proyectoInversiones.servlet;
 
 import proyectoInversiones.NuevoLeerArchivo;
+
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Periodo;
@@ -16,18 +17,17 @@ import java.util.Set;
 public class DataHandler {
 
     public void initEmpresas(URL configURL) {
-        List<Empresa> centros = null;
+        Set<Empresa> empresas = null;
 //        NuevoLeerArchivo archivo = new NuevoLeerArchivo();
         try {
             String filename = configURL.getFile();
-//            centros = (Set<Empresa>) archivo.leerArchivo();
-            centros = Resources.getInstance().getFactory().createEmpresasFromConfig(filename);
+//          empresas = (Set<Empresa>) archivo.leerArchivo();
+            empresas = Resources.getInstance().getFactory().createEmpresasFromConfig(filename);
         } catch (Exception e) {
             e.printStackTrace();
-            centros = Collections.emptyList();
+            empresas = Collections.emptySet();
         }
-        
+        Resources.getInstance().crearRepoEmpresas(empresas); 
     }
  
-   
 }

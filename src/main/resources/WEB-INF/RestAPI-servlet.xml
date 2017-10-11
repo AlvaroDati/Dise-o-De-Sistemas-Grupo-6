@@ -18,6 +18,6 @@
 </bean>
 <mvc:view-controller path="/api/cuenta" view-name="Cuentas"/>
 <mvc:view-controller path="/login" view-name="Index"/>
-<mvc:view-controller path="/api/Indicadores" view-name="Indicadores"/>
+<mvc:view-controller path="/api/Indicadores" view-name="Indicadores"/> 
     <mvc:annotation-driven/>
 </beans>
