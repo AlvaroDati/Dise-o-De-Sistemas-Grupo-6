@@ -4,7 +4,7 @@
     "inicioActividad":2000,
     "periodos":[ 
     			{ "anio": 2006,
-    			  cuentas: {
+    			  "cuentas": {
     			  "ebitda": 44591,
              	  "fds": 0,
                   "fCashFlow":955,
@@ -30,7 +30,7 @@
     "inicioActividad":1955,
     "periodos":[
                 { "anio": 2006,
-                  cuentas:{
+                  "cuentas":{
 				  "ebitda": 12345,
                   "fds": 1,
                   "fCashFlow":789,
@@ -40,7 +40,7 @@
             	}},
 
             {"anio": 2007,
-             cuentas:{
+             "cuentas":{
              "ebitda": 23456,
               "fds": 3,
               "fCashFlow":978,
@@ -49,7 +49,7 @@
               "deuda": 6
 		}},
 		{"anio": 2008,
-		cuentas:{
+		"cuentas":{
              "ebitda": 34567,
               "fds": 5,
               "fCashFlow":1012,
@@ -69,7 +69,7 @@
             [
 
             {"anio": 2006,
-            cuentas:{
+            "cuentas":{
             
              "ebitda": 44591,
               "fds": 2,
@@ -80,7 +80,7 @@
             
 
             {"anio": 2007,
-			  cuentas:{	
+			  "cuentas":{	
              "ebitda": 77691,
               "fds": 4,
               "fCashFlow":1096,
@@ -89,7 +89,7 @@
               "deuda": 12
 		}},
             {"anio": 2008,
-             cuentas:{
+             "cuentas":{
              "ebitda": 85291,
               "fds": 6,
               "fCashFlow":1198,
@@ -98,7 +98,7 @@
               "deuda": 14
 		}},
             {"anio": 2009,
-             cuentas:{
+            "cuentas":{
              "ebitda": 79463,
               "fds": 5,
               "fCashFlow":1234,
