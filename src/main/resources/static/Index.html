@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
+    <title> Inicio de sesión </title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,22 +14,6 @@
 
     <title>Title</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>
-   <!--  <script>
-        function addBanco() {
-            $.ajax({
-                url: "banco",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                data: $("#bancoArea").html()
-            }).done(function( data, textStatus, jqXHR ) {
-                alert("created");
-            }).fail(function( jqXHR, textStatus, errorThrown ) {
-                alert("failed");
-            });
-        }
-    </script> -->
   </head>
   <body>
 
@@ -43,9 +27,6 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav ml-auto">
               <a class="nav-item nav-link" href="Index.html">Inicio de sesión</a>
-              <a class="nav-item nav-link" href="Cuentas.html">Cuentas</a>
-              <a class="nav-item nav-link" href="Indicadores.html">Indicadores</a>
-              <a class="nav-item nav-link" href="Metodologías.html">Metodologías</a>
             </div>
           </div>
         </nav>
@@ -62,15 +43,15 @@
             <form role="form" action="" method="post" class="">
 
               <div class="form-group">
-               <input type="text" name="form-username" placeholder="Ingrese su nombre de usuario:" class="form-control" id="form-username">
+               <input type="text"  name="userTag" placeholder="Ingrese su nombre de usuario:" class="form-control" id="userTag">
               </div>
 
               <div class="form-group">
-                <input type="password" name="form-password" placeholder="Ingrese su contraseña:" class="form-control" id="form-password">
+                <input type="password" name="password" placeholder="Ingrese su contraseña:" class="form-control" id="password">
               </div>
 
               <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Ingresar">
+                <input type="submit" class="btn btn-success" value="Ingresar" href="UsuarioIngresado.html">
               </div>
 
             </form>

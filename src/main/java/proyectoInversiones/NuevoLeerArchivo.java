@@ -60,9 +60,6 @@ public class NuevoLeerArchivo {
 		
 	}
 
-	
-
-
 	public List<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa) {
 		List<Periodo> periodos = this.getPeriodos(empresa);
 		List<Integer> periodosAux = new ArrayList<Integer>();
@@ -155,10 +152,10 @@ public class NuevoLeerArchivo {
 				cuenta = cuentas.get(i);
 			}
 		}
-
-
 		return cuenta;
 	}
+	
+	
 
 	// //SIRVE PARA OBTENER LAS CUENTAS DE LA EMPRESA QUE SE SOLICITE
 	public ArrayList<Float> sumaDeCuentasDe(Empresa empresa) {

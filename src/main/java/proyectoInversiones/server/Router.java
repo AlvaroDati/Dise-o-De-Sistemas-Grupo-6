@@ -1,12 +1,12 @@
 package proyectoInversiones.server;
 
 
-import proyectoInversiones.controllers.LoginController;
+import proyectoInversiones.controllers.*;
 import proyectoInversiones.spark.BooleanHelper;
 import proyectoInversiones.spark.HandlebarsTemplateEngineBuilder;
+import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.ModelAndView;
 import spark.Spark;
-import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class Router {
 
@@ -16,11 +16,10 @@ public class Router {
 
 		Spark.staticFiles.location("/public");
 
-//		Spark.get("/", new LoginController()::login, engine);
-		Spark.get("/", (req,res) -> new ModelAndView(null, "Index.html"));
+		Spark.get("/", new LoginController()::login, engine);
 		Spark.post("/", new LoginController()::validate);
 //		Spark.get("/home", HomeController::home, engine);
-//		Spark.get("/empresas", EmpresasController::listar, engine);
+		Spark.get("/cuentas", CuentasController::listar, engine);
 //		Spark.get("/empresas/:id", EmpresasController::mostrar, engine);
 //		Spark.get("/indicadores", new IndicadoresController()::listar, engine);
 //		Spark.get("/indicadores/new", new IndicadoresController()::newForm, engine);

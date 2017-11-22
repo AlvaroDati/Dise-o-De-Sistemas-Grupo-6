@@ -13,6 +13,10 @@ public class RepoCuentas extends RepoAbstracto<Cuenta> {
 	super(cuentas);
 }
 
+	public RepoCuentas() {
+		super();
+}
+	
 //public Set<Empresa> buscar(String bancoQuery, String servicioQuery) {
 //  boolean searchByBanco = bancoQuery.trim().length() > 0;
 //  boolean searchByServicio = servicioQuery.trim().length() > 0;
