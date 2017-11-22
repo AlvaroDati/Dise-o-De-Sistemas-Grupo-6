@@ -1,40 +1,39 @@
 package proyectoInversiones.repositorio;
 
 
+
 import javax.persistence.EntityManager;
 
 public class Repositorio {
-	private Periodos periodos;
-	//private Cuentas cuentas;  revisar si la estructura de cuentas se puede alterar para hacer OneToOne
-	private Empresas empresas;
+	private PeriodosRepo periodos;
+	private EmpresasRepo empresas;
+	private UsuariosRepo usuarios;
 	protected EntityManager emanager;
 
 	public Repositorio(EntityManager emanager) {
 		this.emanager = emanager;
 	}
 	
-	public Empresas empresasRepo(){
+	public EmpresasRepo empresasRepo(){
 		if (empresas == null) {
-			empresas = new Empresas(emanager);
+			empresas = new EmpresasRepo(emanager);
 		}
 		return empresas;
 	}
 
-	public Periodos periodosRepo() {
+	public PeriodosRepo periodosRepo() {
 		if (periodos == null) {
-			periodos = new Periodos(emanager);
+			periodos = new PeriodosRepo(emanager);
 		}
 		return periodos;
 	}
-
-	/*public Cuentas cuentas() {
-		if (cuentas == null) {
-			cuentas = new Cuentas(emanager);
+	
+	public UsuariosRepo usuariosRepo() {
+		if (usuarios == null) {
+			usuarios = new UsuariosRepo(emanager);
 		}
-		return cuentas; 
-	}*/
-	
-	
+		return usuarios;
+	}
 
 
 	public void cerrar() {

@@ -7,8 +7,8 @@ import proyectoInversiones.Cuenta;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 
 
-public class  Empresas extends Repositorio {
-	Empresas(EntityManager emanager) {
+public class  EmpresasRepo extends Repositorio {
+	EmpresasRepo(EntityManager emanager) {
 		super(emanager);
 	}
 
@@ -22,21 +22,6 @@ public class  Empresas extends Repositorio {
 		emanager.getTransaction().commit();
 	}
 	
-	/*
-	 * 
-	 * Entrega4Indicadores
-	 * 
-	 * */
-	public void persistirIndicador(ArmadorIndicador indicador){
-		emanager.getTransaction().begin();
-		emanager.persist(indicador);
-		emanager.getTransaction().commit();
-	}
-	/*
-	 * 
-	 * Entrega4Indicadores
-	 * 
-	 * */
 	
 	public List <Empresa> buscarEmpresaPorNombre(String nombre){
 		List<Empresa> listaEmpresasFiltradas = null;

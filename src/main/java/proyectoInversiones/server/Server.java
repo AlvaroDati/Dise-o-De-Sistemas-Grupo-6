@@ -15,7 +15,7 @@ public class Server {
 		//new Bootstrap().init();
 		Spark.port(8080);
 		DebugScreen.enableDebugScreen();
-		Router.configure();
+		Router.configure(); 
 	}
 	
 }

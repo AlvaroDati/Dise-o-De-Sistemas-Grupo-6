@@ -11,7 +11,7 @@
 		<class>proyectoInversiones.Periodo</class>
 		<class>proyectoInversiones.AlgoPersistible</class>
 		<class>proyectoInversiones.Cuenta</class>
-
+        <class>proyectoInversiones.usuarios.Usuario</class>
 	<!--  
 		<class>proyectoInversiones.Empresa</class>
 		<class>pryoectoInversiones.Periodo</class>
@@ -37,7 +37,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" /> 
 			<property name="hibernate.show_sql" value="false" />
 			<property name="use_sql_comments" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 
 	</persistence-unit>

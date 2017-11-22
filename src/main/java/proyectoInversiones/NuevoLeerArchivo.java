@@ -28,7 +28,7 @@ public class NuevoLeerArchivo {
 
 	public ArrayList<Empresa> leerArchivo() {
 
-		String ruta = "empresas2.txt";
+		String ruta = "empresas.json";
 		ArrayList<Empresa> empresas = new ArrayList<>();
 
 		try {

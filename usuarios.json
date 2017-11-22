@@ -1,24 +1,24 @@
 [
 	{
-	"idUsuario":1,
+	"id":1,
 	"userTag":"ivan",
 	"password":"ivan"
 	},
 	
 	{
-	"idUsuario":2,
+	"id":2,
 	"userTag":"alvitovito",
 	"password":"vitovito"
 	},
 
 	{
-	"idUsuario":3,
+	"id":3,
 	"userTag":"elias",
 	"password":"kimcito"
 	},
 	
 	{
-	"idUsuario":4,
+	"id":4,
 	"userTag":"gulloxdeus",
 	"password":"gullollollo"
 	}

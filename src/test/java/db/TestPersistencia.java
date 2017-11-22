@@ -25,6 +25,7 @@ import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
+import proyectoInversiones.usuarios.Usuario;
 
 import proyectoInversiones.repositorio.Repositorio;
 
@@ -103,7 +104,7 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	 	*/
 	
 	
-	
+/*	
 	@Test
 	public void buscarEmpresaPorNombre(){
 		
@@ -122,9 +123,9 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 		
 		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
 		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
-	}
+	}*/
 	
-	
+/*	
 	@Test
 	public void  persistirEmpresaConPeriodos() {
 		Periodo unPeriodo = new Periodo(2014);
@@ -140,8 +141,16 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 		unaEmpresa.addPeriodo(p3);
 	    repositorio.empresasRepo().persistir(unaEmpresa);
 		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-	}
+	}*/
 	
+	
+	@Test
+	public void  persistirUsuarios() {
+		Usuario user1 = new Usuario("elia","kim");
+		Usuario user2 = new Usuario("arn","old");
+		repositorio.usuariosRepo().persistir(user1);
+		repositorio.usuariosRepo().persistir(user2);
+	}
 	
 /*	@Test
 	public void  buscarEmpresaPorNombre() {

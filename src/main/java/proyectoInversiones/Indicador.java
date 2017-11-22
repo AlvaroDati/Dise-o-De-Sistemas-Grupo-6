@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import proyectoInversiones.usuarios.Usuario;
+
 @Entity
 @Table(name = "indicadores")
 public class Indicador extends AlgoPersistible{
@@ -27,13 +29,15 @@ public class Indicador extends AlgoPersistible{
 	
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
-	private Empresa empresa;
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
+
 	@Column(name = "valorIndicador",nullable = false)
 	private float valorIndicador;
 	@Column(name = "anio",nullable=false)
 	private int periodo;
 	
+	private Empresa empresa;
 	
 	public Empresa getEmpresa() {
 		return empresa;
@@ -41,6 +45,13 @@ public class Indicador extends AlgoPersistible{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 	public float getValorIndicador() {
 		return valorIndicador;
 	}

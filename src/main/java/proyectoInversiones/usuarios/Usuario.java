@@ -1,31 +1,38 @@
 package proyectoInversiones.usuarios;
 
+
 import java.time.Year;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/*import dominio.empresas.Empresa;
-import dominio.indicadores.Indicador;
-import dominio.indicadores.RepositorioIndicadores;
-import dominio.metodologias.Metodologia;
-import dominio.metodologias.RepositorioMetodologias;
-import dominio.parser.ParserIndicadores;*/
+import java.io.Serializable;
 
-//@Entity
-//@Table(name = "usuarios")
-public class Usuario {
-//	@Id 
-//	@GeneratedValue
-	private Long idUsuario;
+import proyectoInversiones.Indicador;
+
+@Entity
+@Table(name = "usuarios")
+public class Usuario implements Serializable {
+	@Id 
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "userTag")
 	private String userTag;
+	@Column(name = "password")
 	private String password;
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Indicador> indicadoresUsuario;
 	
 /*	private static Usuario activo;
 	public static Usuario activo(){
@@ -35,7 +42,7 @@ public class Usuario {
 		Usuario.activo = activo;
 	}
 */	
-	private Usuario(){}//Necesario para persistir la clase
+	protected Usuario(){}//Necesario para persistir la clase
 	
 	public Usuario(String userTag, String password){
 		this.userTag = userTag;
@@ -47,8 +54,10 @@ public class Usuario {
 		return userTag.equals(this.getUserTag()) && password.equals(this.getPassword());
 	}
 	
+	
+	
 	public Long getId() {
-		return idUsuario;
+		return id;
 	}
 	
 	public String getUserTag() {

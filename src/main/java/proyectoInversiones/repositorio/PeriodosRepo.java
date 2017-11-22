@@ -5,8 +5,8 @@ import javax.persistence.EntityManager;
 
 import proyectoInversiones.Periodo;
 
-public class Periodos extends Repositorio {
-	Periodos(EntityManager emanager) {
+public class PeriodosRepo extends Repositorio {
+	PeriodosRepo(EntityManager emanager) {
 		super(emanager);
 	}
 

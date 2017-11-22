@@ -31,8 +31,8 @@ public class Empresa extends AlgoPersistible {
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Indicador> indicadores;
+/*	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   private List<Indicador> indicadores;
 	
 	public List<Indicador> getIndicadores() {
 		return indicadores;
@@ -45,6 +45,7 @@ public class Empresa extends AlgoPersistible {
 		
 		if(!this.getIndicadores().contains(indicador))indicadores.add(indicador);
 	}
+	*/
 	
 	public Empresa(){
 		periodos = new ArrayList<Periodo>();
