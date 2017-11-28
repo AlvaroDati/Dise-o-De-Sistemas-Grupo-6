@@ -171,6 +171,19 @@ public class NuevoLeerArchivo {
 		return sumaDeCuentas;
 	}
 
+	
+	public static void main(){
+		
+		NuevoLeerArchivo arch = new NuevoLeerArchivo();
+		List<Periodo>cuentasAux =  arch.getPeriodos(new Empresa("General Electric"));
+		
+		List<Cuenta> cuentas = new ArrayList<Cuenta>();
+		for(Periodo head:cuentasAux){
+			cuentas.add(head.getCuentas());
+		}
+		System.out.println(cuentas.get(0).getAnioDelPeriodo());
+	}
+	
 	/*
 	 * SI QUIEREN UN PERIODO O UN DATO EN ESPECIFICO, SE HACE UN for(int i =
 	 * 0;i<cuentita.size();i++)

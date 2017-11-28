@@ -4,7 +4,7 @@
     "inicioActividad":2000,
     "periodos":[ 
     			{ "anio": 2006,
-    			  cuentas: {
+    			  cuentas:{
     			  "ebitda": 44591,
              	  "fds": 0,
                   "fCashFlow":955,

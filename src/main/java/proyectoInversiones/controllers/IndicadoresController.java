@@ -26,5 +26,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 //		model.put("indicadores", indicadores);
 		return new ModelAndView(model, "Indicadores.html");
 	}
+	
+	
 }
 

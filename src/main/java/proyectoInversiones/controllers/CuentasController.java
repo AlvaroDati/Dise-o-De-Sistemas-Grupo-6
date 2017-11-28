@@ -25,22 +25,19 @@ public class CuentasController implements WithGlobalEntityManager, Transactional
 	public static ModelAndView listar(Request req, Response res) {
 		Map<String, List<Cuenta>> model = new HashMap<>();
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
-		List<Periodo>cuentasAux =  arch.getPeriodos(new Empresa("America Movil"));
+		List<Periodo>cuentasAux =  arch.getPeriodos(new Empresa("General Electric"));
 		
 		List<Cuenta> cuentas = new ArrayList<Cuenta>();
-		for(Periodo head:cuentasAux){
-			cuentas.add(head.getCuentas());
+		
+		for (int i=0;i<cuentasAux.size();i++){
+			cuentas.add(cuentasAux.get(i).getCuentas());
+			cuentas.get(i).setPeriodoVinculado(cuentasAux.get(i));
 		}
 		
-		
-		
+	
 		model.put("cuentas", cuentas);
 		
 		return new ModelAndView(model, "Cuentas2.html");
 	}
-	
-	
-	
-	
 	
 }

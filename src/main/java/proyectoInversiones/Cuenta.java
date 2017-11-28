@@ -36,14 +36,17 @@ public class Cuenta extends AlgoPersistible{
 	private float deuda;
     @Column(name = "capitalTotal")
 	private float capitalTotal;
-	
+    
+    
     public Periodo getPeriodoVinculado() {
 		return periodoVinculado;
 	}
+    
 	public void setPeriodoVinculado(Periodo periodoVinculado) {
 		this.periodoVinculado = periodoVinculado;
 	}
- 
+	
+    
 	public float getDeuda() {
 		return deuda;
 	}

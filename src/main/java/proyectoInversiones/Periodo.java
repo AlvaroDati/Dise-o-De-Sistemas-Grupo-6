@@ -33,9 +33,6 @@ public class Periodo implements Serializable{
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
 	private Empresa empresa;
 	
-	
-	
-
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -78,7 +75,5 @@ public class Periodo implements Serializable{
 		cuentas = unasCuentas;
 	}
 
-	
-	
 	
 }
