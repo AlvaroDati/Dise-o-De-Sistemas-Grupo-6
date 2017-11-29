@@ -16,7 +16,7 @@
        			"cuentas":{
        					"ebitda": 77691,
               			"fds": 0,
-              			"fCashFlow":1096,
+              			"fCashFlow": 1096,
               			"ingNetoOpCont": 3221,
 	      				"ingNetoOpDiscont": 1221,
               			"deuda": 12
@@ -43,7 +43,7 @@
              "cuentas":{
              "ebitda": 23456,
               "fds": 3,
-              "fCashFlow":978,
+              "fCashFlow": 978,
               "ingNetoOpCont": 3456,
 	      "ingNetoOpDiscont": 2123,
               "deuda": 6
@@ -52,7 +52,7 @@
 		"cuentas":{
              "ebitda": 34567,
               "fds": 5,
-              "fCashFlow":1012,
+              "fCashFlow": 1012,
               "ingNetoOpCont": 3232,
 	      "ingNetoOpDiscont": 1331,
               "deuda": 4
@@ -73,7 +73,7 @@
             
              "ebitda": 44591,
               "fds": 2,
-              "fCashFlow":955,
+              "fCashFlow": 955,
               "ingNetoOpCont": 2221,
 	      "ingNetoOpDiscont": 1051,
               "deuda": 15}},
@@ -83,7 +83,7 @@
 			  "cuentas":{	
              "ebitda": 77691,
               "fds": 4,
-              "fCashFlow":1096,
+              "fCashFlow": 1096,
               "ingNetoOpCont": 3221,
 	      "ingNetoOpDiscont": 1221,
               "deuda": 12
@@ -92,7 +92,7 @@
              "cuentas":{
              "ebitda": 85291,
               "fds": 6,
-              "fCashFlow":1198,
+              "fCashFlow": 1198,
               "ingNetoOpCont": 4568,
 	      "ingNetoOpDiscont": 2112,
               "deuda": 14
@@ -101,7 +101,7 @@
             "cuentas":{
              "ebitda": 79463,
               "fds": 5,
-              "fCashFlow":1234,
+              "fCashFlow": 1234,
               "ingNetoOpCont": 2789,
 	      "ingNetoOpDiscont": 987,
               "deuda": 13

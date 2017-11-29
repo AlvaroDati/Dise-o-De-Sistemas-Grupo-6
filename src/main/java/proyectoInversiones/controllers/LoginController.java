@@ -28,7 +28,7 @@ public class LoginController {
 	
 	public Void validate(Request req, Response res) {
 		String userTag = req.queryParams("userTag");
-		String password = req.queryParams("password");
+		String password = req.queryParams("password"); 
 		try{
 			LeerUsuarios archivoUsuarios = new LeerUsuarios();
 			Long idUsuario = archivoUsuarios.obtenerId(userTag,password);

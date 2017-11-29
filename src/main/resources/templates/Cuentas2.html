@@ -49,7 +49,7 @@
 			<td>{{this.periodoVinculado.anio}}</td>
 			<td>{{ebitda}}</td>
 			<td>{{fds}}</td>
-			<td>{{fCashFlow}}</td>
+			<td>{{this.fCashFlow}}</td>
 			<td>{{ingNetoOpCont}}</td>
 			<td>{{ingNetoOpDiscont}}</td>
 			<td>{{deuda}}</td>
@@ -62,11 +62,30 @@
     
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-          <ul class="list-group">
+          <form role="form" action="" method="post" class="">
+
+              <div class="form-group">
+               <select  name="Empresa" id="Empresa">
+          	
+   				<option value="América Móvil">América Móvil</option> 
+				<option value="Berkshire Hathaway">Berkshire Hathaway</option> 
+				<option value="General Electric">General Electric</option>
+
+				</select>
+              </div>
+              
+              <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Mostrar Datos">
+              </div>
+		</form>
+			
+       <!--<ul class="list-group">
+       
             <a href="#" class="list-group-item text-center bg-dark"> América Móvil </a>
             <a href="#" class="list-group-item text-center bg-dark"> Berkshire Hathaway </a>
             <a href="#" class="list-group-item text-center bg-dark"> General Electric </a>
-          </ul>
+            
+          </ul>-->
       </div>
     </div>
  
