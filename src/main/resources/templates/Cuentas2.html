@@ -64,22 +64,27 @@
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
           <form role="form" action="" method="post" class="">
 
-              <div class="form-group">
-               <select  name="Empresa" id="Empresa">
-          	
-   				<option value="América Móvil">América Móvil</option> 
-				<option value="Berkshire Hathaway">Berkshire Hathaway</option> 
-				<option value="General Electric">General Electric</option>
-
-				</select>
+             <div class="form-group">
+               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control" id="Empresa">
               </div>
-              
+             
               <div class="form-group">
                 <input type="submit" class="btn btn-success" value="Mostrar Datos">
               </div>
+             <!-- <div class="form-group"> ESTO ES LA LISTA DESPLEGABLE DE EMPRESAS (no devuelve nada como para hacer un request, de ahí el cambio)
+               <select  name="Empresa" id="Empresa">
+          	
+   				<option value="América Móvil" id="America Movil">América Móvil</option> 
+				<option value="Berkshire Hathaway" id="Berkshire Hathaway">Berkshire Hathaway</option> 
+				<option value="General Electric" id="General Electric">General Electric</option>
+
+				</select>
+              </div>-->
+              
+            
 		</form>
 			
-       <!--<ul class="list-group">
+       <!--<ul class="list-group">  ESTOS SON LOS BOTONES DE LAS  EMPRESAS
        
             <a href="#" class="list-group-item text-center bg-dark"> América Móvil </a>
             <a href="#" class="list-group-item text-center bg-dark"> Berkshire Hathaway </a>

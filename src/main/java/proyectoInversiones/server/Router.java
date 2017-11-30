@@ -19,7 +19,7 @@ public class Router {
 		Spark.get("/", new LoginController()::login, engine);
 		Spark.post("/", new LoginController()::validate);
 		Spark.get("/cuentas", CuentasController::listar, engine);
-	//	Spark.post("/cuentas", CuentasController()::setearEmpresa,engine);
+		Spark.post("/cuentas", CuentasController::setearEmpresa, engine);
 		Spark.get("/indicadores", new IndicadoresController()::listar, engine);
 //		Spark.get("/indicadores/new", new IndicadoresController()::newForm, engine);
 //		Spark.post("/indicadores/new", new IndicadoresController()::create);

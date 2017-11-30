@@ -15,13 +15,6 @@ import spark.debug.DebugScreen;
 public class LoginController {
 	
 	public ModelAndView login(Request req, Response res) {
-		/*String mensajeError = req.cookie("mensajeError");
-		if (mensajeError == null) return new ModelAndView(null, "Index.html");
-		Map<String, String> model = new HashMap<>();
-		model.put("mensajeError", mensajeError);
-		res.removeCookie("mensajeError");
-		return new ModelAndView(model, "errorLogin.html");*/
-		
 		return new ModelAndView(null, "Index.html");
 	}
 	
