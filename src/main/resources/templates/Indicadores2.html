@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Indicadores </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Trabajo práctico D.D.S.: Cómo Invierto">
+    <meta name="author" content="Grupo 6">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="Formatos.css">
+  </head>
+  <body>
+
+    <div class= "container-fluid bg-dark fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+        <a class="navbar-brand" href="Index.html">Cómo Invierto</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" href="/">Cerrar sesión</a>
+            <a class="nav-item nav-link" href="/cuentas">Cuentas</a>
+            <a class="nav-item nav-link" href="/indicadores">Indicadores</a>
+            <a class="nav-item nav-link" href="/metodologias">Metodologías</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+ <div class="row contenedorContenidoDebajoDelNav">
+        
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="bg-dark table-responsive">
+            <table class="table table-bordered table-hover">
+		 <thead class="thead-default">
+			<tr>
+				<th>Periodo<i class="fa fa-fw fa-sort"></i></th>
+				<th>Ingreso Neto<i class="fa fa-fw fa-sort"></i></th>
+				<th>ROE<i class="fa fa-fw fa-sort"></i></th>
+			</tr>
+		</thead>
+		{{#each indicadores}}
+		<tr>
+			<td>{{periodo}}</td>
+			<td>{{ingresoNeto}}</td>
+			<td>{{roe}}</td>
+		</tr>
+		{{/each}} 
+
+			</table>
+		  </div>
+    	</div>
+   
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+          <form role="form" action="" method="post" class="">
+
+             <div class="form-group">
+               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control" id="Empresa">
+              </div>
+             
+              <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Mostrar Datos">
+              </div>
+        </form>
+    </div>
+    
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="bg-dark table-responsive">
+            <table class="table table-bordered table-hover">
+              <tr>
+                Indicadores Definidos por el Usuario
+              </tr>
+              <tr>
+                 <td class="encabezadoTablas">
+                  Periodo
+                </td>
+                <td class="encabezadoTablas">
+                  2006
+                </td>
+                <td class="encabezadoTablas">
+                  2007
+                </td>
+                <td class="encabezadoTablas">
+                  2008
+                </td>
+                <td class="encabezadoTablas">
+                  2009
+                </td>
+                <td class="encabezadoTablas">
+                  2010
+                </td>
+              </tr>
+              <tr>
+                <td class="encabezadoTablas">
+                   Predefinido 1
+                </td>
+                <td >
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+               <tr>
+                <td class="encabezadoTablas">
+                   Predefinido 2
+                </td>
+                <td >
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+               <tr>
+                <td class="encabezadoTablas">
+                   Predefinido 3
+                </td>
+                <td >
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+               <tr>
+                <td class="encabezadoTablas">
+                   Predefinido 4
+                </td>
+                <td >
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+               <tr>
+                 <td class="encabezadoTablas">
+                   Predefinido 5
+                </td>
+                <td >
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+               <tr>
+                <td class="encabezadoTablas">
+                   Predefinido 6
+                </td>
+                <td >
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+
+      <div class="alinearVerticalmente col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class= "bg-dark myform">
+            <form role="form" action="" method="post" class="">
+
+              <div class="form-group">
+               <input type="text" name="form-nombreIndicador" placeholder="Ingrese el nombre del indicador:" class="form-control" id="form-nombreIndicador">
+              </div>
+
+              <div class="form-group">
+                <input type="text" name="form-valorIndicador" placeholder="Ingrese la regla de calculo:" class="form-control" id="form-valorIndicador">
+              </div>
+
+              <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Agregar">
+              </div>
+            </form>
+      </div>
+    </div>
+ 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -37,6 +37,9 @@ public class Indicador extends AlgoPersistible{
 	@Column(name = "anio",nullable=false)
 	private int periodo;
 	
+	private float roe;
+	private float ingresoNeto;
+	
 	private Empresa empresa;
 	
 	public Empresa getEmpresa() {
@@ -63,6 +66,21 @@ public class Indicador extends AlgoPersistible{
 	}
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
+	}
+	
+	public void setRoe(float valorRoe) {
+		this.roe = valorRoe;
+	}
+	
+	public float getRoe() {
+		return roe;
+	}
+	public void setIngresoNeto(float valorIngreso) {
+		this.ingresoNeto = valorIngreso;
+	}
+	
+	public float getIngresoNeto() {
+		return ingresoNeto;
 	}
 
 }

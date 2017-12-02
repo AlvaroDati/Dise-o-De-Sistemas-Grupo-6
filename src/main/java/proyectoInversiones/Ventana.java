@@ -294,17 +294,7 @@ public void actionPerformed(ActionEvent evento) {
 		modeloCuentas.addElement("Deuda:");
 		
 		
-		//Rellenamos la lista con los datos de las cuentas
-
-//		for(Cuenta cuenta: cuentasRequeridas){
-//				modeloCuentas.addElement(cuenta.getEbitda());
-//				modeloCuentas.addElement(cuenta.getFds());
-//				modeloCuentas.addElement(cuenta.getfCashFlow());
-//				modeloCuentas.addElement(cuenta.getIngNetoOpCont());
-//				modeloCuentas.addElement(cuenta.getIngNetoOpDiscont());
-//				modeloCuentas.addElement(cuenta.getDeuda());
-//		}
-			for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
+		for(int i = 0;i<archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).size();i++){
 				
 				modeloCuentas.addElement(archivoAux.obtenerPeriodosSegunEmpresa((Empresa)empresaSeleccionada).get(i));
 				modeloCuentas.addElement(cuentasRequeridas.get(i).getEbitda());
@@ -325,13 +315,14 @@ public void actionPerformed(ActionEvent evento) {
 		
 		//rellenamos la lista con los datos de los indicadores
 		
+		
+		//ACA
 		for(int i = 0;i<cuentasRequeridas.size();i++){
 			modeloIndPredefinidos.addElement(indicadorPredefinido.periodos(((Empresa) empresaSeleccionada)).get(i));
 			modeloIndPredefinidos.addElement(indicadorPredefinido.calcularIngresoNeto(((Empresa) empresaSeleccionada)).get(i));
 			modeloIndPredefinidos.addElement(indicadorPredefinido.calcularRoe(((Empresa) empresaSeleccionada)).get(i));
 			
 		}
-		
 		
 		
 		//Aniadimos los encabezados de las filas de la lista de indicadores de usuario

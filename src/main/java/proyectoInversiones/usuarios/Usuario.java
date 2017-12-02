@@ -54,8 +54,6 @@ public class Usuario implements Serializable {
 		return userTag.equals(this.getUserTag()) && password.equals(this.getPassword());
 	}
 	
-	
-	
 	public Long getId() {
 		return id;
 	}

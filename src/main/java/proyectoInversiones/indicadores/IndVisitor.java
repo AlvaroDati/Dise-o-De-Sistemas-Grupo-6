@@ -26,6 +26,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 	/** "memory" for our calculator; variable/value pairs go here */
 	 
 	List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
+	
 	public List<Indicador> getListaDeIndicador() {
 		return listaDeIndicador;
 	}
@@ -326,7 +327,6 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 
 		return listaDeIndicador;
 	}
-	
 
 }
 	/*
