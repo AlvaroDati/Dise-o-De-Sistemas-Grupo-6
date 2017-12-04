@@ -33,6 +33,7 @@ public class Usuario implements Serializable {
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Indicador> indicadoresUsuario;
+	private static Usuario activo;
 	
 /*	private static Usuario activo;
 	public static Usuario activo(){
