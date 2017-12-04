@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -27,7 +27,7 @@ import spark.Response;
 
 public class IndicadoresController implements WithGlobalEntityManager, TransactionalOps{
 	
-	public ModelAndView listar(Request req, Response res) {
+	public ModelAndView listar(Request req, Response res) throws IOException {
 
 		Map<String, List<Indicador>> model = new HashMap<>();
 		
@@ -35,7 +35,9 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
 		List<Periodo>	 periodos =  arch.getPeriodos(empresaInicial);
 		List<Indicador>  indicadores = setearListaIndicadores (periodos, empresaInicial);
+		List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodos, empresaInicial);
 		model.put("indicadores", indicadores);
+		model.put("indicadoresU", indicadoresUsuario);
 		return new ModelAndView(model, "Indicadores2.html");
 	}
 	
@@ -52,7 +54,9 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo>periodosEmpresa =  arch.getPeriodos(empresa);
 			List<Indicador> indicadoresDeEmpresa = setearListaIndicadores(periodosEmpresa,empresa);
+			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa, empresa);
 			model.put("indicadores", indicadoresDeEmpresa);
+			model.put("indicadoresU", indicadoresUsuario);
 			return new ModelAndView(model, "Indicadores2.html");
 			
 		}catch ( Exception e ){
@@ -80,7 +84,18 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		return indicadores;
 	}
 	
+	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos, Empresa empresa) throws IOException{
+		List<Indicador> indicadores = new ArrayList<Indicador>();
+		ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
+		indicadores = calcularIndicadores.getIndicadoresUsuario("output.txt",empresa);
+		return indicadores;
+	}
 	
+	public ModelAndView nuevoInd(Request req, Response res) {
+		return new ModelAndView(null, "IndicadoresNuevo.html");
+
+	
+	}
 	
 }
 

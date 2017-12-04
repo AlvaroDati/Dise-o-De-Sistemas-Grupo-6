@@ -1,5 +1,6 @@
 package proyectoInversiones.indicadores;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -39,7 +40,7 @@ public class ArmadorIndicador {
 	List<Float> valor_cuenta_indicador = new ArrayList<Float>(); /* ESTA LISTA ES PARA ALMACENAR LOS IDENTIFICADORES DEL USUARIO
 	 																	QUE SE VAN A OBTENER DE LA CLASE IndVisitor
 	 																	ESTO YA PINTA PARA UNA SUBCLASE....*/
-
+	
 	/*************************************************************************
 	 *    INICIO
 	 * CONSTRUCTORES
@@ -135,6 +136,18 @@ public class ArmadorIndicador {
 	public void setValorCuentaIndicador(List<Float> valor_cuenta_indicador) {
 		this.valor_cuenta_indicador = valor_cuenta_indicador;
 	}
+	public List<Indicador> getIndicadoresUsuario(String archivo, Empresa empresa2) throws IOException{
+		IndVisitor indVisitor = new IndVisitor();
+		List<Indicador> indicador = new ArrayList<Indicador>();
+		List<Indicador> indicadoresUsuario =indVisitor.obtenerIndicadoresUsuario(archivo);
+		for(int i = 0;i<indicadoresUsuario.size();i++){
+			if(indicadoresUsuario.get(i).getEmpresa().getNombre().equals(empresa2.getNombre())){
+				indicador.add(indicadoresUsuario.get(i));
+			}
+		}
+		return indicador;
+	}
+	
 	/*
 	 *        FIN
 	 * SETTERS Y GETTERS
@@ -234,7 +247,18 @@ public class ArmadorIndicador {
 		return indicadorPredefinido;
 	}
 	
-
 	
+	public Indicador obtenerIndicadorUsuarioSegunExpresion(String archivoUsuario,String nombre,Empresa empresa) throws IOException{
+		List<Indicador> indicadores = this.getIndicadoresUsuario(archivoUsuario,empresa);
+		Indicador indicador = new Indicador();
+		for (int i = 0; i < indicadores.size(); i++) {
+			if (indicadores.get(i).getNombre().equals(nombre)) {
+				indicador = indicadores.get(i);
+				break;
+			}
+		}
+		
+		return indicador;
+	}
 	
 }

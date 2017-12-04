@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.usuarios.Usuario;
 
 @Entity
@@ -39,6 +40,8 @@ public class Indicador extends AlgoPersistible{
 	
 	private float roe;
 	private float ingresoNeto;
+	
+	
 	
 	private Empresa empresa;
 	
@@ -82,5 +85,6 @@ public class Indicador extends AlgoPersistible{
 	public float getIngresoNeto() {
 		return ingresoNeto;
 	}
-
+	
+	
 }
