@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -45,7 +48,6 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		
 		String nombreEmpresa = req.queryParams("Empresa");
-		System.out.println(nombreEmpresa);
 		
 		Empresa empresa = new Empresa(nombreEmpresa);
 		
@@ -91,11 +93,43 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		return indicadores;
 	}
 	
-	public ModelAndView nuevoInd(Request req, Response res) {
-		return new ModelAndView(null, "IndicadoresNuevo.html");
+	public ModelAndView nuevoInd(Request req, Response res){
+		
+		String nombreIndicador = req.queryParams("nombreIndicador");
+		String expresionIndicador = req.queryParams("valorIndicador");
+		//Acá estaría bueno obtener el ID del usuario
+		
+		try {
 
-	
+			File file = new File("output.txt");
+
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(empresaSeleccionada.toString()+"("+nombreIndicador+")" + "=");
+			bw.write(cuentaIndicador + "\n"); //numero + empresa(cuenta/indicador(periodo))
+			bw.close();
+
+			System.out.println("Datos guardados en output");
+			textoIndicador.setText("");
+			textoNombreIndicador.setText("");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return new ModelAndView(null, "IndicadoresNuevo.html");
 	}
+	
+	
+	
+	
+	
+	
 	
 }
 
