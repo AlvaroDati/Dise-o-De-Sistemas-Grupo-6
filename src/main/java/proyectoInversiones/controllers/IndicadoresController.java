@@ -29,14 +29,14 @@ import spark.Request;
 import spark.Response;
 
 public class IndicadoresController implements WithGlobalEntityManager, TransactionalOps {
-	static String idGlobal;
+	static String usuarioActivo;
 	static String rutaArchivo = "IndicadoresDelUsuario";
 	
 	public ModelAndView listar(Request req, Response res) throws IOException {
 
-		String id = req.cookie("idUsuario");
-		System.out.printf("Id del usuario: %s '\n",id);
-		idGlobal = id;
+		String usuario = req.cookie("userTag");
+		System.out.printf("Tag del usuario: %s '\n",usuario);
+		usuarioActivo = usuario;
 		Map<String, List<Indicador>> model = new HashMap<>();
 
 		Empresa empresaInicial = new Empresa("America Movil");
@@ -50,7 +50,6 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	}
 
 	public static ModelAndView setearEmpresa(Request req, Response res) {
-		System.out.println("Hola marola2");
 		String nombreEmpresa = req.queryParams("Empresa");
 		Empresa empresa = new Empresa(nombreEmpresa);
 		try {
@@ -81,8 +80,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			Indicador indicadorAux = new Indicador();
 			indicadorAux.setPeriodo(listaPeriodos.get(i).getAnio());
 			indicadorAux.setRoe(calculadorIndicadores.obtenerRoeSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
-			indicadorAux.setIngresoNeto(
-					calculadorIndicadores.obtenerIngresoNetoSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
+			indicadorAux.setIngresoNeto(calculadorIndicadores.obtenerIngresoNetoSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
 			indicadores.add(indicadorAux);
 		}
 		return indicadores;
@@ -92,8 +90,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			throws IOException {
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
-		String id = idGlobal;
-		String archivoUsuario = rutaArchivo.concat(id);
+		String usuario = usuarioActivo;
+		String archivoUsuario = rutaArchivo.concat(usuario);
 		File file = new File(archivoUsuario);
 		if (!file.exists()) {
 			file.createNewFile();
@@ -108,7 +106,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	}
 
 	public static ModelAndView nuevoInd(Request req, Response res) {
-		String id = req.cookie("idUsuario");
+		String usuario = req.cookie("userTag");
+//		String id = req.cookie("idUsuario");
 		
 		String nombreIndicador = req.queryParams("nombreIndicador");
 		String empresaSeleccionada = req.queryParams("nombreEmpresa");
@@ -118,8 +117,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 				System.out.printf("nombreIndicador: %s, empresaSeleccionada: %s, expresionIndicador: %s '\n",
 						nombreIndicador, empresaSeleccionada, expresionIndicador);
 				
-				String archivoUsuario = rutaArchivo.concat(id);
-				System.out.printf("nombreIndicador: %s,  '\n",archivoUsuario);
+				String archivoUsuario = rutaArchivo.concat(usuario);
+				System.out.printf("nombre del archivo: %s,  '\n",archivoUsuario);
 				
 				File file = new File(archivoUsuario);
 				
