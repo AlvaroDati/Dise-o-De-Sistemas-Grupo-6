@@ -9,6 +9,7 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="Formatos.css">
+    <script src="validar.js"></script>
   </head>
   <body>
 
@@ -62,25 +63,15 @@
     
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-          <form role="form" action="" method="post" class="">
+          <form role="form" method="post" onsubmit="return validar();">
 
              <div class="form-group">
-               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control" id="Empresa">
+               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
               </div>
              
               <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Mostrar Datos">
-              </div>
-             <!-- <div class="form-group"> ESTO ES LA LISTA DESPLEGABLE DE EMPRESAS (no devuelve nada como para hacer un request, de ahí el cambio)
-               <select  name="Empresa" id="Empresa">
-          	
-   				<option value="América Móvil" id="America Movil">América Móvil</option> 
-				<option value="Berkshire Hathaway" id="Berkshire Hathaway">Berkshire Hathaway</option> 
-				<option value="General Electric" id="General Electric">General Electric</option>
-
-				</select>
-              </div>-->
-            
+                <input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
+              </div>       
 		</form>
 	</div>
 </div>

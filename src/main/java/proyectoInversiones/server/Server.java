@@ -17,5 +17,4 @@ public class Server {
 		DebugScreen.enableDebugScreen();
 		Router.configure(); 
 	}
-	
 }
