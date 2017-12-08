@@ -37,13 +37,14 @@ public class Indicador extends AlgoPersistible{
 	private float valorIndicador;
 	@Column(name = "anio",nullable=false)
 	private int periodo;
+	@Column(name = "empresaAsoc", nullable = false)	
+	private Empresa empresa;
+	
 	
 	private float roe;
 	private float ingresoNeto;
 	
 	
-	
-	private Empresa empresa;
 	
 	public Empresa getEmpresa() {
 		return empresa;

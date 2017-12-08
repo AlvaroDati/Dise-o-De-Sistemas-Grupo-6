@@ -65,5 +65,16 @@ public class LeerUsuarios {
 		return usuarioFiltrado.getId() ;
 	}
 	
+	@SuppressWarnings("unused")
+	public Usuario obtenerUsuario(String userTag){
+		Usuario usuarioBuscado = new Usuario();
+		for (Usuario head:usuarios){
+			if (head.getUserTag()==userTag){
+				usuarioBuscado = head;
+				return usuarioBuscado;
+			}
+		}
+		return null;	
+	}
+	
 }
-

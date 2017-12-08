@@ -11,7 +11,6 @@ import javax.persistence.MappedSuperclass;
 public class AlgoPersistible implements Serializable {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(name = "nombre")
 	protected String nombre;

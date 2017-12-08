@@ -13,8 +13,8 @@ public class UsuariosRepo extends Repositorio {
 		super(emanager);
 	}
 
-	public Periodo buscarPorId(Long id) {
-		return emanager.find(Periodo.class, id);
+	public Usuario buscarPorId(Long id) {
+		return emanager.find(Usuario.class, id);
 	}
 	
 	public void persistir(Usuario unUsuario) {

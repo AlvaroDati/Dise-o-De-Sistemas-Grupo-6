@@ -25,10 +25,9 @@ import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
+import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
-
-import proyectoInversiones.repositorio.Repositorio;
-
+import proyectoInversiones.repositorio.*;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 
 
@@ -45,7 +44,21 @@ public class TestPersistencia {
 		repositorio = new Repositorio(emFactory.createEntityManager());
 	}
 	
-/*	
+	
+	@Test
+	public void  persistirUsuarios() {
+		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
+		
+		for (Usuario head:usuarios){
+			System.out.println(head.getId());
+			System.out.println(head.getUserTag());
+			System.out.println(head.getPassword());
+			repositorio.usuariosRepo().persistir(head);
+		}
+	}
+	
+	
 	@Test
 	public void persistirConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
@@ -64,10 +77,11 @@ public class TestPersistencia {
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresas.get(i)).get(j));
 								
-				empresas.get(i).addIndicador(indicador);
-				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
-				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
+//				empresas.get(i).addIndicador(indicador);
+//				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
+//				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
 				repositorio.empresasRepo().persistir(empresas.get(i)); 
+				repositorio.indicadoresRepo().persistir(indicador);
 			}
 			
 		}
@@ -83,15 +97,16 @@ public class TestPersistencia {
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularRoe(empresas.get(i)).get(j));
 								
-				empresas.get(i).addIndicador(indicador);
+			//	empresas.get(i).addIndicador(indicador);
 				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
 				
 				repositorio.empresasRepo().persistir(empresas.get(i)); 
+				repositorio.indicadoresRepo().persistir(indicador);
 			}
 			
 		}
 	}
-	*/
+	
 
 	
 	/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
@@ -144,57 +159,8 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	}*/
 	
 	
-	@Test
-	public void  persistirUsuarios() {
-		Usuario user1 = new Usuario("elia","kim");
-		Usuario user2 = new Usuario("arn","old");
-		repositorio.usuariosRepo().persistir(user1);
-		repositorio.usuariosRepo().persistir(user2);
-	}
-	
-/*	@Test
-	public void  buscarEmpresaPorNombre() {
-		List<Empresa> unasEmpresas = repositorio.empresasRepo().buscarEmpresaPorNombre("IB");
-		for(Empresa unaEmpresa : unasEmpresas){
-		System.out.println(unaEmpresa.getNombre());	
-		System.out.println(unaEmpresa.getPeriodos());
-		
-		}
-	}*/
-	
-	
-//	@Test
-//	public void  persistirEmpresaConPeriodosYCuentas() {
-//		Empresa unaEmpresa = new Empresa("America Movil");
-//        Periodo unPeriodo = new Periodo(2006);
-//        Cuenta unaCuenta = new Cuenta();
-//        unaCuenta.setEbitda(200);
-//        unPeriodo.setCuentas(unaCuenta);
-//        unaCuenta.setPeriodoVinculado(unPeriodo);
-//        unaEmpresa.addPeriodo(unPeriodo);
-//        unPeriodo.setEmpresa(unaEmpresa);
-//		//NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-//		
-//		
-//		//Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
-//       // periodos.forEach(unPeriodo -> unPeriodo.setEmpresa(unaEmpresa));
-//       /* for(Periodo head:periodos){
-//        	head.setEmpresa(unaEmpresa);
-//        }*/
-//		repositorio.empresasRepo().persistir(unaEmpresa);
-//		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-//	}
-//	
-	
-	
-/*	@Test
-	public void persistirIndicador(){
-		Empresa unaEmpresa = new Empresa("IBM");
-		Indicador indicador = new Indicador("Ingreso Neto");
-		indicador.ingresoNeto(unaEmpresa);
-		unaEmpresa.addIndicador(indicador);
-		repositorio.empresasRepo().persistir(unaEmpresa);
-	}*/
+
+
 	
 	@After
 	public void tearDown() throws Exception {

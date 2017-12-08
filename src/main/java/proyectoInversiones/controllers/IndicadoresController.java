@@ -23,7 +23,8 @@ import proyectoInversiones.indicadores.*;
 //import proyectoInversiones.repos.RepoCuentas;
 /*import dominio.usuarios.RepositorioUsuarios;
 import dominio.usuarios.Usuario;*/
-
+import proyectoInversiones.usuarios.LeerUsuarios;
+import proyectoInversiones.usuarios.Usuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -91,13 +92,18 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
 		String usuario = usuarioActivo;
-		String archivoUsuario = rutaArchivo.concat(usuario);
+		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
+		String archivoUsuario = rutaArchivo.concat(usuario); //IndicadoresUsuarioUserTag;
 		File file = new File(archivoUsuario);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		System.out.println(archivoUsuario);
+		
 		indicadores = calcularIndicadores.getIndicadoresUsuario(archivoUsuario, empresa);
+		for(int i = 0;i<indicadores.size();i++){
+			indicadores.get(i).setUsuario(usuarioCreador);
+		}
 		return indicadores;
 	}
 
@@ -107,6 +113,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 
 	public static ModelAndView nuevoInd(Request req, Response res) {
 		String usuario = req.cookie("userTag");
+
+		
 //		String id = req.cookie("idUsuario");
 		
 		String nombreIndicador = req.queryParams("nombreIndicador");
