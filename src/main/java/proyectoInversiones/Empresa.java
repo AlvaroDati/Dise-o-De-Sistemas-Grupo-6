@@ -22,7 +22,7 @@ import proyectoInversiones.indicadores.ArmadorIndicador;
 
 @Entity
 @Table (name = "empresas")
-//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
+@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
 public class Empresa extends AlgoPersistible {
 	
 	@Column(name = "inicioDeActividad")

@@ -46,16 +46,18 @@ public class TestPersistencia {
 	
 	
 	@Test
-	public void  persistir1Usuarios() {
+	public void  persistir1UsuariosYverificarUno() {
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
 		
 		for (Usuario head:usuarios){
-			System.out.println(head.getId());
-			System.out.println(head.getUserTag());
-			System.out.println(head.getPassword());
-		    repositorio.usuariosRepo().persistir(head);
+			if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
+				Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
+			else
+				repositorio.usuariosRepo().persistir(head);
 		}
+		
+		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
 	}
 
 
@@ -141,26 +143,25 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	 	*/
 	
 	
-/*	
 	@Test
-	public void buscarEmpresaPorNombre(){
+	public void persistir4BuscarEmpresaPorNombre(){
 		
-		Empresa empresa = new Empresa("America Movil");
-		Empresa empresa2 = new Empresa("Amerga");
-		Empresa otraEmpresa = new Empresa("Alva Putin");
+		Empresa empresa = new Empresa("EmpresaPrueba1");
+		Empresa empresa2 = new Empresa("EmpresaPrueba2");
+		Empresa otraEmpresa = new Empresa("asd");
 		repositorio.empresasRepo().persistir(empresa);
 		repositorio.empresasRepo().persistir(empresa2);
 		repositorio.empresasRepo().persistir(otraEmpresa);
 		
 		
-		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Amer");
+		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Emp");
 		for(Empresa unaEmpresa : empresasFiltradas){
 			System.out.println(unaEmpresa.getNombre());
 		}
 		
 		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
 		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
-	}*/
+	}
 	
 /*	
 	@Test
