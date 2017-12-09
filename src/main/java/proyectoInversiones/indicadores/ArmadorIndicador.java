@@ -24,6 +24,7 @@ import proyectoInversiones.Empresa;
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
+import proyectoInversiones.usuarios.Usuario;
 
 
 public class ArmadorIndicador {
@@ -142,7 +143,10 @@ public class ArmadorIndicador {
 		List<Indicador> indicadoresUsuario =indVisitor.obtenerIndicadoresUsuario(archivo);
 		for(int i = 0;i<indicadoresUsuario.size();i++){
 			if(indicadoresUsuario.get(i).getEmpresa().getNombre().equals(empresa2.getNombre())){
+				indicadoresUsuario.get(i).setEmpresaAsoc(empresa2.getNombre());
+			//	indicadoresUsuario.get(i).setUsuario(usuario);
 				indicador.add(indicadoresUsuario.get(i));
+				System.out.printf("hola:%s, usuario:%s \n",indicador.get(i).getEmpresaAsoc(),indicador.get(i).getUsuario().getUserTag());
 			}
 		}
 		return indicador;
@@ -248,17 +252,17 @@ public class ArmadorIndicador {
 	}
 	
 	
-	public Indicador obtenerIndicadorUsuarioSegunExpresion(String archivoUsuario,String nombre,Empresa empresa) throws IOException{
-		List<Indicador> indicadores = this.getIndicadoresUsuario(archivoUsuario,empresa);
-		Indicador indicador = new Indicador();
-		for (int i = 0; i < indicadores.size(); i++) {
-			if (indicadores.get(i).getNombre().equals(nombre)) {
-				indicador = indicadores.get(i);
-				break;
-			}
-		}
-		
-		return indicador;
-	}
+//	public Indicador obtenerIndicadorUsuarioSegunExpresion(String archivoUsuario,String nombre,Empresa empresa) throws IOException{
+//		List<Indicador> indicadores = this.getIndicadoresUsuario(archivoUsuario,empresa);
+//		Indicador indicador = new Indicador();
+//		for (int i = 0; i < indicadores.size(); i++) {
+//			if (indicadores.get(i).getNombre().equals(nombre)) {
+//				indicador = indicadores.get(i);
+//				break;
+//			}
+//		}
+//		
+//		return indicador;
+//	}
 	
 }

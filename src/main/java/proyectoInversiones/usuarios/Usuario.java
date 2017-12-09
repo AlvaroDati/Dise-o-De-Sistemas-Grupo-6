@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
@@ -22,8 +23,7 @@ import proyectoInversiones.Indicador;
 @Table(name = "usuarios")
 public class Usuario implements Serializable {
 	@Id 
-	@GeneratedValue
-	@Column(name = "id")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(name = "userTag")
@@ -33,9 +33,19 @@ public class Usuario implements Serializable {
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Indicador> indicadoresUsuario;
-	private static Usuario activo;
+
+
+	//	private static Usuario activo;
 	
-/*	private static Usuario activo;
+public List<Indicador> getIndicadoresUsuario() {
+		return indicadoresUsuario;
+	}
+
+	public void setIndicadoresUsuario(List<Indicador> indicadoresUsuario) {
+		this.indicadoresUsuario = indicadoresUsuario;
+	}
+
+	/*	private static Usuario activo;
 	public static Usuario activo(){
 		return activo;
 	}
@@ -55,6 +65,7 @@ public class Usuario implements Serializable {
 		return userTag.equals(this.getUserTag()) && password.equals(this.getPassword());
 	}
 	
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}

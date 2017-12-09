@@ -9,6 +9,7 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="Formatos.css">
+     <script src="validar.js"></script>
   </head>
   <body>
 
@@ -23,7 +24,7 @@
           <div class="navbar-nav ml-auto">
             <a class="nav-item nav-link" href="/">Cerrar sesión</a>
             <a class="nav-item nav-link" href="/cuentas">Cuentas</a>
-            <a class="nav-item nav-link" href="/indicadores/new">Nuevo Indicador</a>
+            <a class="nav-item nav-link active" href="/indicadores/new">Nuevo Indicador</a>
             <a class="nav-item nav-link" href="/metodologias">Metodologías</a>
           </div>
         </div>
@@ -54,19 +55,20 @@
 		  </div>
     	</div>
    
-
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-          <form role="form" action="" method="post" class="">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+          <form role="form" method="post" onsubmit="return validar();">
 
              <div class="form-group">
-               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control" id="Empresa">
+               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
               </div>
              
               <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Mostrar Datos">
+                <input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
               </div>
-        </form>
-    </div>
+                    
+		</form>
+		
+	</div>
     
 
      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

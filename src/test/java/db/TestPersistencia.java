@@ -25,10 +25,9 @@ import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
+import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
-
-import proyectoInversiones.repositorio.Repositorio;
-
+import proyectoInversiones.repositorio.*;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 
 
@@ -45,9 +44,27 @@ public class TestPersistencia {
 		repositorio = new Repositorio(emFactory.createEntityManager());
 	}
 	
-/*	
+	
 	@Test
-	public void persistirConJson() {
+	public void  persistir1UsuariosYverificarUno() {
+		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
+		
+		for (Usuario head:usuarios){
+			if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
+				Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
+			else
+				repositorio.usuariosRepo().persistir(head);
+		}
+		
+		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
+	}
+
+
+	
+	
+	@Test
+	public void persistir2ConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		ArrayList<Empresa> empresas = archivo.leerArchivo();
 		ArmadorIndicador armarIndicador = new ArmadorIndicador();
@@ -60,13 +77,14 @@ public class TestPersistencia {
 				Indicador indicador = new Indicador();
 
 				indicador.setNombre("Ingreso Neto");
-				indicador.setEmpresa(empresas.get(i));
+				indicador.setEmpresaAsoc(empresas.get(i).getNombre());
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresas.get(i)).get(j));
 								
-				empresas.get(i).addIndicador(indicador);
+//				empresas.get(i).addIndicador(indicador);
 				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
 				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
+				repositorio.indicadoresRepo().persistir(indicador);
 				repositorio.empresasRepo().persistir(empresas.get(i)); 
 			}
 			
@@ -79,20 +97,41 @@ public class TestPersistencia {
 				Indicador indicador = new Indicador();
 
 				indicador.setNombre("ROE");
-				indicador.setEmpresa(empresas.get(i));
+				indicador.setEmpresaAsoc(empresas.get(i).getNombre());
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularRoe(empresas.get(i)).get(j));
 								
-				empresas.get(i).addIndicador(indicador);
+			//	empresas.get(i).addIndicador(indicador);
 				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
 				
+				repositorio.indicadoresRepo().persistir(indicador);
 				repositorio.empresasRepo().persistir(empresas.get(i)); 
 			}
 			
 		}
 	}
-	*/
-
+	
+	@Test
+	public void persistir3IndicadoresDefinidosPorUsuario(){
+		Empresa empresa = new Empresa("America Movil");
+		Usuario usuario = new Usuario("ivan","ivan");
+		ArmadorIndicador armadorIndicador = new ArmadorIndicador();
+		List<Indicador> indicadores = new ArrayList<Indicador>();
+		String archivo = "IndicadoresDelUsuarioivan";
+		try{
+			indicadores = armadorIndicador.getIndicadoresUsuario(archivo, empresa);
+		}catch(Exception e){
+			
+		}
+		
+		usuario.setIndicadoresUsuario(indicadores);
+		for(Indicador head:indicadores){
+			
+			System.out.println(head.getEmpresaAsoc());
+			System.out.println(head.getNombre());
+			repositorio.indicadoresRepo().persistir(head);
+		}
+	}
 	
 	/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
 	Ya que al no estar en json, siempre van a tiran el mismo error 
@@ -104,26 +143,25 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	 	*/
 	
 	
-/*	
 	@Test
-	public void buscarEmpresaPorNombre(){
+	public void persistir4BuscarEmpresaPorNombre(){
 		
-		Empresa empresa = new Empresa("America Movil");
-		Empresa empresa2 = new Empresa("Amerga");
-		Empresa otraEmpresa = new Empresa("Alva Putin");
+		Empresa empresa = new Empresa("EmpresaPrueba1");
+		Empresa empresa2 = new Empresa("EmpresaPrueba2");
+		Empresa otraEmpresa = new Empresa("asd");
 		repositorio.empresasRepo().persistir(empresa);
 		repositorio.empresasRepo().persistir(empresa2);
 		repositorio.empresasRepo().persistir(otraEmpresa);
 		
 		
-		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Amer");
+		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Emp");
 		for(Empresa unaEmpresa : empresasFiltradas){
 			System.out.println(unaEmpresa.getNombre());
 		}
 		
 		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
 		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
-	}*/
+	}
 	
 /*	
 	@Test
@@ -144,57 +182,8 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	}*/
 	
 	
-	@Test
-	public void  persistirUsuarios() {
-		Usuario user1 = new Usuario("elia","kim");
-		Usuario user2 = new Usuario("arn","old");
-		repositorio.usuariosRepo().persistir(user1);
-		repositorio.usuariosRepo().persistir(user2);
-	}
-	
-/*	@Test
-	public void  buscarEmpresaPorNombre() {
-		List<Empresa> unasEmpresas = repositorio.empresasRepo().buscarEmpresaPorNombre("IB");
-		for(Empresa unaEmpresa : unasEmpresas){
-		System.out.println(unaEmpresa.getNombre());	
-		System.out.println(unaEmpresa.getPeriodos());
-		
-		}
-	}*/
-	
-	
-//	@Test
-//	public void  persistirEmpresaConPeriodosYCuentas() {
-//		Empresa unaEmpresa = new Empresa("America Movil");
-//        Periodo unPeriodo = new Periodo(2006);
-//        Cuenta unaCuenta = new Cuenta();
-//        unaCuenta.setEbitda(200);
-//        unPeriodo.setCuentas(unaCuenta);
-//        unaCuenta.setPeriodoVinculado(unPeriodo);
-//        unaEmpresa.addPeriodo(unPeriodo);
-//        unPeriodo.setEmpresa(unaEmpresa);
-//		//NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-//		
-//		
-//		//Set<Periodo> periodos = archivo.getPeriodos(unaEmpresa);
-//       // periodos.forEach(unPeriodo -> unPeriodo.setEmpresa(unaEmpresa));
-//       /* for(Periodo head:periodos){
-//        	head.setEmpresa(unaEmpresa);
-//        }*/
-//		repositorio.empresasRepo().persistir(unaEmpresa);
-//		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-//	}
-//	
-	
-	
-/*	@Test
-	public void persistirIndicador(){
-		Empresa unaEmpresa = new Empresa("IBM");
-		Indicador indicador = new Indicador("Ingreso Neto");
-		indicador.ingresoNeto(unaEmpresa);
-		unaEmpresa.addIndicador(indicador);
-		repositorio.empresasRepo().persistir(unaEmpresa);
-	}*/
+
+
 	
 	@After
 	public void tearDown() throws Exception {

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 public class Repositorio {
 	private PeriodosRepo periodos;
 	private EmpresasRepo empresas;
+	private IndicadoresRepo indicadores;
 	private UsuariosRepo usuarios;
 	protected EntityManager emanager;
 
@@ -27,6 +28,14 @@ public class Repositorio {
 		}
 		return periodos;
 	}
+	
+	public IndicadoresRepo indicadoresRepo() {
+		if (indicadores == null) {
+			indicadores = new IndicadoresRepo(emanager);
+		}
+		return indicadores;
+	}
+	
 	
 	public UsuariosRepo usuariosRepo() {
 		if (usuarios == null) {

@@ -12,16 +12,8 @@
 		<class>proyectoInversiones.AlgoPersistible</class>
 		<class>proyectoInversiones.Cuenta</class>
         <class>proyectoInversiones.usuarios.Usuario</class>
-	<!--  
-		<class>proyectoInversiones.Empresa</class>
-		<class>pryoectoInversiones.Periodo</class>
-		<class>pryoectoInversiones.AlgoPersistible</class>
-		<class>proyectoInversiones.Cuenta</class>
-	<class>proyectoInversiones.indicadores.Indicadores</class>
-	-->	
-<!--   
-		<class>proyectoInversiones.metodologias.Metodologia</class>     
-		-->
+        <class>proyectoInversiones.Indicador</class>
+	
 
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class" />

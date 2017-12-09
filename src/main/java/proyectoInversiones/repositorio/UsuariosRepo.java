@@ -13,8 +13,8 @@ public class UsuariosRepo extends Repositorio {
 		super(emanager);
 	}
 
-	public Periodo buscarPorId(Long id) {
-		return emanager.find(Periodo.class, id);
+	public Usuario buscarPorId(Long id) {
+		return emanager.find(Usuario.class, id);
 	}
 	
 	public void persistir(Usuario unUsuario) {
@@ -23,12 +23,6 @@ public class UsuariosRepo extends Repositorio {
 		emanager.getTransaction().commit();
 	}
 	
-	public void persistirIndicador(ArmadorIndicador indicador){
-		emanager.getTransaction().begin();
-		emanager.persist(indicador);
-		emanager.getTransaction().commit();
-	}
-
 	
 //	public void persistirMetodologia(){
 //		emanager.getTransaction().begin();

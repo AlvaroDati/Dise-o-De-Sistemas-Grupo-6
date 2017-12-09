@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.usuarios.Usuario;
@@ -18,16 +19,6 @@ import proyectoInversiones.usuarios.Usuario;
 @Entity
 @Table(name = "indicadores")
 public class Indicador extends AlgoPersistible{
-
-	
-	public Indicador(){
-		
-	}
-	public Indicador(String nombreIngresado,Empresa empresa){
-		nombre = nombreIngresado;
-		if(empresa == null) empresa = new Empresa(empresa.getNombre()); 
-	}
-	
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
@@ -37,20 +28,44 @@ public class Indicador extends AlgoPersistible{
 	private float valorIndicador;
 	@Column(name = "anio",nullable=false)
 	private int periodo;
+	@Column(name = "empresaAsoc", nullable = false)	
+	private String empresaAsoc;
 	
-	private float roe;
-	private float ingresoNeto;
-	
-	
-	
+	@Transient
 	private Empresa empresa;
 	
-	public Empresa getEmpresa() {
+	
+	@Transient
+	protected  float roe;
+	@Transient
+	protected float ingresoNeto;
+	
+	
+	public Indicador(){
+		
+	}
+	public Indicador(String nombreIngresado,Empresa empresa){
+		nombre = nombreIngresado;
+		if(empresa == null) empresa = new Empresa(empresa.getNombre()); 
+	}
+	
+	
+	public String getEmpresaAsoc() {
+		return empresaAsoc;
+	}
+	
+	public void setEmpresaAsoc(String unNombreDeEmpresa) {
+		this.empresaAsoc = unNombreDeEmpresa;
+	}
+	
+	public Empresa getEmpresa(){
 		return empresa;
 	}
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	
+	public void setEmpresa(Empresa unaEmpresa){
+		empresa = unaEmpresa;
 	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -74,10 +89,10 @@ public class Indicador extends AlgoPersistible{
 	public void setRoe(float valorRoe) {
 		this.roe = valorRoe;
 	}
-	
 	public float getRoe() {
 		return roe;
 	}
+	
 	public void setIngresoNeto(float valorIngreso) {
 		this.ingresoNeto = valorIngreso;
 	}

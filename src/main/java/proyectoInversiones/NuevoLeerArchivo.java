@@ -64,17 +64,6 @@ public class NuevoLeerArchivo {
 		List<Periodo> periodos = this.getPeriodos(empresa);
 		List<Integer> periodosAux = new ArrayList<Integer>();
 
-//		String empresaAsoc = empresa.getNombre();
-//		if (validarEmpresa(empresaAsoc)) {
-//			for (Empresa head : empresaAsociada) {
-//				periodos = head.getPeriodos();
-//			}
-//
-//		}
-//		 for (int i = 0; i < periodos.size(); i++) {
-//		 periodosAux.add(periodos.get(i).getAnio());
-//		 }
-
 		for (Periodo head : periodos) {
 			periodosAux.add(head.getAnio());
 		}

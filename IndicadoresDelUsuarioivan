@@ -1,0 +1,4 @@
+America Movil(EliasElPupilo)=123123
+America Movil(Carlos)=America Movil(deuda(2008))+1000
+America Movil(Albertito)=4511+4500+America Movil(deuda(2008))
+America Movil(AlvitoGay)=4511+4500+America Movil(deuda(2007))
