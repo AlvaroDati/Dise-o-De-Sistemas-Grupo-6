@@ -19,16 +19,6 @@ import proyectoInversiones.usuarios.Usuario;
 @Table(name = "indicadores")
 public class Indicador extends AlgoPersistible{
 
-	
-	public Indicador(){
-		
-	}
-	public Indicador(String nombreIngresado,Empresa empresa){
-		nombre = nombreIngresado;
-		if(empresa == null) empresa = new Empresa(empresa.getNombre()); 
-	}
-	
-
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
@@ -38,18 +28,26 @@ public class Indicador extends AlgoPersistible{
 	@Column(name = "anio",nullable=false)
 	private int periodo;
 	@Column(name = "empresaAsoc", nullable = false)	
-	private Empresa empresa;
+	private String empresa;
 	
 	
 	private float roe;
 	private float ingresoNeto;
 	
 	
+	public Indicador(){
+		
+	}
+	public Indicador(String nombreIngresado,Empresa empresa){
+		nombre = nombreIngresado;
+		if(empresa == null) empresa = new Empresa(empresa.getNombre()); 
+	}
 	
-	public Empresa getEmpresa() {
+	
+	public String getEmpresa() {
 		return empresa;
 	}
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
 	public Usuario getUsuario() {

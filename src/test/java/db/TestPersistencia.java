@@ -46,7 +46,7 @@ public class TestPersistencia {
 	
 	
 	@Test
-	public void  persistirUsuarios() {
+	public void  persistir1Usuarios() {
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
 		
@@ -54,13 +54,15 @@ public class TestPersistencia {
 			System.out.println(head.getId());
 			System.out.println(head.getUserTag());
 			System.out.println(head.getPassword());
-			repositorio.usuariosRepo().persistir(head);
+		    repositorio.usuariosRepo().persistir(head);
 		}
 	}
+
+
 	
 	
 	@Test
-	public void persistirConJson() {
+	public void persistir2ConJson() {
 		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 		ArrayList<Empresa> empresas = archivo.leerArchivo();
 		ArmadorIndicador armarIndicador = new ArmadorIndicador();
@@ -73,15 +75,15 @@ public class TestPersistencia {
 				Indicador indicador = new Indicador();
 
 				indicador.setNombre("Ingreso Neto");
-				indicador.setEmpresa(empresas.get(i));
+				indicador.setEmpresa(empresas.get(i).getNombre());
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresas.get(i)).get(j));
 								
 //				empresas.get(i).addIndicador(indicador);
-//				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
-//				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
-				repositorio.empresasRepo().persistir(empresas.get(i)); 
+				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
+				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
 				repositorio.indicadoresRepo().persistir(indicador);
+				repositorio.empresasRepo().persistir(empresas.get(i)); 
 			}
 			
 		}
@@ -93,15 +95,15 @@ public class TestPersistencia {
 				Indicador indicador = new Indicador();
 
 				indicador.setNombre("ROE");
-				indicador.setEmpresa(empresas.get(i));
+				indicador.setEmpresa(empresas.get(i).getNombre());
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularRoe(empresas.get(i)).get(j));
 								
 			//	empresas.get(i).addIndicador(indicador);
 				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
 				
-				repositorio.empresasRepo().persistir(empresas.get(i)); 
 				repositorio.indicadoresRepo().persistir(indicador);
+				repositorio.empresasRepo().persistir(empresas.get(i)); 
 			}
 			
 		}

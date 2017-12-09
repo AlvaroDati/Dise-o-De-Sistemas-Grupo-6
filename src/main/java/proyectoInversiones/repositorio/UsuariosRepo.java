@@ -23,12 +23,6 @@ public class UsuariosRepo extends Repositorio {
 		emanager.getTransaction().commit();
 	}
 	
-	public void persistirIndicador(ArmadorIndicador indicador){
-		emanager.getTransaction().begin();
-		emanager.persist(indicador);
-		emanager.getTransaction().commit();
-	}
-
 	
 //	public void persistirMetodologia(){
 //		emanager.getTransaction().begin();
