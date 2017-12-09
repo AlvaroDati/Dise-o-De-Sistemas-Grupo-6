@@ -37,7 +37,15 @@ public class Usuario implements Serializable {
 
 	//	private static Usuario activo;
 	
-/*	private static Usuario activo;
+public List<Indicador> getIndicadoresUsuario() {
+		return indicadoresUsuario;
+	}
+
+	public void setIndicadoresUsuario(List<Indicador> indicadoresUsuario) {
+		this.indicadoresUsuario = indicadoresUsuario;
+	}
+
+	/*	private static Usuario activo;
 	public static Usuario activo(){
 		return activo;
 	}

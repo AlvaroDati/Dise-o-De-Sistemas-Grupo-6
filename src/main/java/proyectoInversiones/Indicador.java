@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.usuarios.Usuario;
@@ -28,11 +29,16 @@ public class Indicador extends AlgoPersistible{
 	@Column(name = "anio",nullable=false)
 	private int periodo;
 	@Column(name = "empresaAsoc", nullable = false)	
-	private String empresa;
+	private String empresaAsoc;
+	
+	@Transient
+	private Empresa empresa;
 	
 	
-	private float roe;
-	private float ingresoNeto;
+	@Transient
+	protected  float roe;
+	@Transient
+	protected float ingresoNeto;
 	
 	
 	public Indicador(){
@@ -44,12 +50,22 @@ public class Indicador extends AlgoPersistible{
 	}
 	
 	
-	public String getEmpresa() {
+	public String getEmpresaAsoc() {
+		return empresaAsoc;
+	}
+	
+	public void setEmpresaAsoc(String unNombreDeEmpresa) {
+		this.empresaAsoc = unNombreDeEmpresa;
+	}
+	
+	public Empresa getEmpresa(){
 		return empresa;
 	}
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
+	
+	public void setEmpresa(Empresa unaEmpresa){
+		empresa = unaEmpresa;
 	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -73,10 +89,10 @@ public class Indicador extends AlgoPersistible{
 	public void setRoe(float valorRoe) {
 		this.roe = valorRoe;
 	}
-	
 	public float getRoe() {
 		return roe;
 	}
+	
 	public void setIngresoNeto(float valorIngreso) {
 		this.ingresoNeto = valorIngreso;
 	}

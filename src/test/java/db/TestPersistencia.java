@@ -75,7 +75,7 @@ public class TestPersistencia {
 				Indicador indicador = new Indicador();
 
 				indicador.setNombre("Ingreso Neto");
-				indicador.setEmpresa(empresas.get(i).getNombre());
+				indicador.setEmpresaAsoc(empresas.get(i).getNombre());
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularIngresoNeto(empresas.get(i)).get(j));
 								
@@ -95,7 +95,7 @@ public class TestPersistencia {
 				Indicador indicador = new Indicador();
 
 				indicador.setNombre("ROE");
-				indicador.setEmpresa(empresas.get(i).getNombre());
+				indicador.setEmpresaAsoc(empresas.get(i).getNombre());
 				indicador.setPeriodo(empresas.get(i).getPeriodos().get(j).getAnio());
 				indicador.setValorIndicador(armarIndicador.calcularRoe(empresas.get(i)).get(j));
 								
@@ -109,7 +109,27 @@ public class TestPersistencia {
 		}
 	}
 	
-
+	@Test
+	public void persistir3IndicadoresDefinidosPorUsuario(){
+		Empresa empresa = new Empresa("America Movil");
+		Usuario usuario = new Usuario("ivan","ivan");
+		ArmadorIndicador armadorIndicador = new ArmadorIndicador();
+		List<Indicador> indicadores = new ArrayList<Indicador>();
+		String archivo = "IndicadoresDelUsuarioivan";
+		try{
+			indicadores = armadorIndicador.getIndicadoresUsuario(archivo, empresa);
+		}catch(Exception e){
+			
+		}
+		
+		usuario.setIndicadoresUsuario(indicadores);
+		for(Indicador head:indicadores){
+			
+			System.out.println(head.getEmpresaAsoc());
+			System.out.println(head.getNombre());
+			repositorio.indicadoresRepo().persistir(head);
+		}
+	}
 	
 	/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
 	Ya que al no estar en json, siempre van a tiran el mismo error 
