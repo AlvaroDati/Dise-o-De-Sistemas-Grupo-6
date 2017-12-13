@@ -146,7 +146,7 @@ public class ArmadorIndicador {
 				indicadoresUsuario.get(i).setEmpresaAsoc(empresa2.getNombre());
 			//	indicadoresUsuario.get(i).setUsuario(usuario);
 				indicador.add(indicadoresUsuario.get(i));
-				System.out.printf("hola:%s, usuario:%s \n",indicador.get(i).getEmpresaAsoc(),indicador.get(i).getUsuario().getUserTag());
+			//	System.out.printf("hola:%s, usuario:%s \n",indicador.get(i).getEmpresaAsoc(),indicador.get(i).getUsuario().getUserTag());
 			}
 		}
 		return indicador;

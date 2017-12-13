@@ -26,8 +26,8 @@ import com.google.gson.stream.JsonReader;
 
 public class LeerUsuarios {
 	
-	ArrayList<Usuario> usuarios = this.leerArchivo();
 	
+	ArrayList<Usuario> usuarios = this.leerArchivo();
 	public ArrayList<Usuario> leerArchivo() {
 
 		String ruta = "usuarios.json";
@@ -51,19 +51,23 @@ public class LeerUsuarios {
 	}
 	
 
-	public Long obtenerId(String userTag, String password) throws Exception{
+	public Long obtenerId(String userTag, String password) throws Exception {
 		Usuario usuarioFiltrado = null;
-		for (Usuario usuario : usuarios){
-			if (usuario.validar(userTag,password)){
-				usuarioFiltrado = usuario;
-				return usuarioFiltrado.getId() ;
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios = this.leerArchivo();
+		for (int i = 0; i < usuarios.size(); i++) {
+			if (usuarios.get(i).getUserTag().equals(userTag) && usuarios.get(i).getPassword().equals(password)) {
+				System.out.printf("Valido el usuario: %s\n", usuarios.get(i).getUserTag());
+				usuarioFiltrado = usuarios.get(i);
+			} else {
+				//throw new Exception();
 			}
-			else{
-				throw new Exception();
-				}
+
 		}
-		return usuarioFiltrado.getId() ;
+		return usuarioFiltrado.getId();
 	}
+	
+	
 	
 	@SuppressWarnings("unused")
 	public Usuario obtenerUsuario(String userTag){
@@ -77,4 +81,11 @@ public class LeerUsuarios {
 		return null;	
 	}
 	
+	
+	public static void main(String args[]){
+		LeerUsuarios usuario = new LeerUsuarios();
+		for(int i = 0;i<usuario.leerArchivo().size();i++){
+			System.out.printf("Valido el usuario: %s\n", usuario.leerArchivo().get(i).getUserTag());
+		}
+	}
 }

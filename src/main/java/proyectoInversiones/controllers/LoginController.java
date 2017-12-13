@@ -22,11 +22,14 @@ public class LoginController {
 	public Void validate(Request req, Response res) {
 		String userTag = req.queryParams("userTag");
 		String password = req.queryParams("password"); 
+		System.out.printf("userTag:%s \n", userTag);
+		System.out.printf("password:%s \n", password);
 		try{
 			LeerUsuarios archivoUsuarios = new LeerUsuarios();
 			Long idUsuario = archivoUsuarios.obtenerId(userTag,password);
+			System.out.printf("id:%d \n", idUsuario);
 			res.cookie("userTag", userTag);
-			res.cookie("idUsuario", Long.toString(idUsuario));
+			res.cookie("idUsuario", idUsuario.toString());
 			res.redirect("/cuentas");
 		} catch ( Exception e ){
 			res.cookie("mensajeError", e.getMessage());

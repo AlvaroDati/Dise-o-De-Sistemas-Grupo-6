@@ -24,11 +24,11 @@ import spark.Response;
 public class CuentasController implements WithGlobalEntityManager, TransactionalOps {
 	
 	public static ModelAndView listar(Request req, Response res) {
-		Map<String, List<Cuenta>> model = new HashMap<>();
-		NuevoLeerArchivo arch = new NuevoLeerArchivo();
+	    Map<String, List<Cuenta>> model = new HashMap<>();
+	/*	NuevoLeerArchivo arch = new NuevoLeerArchivo();
 		List<Periodo>periodos =  arch.getPeriodos(new Empresa("America Movil"));
 		List<Cuenta> cuentas = setearListaCuentas(periodos);
-		model.put("cuentas", cuentas);
+		model.put("cuentas", cuentas); */
 		return new ModelAndView(model, "Cuentas2.html");
 	}
 	
