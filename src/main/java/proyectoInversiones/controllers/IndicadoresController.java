@@ -32,6 +32,7 @@ import spark.Response;
 public class IndicadoresController implements WithGlobalEntityManager, TransactionalOps {
 	static String usuarioActivo;
 	static String rutaArchivo = "IndicadoresDelUsuario";
+	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();
 	
 	public ModelAndView listar(Request req, Response res) throws IOException {
 
@@ -39,7 +40,6 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		System.out.printf("Tag del usuario: %s '\n",usuario);
 		usuarioActivo = usuario;
 		Map<String, List<Indicador>> model = new HashMap<>();
-
 		Empresa empresaInicial = new Empresa("America Movil");
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
 		List<Periodo> periodos = arch.getPeriodos(empresaInicial);
@@ -62,7 +62,6 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			model.put("indicadores", indicadoresDeEmpresa);
 			model.put("indicadoresU", indicadoresUsuario);
 			return new ModelAndView(model, "Indicadores2.html");
-
 		} catch (Exception e) {
 			res.cookie("mensajeError", e.getMessage());
 			res.redirect("/cuentas");
@@ -113,41 +112,35 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 
 	public static ModelAndView nuevoInd(Request req, Response res) {
 		String usuario = req.cookie("userTag");
-
-		
-//		String id = req.cookie("idUsuario");
-		
 		String nombreIndicador = req.queryParams("nombreIndicador");
-		String empresaSeleccionada = req.queryParams("nombreEmpresa");
+		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
-		if(nombreIndicador != null && empresaSeleccionada != null && expresionIndicador != null){
-			try {
-				System.out.printf("nombreIndicador: %s, empresaSeleccionada: %s, expresionIndicador: %s '\n",
-						nombreIndicador, empresaSeleccionada, expresionIndicador);
-				
-				String archivoUsuario = rutaArchivo.concat(usuario);
-				System.out.printf("nombre del archivo: %s,  '\n",archivoUsuario);
-				
-				File file = new File(archivoUsuario);
-				
-				if (!file.exists()) {
-					file.createNewFile();
+		if (repoIndicadores.stream().filter(x -> x.getNombre().equals(nombreIndicador)) == null) {
+			if (nombreIndicador != null && empresaSeleccionada != null && expresionIndicador != null) {
+				try {
+
+					String archivoUsuario = rutaArchivo.concat(usuario);
+					File file = new File(archivoUsuario);
+
+					if (!file.exists()) {
+						file.createNewFile();
+					}
+
+					FileWriter fw = new FileWriter(file, true);
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(empresaSeleccionada.toString() + "(" + nombreIndicador + ")" + "=");
+					bw.write(expresionIndicador + "\n"); // numero +
+					bw.close();
+					res.redirect("/indicadores");
+
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				
-				FileWriter fw = new FileWriter(file, true);
-				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write(empresaSeleccionada.toString() + "(" + nombreIndicador + ")" + "=");
-				bw.write(expresionIndicador + "\n"); // numero +
-				// empresa(cuenta/indicador(periodo))
-				bw.close();
-				
-				res.redirect("/indicadores");
-				
-			} catch (IOException e) {
-				e.printStackTrace();
+			} else {
+				// Tirar excepcion en spark
 			}
 		}else{
-			//Tirar excepcion en spark
+			return new ModelAndView(null,"IndicadoresError.html");
 		}
 		return null;
 	}

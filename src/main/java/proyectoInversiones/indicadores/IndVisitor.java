@@ -45,13 +45,9 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
 		ArrayList<Float> vAux = new ArrayList<Float>();
 		Indicador indicadorAux           = new Indicador();
-
 		int resultado = 0;
-		
 		String id = ctx.getText(); // id is left-hand side of '='
-		
 		int periodo = 0;
-		
 		int i = id.indexOf("(");
 		String empresa = id.substring(0, i);
 		Empresa unaEmpresa = new Empresa(empresa);

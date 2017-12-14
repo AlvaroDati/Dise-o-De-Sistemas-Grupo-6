@@ -61,8 +61,11 @@ public List<Indicador> getIndicadoresUsuario() {
 	}
 	
 	public boolean validar(String userTag, String password){
-		System.out.printf("entro a validar \n");
-		return userTag.equals(this.getUserTag()) && password.equals(this.getPassword());
+		System.out.println("User tag " +userTag);
+		System.out.println("Password " +password);
+		System.out.println("this.getUserTag() " +this.getUserTag());
+		System.out.println("this.getPassword() "+this.getPassword());
+		return (userTag.equals(this.getUserTag()) && password.equals(this.getPassword()));
 	}
 	
 	@Column(name = "id")
