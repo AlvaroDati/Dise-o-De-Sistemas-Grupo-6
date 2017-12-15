@@ -50,7 +50,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
 			List<Indicador> indicadoresDeEmpresa = setearListaIndicadores(periodosEmpresa, empresa);
-			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa);
+			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa,empresa);
+			
 			model.put("indicadores", indicadoresDeEmpresa);
 			model.put("indicadoresU", indicadoresUsuario);
 			return new ModelAndView(model, "Indicadores2.html");
@@ -78,25 +79,28 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		return indicadores;
 	}
 
-	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos)
+	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)
 			throws IOException {
 		List<Indicador> indicadores = new ArrayList<Indicador>();
-		ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
+		//ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
+		IndVisitor indVisitor = new IndVisitor();
 		String usuario = usuarioActivo;
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
 		String archivoUsuario = rutaArchivo.concat(usuario); //IndicadoresUsuarioUserTag;
-		System.out.println(archivoUsuario);
 		File file = new File(archivoUsuario);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		
-		indicadores = calcularIndicadores.getIndicadoresUsuario(archivoUsuario);
-		for(int i = 0;i<indicadores.size();i++){
-			System.out.printf("Nombre Indicador: %s = %f \n",indicadores.get(i).getNombre(),indicadores.get(i).getValorIndicador());
-			indicadores.get(i).setUsuario(usuarioCreador);
+		for(int i = 0;i<listaPeriodos.size();i++){
+			System.out.printf(" en el periodo: %d\n", listaPeriodos.size());
+			indicadores.addAll(indVisitor.obtenerIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
+			
 		}
+			for(int j = 0;j<indicadores.size();j++){
+					indicadores.get(j).setUsuario(usuarioCreador);
+		}
+			repoIndicadores = indicadores;
 		return indicadores;
 	}
 
@@ -109,7 +113,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		String nombreIndicador = req.queryParams("nombreIndicador");
 		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
-		if (repoIndicadores.stream().filter(x -> x.getNombre().equals(nombreIndicador)) == null) {
+		
+		if (repoIndicadores.stream().filter(x -> x.getNombre().equals(nombreIndicador)) != null) {
 			if (nombreIndicador != null && empresaSeleccionada != null && expresionIndicador != null) {
 				try {
 

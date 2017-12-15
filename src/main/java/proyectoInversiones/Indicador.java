@@ -1,5 +1,8 @@
 package proyectoInversiones;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,8 +43,18 @@ public class Indicador extends AlgoPersistible{
 	protected  float roe;
 	@Transient
 	protected float ingresoNeto;
+	@Transient
+	private List<String> cuentas = new ArrayList<String>();
 	
-	
+	public void agregarCuenta(String cuenta){
+		this.getCuentas().add(cuenta);
+	}
+	public List<String> getCuentas() {
+		return cuentas;
+	}
+	public void setCuentas(List<String> cuentas) {
+		this.cuentas = cuentas;
+	}
 	public Indicador(){
 		
 	}

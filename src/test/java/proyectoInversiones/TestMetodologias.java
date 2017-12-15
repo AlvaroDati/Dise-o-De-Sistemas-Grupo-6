@@ -32,7 +32,6 @@ public class TestMetodologias {
 		
 		Indicador indicador = new Indicador();
 		ArmadorIndicador armador = new ArmadorIndicador();
-		indicador.setValorIndicador();
 		
 		
 		assertFalse(false);

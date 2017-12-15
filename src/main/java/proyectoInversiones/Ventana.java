@@ -203,12 +203,12 @@ public void actionPerformed(ActionEvent evento) {
 	ArmadorIndicador                   indicadorPredefinido     = new ArmadorIndicador();
 	IndVisitor                         indicadorVisitor         = new IndVisitor();
 	List<Indicador> indicadorUsuario = null;
-	try {
-		indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
-	} catch (IOException e2) {
-		// TODO Auto-generated catch block
-		e2.printStackTrace();
-	}
+//	try {
+//		//indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+//	} catch (IOException e2) {
+//		// TODO Auto-generated catch block
+//		e2.printStackTrace();
+//	}
 
 	System.out.print(cuentasRequeridas.iterator());
 	
@@ -218,12 +218,12 @@ public void actionPerformed(ActionEvent evento) {
 	filasListaIndUsuario = 3;
 	
 	
-		try {
-			indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		try {
+//			//indicadorUsuario = indicadorVisitor.obtenerIndicadoresUsuario("output.txt");
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 	
 	
 	if (evento.getSource()==botonVerInformacion){

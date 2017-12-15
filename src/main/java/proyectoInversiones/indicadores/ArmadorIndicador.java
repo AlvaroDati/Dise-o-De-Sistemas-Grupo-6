@@ -6,20 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
@@ -41,7 +27,7 @@ public class ArmadorIndicador {
 	List<Float> valor_cuenta_indicador = new ArrayList<Float>(); /* ESTA LISTA ES PARA ALMACENAR LOS IDENTIFICADORES DEL USUARIO
 	 																	QUE SE VAN A OBTENER DE LA CLASE IndVisitor
 	 																	ESTO YA PINTA PARA UNA SUBCLASE....*/
-	
+	private IndVisitor indVisitor = new IndVisitor();
 	/*************************************************************************
 	 *    INICIO
 	 * CONSTRUCTORES
@@ -137,18 +123,10 @@ public class ArmadorIndicador {
 	public void setValorCuentaIndicador(List<Float> valor_cuenta_indicador) {
 		this.valor_cuenta_indicador = valor_cuenta_indicador;
 	}
-	public List<Indicador> getIndicadoresUsuario(String archivo) throws IOException{
+	public List<Indicador> getIndicadoresUsuario(String archivo,Empresa empresa,int periodo) throws IOException{
 		IndVisitor indVisitor = new IndVisitor();
 		List<Indicador> indicador = new ArrayList<Indicador>();
-		List<Indicador> indicadoresUsuario =indVisitor.obtenerIndicadoresUsuario(archivo);
-//		for(int i = 0;i<indicadoresUsuario.size();i++){
-//			if(indicadoresUsuario.get(i).getEmpresa().getNombre().equals(empresa2.getNombre())){
-//				indicadoresUsuario.get(i).setEmpresaAsoc(empresa2.getNombre());
-//			//	indicadoresUsuario.get(i).setUsuario(usuario);
-//				indicador.add(indicadoresUsuario.get(i));
-//			//	System.out.printf("hola:%s, usuario:%s \n",indicador.get(i).getEmpresaAsoc(),indicador.get(i).getUsuario().getUserTag());
-//			}
-//		}
+		List<Indicador> indicadoresUsuario =indVisitor.obtenerIndicadoresUsuarioSegunEmpresa(archivo,empresa,periodo);
 		for(int i = 0;i<indicadoresUsuario.size();i++){
 			System.out.printf("Nombre Indicador: %s = %f \n",indicadoresUsuario.get(i).getNombre(),indicadoresUsuario.get(i).getValorIndicador());
 		}
