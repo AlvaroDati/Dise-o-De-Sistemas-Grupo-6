@@ -14,7 +14,7 @@ HashMap memory = new HashMap();
 
 prog: stat+ ;
 stat: expr NEWLINE # printExpr
-|  INDICADOR '(' INDICADOR')' '=' expr NEWLINE # assign
+|  INDICADOR '=' expr NEWLINE # assign
 | NEWLINE # blank
 ;
 

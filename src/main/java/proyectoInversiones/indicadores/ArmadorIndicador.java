@@ -137,19 +137,22 @@ public class ArmadorIndicador {
 	public void setValorCuentaIndicador(List<Float> valor_cuenta_indicador) {
 		this.valor_cuenta_indicador = valor_cuenta_indicador;
 	}
-	public List<Indicador> getIndicadoresUsuario(String archivo, Empresa empresa2) throws IOException{
+	public List<Indicador> getIndicadoresUsuario(String archivo) throws IOException{
 		IndVisitor indVisitor = new IndVisitor();
 		List<Indicador> indicador = new ArrayList<Indicador>();
 		List<Indicador> indicadoresUsuario =indVisitor.obtenerIndicadoresUsuario(archivo);
+//		for(int i = 0;i<indicadoresUsuario.size();i++){
+//			if(indicadoresUsuario.get(i).getEmpresa().getNombre().equals(empresa2.getNombre())){
+//				indicadoresUsuario.get(i).setEmpresaAsoc(empresa2.getNombre());
+//			//	indicadoresUsuario.get(i).setUsuario(usuario);
+//				indicador.add(indicadoresUsuario.get(i));
+//			//	System.out.printf("hola:%s, usuario:%s \n",indicador.get(i).getEmpresaAsoc(),indicador.get(i).getUsuario().getUserTag());
+//			}
+//		}
 		for(int i = 0;i<indicadoresUsuario.size();i++){
-			if(indicadoresUsuario.get(i).getEmpresa().getNombre().equals(empresa2.getNombre())){
-				indicadoresUsuario.get(i).setEmpresaAsoc(empresa2.getNombre());
-			//	indicadoresUsuario.get(i).setUsuario(usuario);
-				indicador.add(indicadoresUsuario.get(i));
-			//	System.out.printf("hola:%s, usuario:%s \n",indicador.get(i).getEmpresaAsoc(),indicador.get(i).getUsuario().getUserTag());
-			}
+			System.out.printf("Nombre Indicador: %s = %f \n",indicadoresUsuario.get(i).getNombre(),indicadoresUsuario.get(i).getValorIndicador());
 		}
-		return indicador;
+		return indicadoresUsuario;
 	}
 	
 	/*
@@ -251,6 +254,9 @@ public class ArmadorIndicador {
 		return indicadorPredefinido;
 	}
 	
+//	public float obtenerValorDeExpresion(Indicador indicador){
+//		ArmadorIndicador indicador 
+//	}
 	
 //	public Indicador obtenerIndicadorUsuarioSegunExpresion(String archivoUsuario,String nombre,Empresa empresa) throws IOException{
 //		List<Indicador> indicadores = this.getIndicadoresUsuario(archivoUsuario,empresa);
