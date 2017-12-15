@@ -33,7 +33,8 @@ public class Indicador extends AlgoPersistible{
 	
 	@Transient
 	private Empresa empresa;
-	
+	@Transient
+	private String expresion;
 	
 	@Transient
 	protected  float roe;

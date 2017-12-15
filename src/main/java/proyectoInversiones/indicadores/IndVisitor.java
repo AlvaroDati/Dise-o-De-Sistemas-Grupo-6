@@ -46,34 +46,26 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		ArrayList<Float> vAux = new ArrayList<Float>();
 		Indicador indicadorAux           = new Indicador();
 		int resultado = 0;
-		String id = ctx.getText(); // id is left-hand side of '='
+		String id = ctx.getText(); 
+	//	System.out.print(id);
 		int periodo = 0;
-		int i = id.indexOf("(");
-		String empresa = id.substring(0, i);
-		Empresa unaEmpresa = new Empresa(empresa);
-		
-		
+		int i = id.indexOf("=");
+		String nombreIndicador = id.substring(0, i);
+//		Empresa unaEmpresa = new Empresa(empresa);
+		System.out.print(nombreIndicador);
 		List<Indicador> listaUsuario = new ArrayList<Indicador>();
 		
-		String restante = id.substring(i+1);
-		int b = restante.indexOf(")");
-		String cuenta_indicador = restante.substring(0, b); 
 		int value = visit(ctx.expr()); // compute value of expression on right
-		
-		indicadorAux.setNombre(cuenta_indicador);
+		indicadorAux.setNombre(nombreIndicador);
 		indicadorAux.setValorIndicador(value);
 		resultado = value;
 		
-		
 		periodo = periodoGlobal;
 		indicadorAux.setPeriodo(periodo);
-		indicadorAux.setEmpresa(unaEmpresa);
+		//indicadorAux.setEmpresa(unaEmpresa);
 		//indicadorUsuario.add(indicadorAux);
-		
 		resultado = 0;		
-		
 		listaUsuario.add(indicadorAux);
-		
 		listaDeIndicador.addAll(listaUsuario);
 		//System.out.println(listaUsuario);
 	
@@ -303,7 +295,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		InputStream is = System.in;
 		if (inputFile != null)
 			is = new FileInputStream(inputFile);
-
+		
 		@SuppressWarnings("deprecation")
 		ANTLRInputStream input = new ANTLRInputStream(is);
 
@@ -322,6 +314,16 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer>{
 		listaDeIndicador = eval.getListaDeIndicador();
 
 		return listaDeIndicador;
+	}
+	
+	public static void main(String args[]) throws IOException{
+		IndVisitor vid = new IndVisitor();
+		List<Indicador> ind = vid.obtenerIndicadoresUsuario("IndicadoresDelUsuarioivan");
+	
+		for(int i = 0;i<ind.size();i++){
+			System.out.printf("Nombre Indicador: %s = %f \n", ind.get(i).getNombre(),ind.get(i).getValorIndicador());
+		}
+	
 	}
 
 }

@@ -37,16 +37,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	public ModelAndView listar(Request req, Response res) throws IOException {
 
 		String usuario = req.cookie("userTag");
-		System.out.printf("Tag del usuario: %s '\n",usuario);
 		usuarioActivo = usuario;
 		Map<String, List<Indicador>> model = new HashMap<>();
-		Empresa empresaInicial = new Empresa("America Movil");
-		NuevoLeerArchivo arch = new NuevoLeerArchivo();
-		List<Periodo> periodos = arch.getPeriodos(empresaInicial);
-		List<Indicador> indicadores = setearListaIndicadores(periodos, empresaInicial);
-		List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodos, empresaInicial);
-		model.put("indicadores", indicadores);
-		model.put("indicadoresU", indicadoresUsuario);
 		return new ModelAndView(model, "Indicadores2.html");
 	}
 
@@ -58,7 +50,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
 			List<Indicador> indicadoresDeEmpresa = setearListaIndicadores(periodosEmpresa, empresa);
-			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa, empresa);
+			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa);
 			model.put("indicadores", indicadoresDeEmpresa);
 			model.put("indicadoresU", indicadoresUsuario);
 			return new ModelAndView(model, "Indicadores2.html");
@@ -86,7 +78,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		return indicadores;
 	}
 
-	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos, Empresa empresa)
+	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos)
 			throws IOException {
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
@@ -94,13 +86,15 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
 		String archivoUsuario = rutaArchivo.concat(usuario); //IndicadoresUsuarioUserTag;
+		System.out.println(archivoUsuario);
 		File file = new File(archivoUsuario);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
 		
-		indicadores = calcularIndicadores.getIndicadoresUsuario(archivoUsuario, empresa);
+		indicadores = calcularIndicadores.getIndicadoresUsuario(archivoUsuario);
 		for(int i = 0;i<indicadores.size();i++){
+			System.out.printf("Nombre Indicador: %s = %f \n",indicadores.get(i).getNombre(),indicadores.get(i).getValorIndicador());
 			indicadores.get(i).setUsuario(usuarioCreador);
 		}
 		return indicadores;
@@ -128,7 +122,8 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 
 					FileWriter fw = new FileWriter(file, true);
 					BufferedWriter bw = new BufferedWriter(fw);
-					bw.write(empresaSeleccionada.toString() + "(" + nombreIndicador + ")" + "=");
+					//bw.write(empresaSeleccionada.toString() + "(" + nombreIndicador + ")" + "=");
+					bw.write(nombreIndicador  + "=");
 					bw.write(expresionIndicador + "\n"); // numero +
 					bw.close();
 					res.redirect("/indicadores");
