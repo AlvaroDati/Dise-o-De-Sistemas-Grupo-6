@@ -5,6 +5,7 @@ import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.antlr4.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -329,7 +330,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		return 0;
 	}
 
-	public List<Indicador> obtenerIndicadoresUsuarioSegunEmpresa(String ruta,Empresa empresaAsociada,int per) throws IOException {
+	public List<Indicador> obtenerResultadosIndicadoresUsuarioSegunEmpresa(String ruta,Empresa empresaAsociada,int per) throws IOException {
 
 		List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
 
@@ -415,9 +416,98 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 
 		return listaDeIndicador;
 	}
+	
+	
+	public Indicador obtenerResultadoIndicadorSegunEmpresa(String expresionDeUnIndicador,Empresa empresaAsociada,int per) throws IOException {
 
-//	public static void main(String args[]) throws IOException {
+		Indicador elObjetoIndicadorResultante = new Indicador();
+
+		String inputANTLR = expresionDeUnIndicador; // En "Run Configurations, ponen en Java
+									// Application => Arguments =>
+									// Program&Arguments => {dirDel
+									// indicadores.txt}"
+		if (expresionDeUnIndicador.length() > 0)
+			inputANTLR = expresionDeUnIndicador;
+
+		InputStream is = new ByteArrayInputStream(inputANTLR.getBytes());;
+		
+
+		@SuppressWarnings("deprecation")
+		ANTLRInputStream input = new ANTLRInputStream(is);
+
+		indicadoresLexer lexer = new indicadoresLexer(input);
+
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+		indicadoresParser parser = new indicadoresParser(tokens);
+
+		ParseTree tree = parser.prog(); // parse
+
+		IndVisitor eval = new IndVisitor();
+
+		eval.visit(tree);
+
+		eval.getCuentaIndicador();
+		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
+		ArmadorIndicador indicador = new ArmadorIndicador();
+//		for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
+//			System.out.printf("\nNombre Indicador: %s"
+//					+ " -> Cant cuentas:%d \n",entry.getKey(),entry.getValue().size());
+//		}
+		elObjetoIndicadorResultante = eval.getListaDeIndicador().get(0);
+		elObjetoIndicadorResultante.setPeriodo(per);
+			for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
+				float value = 0;
+				if(elObjetoIndicadorResultante.getNombre().equals(entry.getKey())){
+					for(int j = 0;j<entry.getValue().size();j++){
+						String nombreCuenta = entry.getValue().get(j);
+						switch(nombreCuenta){
+					case "INGRESONETO":
+						value += (int) indicador.obtenerIngresoNetoSegunPeriodo(empresaAsociada, per);
+						break;
+					case "ROE":
+						value += (int) indicador.obtenerRoeSegunPeriodo(empresaAsociada, per);
+						break;
+					case ("EBITDA"):
+						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						break;
+					case ("FDS"):
+						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						break;
+					case ("FCASHFLOW"):
+						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						break;
+					case ("INGNETOOPCONT"):
+						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						break;
+					case ("INGNETOOPDISC"):
+						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						break;
+					case ("DEUDA"):
+						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						break;
+					default:
+						break;
+					}
+					}
+					
+					elObjetoIndicadorResultante.setValorIndicador(elObjetoIndicadorResultante.getValorIndicador()+value);
+					
+				
+				
+			}
+		}
+		
+
+		return elObjetoIndicadorResultante;
+	}
+
+
+
+	public static void main(String args[]) throws IOException {
 //		IndVisitor vid = new IndVisitor();
+//		Indicador unIndicador = vid.obtenerResultadoIndicadorSegunEmpresa(expresionDeUnIndicador, empresaAsociada, per)
+//		
 //		List<Indicador> ind = vid.obtenerIndicadoresUsuarioSegunEmpresa("IndicadoresDelUsuarioivan",new Empresa("America Movil"),2007);
 //
 //		for (int i = 0; i < ind.size(); i++) {
@@ -427,8 +517,10 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 //					ind.get(i).getPeriodo());
 //
 //		}
-//
-//	}
+
+		
+		
+	}
 
 }
 /*

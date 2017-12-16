@@ -119,7 +119,7 @@ public class TestPersistencia {
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		String archivo = "IndicadoresDelUsuarioivan";
 		try{
-			//indicadores = armadorIndicador.getIndicadoresUsuario(archivo);
+			/*indicadores = armadorIndicador.getIndicadoresUsuario(archivo);*/
 		}catch(Exception e){
 			
 		}
