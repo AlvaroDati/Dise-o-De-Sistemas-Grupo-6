@@ -94,7 +94,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		}
 		for(int i = 0;i<listaPeriodos.size();i++){
 			System.out.printf(" en el periodo: %d\n", listaPeriodos.size());
-			indicadores.addAll(indVisitor.obtenerIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
+			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
 			
 		}
 			for(int j = 0;j<indicadores.size();j++){

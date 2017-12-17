@@ -126,7 +126,7 @@ public class ArmadorIndicador {
 	public List<Indicador> getIndicadoresUsuario(String archivo,Empresa empresa,int periodo) throws IOException{
 		IndVisitor indVisitor = new IndVisitor();
 		List<Indicador> indicador = new ArrayList<Indicador>();
-		List<Indicador> indicadoresUsuario =indVisitor.obtenerIndicadoresUsuarioSegunEmpresa(archivo,empresa,periodo);
+		List<Indicador> indicadoresUsuario =indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivo,empresa,periodo);
 		for(int i = 0;i<indicadoresUsuario.size();i++){
 			System.out.printf("Nombre Indicador: %s = %f \n",indicadoresUsuario.get(i).getNombre(),indicadoresUsuario.get(i).getValorIndicador());
 		}
