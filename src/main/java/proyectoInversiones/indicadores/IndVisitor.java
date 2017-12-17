@@ -5,21 +5,26 @@ import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.antlr4.*;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.lang.Object.*;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BufferedTokenStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+
+
 
 public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	/** "memory" for our calculator; variable/value pairs go here */
@@ -422,18 +427,20 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 
 		Indicador elObjetoIndicadorResultante = new Indicador();
 
-		String inputANTLR = expresionDeUnIndicador; // En "Run Configurations, ponen en Java
-									// Application => Arguments =>
-									// Program&Arguments => {dirDel
-									// indicadores.txt}"
+		String inputANTLR = expresionDeUnIndicador; 
+		
+		//String inputANTLR = "asdf=EBITDA+FDS+FCASHFLOW";
+		
 		if (expresionDeUnIndicador.length() > 0)
 			inputANTLR = expresionDeUnIndicador;
 
 		InputStream is = new ByteArrayInputStream(inputANTLR.getBytes());;
 		
-
+		//ExprParser isa = new ExprParser();
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		
 		@SuppressWarnings("deprecation")
-		ANTLRInputStream input = new ANTLRInputStream(is);
+		ANTLRInputStream input = new ANTLRInputStream(br.readLine() + "\n");
 
 		indicadoresLexer lexer = new indicadoresLexer(input);
 
@@ -450,10 +457,6 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		eval.getCuentaIndicador();
 		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
 		ArmadorIndicador indicador = new ArmadorIndicador();
-//		for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
-//			System.out.printf("\nNombre Indicador: %s"
-//					+ " -> Cant cuentas:%d \n",entry.getKey(),entry.getValue().size());
-//		}
 		elObjetoIndicadorResultante = eval.getListaDeIndicador().get(0);
 		elObjetoIndicadorResultante.setPeriodo(per);
 			for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
@@ -518,6 +521,11 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 //
 //		}
 
+		
+		IndVisitor vid = new IndVisitor();
+		Indicador unIndicador = vid.obtenerResultadoIndicadorSegunEmpresa("asdf=EBITDA+FDS+FCASHFLOW",new Empresa("America Movil") , 2016);
+		System.out.println("\n"
+				+ unIndicador.getNombre()+"\n"+unIndicador.getValorIndicador());
 		
 		
 	}
