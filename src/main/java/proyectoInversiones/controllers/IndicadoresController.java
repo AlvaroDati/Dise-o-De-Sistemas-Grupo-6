@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -92,15 +93,28 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		if (!file.exists()) {
 			file.createNewFile();
 		}
+		
+		//Esta lista hay que instanciarla antes! así como está ahora, si te mandas a hacer un nuevo ind sin setear una empresa, esto 
+		//queda vacio!!!
+		repoIndicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(1).getAnio()));
+		
+		
+		System.out.println("\n-----------------------------");
+		System.out.println("Instanciacion repoIndicadores");
+		for (Indicador ind:repoIndicadores){
+			System.out.println(ind.getNombre());
+		}
+		
 		for(int i = 0;i<listaPeriodos.size();i++){
-			System.out.printf(" en el periodo: %d\n", listaPeriodos.size());
+			System.out.printf("En el periodo n°: %d\n", i);
 			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
 			
 		}
 			for(int j = 0;j<indicadores.size();j++){
 					indicadores.get(j).setUsuario(usuarioCreador);
 		}
-			repoIndicadores = indicadores;
+		//	repoIndicadores = indicadores;
+			
 		return indicadores;
 	}
 
@@ -114,7 +128,24 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
 		
-		if (repoIndicadores.stream().filter(x -> x.getNombre().equals(nombreIndicador)) != null) {
+		System.out.println("-----------------------------");
+		System.out.println("RepoIndicadores en NuevoInd");
+		for (Indicador ind:repoIndicadores){
+			System.out.println(ind.getNombre());
+		}
+		
+		System.out.println("-----------------------------");
+		System.out.printf("Nombre del indicador ingresado: %s\n", nombreIndicador);
+		
+		Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
+		
+		System.out.println("-----------------------------");
+		System.out.println("Cantidad de indicadores de igual nombre");
+		Long contador = filtro.count();
+		System.out.println(contador);
+		
+		
+		if (contador == 0) {
 			if (nombreIndicador != null && empresaSeleccionada != null && expresionIndicador != null) {
 				try {
 

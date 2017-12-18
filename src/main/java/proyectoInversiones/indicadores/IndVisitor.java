@@ -64,6 +64,8 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	Map<String,List<String>> map = new HashMap<String,List<String>>(); 
 	/** INDICADOR '(' INDICADOR')' '=' expr NEWLINE */
 	String nombreIndicadorGlobal;
+	
+	
 	@Override
 	public Integer visitAssign(indicadoresParser.AssignContext ctx) {
 
