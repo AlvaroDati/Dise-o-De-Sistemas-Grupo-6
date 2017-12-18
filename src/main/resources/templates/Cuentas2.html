@@ -14,67 +14,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   </head>
-  <body>
+  
+<body>
 
-    <div class= "container-fluid bg-dark fixed-top">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+<div class= "container-fluid bg-dark fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
         <a class="navbar-brand" href="Index.html">Cómo Invierto</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" href="/">Cerrar sesión</a>
-            <a class="nav-item nav-link" href="/cuentas">Cuentas</a>
-            <a class="nav-item nav-link" href="/indicadores">Indicadores</a>
-            <a class="nav-item nav-link" href="/metodologias">Metodologías</a>
+          	<div class="navbar-nav ml-auto">
+            	<a class="nav-item nav-link" href="/">Cerrar sesión</a>
+            	<a class="nav-item nav-link" href="/cuentas">Cuentas</a>
+            	<a class="nav-item nav-link" href="/indicadores">Indicadores</a>
+           		<a class="nav-item nav-link" href="/metodologias">Metodologías</a>
+        	</div>
         </div>
-      </nav>
-    </div>
+     </nav>
+</div>
 
 <div class="row contenedorContenidoDebajoDelNav">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div class="bg-dark table-responsive">
-            <table class="table table-bordered table-hover">
-		 <thead class="thead-default">
-			<tr>
-				<th>Periodo<i class="fa fa-fw fa-sort"></i></th>
-				<th>ebitda<i class="fa fa-fw fa-sort"></i></th>
-				<th>fds<i class="fa fa-fw fa-sort"></i></th>
-				<th>fCashFlow<i class="fa fa-fw fa-sort"></i></th>
-				<th>ingreso neto continuo<i class="fa fa-fw fa-sort"></i></th>
-				<th>ingreso neto discontinuo<i class="fa fa-fw fa-sort"></i></th>
-				<th>deuda<i class="fa fa-fw fa-sort"></i></th>
-			</tr>
-		</thead>
-		{{#each cuentas}}
-		<tr>
-			<td>{{this.periodoVinculado.anio}}</td>
-			<td>{{ebitda}}</td>
-			<td>{{fds}}</td>
-			<td>{{this.fCashFlow}}</td>
-			<td>{{ingNetoOpCont}}</td>
-			<td>{{ingNetoOpDiscont}}</td>
-			<td>{{deuda}}</td>
-		</tr>
-		{{/each}} 
-
-	</table>
-	</div>
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    	<div class="bg-dark table-responsive">
+        	<table class="table table-bordered table-hover">
+		 		<thead class="thead-default">
+					<tr>
+						<th>Periodo<i class="fa fa-fw fa-sort"></i></th>
+						<th>ebitda<i class="fa fa-fw fa-sort"></i></th>
+						<th>fds<i class="fa fa-fw fa-sort"></i></th>
+						<th>fCashFlow<i class="fa fa-fw fa-sort"></i></th>
+						<th>ingreso neto continuo<i class="fa fa-fw fa-sort"></i></th>
+						<th>ingreso neto discontinuo<i class="fa fa-fw fa-sort"></i></th>
+						<th>deuda<i class="fa fa-fw fa-sort"></i></th>
+					</tr>
+				</thead>
+				{{#each cuentas}}
+				<tr>
+					<td>{{this.periodoVinculado.anio}}</td>
+					<td>{{ebitda}}</td>
+					<td>{{fds}}</td>
+					<td>{{this.fCashFlow}}</td>
+					<td>{{ingNetoOpCont}}</td>
+					<td>{{ingNetoOpDiscont}}</td>
+					<td>{{deuda}}</td>
+				</tr>
+				{{/each}} 
+			</table>
+		</div>
     </div>
     
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-          <form role="form" method="post" onsubmit="return validar();">
-
-             <div class="form-group">
-               <input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
-              </div>
-             
-              <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
-              </div>       
+    	<form role="form" method="post" onsubmit="return validar();">
+      		<div class="form-group">
+            	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
+            </div>
+            <div class="form-group">
+            	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
+            </div>       
 		</form>
 	</div>
 </div>
