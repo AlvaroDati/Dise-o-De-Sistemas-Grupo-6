@@ -34,7 +34,10 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	static String usuarioActivo;
 	static String rutaArchivo = "IndicadoresDelUsuario";
 	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();
-	
+		
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public ModelAndView listar(Request req, Response res) throws IOException {
 
 		String usuario = req.cookie("userTag");
@@ -42,7 +45,10 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		Map<String, List<Indicador>> model = new HashMap<>();
 		return new ModelAndView(model, "Indicadores2.html");
 	}
-
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
 		Empresa empresa = new Empresa(nombreEmpresa);
@@ -53,6 +59,11 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			List<Indicador> indicadoresDeEmpresa = setearListaIndicadores(periodosEmpresa, empresa);
 			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa,empresa);
 			
+			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
+			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
+			indicadorUnico.add(indicadorDeEmpresa);
+			
+			model.put("indicadorUnico", indicadorUnico);
 			model.put("indicadores", indicadoresDeEmpresa);
 			model.put("indicadoresU", indicadoresUsuario);
 			return new ModelAndView(model, "Indicadores2.html");
@@ -64,7 +75,10 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		return null;
 
 	}
-
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static List<Indicador> setearListaIndicadores(List<Periodo> listaPeriodos, Empresa empresa) {
 
 		List<Indicador> indicadores = new ArrayList<Indicador>();
@@ -72,6 +86,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 
 		for (int i = 0; i < listaPeriodos.size(); i++) {
 			Indicador indicadorAux = new Indicador();
+			indicadorAux.setEmpresa(empresa);
 			indicadorAux.setPeriodo(listaPeriodos.get(i).getAnio());
 			indicadorAux.setRoe(calculadorIndicadores.obtenerRoeSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
 			indicadorAux.setIngresoNeto(calculadorIndicadores.obtenerIngresoNetoSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
@@ -79,6 +94,9 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		}
 		return indicadores;
 	}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)
 			throws IOException {
@@ -99,25 +117,27 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		repoIndicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(1).getAnio()));
 		
 		
-		System.out.println("\n-----------------------------");
-		System.out.println("Instanciacion repoIndicadores");
-		for (Indicador ind:repoIndicadores){
-			System.out.println(ind.getNombre());
-		}
+//		System.out.println("\n-----------------------------");
+//		System.out.println("Instanciacion repoIndicadores");
+//		for (Indicador ind:repoIndicadores){
+//			System.out.println(ind.getNombre());
+//		}
 		
 		for(int i = 0;i<listaPeriodos.size();i++){
-			System.out.printf("En el periodo n°: %d\n", i);
+//			System.out.printf("En el periodo n°: %d\n", i);
 			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
 			
 		}
 			for(int j = 0;j<indicadores.size();j++){
 					indicadores.get(j).setUsuario(usuarioCreador);
 		}
-		//	repoIndicadores = indicadores;
-			
+					
 		return indicadores;
 	}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static ModelAndView nuevoFormulario(Request req, Response res) {
 		return new ModelAndView(null, "IndicadoresNuevo.html");
 	}
@@ -128,21 +148,21 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
 		
-		System.out.println("-----------------------------");
-		System.out.println("RepoIndicadores en NuevoInd");
-		for (Indicador ind:repoIndicadores){
-			System.out.println(ind.getNombre());
-		}
+//		System.out.println("-----------------------------");
+//		System.out.println("RepoIndicadores en NuevoInd");
+//		for (Indicador ind:repoIndicadores){
+//			System.out.println(ind.getNombre());
+//		}
 		
-		System.out.println("-----------------------------");
-		System.out.printf("Nombre del indicador ingresado: %s\n", nombreIndicador);
+//		System.out.println("-----------------------------");
+//		System.out.printf("Nombre del indicador ingresado: %s\n", nombreIndicador);
 		
 		Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
 		
-		System.out.println("-----------------------------");
-		System.out.println("Cantidad de indicadores de igual nombre");
+//		System.out.println("-----------------------------");
+//		System.out.println("Cantidad de indicadores de igual nombre");
 		Long contador = filtro.count();
-		System.out.println(contador);
+//		System.out.println(contador);
 		
 		
 		if (contador == 0) {

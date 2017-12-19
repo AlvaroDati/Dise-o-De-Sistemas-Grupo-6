@@ -21,7 +21,7 @@ public class CargaBatchCuentas extends TimerTask {
     @Override
     public void run() {
 		try {
-			this.persistirConJson(); //---> persistir cuentas
+			this.persistirConJson(); 
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -40,9 +40,7 @@ public class CargaBatchCuentas extends TimerTask {
 				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
 				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
 				repositorio.empresasRepo().persistir(empresas.get(i)); 
-				//falta en algun lado setear la BD que se usa (creo), no estoy seguro, asi que lo dejo ahi.
-				//Como estoy casi seguro que me falta algo, no lo probé, estrictamente hablando, pero el resto sigue andando correctamente
-			}
+				}
 		}
 		repositorio.cerrar();
 		emFactory.close();

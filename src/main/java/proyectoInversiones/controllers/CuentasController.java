@@ -12,6 +12,7 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Empresa;
+import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.repos.RepoCuentas;
@@ -25,10 +26,6 @@ public class CuentasController implements WithGlobalEntityManager, Transactional
 	
 	public static ModelAndView listar(Request req, Response res) {
 	    Map<String, List<Cuenta>> model = new HashMap<>();
-	/*	NuevoLeerArchivo arch = new NuevoLeerArchivo();
-		List<Periodo>periodos =  arch.getPeriodos(new Empresa("America Movil"));
-		List<Cuenta> cuentas = setearListaCuentas(periodos);
-		model.put("cuentas", cuentas); */
 		return new ModelAndView(model, "Cuentas2.html");
 	}
 	
@@ -43,6 +40,13 @@ public class CuentasController implements WithGlobalEntityManager, Transactional
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo>periodosEmpresa =  arch.getPeriodos(new Empresa(empresa));
 			List<Cuenta> cuentasDeEmpresa = setearListaCuentas(periodosEmpresa);
+			
+//			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
+//			System.out.printf("\n");
+//			System.out.println(cuentaDeEmpresa.getEmpresaAsoc());
+//			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
+//			cuentaUnica.add(cuentaDeEmpresa);
+//			model.put("cuentaUnica",cuentaUnica);	--> faltaría modificar el html		
 			model.put("cuentas", cuentasDeEmpresa);
 			return new ModelAndView(model, "Cuentas2.html");
 			

@@ -33,16 +33,34 @@
 
  <div class="row contenedorContenidoDebajoDelNav">
         
+         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="bg-dark table-responsive">
+            <table class="table table-bordered table-hover">
+			 <thead class="thead-default">
+			  <tr>
+				<th class="text-center">Empresa Seleccionada<i class="fa fa-fw fa-sort"></i></th>
+			  </tr>
+			</thead>
+		{{#each indicadorUnico}}
+		<tr>
+			<td>{{empresaAsoc}}</td>
+		</tr>
+		{{/each}} 
+			</table>
+		  </div>
+    	</div>
+           
+       
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="bg-dark table-responsive">
             <table class="table table-bordered table-hover">
-		 <thead class="thead-default">
-			<tr>
+			 <thead class="thead-default">
+			  <tr>
 				<th class="text-center">Periodo<i class="fa fa-fw fa-sort"></i></th>
 				<th class="text-center">Ingreso Neto<i class="fa fa-fw fa-sort"></i></th>
 				<th class="text-center">ROE<i class="fa fa-fw fa-sort"></i></th>
-			</tr>
-		</thead>
+			  </tr>
+			</thead>
 		{{#each indicadores}}
 		<tr>
 			<td>{{periodo}}</td>
@@ -50,7 +68,6 @@
 			<td>{{roe}}</td>
 		</tr>
 		{{/each}} 
-	
 			</table>
 		  </div>
     	</div>

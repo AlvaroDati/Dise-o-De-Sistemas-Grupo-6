@@ -32,7 +32,7 @@ public class Indicador extends AlgoPersistible{
 	@Column(name = "anio",nullable=false)
 	private int periodo;
 	@Column(name = "empresaAsoc", nullable = false)	
-	private String empresaAsoc;
+	private String empresaAsoc;//Esto no tendría que ser empresa.getNombre()?
 	
 	@Transient
 	private Empresa empresa;
@@ -60,17 +60,16 @@ public class Indicador extends AlgoPersistible{
 	}
 	public Indicador(String nombreIngresado,Empresa empresa){
 		nombre = nombreIngresado;
-		if(empresa == null) empresa = new Empresa(empresa.getNombre()); 
+		if(empresa == null) empresa = new Empresa(empresa.getNombre()); //no entiendo el sentido de esto, lean el warning
 	}
 	
 	
-	public String getEmpresaAsoc() {
-		return empresaAsoc;
+	public String getEmpresaAsoc() {//cambié esto, me parece que tiene mas sentido así; deje el setter por las dudas, por si se usa
+		return empresa.getNombre();
 	}
 	
 	public void setEmpresaAsoc(String unNombreDeEmpresa) {
-		this.empresaAsoc = unNombreDeEmpresa;
-	}
+		this.empresaAsoc = unNombreDeEmpresa; 	}
 	
 	public Empresa getEmpresa(){
 		return empresa;

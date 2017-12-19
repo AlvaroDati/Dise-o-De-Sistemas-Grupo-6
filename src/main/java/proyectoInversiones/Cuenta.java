@@ -1,6 +1,8 @@
 package proyectoInversiones;
 
 
+//import java.beans.Transient;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -37,10 +40,21 @@ public class Cuenta extends AlgoPersistible{
     @Column(name = "capitalTotal")
 	private float capitalTotal;
     
+//    @Transient
+//    private String empresaAsoc = periodoVinculado.getEmpresa().getNombre();
+//    
+//    public String getEmpresaAsoc(){
+//    	return empresaAsoc;
+//    }
+//    
+//    public void setEmpresaAsoc(String unaEmpresa){
+//    	empresaAsoc = unaEmpresa;
+//    }
+//    
+//    public Periodo getPeriodoVinculado() {
+//		return periodoVinculado;
+//	}
     
-    public Periodo getPeriodoVinculado() {
-		return periodoVinculado;
-	}
     
 	public void setPeriodoVinculado(Periodo periodoVinculado) {
 		this.periodoVinculado = periodoVinculado;
