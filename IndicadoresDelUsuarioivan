@@ -1,10 +1,8 @@
-asdf=EBITDA+DEUDA+12+12
-jkl=FDS+FCASHFLOW
+IndicadorUno=EBITDA+DEUDA+12+12
+IndicadorDos=FDS+FCASHFLOW
 SonLasTresDeLaManana=FDS+EBITDA+DEUDA
 SonLasCuatroYMedia=12+12+12
 CarlitosBaute=EBITDA+10000
-CarlitosBaute=EBITDA+FDS
-CarlitosBaute=EBITDA+FDS
-CarlitosBaute=EBITDA+FDS
-CarlitosBaute=EBITDA+FDS
-CarlitosBaute=EBITDA+FDS
+EliasElPupilo=EBITDA+FDS
+PruebaConMinuscula=deuda+1000
+PruebaMayuscSinEspacio=EBITDA+500

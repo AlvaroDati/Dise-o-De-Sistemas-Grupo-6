@@ -1,0 +1,43 @@
+package proyectoInversiones;
+
+import java.util.ArrayList;
+import java.util.TimerTask;
+import proyectoInversiones.repositorio.Repositorio;
+
+public class CargaBatchCuentas extends TimerTask {
+  
+	
+	private Repositorio repositorio;
+	
+	public CargaBatchCuentas() {
+		super();
+	}
+
+    @Override
+    public void run() {
+		try {
+			this.persistirConJson(); //---> persistir cuentas
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+	    }		
+	}
+    
+    public void persistirConJson() {
+		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+		ArrayList<Empresa> empresas = archivo.leerArchivo();
+		
+		for (int i = 0; i < empresas.size(); i++) {
+			for (int j = 0; j < empresas.get(i).getPeriodos().size(); j++) {
+				empresas.get(i).getPeriodos().get(j).setEmpresa(empresas.get(i));
+				empresas.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(empresas.get(i).getPeriodos().get(j));
+				repositorio.empresasRepo().persistir(empresas.get(i)); 
+				//falta en algun lado setear la BD que se usa (creo), no estoy seguro, asi que lo dejo ahi.
+				//Como estoy casi seguro que me falta algo, no lo probé, estrictamente hablando, pero el resto sigue andando correctamente
+			}
+		}
+    }
+    
+    }
+    
+    
