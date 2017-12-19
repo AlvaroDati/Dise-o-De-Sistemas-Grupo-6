@@ -44,6 +44,8 @@ public class CargaBatchCuentas extends TimerTask {
 				//Como estoy casi seguro que me falta algo, no lo probé, estrictamente hablando, pero el resto sigue andando correctamente
 			}
 		}
+		repositorio.cerrar();
+		emFactory.close();
     }
     
     }
