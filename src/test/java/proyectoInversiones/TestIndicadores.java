@@ -38,7 +38,7 @@ public class TestIndicadores {
 	public void indicadorDefinidoPorUsuario() throws IOException{
 		IndVisitor indicadorVisitor = new IndVisitor();
 		Empresa unaEmpresa = new Empresa("America Movil");
-		List<Indicador> usuario = indicadorVisitor.obtenerIndicadoresUsuarioSegunEmpresa("output.txt",unaEmpresa,2007);
+		List<Indicador> usuario = indicadorVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa("IndicadoresDelUsuarioelias",unaEmpresa,2007);
 		Indicador nuevoIndicador = new Indicador();
 		String nombreIndicador = "Testetetete";
 		Indicador otroIndicador = new Indicador();

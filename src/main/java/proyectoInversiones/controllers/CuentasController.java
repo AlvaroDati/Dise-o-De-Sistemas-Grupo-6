@@ -41,12 +41,13 @@ public class CuentasController implements WithGlobalEntityManager, Transactional
 			List<Periodo>periodosEmpresa =  arch.getPeriodos(new Empresa(empresa));
 			List<Cuenta> cuentasDeEmpresa = setearListaCuentas(periodosEmpresa);
 			
-//			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
-//			System.out.printf("\n");
-//			System.out.println(cuentaDeEmpresa.getEmpresaAsoc());
-//			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
-//			cuentaUnica.add(cuentaDeEmpresa);
-//			model.put("cuentaUnica",cuentaUnica);	--> faltaría modificar el html		
+			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
+			
+			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
+			cuentaDeEmpresa.setEmpresaAsoc(empresa);
+			System.out.println("\n" +cuentaDeEmpresa.getEmpresaAsoc());
+			cuentaUnica.add(cuentaDeEmpresa);
+			model.put("cuentaUnica",cuentaUnica);		
 			model.put("cuentas", cuentasDeEmpresa);
 			return new ModelAndView(model, "Cuentas2.html");
 			

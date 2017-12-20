@@ -40,20 +40,21 @@ public class Cuenta extends AlgoPersistible{
     @Column(name = "capitalTotal")
 	private float capitalTotal;
     
-//    @Transient
-//    private String empresaAsoc = periodoVinculado.getEmpresa().getNombre();
-//    
-//    public String getEmpresaAsoc(){
-//    	return empresaAsoc;
-//    }
-//    
-//    public void setEmpresaAsoc(String unaEmpresa){
-//    	empresaAsoc = unaEmpresa;
-//    }
-//    
-//    public Periodo getPeriodoVinculado() {
-//		return periodoVinculado;
-//	}
+    @Transient
+    private String empresaAsoc;// = periodoVinculado.getEmpresa().getNombre();
+    
+    public String getEmpresaAsoc(){
+    	//empresaAsoc = periodoVinculado.getEmpresa().getNombre();
+    	return empresaAsoc;
+    }
+    
+    public void setEmpresaAsoc(String unaEmpresa){
+    	empresaAsoc = unaEmpresa;
+    }
+    
+    public Periodo getPeriodoVinculado() {
+		return periodoVinculado;
+	}
     
     
 	public void setPeriodoVinculado(Periodo periodoVinculado) {

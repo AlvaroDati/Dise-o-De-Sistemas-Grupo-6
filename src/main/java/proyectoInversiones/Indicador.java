@@ -58,12 +58,12 @@ public class Indicador extends Cuantificador implements Serializable{
 	@Transient
 	private List<String> cuentas = new ArrayList<String>();
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+//	public Long getId() {
+//		return id;
+//	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 	public String getNombre() {
 		return nombre;
 	}
