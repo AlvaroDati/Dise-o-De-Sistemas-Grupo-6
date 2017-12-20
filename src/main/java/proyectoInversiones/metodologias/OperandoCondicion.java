@@ -5,6 +5,7 @@ import java.time.Year;
 import java.util.stream.IntStream;
 
 import proyectoInversiones.Empresa;
+import proyectoInversiones.indicadores.IndVisitor;
   
 	
 	public class OperandoCondicion {

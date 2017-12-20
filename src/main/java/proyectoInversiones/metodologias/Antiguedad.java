@@ -1,13 +1,9 @@
 package proyectoInversiones.metodologias;
 
 import java.time.Year;
-
-import javax.persistence.Entity;
-
 import proyectoInversiones.Empresa;
 
 
-@Entity
 public class Antiguedad extends Cuantificador {
 
 	public Antiguedad(){}

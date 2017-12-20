@@ -19,11 +19,11 @@ import proyectoInversiones.repositorio.EmpresasRepo;
 
 public class TestMetodologias {
 	private NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-	private ArrayList<Empresa> empresas = new ArrayList<Empresa>();
+	private ArrayList<Empresa> empresasDelJson = new ArrayList<Empresa>();
 	
 	@Before
 	public void setUp() {
-		empresas = archivo.leerArchivo();
+		empresasDelJson = archivo.leerArchivo();
 	}
 
 	@Test
@@ -42,13 +42,31 @@ public class TestMetodologias {
 	
 	
 	@Test
-	public void gulloCompanyNOCumpleCondTaxativaINDICADORX() throws IOException{
-		IndVisitor indVisitorTest = new IndVisitor();
-		Empresa gulloCompany = empresas.get(0);
+	public void gulloCompanyNOCumpleCondTaxativaIndicadorLocoMenorA500() throws IOException{
+		Empresa gulloCompany = empresasDelJson.get(0);
 		gulloCompany.setNombre("gulloCompany");
-		Indicador unIndicador = indVisitorTest.obtenerResultadoIndicadorSegunEmpresa("asdf2=DEUDA+EBITDA", gulloCompany, 2016);
-		System.out.println(unIndicador.getValorIndicador());
+		Indicador indicadorLoco = new Indicador();
+	    indicadorLoco.setExpresion("hola=DEUDA+500");
+		indicadorLoco.setNombre("indicadorLoco");
+		OperandoCondicion opCond = new OperandoCondicion(OperacionAgregacion.Ultimo, indicadorLoco, 1);
+		CondicionTaxativa condicion = new CondicionTaxativa(opCond,OperacionRelacional.Menor,500);
+		assertFalse(condicion.laCumple(gulloCompany));
 			
+	}
+	
+	
+	@Test
+	public void soloUnaEmpresasCumpleIndicadorLocoMayorA10000EnUltimos2Anios(){
+		Metodologia metodologia = new Metodologia("Una Metodologia");
+		ArrayList<Empresa> empresasParaComparacionConMetodologias = new ArrayList<Empresa>();
+		empresasParaComparacionConMetodologias.add(empresasDelJson.get(0));
+		empresasParaComparacionConMetodologias.add(empresasDelJson.get(1));
+		Indicador indicadorLoco = new Indicador();
+		indicadorLoco.setExpresion("hola=DEUDA+500");
+		indicadorLoco.setNombre("indicadorLoco");
+		CondicionTaxativa cond = new CondicionTaxativa(new OperandoCondicion(OperacionAgregacion.Promedio,indicadorLoco,2), OperacionRelacional.Mayor, 10000);
+		metodologia.agregarCondicionTaxativa(cond);
+		assertEquals(1,metodologia.evaluarPara(empresasParaComparacionConMetodologias).size());
 	}
 
 }

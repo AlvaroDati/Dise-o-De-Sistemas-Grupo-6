@@ -36,7 +36,7 @@
                   "fCashFlow": 789,
                   "ingNetoOpCont": 2345,
 	      		  "ingNetoOpDiscont": 1234,
-                  "deuda": 7
+                  "deuda": 10000
             	}},
 
             {"anio": 2016,
@@ -46,7 +46,7 @@
               "fCashFlow": 978,
               "ingNetoOpCont": 3456,
 	      "ingNetoOpDiscont": 2123,
-              "deuda": 6
+              "deuda": 15000
 		}},
 		{"anio": 2017,
 		"cuentas":{
@@ -55,7 +55,7 @@
               "fCashFlow": 1012,
               "ingNetoOpCont": 3232,
 	      "ingNetoOpDiscont": 1331,
-              "deuda": 4
+              "deuda": 10000
 		}
 		}
 		

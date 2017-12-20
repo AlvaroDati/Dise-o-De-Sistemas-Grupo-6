@@ -15,14 +15,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.time.Year;
+import proyectoInversiones.metodologias.Cuantificador;
 import proyectoInversiones.indicadores.ArmadorIndicador;
+import proyectoInversiones.indicadores.IndVisitor;
 import proyectoInversiones.usuarios.Usuario;
 
 @Entity
 @Table(name = "indicadores")
-public class Indicador extends AlgoPersistible{
+public class Indicador extends Cuantificador implements Serializable{
 
+
+	
+	@Column(name = "nombre")
+	protected String nombre;
+	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
@@ -46,6 +58,19 @@ public class Indicador extends AlgoPersistible{
 	@Transient
 	private List<String> cuentas = new ArrayList<String>();
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public void agregarCuenta(String cuenta){
 		this.getCuentas().add(cuenta);
 	}
@@ -63,6 +88,12 @@ public class Indicador extends AlgoPersistible{
 		if(empresa == null) empresa = new Empresa(empresa.getNombre()); //no entiendo el sentido de esto, lean el warning
 	}
 	
+	public String getExpresion() {
+		return expresion;
+	}
+	public void setExpresion(String expresion) {
+		this.expresion = expresion;
+	}
 	
 	public String getEmpresaAsoc() {//cambié esto, me parece que tiene mas sentido así; deje el setter por las dudas, por si se usa
 		return empresa.getNombre();
@@ -112,6 +143,19 @@ public class Indicador extends AlgoPersistible{
 	
 	public float getIngresoNeto() {
 		return ingresoNeto;
+	}
+	@Override
+	public int evaluarEn(Empresa empresa, Year anio){
+		IndVisitor unIndVisitor = new IndVisitor();
+		int anioParseado = anio.getValue();
+		Indicador unIndicadorAux = null;
+		try {
+			unIndicadorAux = unIndVisitor.obtenerResultadoIndicadorSegunEmpresa(this.getExpresion(), empresa, anioParseado);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return (int) unIndicadorAux.getValorIndicador();
 	}
 	
 	

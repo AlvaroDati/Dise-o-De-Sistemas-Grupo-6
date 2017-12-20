@@ -17,7 +17,7 @@ public class Server {
 
 	public static void main(String[] args) {
 		//new Bootstrap().init();
-		
+	
 		long cincoMin = 2*60*1000; // El timer funca en milisgundos,por eso la cuentita
 
 		TimerTask cargarCuentas = new CargaBatchCuentas();

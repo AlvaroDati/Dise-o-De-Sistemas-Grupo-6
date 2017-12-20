@@ -428,7 +428,9 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	public Indicador obtenerResultadoIndicadorSegunEmpresa(String expresionDeUnIndicador,Empresa empresaAsociada,int per) throws IOException {
 
 		Indicador elObjetoIndicadorResultante = new Indicador();
-
+		elObjetoIndicadorResultante.setEmpresa(empresaAsociada);
+		elObjetoIndicadorResultante.setPeriodo(per);
+		elObjetoIndicadorResultante.setExpresion(expresionDeUnIndicador);
 		String inputANTLR = expresionDeUnIndicador; 
 		
 		//String inputANTLR = "asdf=EBITDA+FDS+FCASHFLOW";
