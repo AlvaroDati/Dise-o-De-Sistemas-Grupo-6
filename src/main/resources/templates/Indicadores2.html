@@ -37,23 +37,33 @@
  <div class="row contenedorContenidoDebajoDelNav">
         
          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-          <div class="bg-dark table-responsive">
-            <table class="table table-bordered table-hover">
-			 <thead class="thead-default">
-			  <tr>
-				<th class="text-center">Empresa Seleccionada<i class="fa fa-fw fa-sort"></i></th>
-			  </tr>
-			</thead>
-		{{#each indicadorUnico}}
-		<tr>
-			<td>{{empresaAsoc}}</td>
-		</tr>
-		{{/each}} 
-			</table>
-		  </div>
+         	<div class="bg-dark table-responsive">
+            	<table class="table table-bordered table-hover">
+			 		<thead class="thead-default">
+			  		<tr>
+						<th class="text-center">Empresa Seleccionada<i class="fa fa-fw fa-sort"></i></th>
+			  		</tr>
+					</thead>
+					{{#each indicadorUnico}}
+					<tr>
+						<td>{{empresaAsoc}}</td>
+					</tr>
+					{{/each}} 
+				</table>
+		  	</div>
     	</div>
+    	
+    	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+       		<form role="form" method="post" onsubmit="return validar();">
+            	<div class="form-group">
+                	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
+                </div>
+              	<div class="form-group">
+                	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
+                </div>      
+			</form>
+		</div>
            
-       
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div class="bg-dark table-responsive">
             <table class="table table-bordered table-hover">
@@ -73,19 +83,7 @@
 		{{/each}} 
 			</table>
 		  </div>
-
-   
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-       		<form role="form" method="post" onsubmit="return validar();">
-            	<div class="form-group">
-                	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
-                </div>
-              	<div class="form-group">
-                	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
-                </div>      
-			</form>
 		</div>
-    
 
     	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
      		<div class="bg-dark table-responsive">
@@ -107,7 +105,7 @@
 		   		</table>
 			</div>
     	</div>
-	</div>
+</div>
 
-  </body>
+</body>
 </html>
