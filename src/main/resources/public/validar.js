@@ -5,25 +5,22 @@ function validar(){
 	empresa=document.getElementById("Empresa").value;
 
 	if((empresa != "America Movil") && (empresa != "General Electric") && (empresa != "Berkshire Hathaway")){
-		alert("Ingrese un nombre de empresa valido; los registrados hasta el momento son America Movil, General Electric y Berkshire Hathaway");
+		alert("ERROR: Ingrese un nombre de empresa válido; los registrados hasta el momento son America Movil, General Electric y Berkshire Hathaway");
 		return false;
-	}
-//	var TextoEncabezado = document.getElementById("TituloEmpresa").innerHTML= "<tr>"+Empresa+"</tr>";
-//	var Encabezado = document.createElement("TR");
-//	Encabezado.innerHTML=TextoEncabezado;
-//    document.getElementById("tablita").appendChild(Encabezado);
+	}else
+		alert("Datos ingresados correctamente, se mostrará a continuación la informacion de la empresa: "+empresa);
+		return false;
 }
 
-
-//function mostrarEmpresa(){
-//	var empresa = document.getElementById("Empresa").value;
-//	return empresa;
-//}
-//
-//function mostarEmpresaSeleccionada(){
-//	//var empresa = mostrarEmpresa();
-//	
-//	var empresa = document.getElementById("tabla").rows[0].cells;
-//	empresa[0].innerHTML = document.getElementById("Empresa").value;
-//	
-//}
+function validarMetodologia(){
+	var metodologia;
+	var metodologiasCargadas = ["Metodologia1","Metodologia2","Metodologia3"];
+	metodologia=document.getElementById("Metodologia").value;
+	if(metodologiasCargadas.find(metodologia)){
+		alert("ERROR: Ingrese una metodologia existente");
+		return false;
+	}else{
+		alert("Datos ingresados correctamente, se aplicará ahora dicha metodología a todas las empresas:");
+		return false;
+	}
+}
