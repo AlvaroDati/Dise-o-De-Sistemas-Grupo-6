@@ -4,13 +4,27 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.util.stream.IntStream;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import proyectoInversiones.Empresa;
-import proyectoInversiones.indicadores.IndVisitor;
   
-	
-	public class OperandoCondicion {
+@Entity
+@Table(name = "operandos_condicion")
+public class OperandoCondicion {
 		
+		@Id 
+		@GeneratedValue
+		private Long id;	
+		@Enumerated
 		private OperacionAgregacion operacionAgregacion;
+		@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 		private Cuantificador indicadorOAntiguedad;
 		private int aniosAEvaluar;
 		

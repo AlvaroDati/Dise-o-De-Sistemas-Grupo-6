@@ -7,16 +7,36 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import proyectoInversiones.Empresa;
 import proyectoInversiones.metodologias.Condicion;
 import proyectoInversiones.metodologias.CondicionPrioritaria;
 import proyectoInversiones.metodologias.CondicionTaxativa;
 import proyectoInversiones.Metodologia;
 
+@Entity
+@Table(name = "metodologias")
 public class Metodologia{
 
+	@Id 
+	@GeneratedValue
+	private Long id;
+	
 	protected String nombre = "";
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="metodologia_id")
 	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<CondicionTaxativa>();
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="metodologia_id")
 	private List<CondicionPrioritaria> condicionesPrioritarias = new ArrayList<CondicionPrioritaria>();
 
     protected Metodologia(){}

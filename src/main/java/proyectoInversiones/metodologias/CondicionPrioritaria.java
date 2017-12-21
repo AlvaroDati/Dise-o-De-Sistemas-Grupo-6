@@ -1,10 +1,15 @@
 package proyectoInversiones.metodologias;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import proyectoInversiones.Empresa;
 import proyectoInversiones.metodologias.Condicion;
 import proyectoInversiones.metodologias.OperacionRelacional;
 import proyectoInversiones.metodologias.OperandoCondicion;
 
+@Entity
+@Table(name = "condiciones_prioritarias")
 public class CondicionPrioritaria extends Condicion{
 	
 	private CondicionPrioritaria() {} //Necesario para persistir la clase

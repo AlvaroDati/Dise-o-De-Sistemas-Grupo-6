@@ -1,7 +1,12 @@
 package proyectoInversiones.metodologias;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import proyectoInversiones.Empresa;
 
+@Entity
+@Table(name = "condiciones_taxativas")
 public class CondicionTaxativa extends Condicion{
 	
 	private int valor;
