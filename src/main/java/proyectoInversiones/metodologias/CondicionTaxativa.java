@@ -11,7 +11,7 @@ public class CondicionTaxativa extends Condicion{
 	
 	private int valor;
 	
-	private CondicionTaxativa() {}
+	public CondicionTaxativa() {} //Necesario para persistir la clase
 	
 	public CondicionTaxativa(OperandoCondicion operando, OperacionRelacional operacionRelacional, int valor) {
 		this.operando = operando;

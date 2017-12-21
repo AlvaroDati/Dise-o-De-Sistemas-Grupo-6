@@ -12,7 +12,7 @@ import proyectoInversiones.metodologias.OperandoCondicion;
 @Table(name = "condiciones_prioritarias")
 public class CondicionPrioritaria extends Condicion{
 	
-	private CondicionPrioritaria() {} //Necesario para persistir la clase
+	public CondicionPrioritaria() {} //Necesario para persistir la clase
 	
 	public CondicionPrioritaria(OperandoCondicion operando, OperacionRelacional operacionRelacional) {
 		this.operando = operando;

@@ -28,7 +28,7 @@ public class OperandoCondicion {
 		private Cuantificador indicadorOAntiguedad;
 		private int aniosAEvaluar;
 		
-		private OperandoCondicion() {} //Necesario para persistir la clase
+		public OperandoCondicion() {} //Necesario para persistir la clase
 		
 		public OperandoCondicion(OperacionAgregacion operacionAgregacion, Cuantificador indicadorOAntiguedad, int aniosAEvaluar) {
 			this.operacionAgregacion = operacionAgregacion;
