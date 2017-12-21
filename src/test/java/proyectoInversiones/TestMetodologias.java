@@ -50,7 +50,7 @@ public class TestMetodologias {
 		indicadorLoco.setNombre("indicadorLoco");
 		OperandoCondicion opCond = new OperandoCondicion(OperacionAgregacion.Ultimo, indicadorLoco, 1);
 		CondicionTaxativa condicion = new CondicionTaxativa(opCond,OperacionRelacional.Menor,500);
-		assertFalse(condicion.laCumple(gulloCompany));
+		assertTrue(condicion.laCumple(gulloCompany));
 			
 	}
 	

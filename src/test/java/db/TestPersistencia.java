@@ -143,25 +143,25 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	 	*/
 	
 	
-	@Test
-	public void persistir4BuscarEmpresaPorNombre(){
-		
-		Empresa empresa = new Empresa("EmpresaPrueba1");
-		Empresa empresa2 = new Empresa("EmpresaPrueba2");
-		Empresa otraEmpresa = new Empresa("asd");
-		repositorio.empresasRepo().persistir(empresa);
-		repositorio.empresasRepo().persistir(empresa2);
-		repositorio.empresasRepo().persistir(otraEmpresa);
-		
-		
-		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Emp");
-		for(Empresa unaEmpresa : empresasFiltradas){
-			System.out.println(unaEmpresa.getNombre());
-		}
-		
-		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
-		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
-	}
+//	@Test
+//	public void persistir4BuscarEmpresaPorNombre(){
+//		
+//		Empresa empresa = new Empresa("EmpresaPrueba1");
+//		Empresa empresa2 = new Empresa("EmpresaPrueba2");
+//		Empresa otraEmpresa = new Empresa("asd");
+//		repositorio.empresasRepo().persistir(empresa);
+//		repositorio.empresasRepo().persistir(empresa2);
+//		repositorio.empresasRepo().persistir(otraEmpresa);
+//		
+//		
+//		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Emp");
+//		for(Empresa unaEmpresa : empresasFiltradas){
+//			System.out.println(unaEmpresa.getNombre());
+//		}
+//		
+//		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
+//		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
+//	}
 	
 /*	
 	@Test

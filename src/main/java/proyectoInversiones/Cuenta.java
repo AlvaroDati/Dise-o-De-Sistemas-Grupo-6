@@ -29,7 +29,7 @@ public class Cuenta extends AlgoPersistible{
 	private float ebitda;
     @Column(name = "fds")
 	private float fds;
-    @Column(name = "fCashflow")
+    @Column(name = "fCashFlow")
 	private float fCashFlow;
     @Column(name = "ingNetoOpCont")
 	private float ingNetoOpCont;
@@ -80,10 +80,10 @@ public class Cuenta extends AlgoPersistible{
 	public void setFds(float fds) {
 		this.fds = fds;
 	}
-	public float getfCashFlow() {
+	public float getFCashFlow() {
 		return fCashFlow;
 	}
-	public void setfCashFlow(float fCashFlow) {
+	public void setFCashFlow(float fCashFlow) {
 		this.fCashFlow = fCashFlow;
 	}
 	public float getIngNetoOpCont() {
@@ -100,7 +100,7 @@ public class Cuenta extends AlgoPersistible{
 	}
 		
 	public float capitalTotal(){
-		capitalTotal = this.getEbitda() + this.getfCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont() - this.getDeuda();
+		capitalTotal = this.getEbitda() + this.getFCashFlow() + this.getFds() + this.getIngNetoOpCont() + this.getIngNetoOpDiscont() - this.getDeuda();
 		return capitalTotal;
 	}
 	

@@ -32,7 +32,7 @@ MUL : '*' ;
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
-INDICADOR : [a-z' 'A-Z'-']+ ; 
+INDICADOR : [a-z' 'A-Z'-' 0-9]+ ; 
 INT : [0-9]+ ; 
 NEWLINE:'\r'? '\n' ; 
 WS : [ \t]+ -> skip ; 

@@ -42,7 +42,9 @@ public class CuentasController implements WithGlobalEntityManager, Transactional
 			List<Cuenta> cuentasDeEmpresa = setearListaCuentas(periodosEmpresa);
 			
 			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
-			
+			for(int i = 0;i<cuentasDeEmpresa.size();i++){
+				System.out.println(cuentasDeEmpresa.get(i).getFCashFlow());
+			}
 			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
 			cuentaDeEmpresa.setEmpresaAsoc(empresa);
 			System.out.println("\n" +cuentaDeEmpresa.getEmpresaAsoc());

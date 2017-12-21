@@ -163,6 +163,12 @@ public class ArmadorIndicador {
 
 	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo) {
 		float roeAux = 0;
+		List<Float> roe = this.calcularRoe(empresa);
+		List<Integer> periodosDeEmpresa = this.periodos(empresa);
+		for (int i = 0; i < roe.size(); i++) {
+			if (periodosDeEmpresa.get(i).equals(periodo))
+				roeAux = roe.get(i);
+		}
 		return roeAux;
 	}
 

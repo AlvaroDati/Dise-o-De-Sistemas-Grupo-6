@@ -651,4 +651,4 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
  * map.hasKey(campo1), se fija, campo2.hasKey(cuenta2), se fijaaaa
  * 
  * 
- */
+ */ 

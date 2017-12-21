@@ -5,9 +5,9 @@
 	<groupId>proyectoInversiones</groupId>
 	<artifactId>proyectoInversiones</artifactId>
 	<version>1-SNAPSHOT</version>
-	<!-- 
-	 <packaging>war</packaging>
-	 -->
+	
+	 <packaging>jar</packaging>
+	 
 	<name>proyectoInversiones</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -131,6 +131,14 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+				<executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
+                    </execution>
+                </executions>
+				
 			</plugin>
 		<!--	<plugin>
 		  		<groupId>org.springframework.boot</groupId>

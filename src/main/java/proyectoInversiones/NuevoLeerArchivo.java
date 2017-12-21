@@ -111,7 +111,7 @@ public class NuevoLeerArchivo {
 				cuentaQuerida.add(cuentasAsociadas.get(i).getFds());
 				break;
 			case ("FCASHFLOW"):
-				cuentaQuerida.add(cuentasAsociadas.get(i).getfCashFlow());
+				cuentaQuerida.add(cuentasAsociadas.get(i).getFCashFlow());
 				break;
 			case ("INGNETOOPCONT"):
 				cuentaQuerida.add(cuentasAsociadas.get(i).getIngNetoOpCont());
@@ -123,7 +123,7 @@ public class NuevoLeerArchivo {
 				cuentaQuerida.add(cuentasAsociadas.get(i).getDeuda());
 				break;
 			case("CAPITALTOTAL"):
-				float valor = cuentasAsociadas.get(i).getEbitda() +cuentasAsociadas.get(i).getFds()+cuentasAsociadas.get(i).getfCashFlow()+cuentasAsociadas.get(i).getIngNetoOpCont()
+				float valor = cuentasAsociadas.get(i).getEbitda() +cuentasAsociadas.get(i).getFds()+cuentasAsociadas.get(i).getFCashFlow()+cuentasAsociadas.get(i).getIngNetoOpCont()
 				+cuentasAsociadas.get(i).getIngNetoOpDiscont() -cuentasAsociadas.get(i).getDeuda();
 			cuentaQuerida.add(valor);
 				break;
