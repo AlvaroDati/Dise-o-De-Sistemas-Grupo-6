@@ -122,6 +122,11 @@ public class NuevoLeerArchivo {
 			case ("DEUDA"):
 				cuentaQuerida.add(cuentasAsociadas.get(i).getDeuda());
 				break;
+			case("CAPITALTOTAL"):
+				float valor = cuentasAsociadas.get(i).getEbitda() +cuentasAsociadas.get(i).getFds()+cuentasAsociadas.get(i).getfCashFlow()+cuentasAsociadas.get(i).getIngNetoOpCont()
+				+cuentasAsociadas.get(i).getIngNetoOpDiscont() -cuentasAsociadas.get(i).getDeuda();
+			cuentaQuerida.add(valor);
+				break;
 			default:
 				// Tirar excepcion
 				break;

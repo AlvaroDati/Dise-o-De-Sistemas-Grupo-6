@@ -319,6 +319,9 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		case ("DEUDA"):
 			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
 			break;
+		case("CAPITALTOTAL"):
+			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, "CAPITALTOTAL");
+			break;
 		default:
 			/*
 			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador

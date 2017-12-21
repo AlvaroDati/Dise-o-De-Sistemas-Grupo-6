@@ -1,7 +1,7 @@
 [
 	{
 	"nombre":"America Movil",
-    "inicioActividad":2000,
+    "inicioActividad":2013,
     "periodos":[ 
     			{ "anio": 2016,
     			  "cuentas": {
@@ -27,7 +27,7 @@
 	},
 	{
     "nombre":"Berkshire Hathaway",
-    "inicioActividad":1955,
+    "inicioActividad":2012,
     "periodos":[
                 { "anio": 2015,
                   "cuentas":{
@@ -64,7 +64,7 @@
 		
 		{
             "nombre":"General Electric",
-            "inicioActividad":1892,
+            "inicioActividad":1970,
             "periodos":            
             [
 

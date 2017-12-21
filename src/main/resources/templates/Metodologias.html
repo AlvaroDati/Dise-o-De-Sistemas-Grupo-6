@@ -29,45 +29,45 @@
             <a class="nav-item nav-link" href="/">Cerrar sesión</a>
             <a class="nav-item nav-link" href="/cuentas">Cuentas</a>
             <a class="nav-item nav-link" href="/indicadores">Indicadores</a>
-            <a class="nav-item nav-link" href="/metodologias/new">Nueva Metodología</a>
+           <!--  <a class="nav-item nav-link" href="/metodologias/new">Nueva Metodología</a> -->
           </div>
         </div>
       </nav>
     </div>
 
-    <div class="row contenedorContenidoDebajoDelNav">
+		
+<div class="row contenedorContenidoDebajoDelNav">
+
+		
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+    	<form role="form" method="post" onsubmit="return validarMetodologia();">
+           	<div class="form-group">
+               	<input type="text"  name="metodologia" placeholder="Ingrese la metodología:" class="form-control input-48" id="metodologia" required>
+               </div>
+            	<div class="form-group">
+                	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
+                </div>      
+			</form>
+		</div>
+       
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
          	<div class="bg-dark table-responsive">
             	<table class="table table-bordered table-hover">
 		 			<thead class="thead-default">
 						<tr>
-							<th class="text-center">Empresa<i class="fa fa-fw fa-sort"></i></th>
-							<th class="text-center">Periodo<i class="fa fa-fw fa-sort"></i></th>
-							<th class="text-center">Metodologia<i class="fa fa-fw fa-sort"></i></th>
-							<th class="text-center">Valor<i class="fa fa-fw fa-sort"></i></th>
+							<th class="text-center">Metodologias<i class="fa fa-fw fa-sort"></i></th>
 						</tr>
 					</thead>
-					<!-- {{#each indicadores}}
+					{{#each metodologias}}
 					<tr>
-						<td>{{periodo}}</td>			ACA IRÍA EL MANEJO DE HANDLEBARS PARA COMPLETAR LA TABLA CON
-						<td>{{ingresoNeto}}</td>		LOS DATOS DE LAS METODOLOGIAS. DEJO EL CÓDIGO HECHO EN INDICADORES
-						<td>{{roe}}</td>				A MODO DE EJEMPLO.
+						<td>{{nombre}}</td>							
 					</tr>
-					{{/each}}  -->
+					{{/each}} 
 				</table>
 		   </div>
     	</div>
-   
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-       		<form role="form" method="post" onsubmit="return validarMetodologia();">
-            	<div class="form-group">
-                	<input type="text"  name="Metodologia" placeholder="Ingrese la metodología:" class="form-control input-48" id="Metodologia" required>
-                </div>
-              	<div class="form-group">
-                	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
-                </div>      
-			</form>
-		</div>
-      </div>
+
+     </div>
+     
   </body>
 </html>

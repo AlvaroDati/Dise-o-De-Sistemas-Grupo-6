@@ -25,7 +25,9 @@ public class Router {
 		Spark.get("/indicadores/new", IndicadoresController::nuevoFormulario,engine);
 		Spark.post("/indicadores/new", IndicadoresController::nuevoInd, engine);
 		Spark.get("/metodologias", new MetodologiasController()::listar, engine);
-		//Spark.get("/metodologias/:id", MetodologiasController::mostrar, engine);
+		Spark.post("/metodologias", new MetodologiasController()::setearMetodologia);
+		Spark.get("/metodologias/show", new MetodologiasController()::listarEmpresas, engine);
+		
 		Spark.get("/*", (req, res) -> {
 			Spark.halt(400, "Bad Request");
 			return null;
