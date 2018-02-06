@@ -2,15 +2,12 @@ package proyectoInversiones.indicadores;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
-import proyectoInversiones.usuarios.Usuario;
 
 
 public class ArmadorIndicador {

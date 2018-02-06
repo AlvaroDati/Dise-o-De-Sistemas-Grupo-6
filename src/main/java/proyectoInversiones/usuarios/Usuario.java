@@ -1,17 +1,13 @@
 package proyectoInversiones.usuarios;
 
 
-import java.time.Year;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,6 +17,7 @@ import proyectoInversiones.Indicador;
 
 @Entity
 @Table(name = "usuarios")
+@NamedQuery(name = "buscarUsuarioPorNombre", query = "SELECT u FROM Usuario u WHERE u.userTag LIKE :filtro")
 public class Usuario implements Serializable {
 	@Id 
 //	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,6 +51,7 @@ public List<Indicador> getIndicadoresUsuario() {
 	}
 */	
 	protected Usuario(){}//Necesario para persistir la clase
+	
 	
 	public Usuario(String userTag, String password){
 		this.userTag = userTag;

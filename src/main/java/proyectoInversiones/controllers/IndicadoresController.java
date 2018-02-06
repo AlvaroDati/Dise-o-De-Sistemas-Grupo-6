@@ -3,7 +3,6 @@ package proyectoInversiones.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,16 +13,13 @@ import java.util.ArrayList;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-import proyectoInversiones.Cuenta;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
-import proyectoInversiones.indicadores.*;
-//import proyectoInversiones.Empresa;
-//import proyectoInversiones.repos.RepoCuentas;
-/*import dominio.usuarios.RepositorioUsuarios;
-import dominio.usuarios.Usuario;*/
+import proyectoInversiones.indicadores.IndVisitor;
+import proyectoInversiones.indicadores.ArmadorIndicador;
+import proyectoInversiones.indicadores.CalculoIndicadores;
 import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
 import spark.ModelAndView;
@@ -56,9 +52,9 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 			Map<String, List<Indicador>> model = new HashMap<>();
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
-			List<Indicador> indicadoresDeEmpresa = setearListaIndicadores(periodosEmpresa, empresa);
-			List<Indicador> indicadoresUsuario = setearListaIndicadoresUsuario(periodosEmpresa,empresa);
-			
+			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
+			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
+			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
 			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
 			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
 			indicadorUnico.add(indicadorDeEmpresa);

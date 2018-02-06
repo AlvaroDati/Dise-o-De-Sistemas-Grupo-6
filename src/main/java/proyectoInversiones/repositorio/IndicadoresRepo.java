@@ -2,7 +2,6 @@ package proyectoInversiones.repositorio;
 
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import proyectoInversiones.Indicador;
 
 

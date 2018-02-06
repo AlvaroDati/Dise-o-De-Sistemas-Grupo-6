@@ -1,10 +1,5 @@
 package proyectoInversiones.repositorio;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import proyectoInversiones.Indicador;
 import proyectoInversiones.indicadores.IndVisitor;
 
 public class RepositorioIndicadores {

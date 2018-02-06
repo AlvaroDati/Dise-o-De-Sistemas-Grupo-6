@@ -1,5 +1,6 @@
 package proyectoInversiones;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,15 +23,17 @@ import proyectoInversiones.metodologias.CondicionPrioritaria;
 import proyectoInversiones.metodologias.CondicionTaxativa;
 import proyectoInversiones.Metodologia;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "metodologias")
-public class Metodologia{
+public class Metodologia implements Serializable{
 
 	@Id 
 	@GeneratedValue
 	private Long id;
 	
-	protected String nombre = "";
+	@Column(name = "nombre", nullable = false)
+	private String nombre;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="metodologia_id")

@@ -4,11 +4,14 @@ package proyectoInversiones.repositorio;
 
 import javax.persistence.EntityManager;
 
-public class Repositorio {
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+public class Repositorio implements WithGlobalEntityManager{
 	private PeriodosRepo periodos;
 	private EmpresasRepo empresas;
 	private IndicadoresRepo indicadores;
 	private UsuariosRepo usuarios;
+	private MetodologiasRepo metodologias;
 	protected EntityManager emanager;
 
 	public Repositorio(EntityManager emanager) {
@@ -36,6 +39,12 @@ public class Repositorio {
 		return indicadores;
 	}
 	
+	public MetodologiasRepo metodologiasRepo() {
+		if (metodologias == null) {
+			metodologias = new MetodologiasRepo(emanager);
+		}
+		return metodologias;
+	}
 	
 	public UsuariosRepo usuariosRepo() {
 		if (usuarios == null) {

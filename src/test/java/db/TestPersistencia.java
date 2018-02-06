@@ -2,11 +2,8 @@ package db;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.Assert;
@@ -14,16 +11,11 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 
 
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
-import proyectoInversiones.Periodo;
-import proyectoInversiones.Cuenta;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
@@ -143,43 +135,28 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	 	*/
 	
 	
-//	@Test
-//	public void persistir4BuscarEmpresaPorNombre(){
-//		
-//		Empresa empresa = new Empresa("EmpresaPrueba1");
-//		Empresa empresa2 = new Empresa("EmpresaPrueba2");
-//		Empresa otraEmpresa = new Empresa("asd");
-//		repositorio.empresasRepo().persistir(empresa);
-//		repositorio.empresasRepo().persistir(empresa2);
-//		repositorio.empresasRepo().persistir(otraEmpresa);
-//		
-//		
-//		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Emp");
-//		for(Empresa unaEmpresa : empresasFiltradas){
-//			System.out.println(unaEmpresa.getNombre());
-//		}
-//		
-//		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
-//		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
-//	}
-	
-/*	
 	@Test
-	public void  persistirEmpresaConPeriodos() {
-		Periodo unPeriodo = new Periodo(2014);
-		Periodo otroPeriodo = new Periodo(2010);
-		Periodo p3 = new Periodo(2000);
-		Empresa unaEmpresa = new Empresa();
-		unaEmpresa.setNombre("IBM");
-	//	unPeriodo.setEmpresa(unaEmpresa);
-	//	otroPeriodo.setEmpresa(unaEmpresa);
-	//	p3.setEmpresa(unaEmpresa);
-		unaEmpresa.addPeriodo(unPeriodo);
-		unaEmpresa.addPeriodo(otroPeriodo);
-		unaEmpresa.addPeriodo(p3);
-	    repositorio.empresasRepo().persistir(unaEmpresa);
-		unaEmpresa.getPeriodos().forEach(periodo -> System.out.println(periodo.getAnio()));
-	}*/
+	public void persistir4BuscarEmpresaPorNombre(){
+		
+		Empresa empresa = new Empresa("EmpresaPrueba1");
+		Empresa empresa2 = new Empresa("EmpresaPrueba2");
+		Empresa otraEmpresa = new Empresa("asd");
+		repositorio.empresasRepo().persistir(empresa);
+		repositorio.empresasRepo().persistir(empresa2);
+		repositorio.empresasRepo().persistir(otraEmpresa);
+		
+		
+		List<Empresa> empresasFiltradas = repositorio.empresasRepo().buscarEmpresaPorNombre("Emp");
+		for(Empresa unaEmpresa : empresasFiltradas){
+			System.out.println(unaEmpresa.getNombre());
+		}
+		
+		Assert.assertFalse(empresasFiltradas.contains(otraEmpresa));
+		Assert.assertTrue(empresasFiltradas.contains(empresa) && empresasFiltradas.contains(empresa2));
+	}
+	
+	
+
 	
 	
 

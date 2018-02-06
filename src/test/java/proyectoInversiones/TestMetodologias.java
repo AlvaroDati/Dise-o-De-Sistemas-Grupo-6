@@ -4,18 +4,17 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import proyectoInversiones.indicadores.*;
 import proyectoInversiones.Empresa;
-import proyectoInversiones.Periodo;
-import proyectoInversiones.Indicador;
-import proyectoInversiones.metodologias.*;
-import proyectoInversiones.repositorio.EmpresasRepo;
-
+import proyectoInversiones.metodologias.Antiguedad;
+import proyectoInversiones.metodologias.CondicionPrioritaria;
+import proyectoInversiones.metodologias.CondicionTaxativa;
+import proyectoInversiones.metodologias.OperacionAgregacion;
+import proyectoInversiones.metodologias.OperacionRelacional;
+import proyectoInversiones.metodologias.OperandoCondicion;
 
 public class TestMetodologias {
 	private NuevoLeerArchivo archivo = new NuevoLeerArchivo();

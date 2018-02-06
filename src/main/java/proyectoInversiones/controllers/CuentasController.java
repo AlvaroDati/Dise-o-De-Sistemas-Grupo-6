@@ -1,23 +1,17 @@
 package proyectoInversiones.controllers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Empresa;
-import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
-import proyectoInversiones.repos.RepoCuentas;
-import proyectoInversiones.usuarios.LeerUsuarios;
-import proyectoInversiones.usuarios.Usuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

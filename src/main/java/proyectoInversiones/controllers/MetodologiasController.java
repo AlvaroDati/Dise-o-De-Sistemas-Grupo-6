@@ -16,7 +16,6 @@ import proyectoInversiones.metodologias.CondicionTaxativa;
 import proyectoInversiones.metodologias.OperacionAgregacion;
 import proyectoInversiones.metodologias.OperacionRelacional;
 import proyectoInversiones.metodologias.OperandoCondicion;
-import proyectoInversiones.usuarios.LeerUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

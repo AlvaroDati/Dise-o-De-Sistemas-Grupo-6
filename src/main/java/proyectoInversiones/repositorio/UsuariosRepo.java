@@ -1,15 +1,15 @@
 package proyectoInversiones.repositorio;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import proyectoInversiones.Empresa;
-import proyectoInversiones.Periodo;
-import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.usuarios.Usuario;
 
 public class UsuariosRepo extends Repositorio {
-	UsuariosRepo(EntityManager emanager) {
+	public UsuariosRepo(EntityManager emanager) { //Antes estaba sin public
 		super(emanager);
 	}
 
@@ -22,13 +22,21 @@ public class UsuariosRepo extends Repositorio {
 		emanager.persist(unUsuario);
 		emanager.getTransaction().commit();
 	}
-	
-	
-//	public void persistirMetodologia(){
-//		emanager.getTransaction().begin();
-//		emanager.persist();
-//		emanager.getTransaction().commit();
-//	}
+	public Usuario buscarUsuarioPorNombre(String nombre){
+		List<Usuario> usuarioALoguearse = new ArrayList<Usuario>();
+	//	usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre").setParameter("filtro", "%" + nombre + "%").getResultList();
+		usuarioALoguearse = entityManager().createNamedQuery("buscarUsuarioPorNombre").setParameter("filtro", "%" + nombre + "%").getResultList();
+		
+		System.out.println("Usuario: "+ usuarioALoguearse.get(0).getPassword());
+		Usuario usuarioALoguearse2 = null;
+		for(int i = 0;i<usuarioALoguearse.size();i++){
+			if(usuarioALoguearse.get(i).getUserTag().equals(nombre)){
+				usuarioALoguearse2 = usuarioALoguearse.get(i);
+			}
+		}
+		
+		return usuarioALoguearse2;
+	}
 	
 }
 

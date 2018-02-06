@@ -7,22 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.Year;
 import proyectoInversiones.metodologias.Cuantificador;
-import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.indicadores.IndVisitor;
 import proyectoInversiones.usuarios.Usuario;
 
@@ -43,9 +36,18 @@ public class Indicador extends Cuantificador implements Serializable{
 	private float valorIndicador;
 	@Column(name = "anio",nullable=false)
 	private int periodo;
-	@Column(name = "empresaAsoc", nullable = false)	
-	private String empresaAsoc;//Esto no tendría que ser empresa.getNombre()?
+	//Esto no tendría que ser empresa.getNombre()?
+	@Column(name = "empresaAsoc", nullable = true)	
+	private String empresaAsoc;
 	
+	public String getEmpresaAsoc() {//cambié esto, me parece que tiene mas sentido así; deje el setter por las dudas, por si se usa
+		empresaAsoc = empresa.getNombre();
+		return empresaAsoc;
+	}
+	
+	public void setEmpresaAsoc(String unNombreDeEmpresa) {
+		this.empresaAsoc = unNombreDeEmpresa; 	
+		}
 	@Transient
 	private Empresa empresa;
 	@Transient
@@ -95,12 +97,7 @@ public class Indicador extends Cuantificador implements Serializable{
 		this.expresion = expresion;
 	}
 	
-	public String getEmpresaAsoc() {//cambié esto, me parece que tiene mas sentido así; deje el setter por las dudas, por si se usa
-		return empresa.getNombre();
-	}
 	
-	public void setEmpresaAsoc(String unNombreDeEmpresa) {
-		this.empresaAsoc = unNombreDeEmpresa; 	}
 	
 	public Empresa getEmpresa(){
 		return empresa;

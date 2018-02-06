@@ -1,6 +1,5 @@
 package proyectoInversiones.repositorio;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 
 import proyectoInversiones.Periodo;

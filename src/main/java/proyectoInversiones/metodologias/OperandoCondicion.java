@@ -1,5 +1,6 @@
 package proyectoInversiones.metodologias;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.stream.IntStream;
@@ -15,9 +16,10 @@ import javax.persistence.Table;
 
 import proyectoInversiones.Empresa;
   
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "operandos_condicion")
-public class OperandoCondicion {
+public class OperandoCondicion implements Serializable{
 		
 		@Id 
 		@GeneratedValue
