@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "empresas")
-//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
+@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
 public class Empresa extends AlgoPersistible {
 	
 	@Column(name = "inicioDeActividad")

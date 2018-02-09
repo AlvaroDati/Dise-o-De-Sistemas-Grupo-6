@@ -17,23 +17,33 @@ import org.junit.runners.MethodSorters;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Indicador;
+import proyectoInversiones.Metodologia;
 import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
 import proyectoInversiones.repositorio.*;
 import proyectoInversiones.indicadores.ArmadorIndicador;
+import proyectoInversiones.indicadores.IndicadorAuxiliar;
+import proyectoInversiones.metodologias.Antiguedad;
+import proyectoInversiones.metodologias.CondicionPrioritaria;
+import proyectoInversiones.metodologias.CondicionTaxativa;
+import proyectoInversiones.metodologias.OperacionAgregacion;
+import proyectoInversiones.metodologias.OperacionRelacional;
+import proyectoInversiones.metodologias.OperandoCondicion;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestPersistencia {
-	private static final String PERSISTENCE_UNIT_NAME = "dds";
+	private static final String PERSISTENCE_UNIT_NAME = "db";
 	private EntityManagerFactory emFactory;
 	private Repositorio repositorio;
-	
+	private NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+	private ArrayList<Empresa> empresasDelJson = new ArrayList<Empresa>();
 	
 	@Before
 	public void setUp() throws Exception {
 		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		repositorio = new Repositorio(emFactory.createEntityManager());
+		empresasDelJson = archivo.leerArchivo();
 	}
 	
 	
@@ -42,11 +52,18 @@ public class TestPersistencia {
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
 		
+		
 		for (Usuario head:usuarios){
-			if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
-				Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
-			else
-				repositorio.usuariosRepo().persistir(head);
+			
+			if(repositorio.usuariosRepo().buscarPorId(head.getId()) == null){
+				repositorio.usuariosRepo().persistir(head);			
+			}else{
+				System.out.println("asdfsd");
+				if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
+					Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
+				else
+					repositorio.usuariosRepo().persistir(head);
+			}
 		}
 		
 		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
@@ -118,21 +135,10 @@ public class TestPersistencia {
 		
 		usuario.setIndicadoresUsuario(indicadores);
 		for(Indicador head:indicadores){
-			
-			System.out.println(head.getEmpresaAsoc());
-			System.out.println(head.getNombre());
 			repositorio.indicadoresRepo().persistir(head);
 		}
 	}
 	
-	/*En vez de perisistir solo empresas, se podria persistir indicadores y metodologias, 
-	Ya que al no estar en json, siempre van a tiran el mismo error 
-
-Caused by: org.hibernate.MappingException: Could not determine type for: proyectoInversiones.NuevoLeerArchivo, at table: Indicador, for columns: [org.hibernate.mapping.Column(archivoEmpresas)]
-	Esto lo tira, porque en el json, no hay un campo Indicador/Metodologia 
-	Capaz si hacemos un persistir(Indicador/Metodologia) indicando la empresa a la que esta relacionada
-	Va a ser mas llevadero esto, y se pueden hacer mejores tests
-	 	*/
 	
 	
 	@Test
@@ -157,7 +163,43 @@ Caused by: org.hibernate.MappingException: Could not determine type for: proyect
 	
 	
 
-	
+	@Test
+	public void persistirMetodologia(){
+		Metodologia unaMetodologia = new Metodologia("Una Metodologia");
+		List<Empresa> empresasParaComparacionConMetodologias = new ArrayList<Empresa>();
+		Empresa ivanCompany = new Empresa("IvanCompany");
+		Empresa gulloCompany = new Empresa("GulloCompany");
+		ivanCompany.setInicioActividad(2000);
+		gulloCompany.setInicioActividad(1980);
+		IndicadorAuxiliar indicadorLoco = new IndicadorAuxiliar();
+		indicadorLoco.setEmpresaAsoc(ivanCompany.getNombre());
+		indicadorLoco.setExpresion("hola=DEUDA+500");
+		indicadorLoco.setNombre("indicadorLoco");
+		
+		CondicionTaxativa unaCondicionTaxativa = new CondicionTaxativa(
+												 new OperandoCondicion(OperacionAgregacion.Promedio,
+																					indicadorLoco,
+																					2), 
+																	  OperacionRelacional.Mayor, 
+																	  100);
+		if(unaMetodologia.evaluarPara(empresasParaComparacionConMetodologias).size() == 0){
+			unaMetodologia.agregarCondicionTaxativa(unaCondicionTaxativa);
+			System.out.println("2");
+		}
+		Antiguedad antiguedad = new Antiguedad();
+		antiguedad.setEmpresaAsoc("Soy un antiguedad");
+		antiguedad.setPeriodos("2999");
+		OperandoCondicion opCond = new OperandoCondicion(OperacionAgregacion.Ultimo, antiguedad, 1);
+		CondicionPrioritaria unaCondicionPrioritaria = new CondicionPrioritaria(opCond, OperacionRelacional.Mayor);		
+		if(unaCondicionPrioritaria.esMejorQue(gulloCompany, ivanCompany)){
+			unaMetodologia.agregarCondicionPrioritaria(unaCondicionPrioritaria);
+			System.out.println("3");
+		}
+		repositorio.metodologiasRepo().persistir(unaMetodologia);
+		
+		
+		
+	}
 	
 
 

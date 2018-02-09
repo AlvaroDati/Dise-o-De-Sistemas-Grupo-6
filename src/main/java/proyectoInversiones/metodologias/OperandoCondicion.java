@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import proyectoInversiones.Empresa;
+import proyectoInversiones.Indicador;
+import proyectoInversiones.usuarios.Usuario;
   
 @SuppressWarnings("serial")
 @Entity

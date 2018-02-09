@@ -10,6 +10,7 @@ import proyectoInversiones.Empresa;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.Metodologia;
 import proyectoInversiones.NuevoLeerArchivo;
+import proyectoInversiones.indicadores.IndicadorAuxiliar;
 import proyectoInversiones.metodologias.Antiguedad;
 import proyectoInversiones.metodologias.CondicionPrioritaria;
 import proyectoInversiones.metodologias.CondicionTaxativa;
@@ -87,7 +88,7 @@ public class MetodologiasController {
 		Metodologia van = new Metodologia("VAN");
 		van.agregarCondicionPrioritaria(new CondicionPrioritaria(new OperandoCondicion(OperacionAgregacion.Ultimo, new Antiguedad(), 6), OperacionRelacional.Mayor));
 		van.agregarCondicionTaxativa(new CondicionTaxativa(new OperandoCondicion(OperacionAgregacion.Ultimo, new Antiguedad(), 6), OperacionRelacional.Menor, 6));
-		Indicador propDeuda = new Indicador();
+		IndicadorAuxiliar propDeuda = new IndicadorAuxiliar();
 		propDeuda.setExpresion("PropDeuda=DEUDA/CAPITALTOTAL");
 		Metodologia minDeuda = new Metodologia("MinimizarDeuda");
 		minDeuda.agregarCondicionPrioritaria(new CondicionPrioritaria(new OperandoCondicion(OperacionAgregacion.Ultimo,propDeuda,1), OperacionRelacional.Menor));

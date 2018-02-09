@@ -20,7 +20,7 @@ stat: expr NEWLINE # printExpr
 
 expr: expr op=('*'|'/') expr # MulDiv
 | expr op=('+'|'-') expr # SumRes
-| INT # int
+| INT expr# int
 | INDICADOR # id
 | '(' expr ')' # parens
 | INDICADOR '(' INDICADOR '(' INT ')'')' #EmpresaCuentaPeriodo
@@ -32,7 +32,7 @@ MUL : '*' ;
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
-INDICADOR : [a-z' 'A-Z'-' 0-9]+ ; 
+INDICADOR : [a-z' 'A-Z'-']+ ; 
 INT : [0-9]+ ; 
 NEWLINE:'\r'? '\n' ; 
 WS : [ \t]+ -> skip ; 

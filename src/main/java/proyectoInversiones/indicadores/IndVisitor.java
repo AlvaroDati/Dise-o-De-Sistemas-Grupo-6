@@ -8,6 +8,7 @@ import proyectoInversiones.antlr4.*;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -115,7 +116,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	/** INT */
 	@Override
 	public Integer visitInt(indicadoresParser.IntContext ctx) {
-		return Integer.valueOf(ctx.INT().getText());
+;		return Integer.valueOf(ctx.INT().getText());
 	}
 
 	/** ID */
@@ -432,7 +433,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 }
 
 	
-	public List<Indicador> obtenerResultadosIndicadoresUsuarioSegunEmpresa(String ruta,Empresa empresaAsociada,int per) throws IOException {
+	public List<Indicador> obtenerResultadosIndicadoresUsuarioSegunEmpresa(String ruta,Empresa empresaAsociada,int per) {
 
 		List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
 
@@ -445,10 +446,21 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 
 		InputStream is = System.in;
 		if (inputFile != null)
-			is = new FileInputStream(inputFile);
+			try {
+				is = new FileInputStream(inputFile);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		@SuppressWarnings("deprecation")
-		ANTLRInputStream input = new ANTLRInputStream(is);
+		ANTLRInputStream input = null;
+		try {
+			input = new ANTLRInputStream(is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		indicadoresLexer lexer = new indicadoresLexer(input);
 
@@ -478,7 +490,6 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 				if(listaDeIndicador.get(i).getNombre().equals(entry.getKey())){
 					for(int j = 0;j<entry.getValue().size();j++){
 						String nombreCuenta = entry.getValue().get(j);
-						System.out.println("NombreIndicador:"+nombreCuenta);
 						switch(nombreCuenta){
 					case "INGRESONETO":
 						value += (int) indicador.obtenerIngresoNetoSegunPeriodo(empresaAsociada, per);
@@ -530,11 +541,10 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 
 		Indicador elObjetoIndicadorResultante = new Indicador();
 		elObjetoIndicadorResultante.setEmpresa(empresaAsociada);
-		elObjetoIndicadorResultante.setPeriodo(per);
+		//elObjetoIndicadorResultante.setEmpresaAsoc(empresaAsociada.getNombre());
+	//	elObjetoIndicadorResultante.setPeriodo(per);
 		elObjetoIndicadorResultante.setExpresion(expresionDeUnIndicador);
 		String inputANTLR = expresionDeUnIndicador; 
-		
-		//String inputANTLR = "asdf=EBITDA+FDS+FCASHFLOW";
 		
 		if (expresionDeUnIndicador.length() > 0)
 			inputANTLR = expresionDeUnIndicador;
@@ -557,13 +567,12 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 
 		IndVisitor eval = new IndVisitor();
 
-		eval.visit(tree);
-
+		int valor = eval.visit(tree);
 		eval.getCuentaIndicador();
 		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
 		ArmadorIndicador indicador = new ArmadorIndicador();
 		elObjetoIndicadorResultante = eval.getListaDeIndicador().get(0);
-		elObjetoIndicadorResultante.setPeriodo(per);
+	//	elObjetoIndicadorResultante.setPeriodo(per);
 			for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
 				float value = 0;
 				if(elObjetoIndicadorResultante.getNombre().equals(entry.getKey())){
@@ -598,53 +607,17 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 						break;
 					}
 					}
-					
 					elObjetoIndicadorResultante.setValorIndicador(elObjetoIndicadorResultante.getValorIndicador()+value);
-					
-				
-				
-			}
+
+				}
 		}
-		
+//			elObjetoIndicadorResultante.setValorIndicador(elObjetoIndicadorResultante.getValorIndicador()+valor);
 
 		return elObjetoIndicadorResultante;
 	}
-
-
-
-	public static void main(String args[]) throws IOException {
-		IndVisitor vid = new IndVisitor();
-//		Indicador unIndicador = vid.obtenerResultadoIndicadorSegunEmpresa(expresionDeUnIndicador, empresaAsociada, per)
-		
-		List<Indicador> ind = vid.obtenerResultadosIndicadoresUsuarioSegunEmpresa("IndicadoresDelUsuarioivan",new Empresa("America Movil"),2016);
-
-		for (int i = 0; i < ind.size(); i++) {
-			System.out.printf("Nombre Indicador: %s = %f " + "Cuentas:%d "
-					+ " Periodo: %d\n ", ind.get(i).getNombre(),
-					ind.get(i).getValorIndicador(), ind.get(i).getCuentas().size(),
-					ind.get(i).getPeriodo());
-
-		}
-
-		
-//		IndVisitor vid = new IndVisitor();
-//		Indicador unIndicador = vid.obtenerResultadoIndicadorSegunEmpresa("asdf=EBITDA+FDS+FCASHFLOW",new Empresa("America Movil") , 2016);
-//		System.out.println("\n"
-//				+ unIndicador.getNombre()+"\n"+unIndicador.getValorIndicador());
-		
-		
-	}
-
+	
+	
+	
+	
+	
 }
-/*
- * si recibimos una cadena OTROINDICADOR suceda calculoNecesario =
- * ctx.OTROINDICADOR.getText(); indicadorPredefinido indi = new
- * IndicadorPredefinido(); indi.
- * 
- * 
- * Map<campo1,campo2>; campo1 = Empresa campo2 = HashMap<Cuenta/Indicador,Valor>
- * 
- * map.hasKey(campo1), se fija, campo2.hasKey(cuenta2), se fijaaaa
- * 
- * 
- */ 

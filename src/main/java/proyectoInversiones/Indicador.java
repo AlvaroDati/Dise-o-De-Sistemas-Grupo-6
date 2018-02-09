@@ -7,6 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,24 +24,22 @@ import proyectoInversiones.usuarios.Usuario;
 
 @Entity
 @Table(name = "indicadores")
-public class Indicador extends Cuantificador implements Serializable{
-
-
+public class Indicador  implements Serializable{
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	@Column(name = "nombre")
 	protected String nombre;
-	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
-
 	@Column(name = "valorIndicador",nullable = false)
 	private float valorIndicador;
-	@Column(name = "anio",nullable=false)
-	private int periodo;
-	//Esto no tendría que ser empresa.getNombre()?
-	@Column(name = "empresaAsoc", nullable = true)	
-	private String empresaAsoc;
+	@Column(name = "aniO")
+	private int periodoA;
+	@Column(name = "empresaAsoc")	
+	protected String empresaAsoc;
 	
 	public String getEmpresaAsoc() {//cambié esto, me parece que tiene mas sentido así; deje el setter por las dudas, por si se usa
 		empresaAsoc = empresa.getNombre();
@@ -121,10 +122,10 @@ public class Indicador extends Cuantificador implements Serializable{
 		this.valorIndicador = valorIndicador;
 	}
 	public int getPeriodo() {
-		return periodo;
+		return periodoA;
 	}
 	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
+		this.periodoA = periodo;
 	}
 	
 	public void setRoe(float valorRoe) {
@@ -141,7 +142,7 @@ public class Indicador extends Cuantificador implements Serializable{
 	public float getIngresoNeto() {
 		return ingresoNeto;
 	}
-	@Override
+	
 	public int evaluarEn(Empresa empresa, Year anio){
 		IndVisitor unIndVisitor = new IndVisitor();
 		int anioParseado = anio.getValue();
