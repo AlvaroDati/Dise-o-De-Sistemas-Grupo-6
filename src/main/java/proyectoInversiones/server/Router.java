@@ -18,6 +18,8 @@ public class Router {
 
 		Spark.staticFiles.location("/public");
 
+		Spark.before(ControladorDeSesion::validarLoggeo);
+			
 		Spark.get("/", new LoginController()::login, engine);
 		Spark.post("/", new LoginController()::validate);
 		Spark.get("/cuentas", CuentasController::listar, engine);

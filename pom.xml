@@ -27,6 +27,7 @@
 			<artifactId>antlr4-maven-plugin</artifactId>
 			<version>4.7</version>
 			<type>maven-plugin</type>
+			
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -127,7 +128,7 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<excludes>
+<!-- <excludes>
 	<exclude>
 		**\.m2\sonatype\sisu\sisu-inject-plexus\2.3.0\sisu-inject-plexus-2.3.0.jar
 	</exclude>
@@ -143,7 +144,7 @@
 	<exclude>**\.m2\repository\org\sonatype\sisu\sisu-guava\0.9.9\sisu-guava-0.9.9.jar
 	</exclude>
 
-</excludes>
+</excludes> -->
 					</configuration>
 			</plugin></plugins>
 					</pluginManagement>
