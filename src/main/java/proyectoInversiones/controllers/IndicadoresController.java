@@ -35,9 +35,13 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public ModelAndView listar(Request req, Response res) throws IOException {
+		System.out.println(req.queryParams("userTag"));
+		System.out.println("web" +req.cookie("usuario"));
 
-		String usuario = req.cookie("userTag");
+		String usuario = req.cookie("usuario");
+		System.out.println("qweq"+usuario);
 		usuarioActivo = usuario;
+		System.out.println("bad"+usuarioActivo);
 		Map<String, List<Indicador>> model = new HashMap<>();
 		return new ModelAndView(model, "Indicadores2.html");
 	}
@@ -47,14 +51,17 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
+		
 		Empresa empresa = new Empresa(nombreEmpresa);
 		try {
 			Map<String, List<Indicador>> model = new HashMap<>();
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
 			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
+			System.out.println("adfsads"+usuarioActivo);
 			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
 			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
+			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
 			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
 			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
 			indicadorUnico.add(indicadorDeEmpresa);
@@ -113,21 +120,22 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		repoIndicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(1).getAnio()));
 		
 		
-//		System.out.println("\n-----------------------------");
-//		System.out.println("Instanciacion repoIndicadores");
-//		for (Indicador ind:repoIndicadores){
-//			System.out.println(ind.getNombre());
-//		}
+		System.out.println("\n-----------------------------");
+		System.out.println("Instanciacion repoIndicadores");
+		for (Indicador ind:repoIndicadores){
+			System.out.println(ind.getNombre());
+		}
 		
 		for(int i = 0;i<listaPeriodos.size();i++){
 //			System.out.printf("En el periodo n°: %d\n", i);
 			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
-			
+			System.out.println("indicadores" + indicadores.get(i).getNombre());
 		}
 			for(int j = 0;j<indicadores.size();j++){
 					indicadores.get(j).setUsuario(usuarioCreador);
 		}
-					
+			
+			
 		return indicadores;
 	}
 
@@ -139,7 +147,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 	}
 
 	public static ModelAndView nuevoInd(Request req, Response res) {
-		String usuario = req.cookie("userTag");
+		String usuario = req.cookie("usuario");
 		String nombreIndicador = req.queryParams("nombreIndicador");
 		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
@@ -154,7 +162,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 //		System.out.printf("Nombre del indicador ingresado: %s\n", nombreIndicador);
 		
 		Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
-		
+		System.out.println("cantidad de indicadores"+repoIndicadores.size());
 //		System.out.println("-----------------------------");
 //		System.out.println("Cantidad de indicadores de igual nombre");
 		Long contador = filtro.count();
@@ -162,10 +170,11 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
 		
 		
 		if (contador == 0) {
-			if (nombreIndicador != null && empresaSeleccionada != null && expresionIndicador != null) {
+			if (nombreIndicador != null  && expresionIndicador != null) {
 				try {
-
-					String archivoUsuario = rutaArchivo.concat(usuario);
+					System.out.println("cantidad de indicadores 2 "+repoIndicadores.size());
+					String archivoUsuario = rutaArchivo + usuario;
+					System.out.println("archivo del usuario " + archivoUsuario);
 					File file = new File(archivoUsuario);
 
 					if (!file.exists()) {

@@ -8,3 +8,4 @@ PruebaConMinuscula=deuda+1000
 PruebaMayuscSinEspacio=EBITDA+500
 Ind=IndicadorUno+12
 
+IndicadorInfinito=DEUDA+FDS+EBITDA

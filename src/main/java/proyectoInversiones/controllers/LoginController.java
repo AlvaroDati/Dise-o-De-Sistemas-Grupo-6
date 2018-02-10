@@ -45,11 +45,9 @@ public class LoginController {
 			Long idUsuario =  usuarioLoggeado.getId();
 		
 			
-			System.out.printf("userTag DB:%s \n", usuarioLoggeado.getUserTag());
-			System.out.printf("password DB:%s \n", usuarioLoggeado.getPassword());
-			System.out.printf("id:%d \n", idUsuario);
 			
 			res.cookie("userTag", userTag);
+			res.cookie("usuario", userTag);
 			res.cookie("idUsuario", idUsuario.toString());
 			res.redirect("/cuentas");
 		} catch ( Exception e ){

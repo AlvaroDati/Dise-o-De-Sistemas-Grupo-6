@@ -1,1 +1,1 @@
-web: java -jar  target/proyectoInversiones.jar
+web: java -cp proyectoinversiones.jar proyectoInversiones.server.Server

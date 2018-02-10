@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "cuenta") 
 //@NamedQuery(name = "buscarCuentaPorNombreYEmpresa", query = "SELECT cuenta FROM Cuenta cuenta WHERE cuenta.nombre LIKE :filtro")

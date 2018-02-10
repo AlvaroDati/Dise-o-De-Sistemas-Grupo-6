@@ -74,10 +74,4 @@ public class LeerUsuarios {
 	}
 	
 	
-	public static void main(String args[]){
-		LeerUsuarios usuario = new LeerUsuarios();
-		for(int i = 0;i<usuario.leerArchivo().size();i++){
-			System.out.printf("Valido el usuario: %s\n", usuario.leerArchivo().get(i).getUserTag());
-		}
-	}
 }

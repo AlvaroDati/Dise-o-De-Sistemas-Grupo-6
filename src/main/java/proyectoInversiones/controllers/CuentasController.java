@@ -28,7 +28,6 @@ public class CuentasController implements WithGlobalEntityManager, Transactional
 		
 		String empresa = req.queryParams("Empresa");
 		System.out.println(empresa);
-		
 		try{
 			Map<String, List<Cuenta>> model = new HashMap<>();
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();

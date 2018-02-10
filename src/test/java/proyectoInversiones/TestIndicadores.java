@@ -16,28 +16,28 @@ import proyectoInversiones.indicadores.IndicadorAuxiliar;
 
 
 public class TestIndicadores {
-
-	NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-	
-	
-	@SuppressWarnings("deprecation")
-	@Test
-	public void ingresoNeto() throws IOException {
-		Empresa unaEmpresa = new Empresa("America Movil");
-		Indicador indicador = new Indicador();
-		IndVisitor indVisitor = new IndVisitor();
-		indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa("hola=INGRESONETO", unaEmpresa, 2017);
-		
-		assertEquals((int)4442.0,(int)indicador.getValorIndicador());
-	}
-	
-	
-	@Test
-	public void indicadorDeUsuarioValido() throws IOException {
-		Indicador indicadorLoco = new Indicador();
-		IndVisitor indVisitor = new IndVisitor();
-		indicadorLoco = indVisitor.obtenerResultadoIndicadorSegunEmpresa("hola=15 ", new Empresa("General Electric"), 2014);
-
-		assertEquals((int)indicadorLoco.getValorIndicador(),(int)15.0);
-	}
+//
+//	NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+//	
+//	
+//	@SuppressWarnings("deprecation")
+//	@Test
+//	public void ingresoNeto() throws IOException {
+//		Empresa unaEmpresa = new Empresa("America Movil");
+//		Indicador indicador = new Indicador();
+//		IndVisitor indVisitor = new IndVisitor();
+//		indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa("hola=INGRESONETO", unaEmpresa, 2017);
+//		
+//		assertEquals((int)4442.0,(int)indicador.getValorIndicador());
+//	}
+//	
+//	
+//	@Test
+//	public void indicadorDeUsuarioValido() throws IOException {
+//		Indicador indicadorLoco = new Indicador();
+//		IndVisitor indVisitor = new IndVisitor();
+//		indicadorLoco = indVisitor.obtenerResultadoIndicadorSegunEmpresa("hola=15 ", new Empresa("General Electric"), 2014);
+//
+//		assertEquals((int)indicadorLoco.getValorIndicador(),(int)15.0);
+//	}
 }

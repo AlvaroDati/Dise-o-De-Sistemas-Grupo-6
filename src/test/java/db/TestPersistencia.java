@@ -1,38 +1,38 @@
-//package db;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.Persistence;
-//import org.junit.After;
-//import org.junit.Assert;
-//import org.junit.Before;
-//import org.junit.FixMethodOrder;
-//import org.junit.Test;
-//import org.junit.runners.MethodSorters;
-//
-//
-//
-//import proyectoInversiones.Empresa;
-//import proyectoInversiones.NuevoLeerArchivo;
-//import proyectoInversiones.Indicador;
-//import proyectoInversiones.Metodologia;
-//import proyectoInversiones.usuarios.LeerUsuarios;
-//import proyectoInversiones.usuarios.Usuario;
-//import proyectoInversiones.repositorio.*;
-//import proyectoInversiones.indicadores.ArmadorIndicador;
-//import proyectoInversiones.indicadores.IndicadorAuxiliar;
-//import proyectoInversiones.metodologias.Antiguedad;
-//import proyectoInversiones.metodologias.CondicionPrioritaria;
-//import proyectoInversiones.metodologias.CondicionTaxativa;
-//import proyectoInversiones.metodologias.OperacionAgregacion;
-//import proyectoInversiones.metodologias.OperacionRelacional;
-//import proyectoInversiones.metodologias.OperandoCondicion;
-//
-//
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-//public class TestPersistencia {
+package db;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+
+
+import proyectoInversiones.Empresa;
+import proyectoInversiones.NuevoLeerArchivo;
+import proyectoInversiones.Indicador;
+import proyectoInversiones.Metodologia;
+import proyectoInversiones.usuarios.LeerUsuarios;
+import proyectoInversiones.usuarios.Usuario;
+import proyectoInversiones.repositorio.*;
+import proyectoInversiones.indicadores.ArmadorIndicador;
+import proyectoInversiones.indicadores.IndicadorAuxiliar;
+import proyectoInversiones.metodologias.Antiguedad;
+import proyectoInversiones.metodologias.CondicionPrioritaria;
+import proyectoInversiones.metodologias.CondicionTaxativa;
+import proyectoInversiones.metodologias.OperacionAgregacion;
+import proyectoInversiones.metodologias.OperacionRelacional;
+import proyectoInversiones.metodologias.OperandoCondicion;
+
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class TestPersistencia {
 //	private static final String PERSISTENCE_UNIT_NAME = "db";
 //	private EntityManagerFactory emFactory;
 //	private Repositorio repositorio;
@@ -209,7 +209,7 @@
 //		repositorio.cerrar();
 //		emFactory.close();
 //	}
-//}
-//	
+}
+	
 
 
