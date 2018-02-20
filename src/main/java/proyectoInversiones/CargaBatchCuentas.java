@@ -50,12 +50,18 @@
   package proyectoInversiones;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.TimerTask;
 import java.io.File;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
 import proyectoInversiones.repositorio.Repositorio;
+import proyectoInversiones.usuarios.Usuario;
 
 
 public class CargaBatchCuentas extends TimerTask {
@@ -64,6 +70,8 @@ public class CargaBatchCuentas extends TimerTask {
  Long ultimaMod = null;
  private static final String PERSISTENCE_UNIT_NAME = "db";
  private EntityManagerFactory emFactory;
+ @PersistenceContext(unitName = "db", type = PersistenceContextType.EXTENDED)
+ private static EntityManager emanager;
  private Repositorio repositorio;
  
  public CargaBatchCuentas() {
@@ -81,8 +89,11 @@ public class CargaBatchCuentas extends TimerTask {
  }
     
     public void persistirConJson() {
+    
      emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-  repositorio = new Repositorio(emFactory.createEntityManager());
+     System.out.println("asfssd");
+     emanager = emFactory.createEntityManager();
+  repositorio = new Repositorio(emanager);
   NuevoLeerArchivo archivo = new NuevoLeerArchivo();
   
   ArrayList<Empresa> empresas = archivo.leerArchivo();
@@ -120,6 +131,23 @@ public class CargaBatchCuentas extends TimerTask {
    emFactory.close();
   
   }
+    }
+    
+    public List<Usuario> obtenerUsuariosSegunNombre(String nombre){
+    	List<Usuario> usuarioALoguearse = new ArrayList<Usuario>();
+	usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre").setParameter("filtro","%" + nombre + "%").getResultList();
+
+
+//		System.out.println("Usuario: " + usuarioALoguearse.get(0).getPassword());
+//		Usuario usuarioALoguearse2 = null;
+//		for (int i = 0; i < usuarioALoguearse.size(); i++) {
+//			if (usuarioALoguearse.get(i).getUserTag().equals(nombre)) {
+//				usuarioALoguearse2 = usuarioALoguearse.get(i);
+//			}
+//		}
+
+		return usuarioALoguearse;
+	
     }
     
 }  

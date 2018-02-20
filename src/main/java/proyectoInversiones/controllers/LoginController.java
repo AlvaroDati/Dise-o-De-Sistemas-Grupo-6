@@ -19,6 +19,7 @@ public class LoginController {
 	private EntityManagerFactory emFactory;
 	private Repositorio repositorio;
 	protected EntityManager emanager;
+	
 	public void setUp() throws Exception {
 		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		repositorio = new Repositorio(emFactory.createEntityManager());
@@ -36,10 +37,8 @@ public class LoginController {
 		System.out.printf("userTag:%s \n", userTag);
 		System.out.printf("password:%s \n", password);
 		try{
-//		LeerUsuarios archivoUsuarios = new LeerUsuarios();
-//			Long idUsuario = archivoUsuarios.obtenerId(userTag,password);
-//			System.out.printf("id:%d \n", idUsuario);
-		
+
+			
 			UsuariosRepo repo = new UsuariosRepo(emanager);
 			Usuario usuarioLoggeado = repo.buscarUsuarioPorNombre(userTag);
 			Long idUsuario =  usuarioLoggeado.getId();

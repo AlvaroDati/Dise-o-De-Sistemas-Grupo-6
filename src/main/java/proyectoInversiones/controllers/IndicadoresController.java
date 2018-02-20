@@ -10,8 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Indicador;
@@ -26,7 +24,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class IndicadoresController implements WithGlobalEntityManager, TransactionalOps {
+public class IndicadoresController {
 	static String usuarioActivo;
 	static String rutaArchivo = "IndicadoresDelUsuario";
 	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();

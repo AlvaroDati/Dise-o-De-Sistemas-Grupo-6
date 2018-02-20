@@ -3,18 +3,21 @@ package proyectoInversiones.repositorio;
 
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-public class Repositorio implements WithGlobalEntityManager{
+public class Repositorio {
 	private PeriodosRepo periodos;
 	private EmpresasRepo empresas;
 	private IndicadoresRepo indicadores;
 	private UsuariosRepo usuarios;
 	private MetodologiasRepo metodologias;
+	@PersistenceContext(unitName = "db", type = PersistenceContextType.EXTENDED)
 	protected EntityManager emanager;
 
 	public Repositorio(EntityManager emanager) {
+		
 		this.emanager = emanager;
 	}
 	
@@ -51,6 +54,11 @@ public class Repositorio implements WithGlobalEntityManager{
 			usuarios = new UsuariosRepo(emanager);
 		}
 		return usuarios;
+	}
+	
+	public EntityManager getEM(){
+		
+		return this.emanager;
 	}
 
 

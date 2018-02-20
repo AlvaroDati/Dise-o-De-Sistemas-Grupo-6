@@ -2,10 +2,11 @@ package proyectoInversiones.usuarios;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.lang.reflect.Type;
-
+import java.net.URL;
 
 //import java.util.List;
 
@@ -22,25 +23,31 @@ public class LeerUsuarios {
 	ArrayList<Usuario> usuarios = this.leerArchivo();
 	public ArrayList<Usuario> leerArchivo() {
 
-		String ruta = "usuarios.json";
-		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+		//	String ruta = "usuarios.json";
+			String ruta = "https://raw.githubusercontent.com/AlvaroDati/Dise-o-De-Sistemas-Grupo-6/nuevaBranch/usuarios.json";
+				ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+				
+				try {
 
-		try {
+					   //FileReader fr = new FileReader(ruta);
+					   URL fr = new URL(ruta);
+					  InputStreamReader in = new InputStreamReader(fr.openStream());
+					  Type tipoUsuario = new TypeToken<ArrayList<Usuario>>() {}.getType();
+					   Gson gson = new Gson();
+					   JsonReader reader = new JsonReader(in); 
+					   listaUsuarios = gson.fromJson(reader, tipoUsuario);
+						return listaUsuarios;
 
-			FileReader fr = new FileReader(ruta);
-			Type tipoUsuario = new TypeToken<ArrayList<Usuario>>() {}.getType();
-			Gson gson = new Gson();
-			JsonReader reader = new JsonReader(fr);
-			listaUsuarios = gson.fromJson(reader, tipoUsuario);
+					  } catch (FileNotFoundException e) {
+					   System.out.println("No se encontro el archivo indicado. El path provisto fue: " + ruta);
+					   e.printStackTrace();
+					  } catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 			return listaUsuarios;
-
-		} catch (FileNotFoundException e) {
-			System.out.println("No se encontro el archivo indicado. El path provisto fue:" + ruta);
-			e.printStackTrace();
 		}
-
-		return listaUsuarios;
-	}
 	
 
 	public Long obtenerId(String userTag, String password) throws Exception {

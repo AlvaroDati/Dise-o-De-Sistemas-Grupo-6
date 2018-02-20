@@ -59,10 +59,6 @@ public List<Indicador> getIndicadoresUsuario() {
 	}
 	
 	public boolean validar(String userTag, String password){
-		System.out.println("User tag " +userTag);
-		System.out.println("Password " +password);
-		System.out.println("this.getUserTag() " +this.getUserTag());
-		System.out.println("this.getPassword() "+this.getPassword());
 		return (userTag.equals(this.getUserTag()) && password.equals(this.getPassword()));
 	}
 	

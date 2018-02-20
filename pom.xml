@@ -20,23 +20,12 @@
 
 
 	<dependencies>
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>5.2.10.Final</version>
+</dependency>
 
-		<!-- <dependency> <groupId>com.jayway.jsonpath</groupId> <artifactId>json-path</artifactId> 
-			<scope>test</scope> </dependency> -->
-		<!-- proyectoInversiones:proyectoInversiones:jar:1-SNAPSHOT [INFO] +- org.antlr:antlr4-maven-plugin:maven-plugin:4.7:compile 
-			[INFO] | +- org.apache.maven:maven-plugin-api:jar:3.0.5:compile [INFO] | 
-			| +- org.apache.maven:maven-model:jar:3.0.5:compile [INFO] | | +- org.apache.maven:maven-artifact:jar:3.0.5:compile 
-			[INFO] | | \- org.sonatype.sisu:sisu-inject-plexus:jar:2.3.0:compile [INFO] 
-			| | +- org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:co [INFO] 
-			| | +- org.codehaus.plexus:plexus-classworlds:jar:2.4:compile [INFO] | | 
-			\- org.sonatype.sisu:sisu-inject-bean:jar:2.3.0:compile [INFO] | | \- org.sonatype.sisu:sisu-guice:jar:no_aop:3.1.0:compile 
-			[INFO] | | \- org.sonatype.sisu:sisu-guava:jar:0.9.9:compile [INFO] | +- 
-			org.codehaus.plexus:plexus-compiler-api:jar:2.2:compile [INFO] | | \- org.codehaus.plexus:plexus-utils:jar:3.0.8:compile 
-			[INFO] | +- org.sonatype.plexus:plexus-build-api:jar:0.0.7:compile [INFO] 
-			| +- org.antlr:antlr4:jar:4.7:compile [INFO] | | +- org.antlr:antlr4-runtime:jar:4.7:compile 
-			[INFO] | | +- org.antlr:antlr-runtime:jar:3.5.2:compile [INFO] | | +- org.antlr:ST4:jar:4.0.8:compile 
-			[INFO] | | +- org.abego.treelayout:org.abego.treelayout.core:jar:1.0.3:compile 
-			[INFO] | | +- org.glassfish:javax.json:jar:1.0.4:compile [INFO] | | \- com.ibm.icu:icu4j:jar:58.2:compile -->
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr4-maven-plugin</artifactId>
@@ -68,16 +57,32 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- JPA Persistence Dependencies -->
+		 <dependency>
+	<groupId>org.uqbar-project</groupId>
+	<artifactId>jpa-java8-extras</artifactId>
+	<version>1.0-alpha-1</version>
+</dependency> 
 		<dependency>
-			<groupId>org.uqbar-project</groupId>
-			<artifactId>jpa-java8-extras</artifactId>
-			<version>1.0-alpha-1</version>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.0.Final</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.0.Final</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.hibernate.javax.persistence</groupId> <artifactId>hibernate-jpa-2.1-api</artifactId> 
+			<version>1.0.2.Final</version> </dependency> -->
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>2.2.4</version>
 		</dependency>
 
 		<!-- driver jdbc --> <!-- drives del motor java para objet -->
@@ -138,20 +143,30 @@
 			<artifactId>handlebars-humanize</artifactId>
 			<version>4.0.6</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.1</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>postgresql</groupId> <artifactId>postgresql</artifactId> 
+			<version>9.1-901.jdbc4</version> </dependency> -->
 	</dependencies>
 
 	<build>
 
-		
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.6.0</version>
 				<configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
 				<!-- <configuration> <transformers> <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
 					</transformer> </transformers> </configuration> -->
 			</plugin>
@@ -184,10 +199,12 @@
 				<artifactId>heroku-maven-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
-				<jdkVersion>1.8</jdkVersion>
+					<jdkVersion>1.8</jdkVersion>
 					<appName>proyectoinversiones</appName>
 					<processTypes>
-						<web>java -jar ./target/proyectoinversiones-1-SNAPSHOT-jar-with-dependencies.jar</web>
+						<web>java -jar
+							./target/proyectoinversiones-1-SNAPSHOT-jar-with-dependencies.jar
+						</web>
 					</processTypes>
 				</configuration>
 			</plugin>
