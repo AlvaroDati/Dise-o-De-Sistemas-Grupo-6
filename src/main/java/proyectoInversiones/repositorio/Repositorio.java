@@ -14,11 +14,24 @@ public class Repositorio {
 	private UsuariosRepo usuarios;
 	private MetodologiasRepo metodologias;
 	@PersistenceContext(unitName = "db", type = PersistenceContextType.EXTENDED)
-	protected EntityManager emanager;
-
+	protected
+	static EntityManager emanager;
+	private static Repositorio repo;
+	
+	public Repositorio(){
+		
+	}
+	
 	public Repositorio(EntityManager emanager) {
 		
 		this.emanager = emanager;
+	}
+	
+	public static Repositorio getInstance(){
+		if(repo == null){
+			repo = new Repositorio();
+		}
+		return repo;
 	}
 	
 	public EmpresasRepo empresasRepo(){
