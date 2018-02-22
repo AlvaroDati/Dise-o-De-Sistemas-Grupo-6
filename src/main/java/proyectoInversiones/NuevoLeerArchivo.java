@@ -238,8 +238,6 @@ public class NuevoLeerArchivo {
   
   ArrayList<Empresa> empresas = new ArrayList<>();
   
-  
-  
   try {
 
    FileReader fr = new FileReader(ruta);

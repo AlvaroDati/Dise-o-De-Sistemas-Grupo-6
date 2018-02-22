@@ -22,23 +22,23 @@ import org.apache.poi.ss.formula.functions.T;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.usuarios.Usuario;
 
-@SuppressWarnings("serial")
-@Entity
-@Table(name = "cuantificadores")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Cuantificador implements Serializable{
+//@SuppressWarnings("serial")
+//@Entity
+//@Table(name = "cuantificadores")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Cuantificador{ //implements Serializable{
 
-	@Id 
-	@GeneratedValue//(strategy=GenerationType.AUTO)
-	private Long id;
-	
-	@Column(name = "valorIndicador",nullable = false)
-	protected float valorIndicador;
-	@Column(name = "anio")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	protected String periodos;
-	@Column(name = "empresaAsoc")	
-	protected String empresaAsoc;
+//	@Id 
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+//	private Long id;
+//	
+//	@Column(name = "valorindicador",nullable = false)
+//	protected float valorIndicador;
+//	@Column(name = "anio")
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+//	protected String periodos;
+//	@Column(name = "empresaasoc")	
+//	protected String empresaAsoc;
 	
 	
 //	@Column(name = "empresaAsoc")	
@@ -52,34 +52,34 @@ public abstract class Cuantificador implements Serializable{
 //		this.empresaAsoc = unNombreDeEmpresa; 	
 //		}
 	
-	public float getValorIndicador() {
-		return valorIndicador;
-	}
-
-
-	public void setValorIndicador(float valorIndicador) {
-		this.valorIndicador = valorIndicador;
-	}
-
-
-	public String getPeriodos() {
-		return periodos;
-	}
-
-
-	public void setPeriodos(String periodos) {
-		this.periodos = periodos;
-	}
-
-
-	public String getEmpresaAsoc() {
-		return empresaAsoc;
-	}
-
-
-	public void setEmpresaAsoc(String empresaAsoc) {
-		this.empresaAsoc = empresaAsoc;
-	}
+//	public float getValorIndicador() {
+//		return valorIndicador;
+//	}
+//
+//
+//	public void setValorIndicador(float valorIndicador) {
+//		this.valorIndicador = valorIndicador;
+//	}
+//
+//
+//	public String getPeriodos() {
+//		return periodos;
+//	}
+//
+//
+//	public void setPeriodos(String periodos) {
+//		this.periodos = periodos;
+//	}
+//
+//
+//	public String getEmpresaAsoc() {
+//		return empresaAsoc;
+//	}
+//
+//
+//	public void setEmpresaAsoc(String empresaAsoc) {
+//		this.empresaAsoc = empresaAsoc;
+//	}
 
 
 	public abstract int evaluarEn(Empresa empresa, Year anio);

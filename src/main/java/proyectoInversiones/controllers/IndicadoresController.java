@@ -17,7 +17,7 @@ import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.indicadores.IndVisitor;
 import proyectoInversiones.indicadores.ArmadorIndicador;
-import proyectoInversiones.indicadores.CalculoIndicadores;
+import proyectoInversiones.CalculoIndicadores;
 import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
 import spark.ModelAndView;

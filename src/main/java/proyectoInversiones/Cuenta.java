@@ -20,21 +20,21 @@ public class Cuenta extends AlgoPersistible{
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "periodo_id", referencedColumnName = "id")
-	private Periodo periodoVinculado;
+	private Periodo periodovinculado;
 	
 	@Column(name = "ebitda")
 	private float ebitda;
     @Column(name = "fds")
 	private float fds;
-    @Column(name = "fCashFlow")
+    @Column(name = "fcashflow")
 	private float fCashFlow;
-    @Column(name = "ingNetoOpCont")
+    @Column(name = "ingnetoopcont")
 	private float ingNetoOpCont;
-    @Column(name = "ingNetoOpDisc")
+    @Column(name = "ingnetoopdisc")
 	private float ingNetoOpDiscont;
     @Column(name = "deuda")
 	private float deuda;
-    @Column(name = "capitalTotal")
+    @Column(name = "capitaltotal")
 	private float capitalTotal;
     
     @Transient
@@ -50,12 +50,12 @@ public class Cuenta extends AlgoPersistible{
     }
     
     public Periodo getPeriodoVinculado() {
-		return periodoVinculado;
+		return periodovinculado;
 	}
     
     
 	public void setPeriodoVinculado(Periodo periodoVinculado) {
-		this.periodoVinculado = periodoVinculado;
+		this.periodovinculado = periodoVinculado;
 	}
 	
     

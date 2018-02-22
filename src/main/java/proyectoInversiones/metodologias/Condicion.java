@@ -21,7 +21,7 @@ public abstract class Condicion implements Serializable{
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	protected OperandoCondicion operando;
 	@Enumerated
-	protected OperacionRelacional operacionRelacional;
+	protected OperacionRelacional operacionrelacional;
 	
 	public OperandoCondicion getOperando() {
 		return operando;

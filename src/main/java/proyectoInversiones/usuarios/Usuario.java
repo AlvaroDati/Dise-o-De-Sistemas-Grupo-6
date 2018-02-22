@@ -23,7 +23,7 @@ public class Usuario implements Serializable {
 //	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "userTag")
+	@Column(name = "usertag")
 	private String userTag;
 	@Column(name = "password")
 	private String password;

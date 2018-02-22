@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.indicadores.IndVisitor;
-import proyectoInversiones.indicadores.IndicadorAuxiliar;
+import proyectoInversiones.IndicadorAuxiliar;
 
 
 public class TestIndicadores {

@@ -25,7 +25,7 @@ import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
 import proyectoInversiones.repositorio.*;
 import proyectoInversiones.indicadores.ArmadorIndicador;
-import proyectoInversiones.indicadores.IndicadorAuxiliar;
+import proyectoInversiones.IndicadorAuxiliar;
 import proyectoInversiones.metodologias.Antiguedad;
 import proyectoInversiones.metodologias.CondicionPrioritaria;
 import proyectoInversiones.metodologias.CondicionTaxativa;
@@ -52,37 +52,37 @@ public class TestPersistencia {
 	}
 	
 	
-	@Test
-	public void conectateAPostgres(){
-		LeerUsuarios archivoUsuarios = new LeerUsuarios();
-		UsuariosRepo repo = new UsuariosRepo(emanager);
-		Usuario usuarioLoggeado = repo.buscarUsuarioPorNombre("ivan");
-		Long idUsuario =  usuarioLoggeado.getId();
-	
-	}
+//	@Test
+//	public void conectateAPostgres(){
+//		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+//		UsuariosRepo repo = new UsuariosRepo(emanager);
+//		Usuario usuarioLoggeado = repo.buscarUsuarioPorNombre("ivan");
+//		Long idUsuario =  usuarioLoggeado.getId();
+//	
+//	}
 	
 //	
-//	@Test
-//	public void  persistir1UsuariosYverificarUno() {
-//		LeerUsuarios archivoUsuarios = new LeerUsuarios();
-//		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
-//		
-//		
-//		for (Usuario head:usuarios){
-//			
-//			if(repositorio.usuariosRepo().buscarPorId(head.getId()) == null){
-//				repositorio.usuariosRepo().persistir(head);			
-//			}else{
-//				System.out.println("asdfsd");
-//				if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
-//					Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
-//				else
-//					repositorio.usuariosRepo().persistir(head);
-//			}
-//		}
-//		
-//		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
-//	}
+	@Test
+	public void  persistir1UsuariosYverificarUno() {
+		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
+		
+		
+		for (Usuario head:usuarios){
+			
+			if(repositorio.usuariosRepo().buscarPorId(head.getId()) == null){
+				repositorio.usuariosRepo().persistir(head);			
+			}else{
+				System.out.println("asdfsd");
+				if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
+					Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
+				else
+					repositorio.usuariosRepo().persistir(head);
+			}
+		}
+		
+		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
+	}
 //
 //
 //	

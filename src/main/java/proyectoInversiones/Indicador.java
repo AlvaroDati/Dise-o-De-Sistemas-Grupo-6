@@ -34,11 +34,11 @@ public class Indicador  implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
-	@Column(name = "valorIndicador",nullable = false)
+	@Column(name = "valorindicador",nullable = false)
 	private float valorIndicador;
-	@Column(name = "aniO")
+	@Column(name = "anio")
 	private int periodoA;
-	@Column(name = "empresaAsoc")	
+	@Column(name = "empresaasoc")	
 	protected String empresaAsoc;
 	
 	public String getEmpresaAsoc() {//cambié esto, me parece que tiene mas sentido así; deje el setter por las dudas, por si se usa

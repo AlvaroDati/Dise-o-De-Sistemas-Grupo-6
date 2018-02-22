@@ -18,7 +18,6 @@
 	<class>proyectoInversiones.metodologias.CondicionTaxativa</class>
 	<class>proyectoInversiones.metodologias.CondicionPrioritaria</class>
 	<class>proyectoInversiones.metodologias.OperandoCondicion</class>
-	<class>proyectoInversiones.metodologias.Antiguedad</class>
 
 
 
@@ -38,17 +37,16 @@
 		<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-107-22-175-33.compute-1.amazonaws.com:5432/den7llrv6p6mdo?sslmode=require&amp;user=yokxnvrgtlwpbt&amp;password=82ea9932c9243715df65b7238f7df392af6594b55f8bfad7e9a12188d24fec6e" />
 		<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /> 
 		<property name="hibernate.jdbc.use_get_generated_keys" value="true" />
-<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
 		<!-- 
 		<property name="javax.persistence.jdbc.user" value="yokxnvrgtlwpbt" />
 		<property name="javax.persistence.jdbc.password" value="82ea9932c9243715df65b7238f7df392af6594b55f8bfad7e9a12188d24fec6e" /> 
 		  
 		 -->
-		   
 
 
 		<property name="hibernate.show_sql" value="true" />
 		<property name="use_sql_comments" value="true" />
+		<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
 		<property name="hibernate.hbm2ddl.auto" value="update" />
 	</properties>
 

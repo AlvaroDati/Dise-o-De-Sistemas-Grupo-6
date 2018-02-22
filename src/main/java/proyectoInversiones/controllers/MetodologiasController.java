@@ -10,7 +10,7 @@ import proyectoInversiones.Empresa;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.Metodologia;
 import proyectoInversiones.NuevoLeerArchivo;
-import proyectoInversiones.indicadores.IndicadorAuxiliar;
+import proyectoInversiones.IndicadorAuxiliar;
 import proyectoInversiones.metodologias.Antiguedad;
 import proyectoInversiones.metodologias.CondicionPrioritaria;
 import proyectoInversiones.metodologias.CondicionTaxativa;

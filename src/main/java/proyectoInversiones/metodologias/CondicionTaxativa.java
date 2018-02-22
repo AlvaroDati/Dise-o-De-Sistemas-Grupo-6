@@ -15,12 +15,12 @@ public class CondicionTaxativa extends Condicion{
 	
 	public CondicionTaxativa(OperandoCondicion operando, OperacionRelacional operacionRelacional, int valor) {
 		this.operando = operando;
-		this.operacionRelacional = operacionRelacional;
+		this.operacionrelacional = operacionRelacional;
 		this.valor = valor;
 	}
 	
 	public boolean laCumple(Empresa empresa){
-		return operacionRelacional.aplicarA(operando.valorPara(empresa), valor);
+		return operacionrelacional.aplicarA(operando.valorPara(empresa), valor);
 	}
 
 }

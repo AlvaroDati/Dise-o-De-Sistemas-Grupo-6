@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,7 +26,7 @@ import proyectoInversiones.Metodologia;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "metodologias")
+@Table(name = "metodologias",schema="public")
 public class Metodologia implements Serializable{
 
 	@Id 
@@ -35,15 +36,15 @@ public class Metodologia implements Serializable{
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="metodologia_id")
 	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<CondicionTaxativa>();
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="metodologia_id")
 	private List<CondicionPrioritaria> condicionesPrioritarias = new ArrayList<CondicionPrioritaria>();
 
-    protected Metodologia(){}
+    public Metodologia(){}
 	
 	public Metodologia(String nombre){
 		this.nombre = nombre;

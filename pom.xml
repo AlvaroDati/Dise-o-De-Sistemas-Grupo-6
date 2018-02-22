@@ -61,12 +61,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.2.0.Final</version>
+			<version>5.2.1.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.0.Final</version>
+			<version>5.2.1.Final</version>
 		</dependency>
 		<dependency>
     <groupId>org.hibernate</groupId>
@@ -207,9 +207,7 @@
 					<jdkVersion>1.8</jdkVersion>
 					<appName>proyectoinversiones</appName>
 					<processTypes>
-						<web>java -jar
-							./target/proyectoinversiones-1-SNAPSHOT-jar-with-dependencies.jar
-						</web>
+						<web>java -jar ./target/proyectoinversiones-1-SNAPSHOT-jar-with-dependencies.jar</web>
 					</processTypes>
 				</configuration>
 			</plugin>

@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.usuarios.Usuario;
 
-@Entity
+//@Entity
 public class Antiguedad extends Cuantificador {
 	
 	public Antiguedad(){}

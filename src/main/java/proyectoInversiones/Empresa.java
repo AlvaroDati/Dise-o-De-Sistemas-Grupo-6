@@ -15,7 +15,7 @@ import javax.persistence.Table;
 //@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
 public class Empresa extends AlgoPersistible {
 	
-	@Column(name = "inicioDeActividad")
+	@Column(name = "iniciodeactividad")
 	private int inicioActividad;
 	
 	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)

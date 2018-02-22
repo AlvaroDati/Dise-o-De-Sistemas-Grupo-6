@@ -25,8 +25,8 @@ public class Periodo implements Serializable{
 	protected Long id;
     @Column(name = "anio")
 	protected int anio;  
-    @OneToOne(mappedBy = "periodoVinculado" , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "periodovinculado" , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
     private Cuenta cuentas;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")

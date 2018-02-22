@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import proyectoInversiones.Empresa;
-import proyectoInversiones.indicadores.IndicadorAuxiliar;
+import proyectoInversiones.IndicadorAuxiliar;
 import proyectoInversiones.metodologias.Antiguedad;
 import proyectoInversiones.metodologias.CondicionPrioritaria;
 import proyectoInversiones.metodologias.CondicionTaxativa;
