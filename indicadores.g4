@@ -15,6 +15,7 @@ HashMap memory = new HashMap();
 prog: stat+ ;
 stat: expr NEWLINE # printExpr
 |  INDICADOR '=' expr NEWLINE # assign
+| INDICADOR
 | NEWLINE # blank
 ;
 
@@ -22,9 +23,9 @@ expr: expr op=('*'|'/') expr # MulDiv
 | expr op=('+'|'-') expr # SumRes
 | INT expr# int
 | INDICADOR # id
-| '(' expr ')' # parens
-| INDICADOR '(' INDICADOR '(' INT ')'')' #EmpresaCuentaPeriodo
-|INDICADOR '(' INDICADOR ')' #EmpresaCuenta
+//| '(' expr ')' # parens
+//| INDICADOR '(' INDICADOR '(' INT ')'')' #EmpresaCuentaPeriodo
+//|INDICADOR '(' INDICADOR ')' #EmpresaCuenta
 ;
 		 
 
@@ -32,7 +33,7 @@ MUL : '*' ;
 DIV : '/' ;
 SUM : '+' ;
 RES : '-' ;
-INDICADOR : [a-z' 'A-Z'-']+ ; 
+INDICADOR : [a-z''A-Z'-']+ ; 
 INT : [0-9]+ ; 
 NEWLINE:'\r'? '\n' ; 
 WS : [ \t]+ -> skip ; 

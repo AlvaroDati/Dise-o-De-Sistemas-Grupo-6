@@ -71,6 +71,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		ArrayList<Float> vAux = new ArrayList<Float>();
 		Indicador indicadorAux = new Indicador();
 		int resultado = 0;
+	//	System.out.println(ctx.getText());
 		String id = ctx.getText();
 		// System.out.print(id);
 		int periodo = 0;
@@ -106,6 +107,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	@Override
 	public Integer visitPrintExpr(indicadoresParser.PrintExprContext ctx) {
 		Integer value = visit(ctx.expr()); // evaluate the expr child
+		System.out.println(ctx.getText());
 		/*
 		 * System.out.println(value); // print the result
 		 * System.out.println(resultado); // print the result
@@ -130,13 +132,16 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 //		System.out.printf("ctx.parent.getText(): %s\n", ctx.parent.parent.parent.getText());
 //		int ia = ctx.parent.parent.getText().indexOf("=");
 //		String nombreIndicador = ctx.parent.parent.parent.getText().substring(0, ia);
-
+		//System.out.println(1);
 		String nombreIndicador = nombreIndicadorGlobal;
 		if(map.containsKey(nombreIndicador)){
+			//System.out.println(2);
 			if(!map.get(nombreIndicador).contains(id)){
+				//System.out.println(3);
 				map.get(nombreIndicador).add(id);
 			}
 		}else{
+			//System.out.println(4);
 			List<String> stringAux = new ArrayList<String>();
 			map.put(nombreIndicador, stringAux);
 			map.get(nombreIndicador).add(id);
@@ -176,166 +181,166 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	}
 
 	/** '(' expr ')' */
-	@Override
-	public Integer visitParens(indicadoresParser.ParensContext ctx) {
-		return visit(ctx.expr()); // return child expr's value
-	}
-
-	@Override
-	public Integer visitEmpresaCuentaPeriodo(indicadoresParser.EmpresaCuentaPeriodoContext ctx) {
-
-		int value = 0;
-		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
-																	
-		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
-		String id = ctx.getText();
-		int i = id.indexOf("(");
-		String empresa = id.substring(0, i);
-		String restante = id.substring(i + 1);
-		int b = restante.indexOf("(");
-		String cuenta_indicador = restante.substring(0, b); 
-		String periodoAux = restante.substring(b + 1);
-		int c = periodoAux.indexOf(")");
-		String periodo = periodoAux.substring(0, c);
-		int per = Integer.valueOf(periodo);
-
-		Empresa empresaAsociada = new Empresa(empresa);
-		ArmadorIndicador indicador = new ArmadorIndicador();
-		String nombreCuenta = cuenta_indicador.toUpperCase();
-		switch (nombreCuenta) {
-		/*
-		 * INICIO INDICADORES PREDEFINIDOS
-		 */
-		case "INGRESONETO":
-			value = (int) indicador.obtenerIngresoNetoSegunPeriodo(empresaAsociada, per);
-			valor_cuenta_indicador = indicador.calcularIngresoNeto(empresaAsociada);
-			break;
-		case "ROE":
-			value = (int) indicador.obtenerRoeSegunPeriodo(empresaAsociada, per);
-			valor_cuenta_indicador = indicador.calcularRoe(empresaAsociada);
-			break;
-		/***
-		 * FIN INDICADORES PREDEFINIDOS
-		 * 
-		 */
-		/*
-		 * INICIO CUENTAS
-		 */
-		case ("EBITDA"):
-			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("FDS"):
-			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("FCASHFLOW"):
-			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("INGNETOOPCONT"):
-			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("INGNETOOPDISC"):
-			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("DEUDA"):
-			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		default:
-			/*
-			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador
-			 * predefinido, por default sea una cuenta, y solo llamo a un
-			 * metodo, hago el case horrible que est arriba.
-			 */
-			// Tirar excepcion
-			break;
-		}
-		/*
-		 * FIN CUENTAS
-		 */
-		vai = valor_cuenta_indicador;
-		periodoGlobal = per;
-		// indicadorAux.setPeriodo(per);
-		return value;
-	}
-
-	public Integer visitEmpresaCuenta(indicadoresParser.EmpresaCuentaContext ctx) {
-
-		int value;
-		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
-																	
-		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
-		String id = ctx.getText();
-		int i = id.indexOf("(");
-		String empresa = id.substring(0, i);
-		String resultado = id.substring(i + 1);
-		int b = resultado.indexOf(")");
-		String cuenta_indicador = resultado.substring(0, b); 
-																
-
-		Empresa empresaAsociada = new Empresa(empresa);
-		ArmadorIndicador indicador = new ArmadorIndicador();
-		String nombreCuenta = cuenta_indicador.toUpperCase();
-
-		switch (nombreCuenta) {
-		/*
-		 * INICIO INDICADORES PREDEFINIDOS
-		 */
-		case "INGRESONETO":
-			valor_cuenta_indicador = indicador.calcularIngresoNeto(empresaAsociada);
-			break;
-		case "ROE":
-			valor_cuenta_indicador = indicador.calcularRoe(empresaAsociada);
-			break;
-		/***
-		 * FIN INDICADORES PREDEFINIDOS
-		 * 
-		 */
-		/*
-		 * INICIO CUENTAS
-		 */
-		case ("EBITDA"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("FDS"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("FCASHFLOW"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("INGNETOOPCONT"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("INGNETOOPDISC"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case ("DEUDA"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
-			break;
-		case("CAPITALTOTAL"):
-			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, "CAPITALTOTAL");
-			break;
-		default:
-			/*
-			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador
-			 * predefinido, por default sea una cuenta, y solo llamo a un
-			 * metodo, hago el case horrible que est arriba.
-			 */
-			// Tirar excepcion
-
-			break;
-		}
-
-		/*
-		 * FIN CUENTAS
-		 */
-		vai = valor_cuenta_indicador;
-		return 0;
-	}
+//	@Override
+//	public Integer visitParens(indicadoresParser.ParensContext ctx) {
+//		return visit(ctx.expr()); // return child expr's value
+//	}
+//
+//	@Override
+//	public Integer visitEmpresaCuentaPeriodo(indicadoresParser.EmpresaCuentaPeriodoContext ctx) {
+//
+//		int value = 0;
+//		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
+//																	
+//		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
+//		String id = ctx.getText();
+//		int i = id.indexOf("(");
+//		String empresa = id.substring(0, i);
+//		String restante = id.substring(i + 1);
+//		int b = restante.indexOf("(");
+//		String cuenta_indicador = restante.substring(0, b); 
+//		String periodoAux = restante.substring(b + 1);
+//		int c = periodoAux.indexOf(")");
+//		String periodo = periodoAux.substring(0, c);
+//		int per = Integer.valueOf(periodo);
+//
+//		Empresa empresaAsociada = new Empresa(empresa);
+//		ArmadorIndicador indicador = new ArmadorIndicador();
+//		String nombreCuenta = cuenta_indicador.toUpperCase();
+//		switch (nombreCuenta) {
+//		/*
+//		 * INICIO INDICADORES PREDEFINIDOS
+//		 */
+//		case "INGRESONETO":
+//			value = (int) indicador.obtenerIngresoNetoSegunPeriodo(empresaAsociada, per);
+//			valor_cuenta_indicador = indicador.calcularIngresoNeto(empresaAsociada);
+//			break;
+//		case "ROE":
+//			value = (int) indicador.obtenerRoeSegunPeriodo(empresaAsociada, per);
+//			valor_cuenta_indicador = indicador.calcularRoe(empresaAsociada);
+//			break;
+//		/***
+//		 * FIN INDICADORES PREDEFINIDOS
+//		 * 
+//		 */
+//		/*
+//		 * INICIO CUENTAS
+//		 */
+//		case ("EBITDA"):
+//			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("FDS"):
+//			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("FCASHFLOW"):
+//			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("INGNETOOPCONT"):
+//			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("INGNETOOPDISC"):
+//			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("DEUDA"):
+//			value = (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		default:
+//			/*
+//			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador
+//			 * predefinido, por default sea una cuenta, y solo llamo a un
+//			 * metodo, hago el case horrible que est arriba.
+//			 */
+//			// Tirar excepcion
+//			break;
+//		}
+//		/*
+//		 * FIN CUENTAS
+//		 */
+//		vai = valor_cuenta_indicador;
+//		periodoGlobal = per;
+//		// indicadorAux.setPeriodo(per);
+//		return value;
+//	}
+//
+//	public Integer visitEmpresaCuenta(indicadoresParser.EmpresaCuentaContext ctx) {
+//
+//		int value;
+//		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
+//																	
+//		ArrayList<Float> valor_cuenta_indicador = new ArrayList<Float>();
+//		String id = ctx.getText();
+//		int i = id.indexOf("(");
+//		String empresa = id.substring(0, i);
+//		String resultado = id.substring(i + 1);
+//		int b = resultado.indexOf(")");
+//		String cuenta_indicador = resultado.substring(0, b); 
+//																
+//
+//		Empresa empresaAsociada = new Empresa(empresa);
+//		ArmadorIndicador indicador = new ArmadorIndicador();
+//		String nombreCuenta = cuenta_indicador.toUpperCase();
+//
+//		switch (nombreCuenta) {
+//		/*
+//		 * INICIO INDICADORES PREDEFINIDOS
+//		 */
+//		case "INGRESONETO":
+//			valor_cuenta_indicador = indicador.calcularIngresoNeto(empresaAsociada);
+//			break;
+//		case "ROE":
+//			valor_cuenta_indicador = indicador.calcularRoe(empresaAsociada);
+//			break;
+//		/***
+//		 * FIN INDICADORES PREDEFINIDOS
+//		 * 
+//		 */
+//		/*
+//		 * INICIO CUENTAS
+//		 */
+//		case ("EBITDA"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("FDS"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("FCASHFLOW"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("INGNETOOPCONT"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("INGNETOOPDISC"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case ("DEUDA"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, nombreCuenta);
+//			break;
+//		case("CAPITALTOTAL"):
+//			valor_cuenta_indicador = archivoEmpresa.obtenerCuentaDe(empresaAsociada, "CAPITALTOTAL");
+//			break;
+//		default:
+//			/*
+//			 * ACA HAY DOS OPCIONES 1)Asumo que si no es un indicador
+//			 * predefinido, por default sea una cuenta, y solo llamo a un
+//			 * metodo, hago el case horrible que est arriba.
+//			 */
+//			// Tirar excepcion
+//
+//			break;
+//		}
+//
+//		/*
+//		 * FIN CUENTAS
+//		 */
+//		vai = valor_cuenta_indicador;
+//		return 0;
+//	}
 	
 	
 	public String getNombreDelIndicador(String expresion){
@@ -386,6 +391,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 		for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
 			float value = 0;
 			if(elObjetoIndicadorResultante.getNombre().equals(entry.getKey())){
+				
 				for(int j = 0;j<entry.getValue().size();j++){
 					String nombreCuenta = entry.getValue().get(j);
 					switch(nombreCuenta){
@@ -411,7 +417,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 					value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
 					break;
 				case ("DEUDA"):
-					value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+					value -= (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
 					break;
 				default:
 					for(int i = 0;i<indicadorDelUsuario.size();i++){
@@ -490,6 +496,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 				if(listaDeIndicador.get(i).getNombre().equals(entry.getKey())){
 					for(int j = 0;j<entry.getValue().size();j++){
 						String nombreCuenta = entry.getValue().get(j);
+						//System.out.println(nombreCuenta);
 						switch(nombreCuenta){
 					case "INGRESONETO":
 						value += (int) indicador.obtenerIngresoNetoSegunPeriodo(empresaAsociada, per);
@@ -513,7 +520,9 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
 						break;
 					case ("DEUDA"):
-						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+					//	System.out.println(value);
+						value -= (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+					//	System.out.println(value);
 						break;
 					default:
 						for(int a =0;i<listaDeIndicador.size();a++){
@@ -601,7 +610,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
 						break;
 					case ("DEUDA"):
-						value += (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
+						value -= (int) archivoEmpresa.obtenerCuentaSegunPeriodo(empresaAsociada, nombreCuenta, per);
 						break;
 					default:
 						break;
@@ -616,8 +625,16 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 		return elObjetoIndicadorResultante;
 	}
 	
-	
-	
+//	public static void main (String args[]) throws IOException{
+//		
+//		IndVisitor ind = new IndVisitor();
+//		List<Indicador> indicador = ind.obtenerResultadosIndicadoresUsuarioSegunEmpresa("IndicadoresDelUsuarioivan", new Empresa("America Movil"), 2016);
+//		for(int i = 0;i<indicador.size();i++){
+//			System.out.println(indicador.get(i).getNombre());
+//			System.out.println(indicador.get(i).getValorIndicador());
+//		}
+//	}
+//	
 	
 	
 }

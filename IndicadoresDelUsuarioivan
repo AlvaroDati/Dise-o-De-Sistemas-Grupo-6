@@ -1,13 +1,3 @@
 IndicadorUno=EBITDA+DEUDA+12+12
-IndicadorDos=FDS+FCASHFLOW
-SonLasTresDeLaManana=FDS+EBITDA+DEUDA
-SonLasCuatroYMedia=12+12+12
-CarlitosBaute=EBITDA+10000
-EliasElPupilo=EBITDA+FDS
-PruebaConMinuscula=deuda+1000
-PruebaMayuscSinEspacio=EBITDA+500
-Ind=IndicadorUno+12
-
-IndicadorInfinito=DEUDA+FDS+EBITDA
-elias=05
-elias=05
+Elias=EBITDA
+asdfs=12

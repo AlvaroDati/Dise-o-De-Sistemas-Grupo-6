@@ -16,10 +16,10 @@ public class Server {
 	
 	public static void main(String[] args) {
 		 
-		 long cincoMin = 5*60*1000; // El timer funca en milisgundos,por eso la cuentita
-		 TimerTask cargarCuentas = new CargaBatchCuentas();
-		 Timer timer = new Timer(true);
-		 timer.scheduleAtFixedRate(cargarCuentas, 0, cincoMin);
+//		 long cincoMin = 5*60*1000; // El timer funca en milisgundos,por eso la cuentita
+//		 TimerTask cargarCuentas = new CargaBatchCuentas();
+//		 Timer timer = new Timer(true);
+//		 timer.scheduleAtFixedRate(cargarCuentas, 0, cincoMin);
 		Spark.port(getHerokuAssignedPort());
 		DebugScreen.enableDebugScreen();
 		
