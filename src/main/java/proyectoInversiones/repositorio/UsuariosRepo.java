@@ -19,7 +19,7 @@ import proyectoInversiones.usuarios.Usuario;
 public class UsuariosRepo extends Repositorio implements WithGlobalEntityManager{
 	
 	
-	public UsuariosRepo(EntityManager emanager) { //Antes estaba sin public
+	UsuariosRepo(EntityManager emanager) { //Antes estaba sin public
 		super(emanager);
 	}
 

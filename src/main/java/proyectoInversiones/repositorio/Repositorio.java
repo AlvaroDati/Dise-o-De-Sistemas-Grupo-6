@@ -16,23 +16,16 @@ public class Repositorio {
 	@PersistenceContext(unitName = "db", type = PersistenceContextType.EXTENDED)
 	protected
 	static EntityManager emanager;
-	private static Repositorio repo;
 	
 	public Repositorio(){
 		
 	}
 	
 	public Repositorio(EntityManager emanager) {
-		
 		this.emanager = emanager;
 	}
 	
-	public static Repositorio getInstance(){
-		if(repo == null){
-			repo = new Repositorio();
-		}
-		return repo;
-	}
+	
 	
 	public EmpresasRepo empresasRepo(){
 		if (empresas == null) {
@@ -69,10 +62,6 @@ public class Repositorio {
 		return usuarios;
 	}
 	
-	public EntityManager getEM(){
-		
-		return this.emanager;
-	}
 
 
 	public void cerrar() {
