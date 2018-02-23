@@ -35,64 +35,97 @@
      </nav>
 </div>
 
-<div class="row contenedorContenidoDebajoDelNav">
+	<div class="row contenedorContenidoDebajoDelNav">
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    	<div class="bg-dark table-responsive">
-        	<table class="table table-bordered table-hover">
-		 		<thead class="thead-default">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="bg-dark table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead class="thead-default">
+						<tr>
+							<th>Empresa seleccionada<i class="fa fa-fw fa-sort"></i></th>
+						</tr>
+					</thead>
+					{{#each cuentaUnica}}
 					<tr>
-						<th>Empresa seleccionada<i class="fa fa-fw fa-sort"></i></th>
+						<td>{{empresaAsoc}}</td>
 					</tr>
-				</thead>
-				{{#each cuentaUnica}}
-				<tr>
-					<td>{{empresaAsoc}}</td>
-				</tr>
-				{{/each}} 
-			</table>
+					{{/each}}
+				</table>
+			</div>
 		</div>
-    </div>
 
-	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    	<div class="bg-dark table-responsive">
-        	<table class="table table-bordered table-hover">
-		 		<thead class="thead-default">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="bg-dark table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead class="thead-default">
+						<tr>
+							<th>Periodo<i class="fa fa-fw fa-sort"></i></th>
+							<th>ebitda<i class="fa fa-fw fa-sort"></i></th>
+							<th>fds<i class="fa fa-fw fa-sort"></i></th>
+							<th>fCashFlow<i class="fa fa-fw fa-sort"></i></th>
+							<th>ingreso neto continuo<i class="fa fa-fw fa-sort"></i></th>
+							<th>ingreso neto discontinuo<i class="fa fa-fw fa-sort"></i></th>
+							<th>deuda<i class="fa fa-fw fa-sort"></i></th>
+						</tr>
+					</thead>
+					{{#each cuentas}}
 					<tr>
-						<th>Periodo<i class="fa fa-fw fa-sort"></i></th>
-						<th>ebitda<i class="fa fa-fw fa-sort"></i></th>
-						<th>fds<i class="fa fa-fw fa-sort"></i></th>
-						<th>fCashFlow<i class="fa fa-fw fa-sort"></i></th>
-						<th>ingreso neto continuo<i class="fa fa-fw fa-sort"></i></th>
-						<th>ingreso neto discontinuo<i class="fa fa-fw fa-sort"></i></th>
-						<th>deuda<i class="fa fa-fw fa-sort"></i></th>
+						<td>{{this.periodoVinculado.anio}}</td>
+						<td>{{ebitda}}</td>
+						<td>{{fds}}</td>
+						<td>{{fCashFlow}}</td>
+						<td>{{ingNetoOpCont}}</td>
+						<td>{{ingNetoOpDiscont}}</td>
+						<td>{{deuda}}</td>
 					</tr>
-				</thead>
-				{{#each cuentas}}
-				<tr>
-					<td>{{this.periodoVinculado.anio}}</td>
-					<td>{{ebitda}}</td>
-					<td>{{fds}}</td>
-					<td>{{fCashFlow}}</td>
-					<td>{{ingNetoOpCont}}</td>
-					<td>{{ingNetoOpDiscont}}</td>
-					<td>{{deuda}}</td>
-				</tr>
-				{{/each}} 
-			</table>
+					{{/each}}
+				</table>
+			</div>
 		</div>
-    </div>
-    
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+
+		<!--    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
     	<form role="form" method="post" onsubmit="return validar();">
       		<div class="form-group">
             	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
             </div>
-            <div class="form-group">
-            	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
-            </div>       
 		</form>
+	</div> -->
+
+
+		<!-- 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+			<form role="form" method="post" onsubmit="return validar();">
+				<div class="form-group">
+					<input type=text list=browsers id="Empresa" name="Empresa">  name="Empresa" class="form-control input-48" id="Empresa" required>
+					<datalist id=browsers>
+						<option>America Movil
+						<option>Berkshire Hathaway
+						<option>General Electric
+					</datalist>
+				</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-success" value="Mostrar Datos"	name="Mostrar Datos">
+			</div>
+			</form>
+		</div> -->
+
+		<div
+			class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+			<form role="form" method="post" onsubmit="return validar();">
+				<div class="form-group">
+					<input type=text list=browsers id="Empresa" name="Empresa">
+					<!--  name="Empresa" class="form-control input-48" id="Empresa" required>-->
+					<datalist id=browsers>
+						{{#each empresasAMostrar}}
+						<option>{{nombre}} {{/each}}
+					</datalist>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-success" value="Mostrar Datos"
+						name="Mostrar Datos">
+				</div>
+			</form>
+		</div>
+
 	</div>
-</div>
 </body>
 </html>

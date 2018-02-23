@@ -17,7 +17,10 @@ import spark.Response;
 public class CuentasController{
 	
 	public static ModelAndView listar(Request req, Response res) {
-	    Map<String, List<Cuenta>> model = new HashMap<>();
+	    Map<String, List<Empresa>> model = new HashMap<>();
+	    NuevoLeerArchivo arch = new NuevoLeerArchivo();
+		
+		model.put("empresasAMostrar",arch.leerArchivo());
 		return new ModelAndView(model, "Cuentas2.html");
 	}
 	
@@ -25,6 +28,7 @@ public class CuentasController{
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		
 		String empresa = req.queryParams("Empresa");
+		//String empresa = req.queryParams("browsers");
 		System.out.println(empresa);
 		try{
 			Map<String, List<Cuenta>> model = new HashMap<>();
@@ -46,7 +50,7 @@ public class CuentasController{
 			
 		}catch ( Exception e ){
 			res.cookie("mensajeError", e.getMessage());
-			res.redirect("/");
+			res.redirect("/Cuentas2.html");
 		}
 		
 		return null;
