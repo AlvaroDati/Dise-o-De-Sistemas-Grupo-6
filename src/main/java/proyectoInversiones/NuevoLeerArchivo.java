@@ -202,32 +202,7 @@ public class NuevoLeerArchivo {
   this.rutaGlobal = ruta;
  }
 
-// public ArrayList<Empresa> leerArchivo() {
-//
-//  //String ruta = "src\\main\\resources\\public\\empresas.json";
-//	String ruta = ClassLoader.getSystemResource("empresas.json").getPath();
-//  
-//  rutaGlobal=ruta;
-//  
-//  ArrayList<Empresa> empresas = new ArrayList<>();
-//
-//  try {
-//
-//   FileReader fr = new FileReader(ruta);
-//   Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
-//   Gson gson = new Gson();
-//   JsonReader reader = new JsonReader(fr);
-//   empresas = gson.fromJson(reader, tipoEmpresa);
-//   return empresas;
-//
-//  } catch (FileNotFoundException e) {
-//   System.out.println("No se encontro el archivo indicado. El path provisto fue: " + ruta);
-//   e.printStackTrace();
-//  }
-//
-//  return empresas;
-//
-// }
+
  
  public ArrayList<Empresa> leerArchivo() {
 

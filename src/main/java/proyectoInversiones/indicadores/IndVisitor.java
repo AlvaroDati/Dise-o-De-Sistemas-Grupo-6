@@ -174,7 +174,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		int left = visit(ctx.expr(0)); // get value of left RESexpression
 		int right = visit(ctx.expr(1)); // get value of right RESexpression
 		int answer = 0;
-System.out.println("visitSumRes : "+ctx.getText());
+//System.out.println("visitSumRes : "+ctx.getText());
 		if (ctx.op.getType() == indicadoresParser.SUM) {
 			answer = left + right;
 		} else {

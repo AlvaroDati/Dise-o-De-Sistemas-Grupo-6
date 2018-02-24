@@ -42,40 +42,6 @@ public class IndicadoresController {
 		return new ModelAndView(repoGeneral, "Indicadores2.html");
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-//	public static ModelAndView setearEmpresa(Request req, Response res) {
-//		String nombreEmpresa = req.queryParams("Empresa");
-//		
-//		Empresa empresa = new Empresa(nombreEmpresa);
-//		try {
-//			
-//			Map<String, List<Indicador>> model = new HashMap<>();
-//			NuevoLeerArchivo arch = new NuevoLeerArchivo();
-//			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
-//			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
-//			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
-//			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
-//			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
-//			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
-//			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
-//			indicadorUnico.add(indicadorDeEmpresa);
-//			
-//			model.put("indicadorUnico", indicadorUnico);
-//			model.put("indicadores", indicadoresDeEmpresa);
-//			model.put("indicadoresU", indicadoresUsuario);
-//			return new ModelAndView(model, "Indicadores2.html");
-//		} catch (Exception e) {
-//			res.cookie("mensajeError", e.getMessage());
-//			res.redirect("/cuentas");
-//		}
-//
-//		return null;
-//
-//	}
-	
-	
 	
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
