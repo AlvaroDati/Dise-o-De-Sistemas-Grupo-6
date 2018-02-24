@@ -82,22 +82,5 @@ public class CargaBatchCuentas extends TimerTask {
 		}
 	}
 
-	public List<Usuario> obtenerUsuariosSegunNombre(String nombre) {
-		List<Usuario> usuarioALoguearse = new ArrayList<Usuario>();
-		usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre")
-				.setParameter("filtro", "%" + nombre + "%").getResultList();
-
-		// System.out.println("Usuario: " +
-		// usuarioALoguearse.get(0).getPassword());
-		// Usuario usuarioALoguearse2 = null;
-		// for (int i = 0; i < usuarioALoguearse.size(); i++) {
-		// if (usuarioALoguearse.get(i).getUserTag().equals(nombre)) {
-		// usuarioALoguearse2 = usuarioALoguearse.get(i);
-		// }
-		// }
-
-		return usuarioALoguearse;
-
-	}
 
 }

@@ -41,12 +41,9 @@ public class LoginController {
 		repositorioServicio = RepositorioServicio.getInstance();
 		try{
 			Usuario usuarioLoggeado = repositorioServicio.buscarUsuarioPorNombre(userTag);
-
-			
+		
 //			UsuariosRepo repo = new UsuariosRepo(emanager);
 			Long idUsuario =  usuarioLoggeado.getId();
-		
-			
 			
 			res.cookie("userTag", userTag);
 			res.cookie("usuario", userTag);

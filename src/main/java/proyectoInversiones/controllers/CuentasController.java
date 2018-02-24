@@ -70,4 +70,18 @@ public class CuentasController{
 		return cuentas;
 	}
 	
+	
+	public static ModelAndView nuevasCuentas(Request req, Response res) {
+		return new ModelAndView(null, "SeleccionarCuentas.php");
+	}
+	
+	
+	public Void setearArchivo(Request req, Response res){
+		System.out.println("\n yegue astaca relooocoooo" );
+		String archivo = req.queryParams("archivin");
+		System.out.println("\n Ruta del Archivo: "+archivo);
+		res.redirect("/cuentas");
+		return null;
+	}
+	
 }

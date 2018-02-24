@@ -33,15 +33,11 @@ public class IndicadoresController {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public ModelAndView listar(Request req, Response res) throws IOException {
-		System.out.println(req.queryParams("userTag"));
-		System.out.println("web" + req.cookie("usuario"));
 		Map<String, List<Empresa>> model = new HashMap<>();
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
 		model.put("empresasAMostrar", arch.leerArchivo());
 		String usuario = req.cookie("usuario");
-		System.out.println("qweq" + usuario);
 		usuarioActivo = usuario;
-		System.out.println("bad" + usuarioActivo);
 		return new ModelAndView(model, "Indicadores2.html");
 	}
 
