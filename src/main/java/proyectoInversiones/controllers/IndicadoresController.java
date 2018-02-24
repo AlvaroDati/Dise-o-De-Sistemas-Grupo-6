@@ -39,9 +39,7 @@ public class IndicadoresController {
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
 		model.put("empresasAMostrar", arch.leerArchivo());
 		String usuario = req.cookie("usuario");
-		System.out.println("qweq" + usuario);
 		usuarioActivo = usuario;
-		System.out.println("bad" + usuarioActivo);
 		return new ModelAndView(model, "Indicadores2.html");
 	}
 
@@ -57,7 +55,6 @@ public class IndicadoresController {
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
 			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
-			System.out.println("adfsads"+usuarioActivo);
 			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
 			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
 			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);

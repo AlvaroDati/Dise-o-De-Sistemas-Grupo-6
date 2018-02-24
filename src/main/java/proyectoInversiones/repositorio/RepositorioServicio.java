@@ -36,7 +36,7 @@ public class RepositorioServicio {
 		 
 	usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre").setParameter("filtro", "%" + nombre + "%").getResultList();
 
-		System.out.println("Usuario: " + usuarioALoguearse.get(0).getPassword());
+		System.out.println("Cantidad de usuarios extraídos de la bd: " + usuarioALoguearse.size());
 		Usuario usuarioALoguearse2 = null;
 		for (int i = 0; i < usuarioALoguearse.size(); i++) {
 			if (usuarioALoguearse.get(i).getUserTag().equals(nombre)) {

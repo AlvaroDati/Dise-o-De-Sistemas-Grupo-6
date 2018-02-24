@@ -53,7 +53,8 @@
 		  	</div>
     	</div>
     	
-   <!--  	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+   <!--  	
+   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
        		<form role="form" method="post" onsubmit="return validar();">
             	<div class="form-group">
                 	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
@@ -62,16 +63,21 @@
                 	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
                 </div>      
 			</form>
-		</div> -->
+		</div> 
+		 -->
 		
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
 			<form role="form" method="post" onsubmit="return validar();">
 				<div class="form-group">
 					<input type=text list=browsers id="Empresa" name="Empresa">
-					<!--  name="Empresa" class="form-control input-48" id="Empresa" required>-->
 					<datalist id=browsers>
-						{{#each empresasAMostrar}}
-						<option>{{nombre}} {{/each}}
+<!-- 						{{#each empresasAMostrar}}
+						{{nombre}} 
+						{{/each}}
+ -->						
+ 						<option> America Movil
+						<option> Berkshire Hathaway
+						<option> General Electric
 					</datalist>
 				</div>
 				<div class="form-group">

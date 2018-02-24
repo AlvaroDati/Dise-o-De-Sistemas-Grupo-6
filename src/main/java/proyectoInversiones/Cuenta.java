@@ -1,6 +1,8 @@
 package proyectoInversiones;
 
 
+import java.util.List;
+
 //import java.beans.Transient;
 
 import javax.persistence.CascadeType;
@@ -39,8 +41,17 @@ public class Cuenta extends AlgoPersistible{
     
     @Transient
     private String empresaAsoc;// = periodoVinculado.getEmpresa().getNombre();
-    
-    public String getEmpresaAsoc(){
+    @Transient
+    private List<Empresa> empresas;
+    public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+
+	public String getEmpresaAsoc(){
     	//empresaAsoc = periodoVinculado.getEmpresa().getNombre();
     	return empresaAsoc;
     }
