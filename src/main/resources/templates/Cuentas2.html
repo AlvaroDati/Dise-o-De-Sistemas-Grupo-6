@@ -45,11 +45,9 @@
 							<th>Empresa seleccionada<i class="fa fa-fw fa-sort"></i></th>
 						</tr>
 					</thead>
-					{{#each cuentaUnica}}
 					<tr>
-						<td>{{empresaAsoc}}</td>
+						<td>{{empresaAsociada}}</td>
 					</tr>
-					{{/each}}
 				</table>
 			</div>
 		</div>
@@ -68,9 +66,10 @@
 							<th>deuda<i class="fa fa-fw fa-sort"></i></th>
 						</tr>
 					</thead>
+					
 					{{#each cuentas}}
 					<tr>
-						<td>{{this.periodoVinculado.anio}}</td>
+						<td>{{periodoVinculado.anio}}</td>
 						<td>{{ebitda}}</td>
 						<td>{{fds}}</td>
 						<td>{{fCashFlow}}</td>
@@ -83,44 +82,16 @@
 			</div>
 		</div>
 
-		<!-- 		
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-       		<form role="form" method="post" onsubmit="return validar();">
-            	<div class="form-group">
-                	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
-                </div>
-              	<div class="form-group">
-                	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
-                </div>      
-			</form>
-		</div> 
 
-
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-			<form role="form" method="post" onsubmit="return validar();">
-				<div class="form-group">
-					<input type=text list=browsers id="Empresa" name="Empresa">  name="Empresa" class="form-control input-48" id="Empresa" required>
-					<datalist id=browsers>
-						<option>America Movil
-						<option>Berkshire Hathaway
-						<option>General Electric
-					</datalist>
-				</div>
-			<div class="form-group">
-				<input type="submit" class="btn btn-success" value="Mostrar Datos"	name="Mostrar Datos">
-			</div>
-			</form>
-		</div> 
-<div
+		<div
 			class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-			<form role="form" method="post" onsubmit="return validar();">
-				<div class="form-group">
-					<input type=text list=browsers id="Empresa" name="Empresa">
-					<datalist id=browsers>
-						{{#each cuentas}}
-						<option>{{this.empresas.nombre}} 
-						{{/each}}
-					</datalist>
+			<form role="form" method="post" >
+				<div class="form-group">	
+					<select id="Empresa" name="Empresa">
+					{{#each empresas~}}
+						<option value={{~nombre~}}>{{~nombre~}}</option>
+					{{~/each}}
+					</select>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-success" value="Mostrar Datos"
@@ -128,31 +99,6 @@
 				</div>
 			</form>
 		</div>
-	</div>
-		-->
-
-		<div
-			class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-			<form role="form" method="post" onsubmit="return validar();">
-				<div class="form-group">
-					<input type=text list=browsers id="Empresa" name="Empresa">
-					<datalist id=browsers>
-						
-						<!-- {{#each empresasAMostrar}}
-						{{nombre}} 
-						{{/each}} -->
-						
-						<option> America Movil
-						<option> Berkshire Hathaway
-						<option> General Electric
-						
-					</datalist>
-				</div>
-				<div class="form-group">
-					<input type="submit" class="btn btn-success" value="Mostrar Datos"
-						name="Mostrar Datos">
-				</div>
-			</form>
 		</div>
 </body>
 </html>

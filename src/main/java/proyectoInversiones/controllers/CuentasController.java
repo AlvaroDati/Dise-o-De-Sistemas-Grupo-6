@@ -10,6 +10,7 @@ import proyectoInversiones.Cuenta;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
+import proyectoInversiones.repositorio.RepositorioGeneral;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -17,33 +18,31 @@ import spark.Response;
 public class CuentasController{
 	
 	public static ModelAndView listar(Request req, Response res) {
-	    Map<String, List<Empresa>> model = new HashMap<>();
-	    NuevoLeerArchivo arch = new NuevoLeerArchivo();
-		model.put("empresasAMostrar",arch.leerArchivo());
-		return new ModelAndView(model, "Cuentas2.html");
+	  
+		RepositorioGeneral repoGeneral = new RepositorioGeneral();
+		NuevoLeerArchivo arch = new NuevoLeerArchivo();
+		repoGeneral.setEmpresas(arch.leerArchivo());
+		
+		
+		return new ModelAndView(repoGeneral, "Cuentas2.html");
 	}
 	
-		
-	public static ModelAndView setearEmpresa(Request req, Response res) {
+	
+public static ModelAndView setearEmpresa(Request req, Response res) {
 		
 		String empresa = req.queryParams("Empresa");
 		System.out.println(empresa);
 		try{
-			Map<String, List<Cuenta>> model = new HashMap<>();
+			RepositorioGeneral repoGeneral = new RepositorioGeneral();
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo>periodosEmpresa =  arch.getPeriodos(new Empresa(empresa));
-			List<Cuenta> cuentasDeEmpresa = setearListaCuentas(periodosEmpresa);
-			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
-			for(int i = 0;i<cuentasDeEmpresa.size();i++){
-				System.out.println(cuentasDeEmpresa.get(i).getFCashFlow());
-				System.out.println("empresas: "+cuentasDeEmpresa.get(i).getEmpresas());
+			repoGeneral.setEmpresas(arch.leerArchivo());
+			repoGeneral.setCuentas(setearListaCuentas(periodosEmpresa));
+			repoGeneral.setEmpresaAsociada(empresa);
+			for(int i = 0;i<repoGeneral.getCuentas().size();i++){
+				System.out.println(repoGeneral.getCuentas().get(i).getEbitda());
 			}
-			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
-			cuentaDeEmpresa.setEmpresaAsoc(empresa);
-			cuentaUnica.add(cuentaDeEmpresa);
-			model.put("cuentaUnica",cuentaUnica);		
-			model.put("cuentas", cuentasDeEmpresa);
-			return new ModelAndView(model, "Cuentas2.html");
+			return new ModelAndView(repoGeneral, "Cuentas2.html");
 		}catch ( Exception e ){
 			res.cookie("mensajeError", e.getMessage());
 			res.redirect("/cuentas");
@@ -53,7 +52,6 @@ public class CuentasController{
 		
 	}
 	
-	
 	public static List<Cuenta> setearListaCuentas(List<Periodo> listaPeriodos){
 		
 		List<Cuenta> cuentas = new ArrayList<Cuenta>();
@@ -61,7 +59,7 @@ public class CuentasController{
 		for (int i=0;i<listaPeriodos.size();i++){
 			cuentas.add(listaPeriodos.get(i).getCuentas());
 			cuentas.get(i).setPeriodoVinculado(listaPeriodos.get(i));
-			cuentas.get(i).setEmpresas(new NuevoLeerArchivo().leerArchivo());
+			//cuentas.get(i).setEmpresas(new NuevoLeerArchivo().leerArchivo());
 		}
 		
 		return cuentas;

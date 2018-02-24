@@ -16,6 +16,7 @@ import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.indicadores.IndVisitor;
+import proyectoInversiones.repositorio.RepositorioGeneral;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.CalculoIndicadores;
 import proyectoInversiones.usuarios.LeerUsuarios;
@@ -26,46 +27,71 @@ import spark.Response;
 
 public class IndicadoresController {
 	static String usuarioActivo;
-	static String rutaArchivo = "IndicadoresDelUsuario";
+	static String rutaArchivo = "target/classes/public/IndicadoresDelUsuario";
 	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();
 		
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public ModelAndView listar(Request req, Response res) throws IOException {
-		System.out.println(req.queryParams("userTag"));
-		System.out.println("web" + req.cookie("usuario"));
-		Map<String, List<Empresa>> model = new HashMap<>();
+		RepositorioGeneral repoGeneral = new RepositorioGeneral();
 		NuevoLeerArchivo arch = new NuevoLeerArchivo();
-		model.put("empresasAMostrar", arch.leerArchivo());
+		repoGeneral.setEmpresas(arch.leerArchivo());
 		String usuario = req.cookie("usuario");
 		usuarioActivo = usuario;
-		return new ModelAndView(model, "Indicadores2.html");
+		return new ModelAndView(repoGeneral, "Indicadores2.html");
 	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+//	public static ModelAndView setearEmpresa(Request req, Response res) {
+//		String nombreEmpresa = req.queryParams("Empresa");
+//		
+//		Empresa empresa = new Empresa(nombreEmpresa);
+//		try {
+//			
+//			Map<String, List<Indicador>> model = new HashMap<>();
+//			NuevoLeerArchivo arch = new NuevoLeerArchivo();
+//			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
+//			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
+//			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
+//			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
+//			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
+//			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
+//			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
+//			indicadorUnico.add(indicadorDeEmpresa);
+//			
+//			model.put("indicadorUnico", indicadorUnico);
+//			model.put("indicadores", indicadoresDeEmpresa);
+//			model.put("indicadoresU", indicadoresUsuario);
+//			return new ModelAndView(model, "Indicadores2.html");
+//		} catch (Exception e) {
+//			res.cookie("mensajeError", e.getMessage());
+//			res.redirect("/cuentas");
+//		}
+//
+//		return null;
+//
+//	}
+	
+	
+	
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
-		
 		Empresa empresa = new Empresa(nombreEmpresa);
 		try {
-			Map<String, List<Indicador>> model = new HashMap<>();
+			
+			RepositorioGeneral repoGeneral = new RepositorioGeneral();
 			NuevoLeerArchivo arch = new NuevoLeerArchivo();
 			List<Periodo> periodosEmpresa = arch.getPeriodos(empresa);
 			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
-			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
-			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
+			repoGeneral.setIndicadores(operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa));
+			repoGeneral.setIndicadoresUsuario(operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa));
+			repoGeneral.setEmpresas(arch.leerArchivo());
 			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
-			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
-			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
-			indicadorUnico.add(indicadorDeEmpresa);
-			
-			model.put("indicadorUnico", indicadorUnico);
-			model.put("indicadores", indicadoresDeEmpresa);
-			model.put("indicadoresU", indicadoresUsuario);
-			return new ModelAndView(model, "Indicadores2.html");
+			repoGeneral.setEmpresaAsociada(nombreEmpresa);
+			return new ModelAndView(repoGeneral, "Indicadores2.html");
 		} catch (Exception e) {
 			res.cookie("mensajeError", e.getMessage());
 			res.redirect("/cuentas");
@@ -75,65 +101,6 @@ public class IndicadoresController {
 
 	}
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public static List<Indicador> setearListaIndicadores(List<Periodo> listaPeriodos, Empresa empresa) {
-
-		List<Indicador> indicadores = new ArrayList<Indicador>();
-		ArmadorIndicador calculadorIndicadores = new ArmadorIndicador();
-
-		for (int i = 0; i < listaPeriodos.size(); i++) {
-			Indicador indicadorAux = new Indicador();
-			indicadorAux.setEmpresa(empresa);
-			indicadorAux.setPeriodo(listaPeriodos.get(i).getAnio());
-			indicadorAux.setRoe(calculadorIndicadores.obtenerRoeSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
-			indicadorAux.setIngresoNeto(calculadorIndicadores.obtenerIngresoNetoSegunPeriodo(empresa, listaPeriodos.get(i).getAnio()));
-			indicadores.add(indicadorAux);
-		}
-		return indicadores;
-	}
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public static List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)
-			throws IOException {
-		List<Indicador> indicadores = new ArrayList<Indicador>();
-		//ArmadorIndicador calcularIndicadores = new ArmadorIndicador();
-		IndVisitor indVisitor = new IndVisitor();
-		String usuario = usuarioActivo;
-		LeerUsuarios archivoUsuarios = new LeerUsuarios();
-		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
-		String archivoUsuario = rutaArchivo.concat(usuario); //IndicadoresUsuarioUserTag;
-		File file = new File(archivoUsuario);
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-		
-		//Esta lista hay que instanciarla antes! así como está ahora, si te mandas a hacer un nuevo ind sin setear una empresa, esto 
-		//queda vacio!!!
-		repoIndicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(1).getAnio()));
-		
-		
-		System.out.println("\n-----------------------------");
-		System.out.println("Instanciacion repoIndicadores");
-		for (Indicador ind:repoIndicadores){
-			System.out.println(ind.getNombre());
-		}
-		
-		for(int i = 0;i<listaPeriodos.size();i++){
-//			System.out.printf("En el periodo n°: %d\n", i);
-			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
-			System.out.println("indicadores" + indicadores.get(i).getNombre());
-		}
-			for(int j = 0;j<indicadores.size();j++){
-					indicadores.get(j).setUsuario(usuarioCreador);
-		}
-			
-			
-		return indicadores;
-	}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,14 +115,6 @@ public class IndicadoresController {
 		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
 		
-//		System.out.println("-----------------------------");
-//		System.out.println("RepoIndicadores en NuevoInd");
-//		for (Indicador ind:repoIndicadores){
-//			System.out.println(ind.getNombre());
-//		}
-		
-//		System.out.println("-----------------------------");
-//		System.out.printf("Nombre del indicador ingresado: %s\n", nombreIndicador);
 		
 		Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
 		System.out.println("cantidad de indicadores"+repoIndicadores.size());
