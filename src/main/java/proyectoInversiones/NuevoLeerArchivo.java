@@ -33,89 +33,19 @@ public class NuevoLeerArchivo {
   this.rutaGlobal = ruta;
  }
 
-// public ArrayList<Empresa> leerArchivo() {
-//
 
-//  //String ruta = "src\\main\\resources\\public\\empresas.json";
-//	String ruta = ClassLoader.getSystemResource("empresas.json").getPath();
-
-//  String ruta = "target/classes/public/empresas.json";
-//  //String ruta = "https://raw.githubusercontent.com/AlvaroDati/Dise-o-De-Sistemas-Grupo-6/nuevaBranch/empresas.json";
-
-//  
-//  rutaGlobal=ruta;
-//  
-//  ArrayList<Empresa> empresas = new ArrayList<>();
-
-//
-//  try {
-//
-//   FileReader fr = new FileReader(ruta);
-//   Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
-//   Gson gson = new Gson();
-//   JsonReader reader = new JsonReader(fr);
-//   empresas = gson.fromJson(reader, tipoEmpresa);
-
-//  
-//  try {
-//
-//   FileReader lectorArchivo = new FileReader(ruta);
-////   URL fr = new URL(ruta);
-////  InputStreamReader in = new InputStreamReader(fr.openStream());
-//   Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
-//   Gson gson = new Gson();
-//   JsonReader jsonReader = new JsonReader(lectorArchivo); 
-//   empresas = gson.fromJson(jsonReader, tipoEmpresa);
-
-//   return empresas;
-//
-//  } catch (FileNotFoundException e) {
-//   System.out.println("No se encontro el archivo indicado. El path provisto fue: " + ruta);
-//   e.printStackTrace();
-
-//  } catch (IOException e) {
-//	// TODO Auto-generated catch block
-//	e.printStackTrace();
-
-//  }
-//
-//  return empresas;
-//
-// }
-
- 
- public ArrayList<Empresa> leerArchivo() {
-
-  String ruta = "target/classes/public/empresas.json";
-  //String ruta = "https://raw.githubusercontent.com/AlvaroDati/Dise-o-De-Sistemas-Grupo-6/nuevaBranch/empresas.json";
-  
-	 rutaGlobal=ruta;
-  
-  ArrayList<Empresa> empresas = new ArrayList<>();
-  
-  try {
-
-   FileReader fr = new FileReader(ruta);
-//   URL fr = new URL(ruta);
-//  InputStreamReader in = new InputStreamReader(fr.openStream());
-   Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
-   Gson gson = new Gson();
-   JsonReader reader = new JsonReader(fr); 
-   empresas = gson.fromJson(reader, tipoEmpresa);
-   return empresas;
-
-  } catch (FileNotFoundException e) {
-   System.out.println("No se encontro el archivo indicado. El path provisto fue: " + ruta);
-   e.printStackTrace();
-  } catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
+ 	public ArrayList<Empresa> leerArchivoDrive(InputStream jsonCrudo){
+ 			ArrayList<Empresa> empresasDrive = new ArrayList<>();
+ 			Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
+ 			final Gson gson = new Gson();
+ 			final BufferedReader reader = new BufferedReader(new InputStreamReader(jsonCrudo));
+ 			empresasDrive = gson.fromJson(reader, tipoEmpresa);
+		return empresasDrive;
 }
-
-  return empresas;
-
- }
  
+ 
+ 
+
 
  public boolean validarEmpresa(String empresa) throws IOException {
 

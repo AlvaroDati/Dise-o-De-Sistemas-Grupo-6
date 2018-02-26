@@ -36,53 +36,53 @@ import proyectoInversiones.metodologias.OperandoCondicion;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestPersistencia {
-	private static final String PERSISTENCE_UNIT_NAME = "db";
-	private EntityManagerFactory emFactory;
-	private EntityManager emanager;
-	private Repositorio repositorio;
-	private NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-	private ArrayList<Empresa> empresasDelJson = new ArrayList<Empresa>();
-	
-	@Before
-	public void setUp() throws Exception {
-		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		emanager = emFactory.createEntityManager();
-		repositorio = new Repositorio(emanager);
-		empresasDelJson = archivo.leerArchivo();
-	}
-	
-	
+//	private static final String PERSISTENCE_UNIT_NAME = "db";
+//	private EntityManagerFactory emFactory;
+//	private EntityManager emanager;
+//	private Repositorio repositorio;
+//	private NuevoLeerArchivo archivo = new NuevoLeerArchivo();
+//	private ArrayList<Empresa> empresasDelJson = new ArrayList<Empresa>();
+//	
+//	@Before
+//	public void setUp() throws Exception {
+//		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+//		emanager = emFactory.createEntityManager();
+//		repositorio = new Repositorio(emanager);
+//		empresasDelJson = archivo.leerArchivo();
+//	}
+//	
+//	
 //	@Test
 //	public void conectateAPostgres(){
 //		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 //		UsuariosRepo repo = new UsuariosRepo(emanager);
 //		Usuario usuarioLoggeado = repo.buscarUsuarioPorNombre("ivan");
 //		Long idUsuario =  usuarioLoggeado.getId();
-//	
 //	}
-	
 //	
-	@Test
-	public void  persistir1UsuariosYverificarUno() {
-		LeerUsuarios archivoUsuarios = new LeerUsuarios();
-		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
-		
-		
-		for (Usuario head:usuarios){
-			
-			if(repositorio.usuariosRepo().buscarPorId(head.getId()) == null){
-				repositorio.usuariosRepo().persistir(head);			
-			}else{
-				System.out.println("asdfsd");
-				if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
-					Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
-				else
-					repositorio.usuariosRepo().persistir(head);
-			}
-		}
-		
-		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
-	}
+//	
+//	
+//	@Test
+//	public void  persistir1UsuariosYverificarUno() {
+//		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+//		ArrayList<Usuario> usuarios = archivoUsuarios.leerArchivo();
+//		
+//		
+//		for (Usuario head:usuarios){
+//			
+//			if(repositorio.usuariosRepo().buscarPorId(head.getId()) == null){
+//				repositorio.usuariosRepo().persistir(head);			
+//			}else{
+//				System.out.println("asdfsd");
+//				if(repositorio.usuariosRepo().buscarPorId(head.getId()).getUserTag().equals(head.getUserTag()))
+//					Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)1).getUserTag(), "ivan");
+//				else
+//					repositorio.usuariosRepo().persistir(head);
+//			}
+//		}
+//		
+//		Assert.assertEquals(repositorio.usuariosRepo().buscarPorId((long)2).getUserTag(), "alvitovito");
+//	}
 //
 //
 //	
@@ -168,7 +168,7 @@ public class TestPersistencia {
 //		ivanCompany.setInicioActividad(2000);
 //		gulloCompany.setInicioActividad(1980);
 //		IndicadorAuxiliar indicadorLoco = new IndicadorAuxiliar();
-//		indicadorLoco.setEmpresaAsoc(ivanCompany.getNombre());
+////		indicadorLoco.setEmpresaAsoc(ivanCompany.getNombre());
 //		indicadorLoco.setExpresion("hola=DEUDA+500");
 //		indicadorLoco.setNombre("indicadorLoco");
 //		
@@ -183,8 +183,8 @@ public class TestPersistencia {
 //			System.out.println("2");
 //		}
 //		Antiguedad antiguedad = new Antiguedad();
-//		antiguedad.setEmpresaAsoc("Soy un antiguedad");
-//		antiguedad.setPeriodos("2999");
+////		antiguedad.setEmpresaAsoc("Soy un antiguedad");
+////		antiguedad.setPeriodos("2999");
 //		OperandoCondicion opCond = new OperandoCondicion(OperacionAgregacion.Ultimo, antiguedad, 1);
 //		CondicionPrioritaria unaCondicionPrioritaria = new CondicionPrioritaria(opCond, OperacionRelacional.Mayor);		
 //		if(unaCondicionPrioritaria.esMejorQue(gulloCompany, ivanCompany)){
@@ -201,11 +201,11 @@ public class TestPersistencia {
 //
 //
 //	
-	@After
-	public void tearDown() throws Exception {
-		repositorio.cerrar();
-		emFactory.close();
-	}
+//	@After
+//	public void tearDown() throws Exception {
+//		repositorio.cerrar();
+//		emFactory.close();
+//	}
 }
 	
 

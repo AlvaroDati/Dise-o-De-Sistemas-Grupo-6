@@ -15,7 +15,7 @@ import proyectoInversiones.usuarios.Usuario;
 
 public class CalculoIndicadores {
 	static String usuarioActivo;
-	static String rutaArchivo = "IndicadoresDelUsuario";
+	static String rutaArchivo = "target/classes/public/IndicadoresDelUsuario";
 	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();
 	static int valor;
 	public CalculoIndicadores(String usuario){
@@ -46,6 +46,7 @@ public class CalculoIndicadores {
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
 		String archivoUsuario = rutaArchivo.concat(usuario);
+		System.out.println("Archivo del usuario: " + archivoUsuario);
 		File file = new File(archivoUsuario);
 		if (!file.exists()) {
 			file.createNewFile();
@@ -57,6 +58,7 @@ public class CalculoIndicadores {
 
 		for(int i = 0;i<listaPeriodos.size();i++){
 			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
+			
 			
 		}
 			for(int j = 0;j<indicadores.size();j++){

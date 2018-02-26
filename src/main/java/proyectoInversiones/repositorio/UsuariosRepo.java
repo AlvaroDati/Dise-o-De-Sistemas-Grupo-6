@@ -11,15 +11,15 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.SessionFactory;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
-import proyectoInversiones.CargaBatchCuentas;
 import proyectoInversiones.Empresa;
+import proyectoInversiones.CargaBatch.CargaBatch;
 import proyectoInversiones.server.Router;
 import proyectoInversiones.usuarios.Usuario;
 
 public class UsuariosRepo extends Repositorio implements WithGlobalEntityManager{
 	
 	
-	UsuariosRepo(EntityManager emanager) { //Antes estaba sin public
+	public UsuariosRepo(EntityManager emanager) { //Antes estaba sin public
 		super(emanager);
 	}
 

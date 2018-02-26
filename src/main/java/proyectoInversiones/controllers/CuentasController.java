@@ -12,6 +12,7 @@ import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.Empresa;
 //import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
+import proyectoInversiones.repositorio.RepositorioGeneral;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -37,12 +38,14 @@ public class CuentasController{
 	  	
 	    model.put("empresasAMostrar", listaEmpresas);
 		return new ModelAndView(model, "Cuentas2.html");
+
 	}
 	
-		
-	public static ModelAndView setearEmpresa(Request req, Response res) {
+	
+public static ModelAndView setearEmpresa(Request req, Response res) {
 		
 		String empresa = req.queryParams("Empresa");
+
 		
 		try{
 			Map<String, List<Cuenta>> model = new HashMap<>();
@@ -59,15 +62,15 @@ public class CuentasController{
 			model.put("cuentas", cuentasDeEmpresa);
 			return new ModelAndView(model, "Cuentas2.html");
 			
+
 		}catch ( Exception e ){
 			res.cookie("mensajeError", e.getMessage());
-			res.redirect("/Cuentas2.html");
+			res.redirect("/cuentas");
 		}
 		
 		return null;
 		
 	}
-	
 	
 	public static List<Cuenta> setearListaCuentas(List<Periodo> listaPeriodos){
 		
@@ -76,6 +79,7 @@ public class CuentasController{
 		for (int i=0;i<listaPeriodos.size();i++){
 			cuentas.add(listaPeriodos.get(i).getCuentas());
 			cuentas.get(i).setPeriodoVinculado(listaPeriodos.get(i));
+			//cuentas.get(i).setEmpresas(new NuevoLeerArchivo().leerArchivo());
 		}
 		
 		return cuentas;

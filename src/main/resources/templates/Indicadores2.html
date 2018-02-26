@@ -36,24 +36,23 @@
 
  <div class="row contenedorContenidoDebajoDelNav">
         
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-         	<div class="bg-dark table-responsive">
-            	<table class="table table-bordered table-hover">
-			 		<thead class="thead-default">
-			  		<tr>
-						<th class="text-center">Empresa Seleccionada<i class="fa fa-fw fa-sort"></i></th>
-			  		</tr>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="bg-dark table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead class="thead-default">
+						<tr>
+							<th>Empresa seleccionada<i class="fa fa-fw fa-sort"></i></th>
+						</tr>
 					</thead>
-					{{#each indicadorUnico}}
 					<tr>
-						<td>{{empresaAsoc}}</td>
+						<td>{{empresaAsociada}}</td>
 					</tr>
-					{{/each}} 
 				</table>
-		  	</div>
-    	</div>
+			</div>
+		</div>
     	
-   <!--  	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+   <!--  	
+   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
        		<form role="form" method="post" onsubmit="return validar();">
             	<div class="form-group">
                 	<input type="text"  name="Empresa" placeholder="Ingrese empresa:" class="form-control input-48" id="Empresa" required>
@@ -62,17 +61,18 @@
                 	<input type="submit" class="btn btn-success" value="Mostrar Datos" name="Mostrar Datos">
                 </div>      
 			</form>
-		</div> -->
+		</div> 
+		 -->
 		
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
-			<form role="form" method="post" onsubmit="return validar();">
-				<div class="form-group">
-					<input type=text list=browsers id="Empresa" name="Empresa">
-					<!--  name="Empresa" class="form-control input-48" id="Empresa" required>-->
-					<datalist id=browsers>
-						{{#each empresasAMostrar}}
-						<option>{{nombre}} {{/each}}
-					</datalist>
+		<div
+			class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
+			<form role="form" method="post" >
+				<div class="form-group">	
+					<select id="Empresa" name="Empresa">
+					{{#each empresas~}}
+						<option value={{~nombre~}}>{{~nombre~}}</option>
+					{{~/each}}
+					</select>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-success" value="Mostrar Datos"
@@ -116,7 +116,7 @@
 							<th class="text-center">Valor<i class="fa fa-fw fa-sort"></i></th>
 						</tr>
 			 		</thead>
- 					{{#each indicadoresU}}
+ 					{{#each indicadoresUsuario}}
 					<tr>
 						<td>{{nombre}}</td>
 						<td>{{periodo}}</td>

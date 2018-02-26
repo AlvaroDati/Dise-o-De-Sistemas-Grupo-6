@@ -27,7 +27,7 @@ import spark.Response;
 
 public class IndicadoresController {
 	static String usuarioActivo;
-	static String rutaArchivo = "IndicadoresDelUsuario";
+	static String rutaArchivo = "target/classes/public/IndicadoresDelUsuario";
 	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();
 		
     static DescargaDrive lectorDrive = new DescargaDrive();
@@ -42,19 +42,15 @@ public class IndicadoresController {
 		ArrayList<Empresa> listaEmpresas = lectorDrive.getTodasLasEmpresas();
 
 		model.put("empresasAMostrar", listaEmpresas);
+
 		String usuario = req.cookie("usuario");
-		System.out.println("qweq" + usuario);
 		usuarioActivo = usuario;
-		System.out.println("bad" + usuarioActivo);
 		return new ModelAndView(model, "Indicadores2.html");
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
-		
 		Empresa empresa = new Empresa(nombreEmpresa);
 		try {
 			Map<String, List<Indicador>> model = new HashMap<>();
@@ -64,13 +60,6 @@ public class IndicadoresController {
 			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
 			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
 			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
-			Indicador indicadorDeEmpresa = indicadoresDeEmpresa.get(0);
-			List<Indicador> indicadorUnico = new ArrayList<Indicador>();
-			indicadorUnico.add(indicadorDeEmpresa);
-			
-			model.put("indicadorUnico", indicadorUnico);
-			model.put("indicadores", indicadoresDeEmpresa);
-			model.put("indicadoresU", indicadoresUsuario);
 			return new ModelAndView(model, "Indicadores2.html");
 		} catch (Exception e) {
 			res.cookie("mensajeError", e.getMessage());

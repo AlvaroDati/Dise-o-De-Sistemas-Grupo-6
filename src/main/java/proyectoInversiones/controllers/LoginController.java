@@ -28,12 +28,12 @@ public class LoginController {
 	}
 	public ModelAndView login(Request req, Response res) throws Exception {
 	//	this.setUp();
-		RepositorioServicio.getInstance().buscarUsuarioPorNombre("ivan");
+		RepositorioServicio.getInstance().buscarUsuarioPorNombre("");
 		return new ModelAndView(null, "Index.html");
 	}
 	
 	
-	public Void validate(Request req, Response res) {
+	public ModelAndView validate(Request req, Response res) {
 		
 		String userTag = req.queryParams("userTag");
 		String password = req.queryParams("password"); 
@@ -41,23 +41,32 @@ public class LoginController {
 		repositorioServicio = RepositorioServicio.getInstance();
 		try{
 			Usuario usuarioLoggeado = repositorioServicio.buscarUsuarioPorNombre(userTag);
-
+			System.out.printf("USUARIO: %s CON CONTRASEÑA: %s SACADOS CON ÉXITO DE LA BASE DE DATOS \n\n",usuarioLoggeado.getUserTag(),usuarioLoggeado.getPassword());
 			
 //			UsuariosRepo repo = new UsuariosRepo(emanager);
 			Long idUsuario =  usuarioLoggeado.getId();
-		
-			
+		if(userTag.equals(usuarioLoggeado.getUserTag()) && password.equals(usuarioLoggeado.getPassword())){
 			
 			res.cookie("userTag", userTag);
 			res.cookie("usuario", userTag);
 			res.cookie("idUsuario", idUsuario.toString());
 			res.redirect("/cuentas");
+		}else{
+			res.removeCookie("userTag");
+			res.removeCookie("usuario");
+			res.removeCookie("idUsuario");
+			res.redirect("/");
+			//return new ModelAndView(null,"public/LoginError.html");
+		};
+			
+			
 		} catch ( Exception e ){
 			res.removeCookie("userTag");
 			res.removeCookie("usuario");
 			res.removeCookie("idUsuario");
 			res.cookie("mensajeError", e.getMessage());
 			res.redirect("/");
+			//return new ModelAndView(null,"public/LoginError.html");
 		}
 		return null;
 	}		

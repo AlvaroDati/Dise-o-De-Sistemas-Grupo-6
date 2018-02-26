@@ -78,6 +78,7 @@
 	<artifactId>jpa-java8-extras</artifactId>
 	<version>1.0-alpha-1</version>
 </dependency> 
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -171,6 +172,24 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.1</version>
+		</dependency>
+		
+		<dependency>
+   			<groupId>com.google.apis</groupId>
+    		<artifactId>google-api-services-drive</artifactId>
+    		<version>v3-rev103-1.23.0</version>
+		</dependency>
+		
+		<dependency>
+  			<groupId>com.google.api-client</groupId>
+  			<artifactId>google-api-client-java6</artifactId>
+  			<version>1.23.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+   			 <artifactId>google-oauth-client-jetty</artifactId>
+   			 <version>1.23.0</version>
 		</dependency>
 
 

@@ -15,15 +15,14 @@ HashMap memory = new HashMap();
 prog: stat+ ;
 stat: expr NEWLINE # printExpr
 |  INDICADOR '=' expr NEWLINE # assign
-| INDICADOR
-| NEWLINE # blank
 ;
 
 expr: expr op=('*'|'/') expr # MulDiv
 | expr op=('+'|'-') expr # SumRes
-| INT expr# int
+| '(' expr ')' # parens
+| INT # int
 | INDICADOR # id
-//| '(' expr ')' # parens
+| NEWLINE # blank
 //| INDICADOR '(' INDICADOR '(' INT ')'')' #EmpresaCuentaPeriodo
 //|INDICADOR '(' INDICADOR ')' #EmpresaCuenta
 ;

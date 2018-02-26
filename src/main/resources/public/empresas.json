@@ -1,6 +1,6 @@
 [
 	{
-	"nombre":"America Movil",
+	"nombre":"Sony",
     "inicioActividad":2013,
     "periodos":[ 
     			{ "anio": 2016,
@@ -26,7 +26,7 @@
               ]
 	},
 	{
-    "nombre":"Berkshire Hathaway",
+    "nombre":"Samsung",
     "inicioActividad":2012,
     "periodos":[
                 { "anio": 2015,
@@ -63,7 +63,7 @@
 		},
 		
 		{
-            "nombre":"General Electric",
+            "nombre":"Audi",
             "inicioActividad":1970,
             "periodos":            
             [

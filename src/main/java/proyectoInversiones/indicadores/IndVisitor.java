@@ -71,7 +71,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		ArrayList<Float> vAux = new ArrayList<Float>();
 		Indicador indicadorAux = new Indicador();
 		int resultado = 0;
-	//	System.out.println(ctx.getText());
+//		System.out.println("Tesxto de visitAssign: "+ctx.getText());
 		String id = ctx.getText();
 		// System.out.print(id);
 		int periodo = 0;
@@ -83,7 +83,9 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		List<Indicador> listaUsuario = new ArrayList<Indicador>();
 		nombreIndicadorGlobal = nombreIndicador;
 		mapIndicador.put(indicadorAux, cuentaIndicador);
+//		System.out.println("CTX.EXPR(): "+ctx.expr().getText());
 		int value = visit(ctx.expr()); // compute value of expression on right
+//		System.out.println("Value: "+value);
 		indicadorAux.setNombre(nombreIndicador);
 		indicadorAux.setValorIndicador(value);
 		List<String> aux = cuenta;
@@ -107,7 +109,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	@Override
 	public Integer visitPrintExpr(indicadoresParser.PrintExprContext ctx) {
 		Integer value = visit(ctx.expr()); // evaluate the expr child
-		System.out.println(ctx.getText());
+//		System.out.println(ctx.getText());
 		/*
 		 * System.out.println(value); // print the result
 		 * System.out.println(resultado); // print the result
@@ -118,6 +120,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	/** INT */
 	@Override
 	public Integer visitInt(indicadoresParser.IntContext ctx) {
+//		System.out.println(ctx.INT().getText());
 ;		return Integer.valueOf(ctx.INT().getText());
 	}
 
@@ -171,6 +174,7 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 		int left = visit(ctx.expr(0)); // get value of left RESexpression
 		int right = visit(ctx.expr(1)); // get value of right RESexpression
 		int answer = 0;
+//System.out.println("visitSumRes : "+ctx.getText());
 		if (ctx.op.getType() == indicadoresParser.SUM) {
 			answer = left + right;
 		} else {
@@ -181,10 +185,10 @@ public class IndVisitor extends indicadoresBaseVisitor<Integer> {
 	}
 
 	/** '(' expr ')' */
-//	@Override
-//	public Integer visitParens(indicadoresParser.ParensContext ctx) {
-//		return visit(ctx.expr()); // return child expr's value
-//	}
+	@Override
+	public Integer visitParens(indicadoresParser.ParensContext ctx) {
+		return visit(ctx.expr()); // return child expr's value
+	}
 //
 //	@Override
 //	public Integer visitEmpresaCuentaPeriodo(indicadoresParser.EmpresaCuentaPeriodoContext ctx) {
@@ -626,15 +630,14 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 	}
 	
 //	public static void main (String args[]) throws IOException{
-//		
 //		IndVisitor ind = new IndVisitor();
 //		List<Indicador> indicador = ind.obtenerResultadosIndicadoresUsuarioSegunEmpresa("IndicadoresDelUsuarioivan", new Empresa("America Movil"), 2016);
 //		for(int i = 0;i<indicador.size();i++){
 //			System.out.println(indicador.get(i).getNombre());
-//			System.out.println(indicador.get(i).getValorIndicador());
+//			System.out.println("Valor indicador: "+indicador.get(i).getValorIndicador());
 //		}
 //	}
-//	
+	
 	
 	
 }

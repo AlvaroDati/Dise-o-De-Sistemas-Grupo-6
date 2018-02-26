@@ -38,6 +38,7 @@ public class MetodologiasController {
 	
 	public Void setearMetodologia(Request req, Response res) {
 		String metodologia = req.queryParams("metodologia");
+		System.out.printf("\nMetodologia buscada: %s", req.queryString());
 		System.out.printf("\nMetodologia buscada: %s", metodologia);		
 		
 		try{
