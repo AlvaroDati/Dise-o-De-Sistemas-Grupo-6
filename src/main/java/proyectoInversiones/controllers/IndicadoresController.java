@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import javax.persistence.EntityManager;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +19,8 @@ import proyectoInversiones.Indicador;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.indicadores.IndVisitor;
+import proyectoInversiones.repositorio.RepositorioGeneral;
+import proyectoInversiones.repositorio.RepositorioServicio;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.CalculoIndicadores;
 import proyectoInversiones.DescargaDrive;
@@ -31,6 +36,8 @@ public class IndicadoresController {
 	static List<Indicador> repoIndicadores = new ArrayList<Indicador>();
 		
     static DescargaDrive lectorDrive = new DescargaDrive();
+	private static RepositorioServicio repositorioServicio;
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +56,7 @@ public class IndicadoresController {
 	}
 
 	
-	public static ModelAndView setearEmpresa(Request req, Response res) {
+	public  ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
 		Empresa empresa = new Empresa(nombreEmpresa);
 		try {
@@ -61,6 +68,7 @@ public class IndicadoresController {
 			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
 			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
 			return new ModelAndView(model, "Indicadores2.html");
+
 		} catch (Exception e) {
 			res.cookie("mensajeError", e.getMessage());
 			res.redirect("/cuentas");
@@ -69,6 +77,42 @@ public class IndicadoresController {
 		return null;
 
 	}
+	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)throws IOException{
+		
+		List<Indicador> indicadores = new ArrayList<Indicador>();
+		IndVisitor indVisitor = new IndVisitor();
+		String usuario = usuarioActivo;
+		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+		RepositorioServicio repositorio = RepositorioServicio.getInstance();
+		List<String> expresionIndicadores = new ArrayList<String>();
+		expresionIndicadores = repositorio.buscarIndicadorPorUsuario(usuario);
+		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
+		Indicador indicador = new Indicador();
+		for (int j = 0; j < listaPeriodos.size(); j++) {
+			int periodo = listaPeriodos.get(j).getAnio();
+//			indicador.setPeriodo(listaPeriodos.get(j).getAnio());
+			for (int i = 0; i < expresionIndicadores.size(); i++) {
+				indicador.setPeriodo(periodo);
+				System.out.println("Periodo de indicador: "+indicador.getPeriodo());
+					indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa(expresionIndicadores.get(i), empresa,
+							periodo);
+				indicadores.add(indicador);
+//				indicadores.get(i).setPeriodo(listaPeriodos.get(j).getAnio());
+
+			}
+		}
+
+//			for (int i = 0; i < indicadores.size(); i++) {
+//				for (int j = 0; j < listaPeriodos.size(); j++) {
+//				indicadores.get(i).setPeriodo(listaPeriodos.get(j).getAnio());
+//			}
+//		}		
+		
+		return indicadores;
+	}
+	
+	
+	
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,13 +145,28 @@ public class IndicadoresController {
 					if (!file.exists()) {
 						file.createNewFile();
 					}
-
+					
 					FileWriter fw = new FileWriter(file, true);
 					BufferedWriter bw = new BufferedWriter(fw);
 					//bw.write(empresaSeleccionada.toString() + "(" + nombreIndicador + ")" + "=");
 					bw.write(nombreIndicador  + "=");
 					bw.write(expresionIndicador + "\n"); // numero +
 					bw.close();
+					
+//					Usuario us = new Usuario(usuario,req.cookie("password"));
+//					System.out.println("us: "+us.getUserTag()+"pw:"+us.getUserTag());
+					Indicador indicador = new Indicador();
+					RepositorioServicio repo = repositorioServicio.getInstance();
+					Usuario u = repo.buscarUsuarioPorNombre(usuario);
+					System.out.println("u: "+u.getUserTag()+"pw:"+u.getUserTag());
+					indicador.setUsuario(u);
+					indicador.setNombre(nombreIndicador);
+					indicador.setExpresion(nombreIndicador+"="+expresionIndicador+"\n");
+					
+					repo.getEmanager().getTransaction().begin();
+					 repo.getEmanager().persist(indicador);
+					 repo.getEmanager().getTransaction().commit();
+					
 					res.redirect("/indicadores");
 
 				} catch (IOException e) {

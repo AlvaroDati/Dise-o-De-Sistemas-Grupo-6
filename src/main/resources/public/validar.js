@@ -25,3 +25,10 @@ function validarMetodologia(){
 		return false;
 	}
 }
+
+fuction confirmar(){
+	
+	var boton;
+	boton = document.getElementOnSubmit("");
+	
+}

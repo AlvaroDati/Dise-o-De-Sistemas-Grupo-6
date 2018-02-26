@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -24,6 +25,7 @@ import proyectoInversiones.usuarios.Usuario;
 
 @Entity
 @Table(name = "indicadores")
+@NamedQuery(name = "buscarIndicadorPorUsuario", query = "SELECT u FROM Indicador u WHERE u.usuario.id LIKE :filtro")
 public class Indicador  implements Serializable{
 	
 	@Id
@@ -51,7 +53,7 @@ public class Indicador  implements Serializable{
 		}
 	@Transient
 	private Empresa empresa;
-	@Transient
+	@Column(name = "expresion")
 	private String expresion;
 	
 	@Transient

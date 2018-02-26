@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import proyectoInversiones.Indicador;
 import proyectoInversiones.usuarios.Usuario;
 
 public class RepositorioServicio {
@@ -67,6 +68,26 @@ public class RepositorioServicio {
 		this.emanager = emanager;
 	}
 	
+	
+	public List<String> buscarIndicadorPorUsuario(String nombre){
+		List<Indicador> indicador = new ArrayList<Indicador>();
+		List<String> expresionIndicadores = new ArrayList<String>();
+		Usuario us = this.buscarUsuarioPorNombre(nombre);
+		String query = "select  expresion from indicadores where usuario_id="+us.getId()+";";
+//		System.out.println("Query: "+query);
+		//indicador = emanager.createQuery(query).getResultList();
+	//	indicador = emanager.createNamedQuery("buscarIndicadorPorUsuario").setParameter("filtro", us.getId()).getResultList();
+expresionIndicadores =		emanager.createNativeQuery(query).getResultList();
+//		System.out.println("Indicadores extraidos de la bd: "+expresionIndicadores);
+//		System.out.println("Cantidad de indicadores extraidos de la bd: "+indicador.size());
+//		
+//		for(int i = 0;i<expresionIndicadores.size();i++){
+//		//	System.out.println("Expresion indicador: "+indicador.get(i).getNombre());
+//			System.out.println("asdf");
+//			System.out.println("Expresion indicador: "+expresionIndicadores.get(i));
+//		}
+		return expresionIndicadores;
+	}
 	
 	
 	
