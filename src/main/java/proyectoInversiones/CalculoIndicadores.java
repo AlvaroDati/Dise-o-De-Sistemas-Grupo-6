@@ -22,7 +22,7 @@ public class CalculoIndicadores {
 		usuarioActivo = usuario;
 	}
 	
-	public List<Indicador> setearListaIndicadores(List<Periodo> listaPeriodos, Empresa empresa) {
+	public List<Indicador> setearListaIndicadores(List<Periodo> listaPeriodos, Empresa empresa) throws IOException {
 		
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		ArmadorIndicador calculadorIndicadores = new ArmadorIndicador();

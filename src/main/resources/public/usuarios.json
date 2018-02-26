@@ -1,0 +1,25 @@
+[
+	{
+	"id":1,
+	"userTag":"ivan",
+	"password":"ivan"
+	},
+	
+	{
+	"id":2,
+	"userTag":"alvitovito",
+	"password":"vitovito"
+	},
+
+	{
+	"id":3,
+	"userTag":"elias",
+	"password":"kimcito"
+	},
+	
+	{
+	"id":4,
+	"userTag":"gulloxdeus",
+	"password":"guyo"
+	}
+]

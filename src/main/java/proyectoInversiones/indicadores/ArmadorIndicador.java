@@ -140,13 +140,14 @@ public class ArmadorIndicador {
 	 * 
 	 * INICIO
 	 * METODOS DE ArmarIndicadores
+	 * @throws IOException 
 	 * 
 	 * */
-	public List<Integer> periodos(Empresa empresa) {
+	public List<Integer> periodos(Empresa empresa) throws IOException {
 		return archivoEmpresas.obtenerPeriodosSegunEmpresa(empresa);
 	}
 
-	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo) {
+	public float obtenerIngresoNetoSegunPeriodo(Empresa empresa, int periodo) throws IOException {
 		float ingNetoAux = 0;
 		ArrayList<Float> ingNeto = this.calcularIngresoNeto(empresa);
 		List<Integer> periodosDeEmpresa = this.periodos(empresa);
@@ -158,7 +159,7 @@ public class ArmadorIndicador {
 		return ingNetoAux;
 	}
 
-	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo) {
+	public float obtenerRoeSegunPeriodo(Empresa empresa, int periodo) throws IOException {
 		float roeAux = 0;
 		List<Float> roe = this.calcularRoe(empresa);
 		List<Integer> periodosDeEmpresa = this.periodos(empresa);
@@ -169,7 +170,7 @@ public class ArmadorIndicador {
 		return roeAux;
 	}
 
-	public float obtenerValorIndicador(Indicador indicador) {
+	public float obtenerValorIndicador(Indicador indicador) throws IOException {
 		float indicadorDeseado = 0;
 		Empresa empresa = indicador.getEmpresa();
 		List<Integer> periodosDeEmpresa = this.periodos(empresa);
@@ -193,7 +194,7 @@ public class ArmadorIndicador {
 	
 
 	
-	public ArrayList<Float> calcularIngresoNeto(Empresa empresa) {
+	public ArrayList<Float> calcularIngresoNeto(Empresa empresa) throws IOException {
 		ArrayList<Float> ingNeto = new ArrayList<Float>();
 		ArrayList<Float> ingNetoOpCont = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPCONT");
 		ArrayList<Float> ingNetoOpDis = archivoEmpresas.obtenerCuentaDe(empresa, "INGNETOOPDISC");
@@ -205,7 +206,7 @@ public class ArmadorIndicador {
 		return ingNeto;
 	}
 	
-	public ArrayList<Float> calcularRoe(Empresa empresa){
+	public ArrayList<Float> calcularRoe(Empresa empresa) throws IOException{
 		ArrayList<Float> roe     = new ArrayList<Float>();		
 		ArrayList<Float> ingNeto = this.calcularIngresoNeto(empresa);
 	
@@ -222,7 +223,7 @@ public class ArmadorIndicador {
 
 	
 	
-	public ArrayList<ArmadorIndicador> calcularIndicadorPredefinido(Empresa empresa,ArmadorIndicador indicador){
+	public ArrayList<ArmadorIndicador> calcularIndicadorPredefinido(Empresa empresa,ArmadorIndicador indicador) throws IOException{
 		ArrayList<ArmadorIndicador> indicadorPredefinido = new ArrayList<ArmadorIndicador>();
 		
 		switch(indicador.toString()){
@@ -235,21 +236,5 @@ public class ArmadorIndicador {
 		return indicadorPredefinido;
 	}
 	
-//	public float obtenerValorDeExpresion(Indicador indicador){
-//		ArmadorIndicador indicador 
-//	}
-	
-//	public Indicador obtenerIndicadorUsuarioSegunExpresion(String archivoUsuario,String nombre,Empresa empresa) throws IOException{
-//		List<Indicador> indicadores = this.getIndicadoresUsuario(archivoUsuario,empresa);
-//		Indicador indicador = new Indicador();
-//		for (int i = 0; i < indicadores.size(); i++) {
-//			if (indicadores.get(i).getNombre().equals(nombre)) {
-//				indicador = indicadores.get(i);
-//				break;
-//			}
-//		}
-//		
-//		return indicador;
-//	}
-	
+
 }

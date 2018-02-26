@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 import java.io.File;
+import java.io.IOException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,9 +16,9 @@ import proyectoInversiones.repositorio.Repositorio;
 import proyectoInversiones.usuarios.Usuario;
 
 public class CargaBatchCuentas extends TimerTask {
-
-	String rutaAnterior = "";
-	Long ultimaMod = null;
+	
+	int nroDeArchivosPersistidos = 0;
+	int sumaHashPersistidos = 0;
 	private static final String PERSISTENCE_UNIT_NAME = "db";
 	private EntityManagerFactory emFactory;
 	@PersistenceContext(unitName = "db", type = PersistenceContextType.EXTENDED)
@@ -31,39 +32,39 @@ public class CargaBatchCuentas extends TimerTask {
 	@Override
 	public void run() {
 		try {
-			this.persistirConJson();
+			this.persistirArchivosDrive();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void persistirConJson() {
+	public void persistirArchivosDrive() throws IOException {
 
 		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		System.out.println("asfssd");
 		emanager = emFactory.createEntityManager();
 		repositorio = new Repositorio(emanager);
-		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
 
-		ArrayList<Empresa> empresas = archivo.leerArchivo();
-		String rutaArchivo = archivo.getRuta();
+		DescargaDrive lectorDrive = new DescargaDrive();
+		lectorDrive.obtenerEmpresas();
+		
+		ArrayList<Empresa> empresas = lectorDrive.getTodasLasEmpresas();
+		ArrayList<Integer> hashcodes = lectorDrive.getHashcodesDeArchivos();
+		
+		int sumaHash = 0;
+		
+		for (Integer hash:hashcodes){
+			sumaHash = sumaHash + hash;
+		}
+		
+		int nroDeArchivos = lectorDrive.getCantidadDeArchivos();
+		
+		if (nroDeArchivosPersistidos == nroDeArchivos && sumaHash == sumaHashPersistidos) {
 
-		System.out.printf("\nRuta del archivo: %s\n", rutaArchivo);
-
-		File file = new File(rutaArchivo);
-		Long modReal = file.lastModified();
-
-		System.out.printf("\nmodReal: %d", modReal);
-		System.out.printf("\nultimaMod: %d\n", ultimaMod);
-
-		if (rutaArchivo == rutaAnterior && ultimaMod.equals(modReal)) {
-
-			System.out.printf("\nEl archivo ya fue cargado\n");
+			System.out.printf("\nEl/los archivos ya fue/ron cargado/s\n");
 			repositorio.cerrar();
 			emFactory.close();
 
 		} else {
-
 			System.out.printf("\nPersistiendo archivo\n");
 			System.out.printf("///////////////////////\n");
 			for (int i = 0; i < empresas.size(); i++) {
@@ -74,30 +75,12 @@ public class CargaBatchCuentas extends TimerTask {
 					repositorio.empresasRepo().persistir(empresas.get(i));
 				}
 			}
-			rutaAnterior = rutaArchivo;
-			ultimaMod = file.lastModified();
+
+			sumaHashPersistidos = sumaHash;
+			nroDeArchivosPersistidos = nroDeArchivos;
 			repositorio.cerrar();
 			emFactory.close();
-
 		}
-	}
-
-	public List<Usuario> obtenerUsuariosSegunNombre(String nombre) {
-		List<Usuario> usuarioALoguearse = new ArrayList<Usuario>();
-		usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre")
-				.setParameter("filtro", "%" + nombre + "%").getResultList();
-
-		// System.out.println("Usuario: " +
-		// usuarioALoguearse.get(0).getPassword());
-		// Usuario usuarioALoguearse2 = null;
-		// for (int i = 0; i < usuarioALoguearse.size(); i++) {
-		// if (usuarioALoguearse.get(i).getUserTag().equals(nombre)) {
-		// usuarioALoguearse2 = usuarioALoguearse.get(i);
-		// }
-		// }
-
-		return usuarioALoguearse;
-
 	}
 
 }

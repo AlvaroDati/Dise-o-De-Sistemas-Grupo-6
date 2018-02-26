@@ -21,14 +21,13 @@ public class LeerUsuarios {
 	
 	
 	ArrayList<Usuario> usuarios = this.leerArchivo();
+	
 	public ArrayList<Usuario> leerArchivo() {
 
-		//	String ruta = "usuarios.json";
-			String ruta = "https://raw.githubusercontent.com/AlvaroDati/Dise-o-De-Sistemas-Grupo-6/nuevaBranch/usuarios.json";
+			String ruta = "/usuarios.json";
 				ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 				
 				try {
-
 					   //FileReader fr = new FileReader(ruta);
 					   URL fr = new URL(ruta);
 					  InputStreamReader in = new InputStreamReader(fr.openStream());

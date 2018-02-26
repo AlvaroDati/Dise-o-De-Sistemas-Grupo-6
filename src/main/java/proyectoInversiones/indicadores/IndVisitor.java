@@ -439,7 +439,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 }
 
 	
-	public List<Indicador> obtenerResultadosIndicadoresUsuarioSegunEmpresa(String ruta,Empresa empresaAsociada,int per) {
+	public List<Indicador> obtenerResultadosIndicadoresUsuarioSegunEmpresa(String ruta,Empresa empresaAsociada,int per) throws IOException {
 
 		List<Indicador> listaDeIndicador = new ArrayList<Indicador>();
 

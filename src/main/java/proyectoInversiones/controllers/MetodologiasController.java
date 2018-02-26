@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.Metodologia;
@@ -23,6 +24,8 @@ import spark.Response;
 
 public class MetodologiasController {
 	
+    static DescargaDrive lectorDrive = new DescargaDrive();
+
 	public ModelAndView listar(Request req, Response res) throws IOException {
 
 		Map<String, List<Metodologia>> model = new HashMap<>();
@@ -52,10 +55,12 @@ public class MetodologiasController {
 
 		Map<String, List<Empresa>> model = new HashMap<>();
 		String metodologiaBuscada = req.cookie("metodologia");
-		System.out.printf("\nMetodologia buscada en ListarEmpresas: %s", metodologiaBuscada);	
+
 		List<Metodologia> metodologias = setearMetodologias();
-		NuevoLeerArchivo arch = new NuevoLeerArchivo();
-		List<Empresa> empresas = arch.leerArchivo();
+		
+		lectorDrive.obtenerEmpresas();
+		
+		List<Empresa> empresas = lectorDrive.getTodasLasEmpresas();
 		
 		Metodologia metodologiaFiltrada = new Metodologia(metodologiaBuscada);
 		

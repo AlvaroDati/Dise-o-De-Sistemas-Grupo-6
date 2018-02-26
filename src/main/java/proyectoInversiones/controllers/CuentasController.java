@@ -1,5 +1,6 @@
 package proyectoInversiones.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +8,9 @@ import java.util.Map;
 
 
 import proyectoInversiones.Cuenta;
+import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.Empresa;
-import proyectoInversiones.NuevoLeerArchivo;
+//import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import spark.ModelAndView;
 import spark.Request;
@@ -16,11 +18,24 @@ import spark.Response;
 
 public class CuentasController{
 	
+    static DescargaDrive lectorDrive = new DescargaDrive();
+
 	public static ModelAndView listar(Request req, Response res) {
 	    Map<String, List<Empresa>> model = new HashMap<>();
-	    NuevoLeerArchivo arch = new NuevoLeerArchivo();
+	    
 		
-		model.put("empresasAMostrar",arch.leerArchivo());
+		try {
+			lectorDrive.obtenerEmpresas();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ArrayList<Empresa> listaEmpresas = new ArrayList<Empresa>();
+		
+	  	listaEmpresas = lectorDrive.getTodasLasEmpresas();
+	  	
+	    model.put("empresasAMostrar", listaEmpresas);
 		return new ModelAndView(model, "Cuentas2.html");
 	}
 	
@@ -28,21 +43,17 @@ public class CuentasController{
 	public static ModelAndView setearEmpresa(Request req, Response res) {
 		
 		String empresa = req.queryParams("Empresa");
-		//String empresa = req.queryParams("browsers");
-		System.out.println(empresa);
+		
 		try{
 			Map<String, List<Cuenta>> model = new HashMap<>();
-			NuevoLeerArchivo arch = new NuevoLeerArchivo();
-			List<Periodo>periodosEmpresa =  arch.getPeriodos(new Empresa(empresa));
+						
+			List<Periodo>periodosEmpresa =  lectorDrive.getPeriodos(new Empresa(empresa));
 			List<Cuenta> cuentasDeEmpresa = setearListaCuentas(periodosEmpresa);
 			
 			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
-			for(int i = 0;i<cuentasDeEmpresa.size();i++){
-				System.out.println(cuentasDeEmpresa.get(i).getFCashFlow());
-			}
+		
 			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
 			cuentaDeEmpresa.setEmpresaAsoc(empresa);
-			System.out.println("\n" +cuentaDeEmpresa.getEmpresaAsoc());
 			cuentaUnica.add(cuentaDeEmpresa);
 			model.put("cuentaUnica",cuentaUnica);		
 			model.put("cuentas", cuentasDeEmpresa);
@@ -69,5 +80,5 @@ public class CuentasController{
 		
 		return cuentas;
 	}
-	
+
 }
