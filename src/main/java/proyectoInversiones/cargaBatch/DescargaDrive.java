@@ -91,9 +91,9 @@ public class DescargaDrive {
             	InputStream input = driveService.files().get(fileId).executeMediaAsInputStream();
             	NuevoLeerArchivo lectorDeArchivoDrive = new NuevoLeerArchivo();
             	ArrayList<Empresa> todasLasEmpresasDelJson = lectorDeArchivoDrive.leerArchivoDrive(input);
-            	for(Empresa unaEmpresaDelJson : todasLasEmpresasDelJson){
-            		System.out.println(unaEmpresaDelJson.getNombre());
-            	}
+//            	for(Empresa unaEmpresaDelJson : todasLasEmpresasDelJson){
+  //          		System.out.println(unaEmpresaDelJson.getNombre());
+  //          	}
                 System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
         } 

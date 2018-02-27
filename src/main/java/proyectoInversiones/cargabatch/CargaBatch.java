@@ -1,4 +1,4 @@
-package proyectoInversiones.cargabatch;
+package proyectoInversiones.cargaBatch;
 
 import java.util.ArrayList;
 import java.util.List;

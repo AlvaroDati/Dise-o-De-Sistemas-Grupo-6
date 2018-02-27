@@ -18,11 +18,14 @@ import spark.debug.DebugScreen;
 
 public class Server {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 //		 long cincoMin = 5*60*1000; // El timer funca en milisgundos,por eso la cuentita
 //		 TimerTask cargarCuentas = new CargaBatchCuentas();
 //		 Timer timer = new Timer(true);
 //		 timer.scheduleAtFixedRate(cargarCuentas, 0, cincoMin);
+		
+		DescargaDrive lector = new DescargaDrive();
+		lector.obtenerEmpresas();
 		
 		Spark.port(getHerokuAssignedPort());
 		DebugScreen.enableDebugScreen();
