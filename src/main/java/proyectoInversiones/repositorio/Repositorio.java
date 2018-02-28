@@ -29,7 +29,7 @@ public class Repositorio {
 	
 	public EmpresasRepo empresasRepo(){
 		if (empresas == null) {
-			empresas = new EmpresasRepo(emanager);
+			empresas = new EmpresasRepo();
 		}
 		return empresas;
 	}

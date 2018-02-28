@@ -17,6 +17,10 @@ import com.google.api.services.drive.model.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+
+import proyectoInversiones.Empresa;
+import proyectoInversiones.Periodo;
+
 import com.google.api.services.drive.Drive;
 
 import java.io.BufferedReader;
@@ -39,10 +43,12 @@ public class DescargaDrive {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static HttpTransport HTTP_TRANSPORT;
     private static final List<String> SCOPES = Arrays.asList(DriveScopes.DRIVE_METADATA,DriveScopes.DRIVE_FILE,DriveScopes.DRIVE, DriveScopes.DRIVE_APPDATA);
-
+    private static Drive driveService;
+    private static Credential credential;
+    
        public List<File> archivos = new ArrayList<File>();
     
-	   public static ArrayList<Empresa> todasLasEmpresas = new ArrayList<Empresa>();
+	   public static ArrayList<Empresa> todasLasEmpresas;
 	    
 	   public ArrayList<Empresa> getTodasLasEmpresas() {
 			return todasLasEmpresas;
@@ -89,46 +95,89 @@ public class DescargaDrive {
 
     
     public static Drive getDriveService() throws IOException {
-        Credential credential = authorize();
-        return new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
+        
+    	if(credential == null) credential = authorize();
+        
+        if(driveService == null){
+        	driveService = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
+        }
+        
+        return driveService;
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
   
+    public ArrayList<Empresa> obtenerEmpresas() throws IOException{
+    	ArrayList<Empresa> empresasDelDrive = new ArrayList<Empresa>();
+    	
+    	 Drive driveService = getDriveService();
+         FileList result = driveService.files().list()
+              .setQ("mimeType='application/json'")
+              .setFields("nextPageToken, files(id, name)")
+              .execute();
+         
+         List<File> files = result.getFiles();
+         
+         archivos = files;
+         
+         if (files == null || files.size() == 0) {
+         	
+             System.out.println("No se encontraron archivos .json");
+         
+         } else {
+         
+         	System.out.println("Archivos encontrados:");
+         	ArrayList<Empresa> empresasDeJsons = new ArrayList<Empresa>();
+         	
+             for (File file : files) {
+                 System.out.printf("Nombre del archivo:%s ID del archivo:(%s)\n", file.getName(), file.getId()); 
+             	String fileId = file.getId(); 	
+             	InputStream input = driveService.files().get(fileId).executeMediaAsInputStream();
+             	ArrayList<Empresa> empresasDelJson = this.leerArchivoDrive(input);
+             	empresasDeJsons.addAll(empresasDelJson);
+             	empresasDelDrive = empresasDeJsons;
+             	if(todasLasEmpresas == null) todasLasEmpresas = empresasDeJsons;
+             	}
+         }
+    	
+    	return empresasDelDrive;
+    }
     
-    public void obtenerEmpresas() throws IOException {
-        Drive driveService = getDriveService();
-
-        FileList result = driveService.files().list()
-             .setQ("mimeType='application/json'")
-             .setFields("nextPageToken, files(id, name)")
-             .execute();
-        
-        List<File> files = result.getFiles();
-        
-        archivos = files;
-        
-        if (files == null || files.size() == 0) {
-        	
-            System.out.println("No se encontraron archivos .json");
-        
-        } else {
-        
-        	System.out.println("Archivos encontrados:");
-        	ArrayList<Empresa> empresasDeJsons = new ArrayList<Empresa>();
- 
-            for (File file : files) {
-                System.out.printf("%s (%s)\n", file.getName(), file.getId());
-            	String fileId = file.getId(); 	
-            	InputStream input = driveService.files().get(fileId).executeMediaAsInputStream();
-            	ArrayList<Empresa> empresasDelJson = this.leerArchivoDrive(input);
-            	empresasDeJsons.addAll(empresasDelJson);
-            	}
-            todasLasEmpresas = empresasDeJsons;
-        }
-  }
+    
+    
+//    public void obtenerEmpresas() throws IOException {
+//        Drive driveService = getDriveService();
+//
+//        FileList result = driveService.files().list()
+//             .setQ("mimeType='application/json'")
+//             .setFields("nextPageToken, files(id, name)")
+//             .execute();
+//        
+//        List<File> files = result.getFiles();
+//        
+//        archivos = files;
+//        
+//        if (files == null || files.size() == 0) {
+//        	
+//            System.out.println("No se encontraron archivos .json");
+//        
+//        } else {
+//        
+//        	System.out.println("Archivos encontrados:");
+//        	ArrayList<Empresa> empresasDeJsons = new ArrayList<Empresa>();
+//        	
+//            for (File file : files) {
+//                System.out.printf("%s (%s)\n", file.getName(), file.getId());
+//            	String fileId = file.getId(); 	
+//            	InputStream input = driveService.files().get(fileId).executeMediaAsInputStream();
+//            	ArrayList<Empresa> empresasDelJson = this.leerArchivoDrive(input);
+//            	empresasDeJsons.addAll(empresasDelJson);
+//            	}
+//            todasLasEmpresas = empresasDeJsons;
+//        }
+//  }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
@@ -147,7 +196,19 @@ public class DescargaDrive {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-	public List<Periodo> getPeriodos(Empresa empresa) {
+//	public List<Periodo> getPeriodos(Empresa empresa) {
+//		List<Periodo> periodos = new ArrayList<Periodo>();
+//		String empresaAsoc = empresa.getNombre();
+//		for (int i = 0; i < todasLasEmpresas.size(); i++) {
+//			if (todasLasEmpresas.get(i).getNombre().equals(empresaAsoc)) {
+//				periodos = todasLasEmpresas.get(i).getPeriodos();
+//			}
+//		}
+//		return periodos;
+//	}
+	
+	
+	public List<Periodo> getPeriodos(Empresa empresa) throws IOException {
 		List<Periodo> periodos = new ArrayList<Periodo>();
 		String empresaAsoc = empresa.getNombre();
 		for (int i = 0; i < todasLasEmpresas.size(); i++) {
@@ -165,6 +226,7 @@ public class DescargaDrive {
 	public ArrayList<Integer> getHashcodesDeArchivos (){
 		ArrayList<Integer> hashcodes = new ArrayList <Integer>();
 		for (File archivo:archivos){
+			System.out.println("Agregando hashcode: "+archivo.hashCode());
 			hashcodes.add(archivo.hashCode());
 		}
 		return hashcodes;

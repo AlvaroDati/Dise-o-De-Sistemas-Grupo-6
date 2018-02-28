@@ -2,12 +2,14 @@ package db;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.IOException;
 import java.sql.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,10 +17,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-
-
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
+import proyectoInversiones.Periodo;
+import proyectoInversiones.cargaBatch.DescargaDrive;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.Metodologia;
 import proyectoInversiones.usuarios.LeerUsuarios;
@@ -48,8 +50,60 @@ public class TestPersistencia {
 //		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 //		emanager = emFactory.createEntityManager();
 //		repositorio = new Repositorio(emanager);
-//		empresasDelJson = archivo.leerArchivo();
+//		//empresasDelJson = archivo.leerArchivo();
 //	}
+//	
+//	@Test 
+//	public void traerTodasLasEmpresas(){
+//		List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();
+//		empresasEnLaDB = emanager.createQuery("FROM Empresa",Empresa.class).getResultList();
+//
+//	}
+//	
+//	@After
+//	public void tearDown() throws Exception {
+//		repositorio.cerrar();
+//		emFactory.close();
+//	}
+//	@Test
+//	public void asdf(){
+//		List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();
+//		empresasEnLaDB= emanager.createNamedQuery("buscarEmpresaPorNombre").setParameter("filtro", "Apple").getResultList();
+//		
+//		for(Empresa empresa:empresasEnLaDB){
+//			for(int i = 0;i<empresasEnLaDB.size();i++){
+//				
+//				System.out.println("Empresa: "+empresa.getNombre()+ " Periodo: " + empresa.getPeriodos().get(i).getAnio());
+//				System.out.println("Cuentas: "+ empresa.getPeriodos().get(i).getCuentas().getEbitda());
+//				System.out.println("Cuentas: "+ empresa.getPeriodos().get(i).getCuentas().getfCashFlow());
+//				System.out.println("Cuentas: "+ empresa.getPeriodos().get(i).getCuentas().getFds());
+//				System.out.println("Cuentas: "+ empresa.getPeriodos().get(i).getCuentas().getIngNetoOpCont());
+//				System.out.println("Cuentas: "+ empresa.getPeriodos().get(i).getCuentas().getIngNetoOpDiscont());
+//				System.out.println("Cuentas: "+ empresa.getPeriodos().get(i).getCuentas().getDeuda());
+//			}
+//		}
+//	}
+//	
+//	
+//	@Test
+//	public void verificarEmpresasPersistidas() throws IOException {
+//		System.out.println("Vericando empresas a persistir");
+//		ArrayList<Empresa> empresas = new DescargaDrive().obtenerEmpresas();
+//		ArrayList<Empresa> empresasAPersistir = new ArrayList<Empresa>();
+//		
+//		for(int i=0;i<empresas.size();i++){
+//			System.out.println("Empresas: " +empresas.get(i).getNombre());
+//			List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();
+//			empresasEnLaDB= emanager.createNamedQuery("buscarEmpresaPorNombre").setParameter("filtro", empresas.get(i).getNombre()).getResultList();
+//			if(empresasEnLaDB.size() == 0){
+//				System.out.println("No se encontró la empresa:" + empresas.get(i).getNombre()+"en la base de datos");
+//				empresasAPersistir.add(empresas.get(i));
+//			}
+//		}
+//		System.out.println("Cantidad de empresas a persistir: " + empresasAPersistir.size());
+//		
+//	}
+//	
 //	
 //	
 //	@Test
@@ -87,10 +141,42 @@ public class TestPersistencia {
 //
 //	
 //	
+//	
+//	
+//	
 //	@Test
-//	public void persistir2ConJson() {
+//	public void test() throws IOException{
+//		ArrayList<Empresa> asf = new DescargaDrive().obtenerEmpresas();
+////		ArrayList<Empresa> asf = new NuevoLeerArchivo().leerArchivo();
+//		List<Periodo> periodos = new ArrayList<Periodo>();
+//		for(int i = 0;i<asf.size();i++){
+//			periodos.addAll(asf.get(i).getPeriodos());
+//		}
+//		
+//		for(int i = 0;i<asf.size();i++){
+//			
+//			for(int j = 0;j<asf.get(i).getPeriodos().size();j++){
+//				asf.get(i).getPeriodos().get(j).setEmpresa(asf.get(i));
+//				System.out.println(asf.get(i).getPeriodos().get(j).getAnio());
+//				System.out.println(asf.get(i).getPeriodos().get(j).getCuentas().getPeriodovinculado());
+//				asf.get(i).getPeriodos().get(j).getCuentas().setPeriodoVinculado(asf.get(i).getPeriodos().get(j));
+//			}
+//		}
+//	
+//		for(int i = 0;i<asf.size();i++){
+//			System.out.println(asf.get(i).getPeriodos());
+//			repositorio.empresasRepo().persistir(asf.get(i));
+//		}
+//	}
+//	
+//	
+//	
+	
+//	
+//	@Test
+//	public void persistir2ConJson() throws IOException {
 //		NuevoLeerArchivo archivo = new NuevoLeerArchivo();
-//		ArrayList<Empresa> empresas = archivo.leerArchivo();
+//		ArrayList<Empresa> empresas = new DescargaDrive().obtenerEmpresas();
 //		ArmadorIndicador armarIndicador = new ArmadorIndicador();
 ////		ArrayList<Float> ingresoNeto = new ArrayList<Float>();
 //

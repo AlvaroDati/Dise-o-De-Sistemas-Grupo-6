@@ -24,7 +24,7 @@ public class LeerUsuarios {
 	
 	public ArrayList<Usuario> leerArchivo() {
 
-			String ruta = "/usuarios.json";
+			String ruta = "https://raw.githubusercontent.com/AlvaroDati/Dise-o-De-Sistemas-Grupo-6/deploy/src/main/resources/usuarios.json";
 				ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 				
 				try {

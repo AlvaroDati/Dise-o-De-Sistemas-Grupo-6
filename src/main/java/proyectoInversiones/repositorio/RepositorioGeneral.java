@@ -12,13 +12,13 @@ public class RepositorioGeneral {
 	List<Cuenta> cuentas = new ArrayList<Cuenta>();
 	List<Indicador> indicadores = new ArrayList<Indicador>();
 	List<Indicador> indicadoresUsuario = new ArrayList<Indicador>();
+	String empresaAsociada = null;
 	public List<Indicador> getIndicadoresUsuario() {
 		return indicadoresUsuario;
 	}
 	public void setIndicadoresUsuario(List<Indicador> indicadoresUsuario) {
 		this.indicadoresUsuario = indicadoresUsuario;
 	}
-	String empresaAsociada = null;
 	private static RepositorioGeneral repositorioGeneral;
 	public RepositorioGeneral(){
 	

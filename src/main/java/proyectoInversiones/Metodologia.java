@@ -26,7 +26,7 @@ import proyectoInversiones.Metodologia;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "metodologias",schema="public")
+@Table(name = "metodologias")
 public class Metodologia implements Serializable{
 
 	@Id 

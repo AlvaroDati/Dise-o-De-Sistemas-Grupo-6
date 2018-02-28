@@ -332,10 +332,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 		eval.getCuentaIndicador();
 		NuevoLeerArchivo archivoEmpresa = new NuevoLeerArchivo(); 
 		ArmadorIndicador indicador = new ArmadorIndicador();
-//		for(Map.Entry<String, List<String>> entry:eval.map.entrySet()){
-//			System.out.printf("\nNombre Indicador: %s"
-//					+ " -> Cant cuentas:%d \n",entry.getKey(),entry.getValue().size());
-//		}
+
 		listaDeIndicador = eval.getListaDeIndicador();
 		
 		for(int i = 0;i<listaDeIndicador.size();i++){
@@ -399,9 +396,6 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 
 		Indicador elObjetoIndicadorResultante = new Indicador();
 		elObjetoIndicadorResultante.setEmpresa(empresaAsociada);
-		//elObjetoIndicadorResultante.setEmpresaAsoc(empresaAsociada.getNombre());
-//		elObjetoIndicadorResultante.setPeriodo(per);
-		System.out.println(per);
 		elObjetoIndicadorResultante.setExpresion(expresionDeUnIndicador);
 	
 		String inputANTLR = expresionDeUnIndicador; 
@@ -478,14 +472,13 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 		return elObjetoIndicadorResultante;
 	}
 	
-//	public static void main (String args[]) throws IOException{
-//		IndVisitor ind = new IndVisitor();
-//		List<Indicador> indicador = ind.obtenerResultadosIndicadoresUsuarioSegunEmpresa("IndicadoresDelUsuarioivan", new Empresa("America Movil"), 2016);
-//		for(int i = 0;i<indicador.size();i++){
-//			System.out.println(indicador.get(i).getNombre());
-//			System.out.println("Valor indicador: "+indicador.get(i).getValorIndicador());
-//		}
-//	}
+	public static void main (String args[]) throws IOException{
+		IndVisitor ind = new IndVisitor();
+		
+		Indicador indi = new Indicador();
+		indi = ind.obtenerResultadoIndicadorSegunEmpresa("hola=EBITDA+20", new Empresa("Apple"), 2016);
+		System.out.println(indi.getValorIndicador());
+	}
 	
 	
 	

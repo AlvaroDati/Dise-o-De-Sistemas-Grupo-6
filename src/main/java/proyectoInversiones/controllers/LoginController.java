@@ -16,19 +16,12 @@ import spark.Response;
 
 
 public class LoginController {
-	private static final String PERSISTENCE_UNIT_NAME = "db";
-	private EntityManagerFactory emFactory;
-	private Repositorio repositorio;
+
 	private RepositorioServicio repositorioServicio;
-	protected EntityManager emanager;
 	
-	public void setUp() throws Exception {
-		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		repositorio = new Repositorio(emFactory.createEntityManager());
-	}
+
 	public ModelAndView login(Request req, Response res) throws Exception {
-	//	this.setUp();
-		RepositorioServicio.getInstance().buscarUsuarioPorNombre("");
+		//RepositorioServicio.getInstance().buscarUsuarioPorNombre("");
 		return new ModelAndView(null, "Index.html");
 	}
 	

@@ -15,23 +15,23 @@ import javax.persistence.Table;
 
 import proyectoInversiones.Empresa;
 import proyectoInversiones.Cuenta;
-
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "periodos")
 public class Periodo implements Serializable{
 	
     @Id 
+    @Column(name = "id")
     @GeneratedValue(strategy=GenerationType.AUTO)      
 	protected Long id;
     @Column(name = "anio")
 	protected int anio;  
-    @OneToOne(mappedBy = "periodovinculado" , cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //@JoinColumn(name = "cuenta_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "periodovinculado" , cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+  //  @JoinColumn(name = "cuenta_id", referencedColumnName = "id")
     private Cuenta cuentas;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "empresa_id", referencedColumnName = "id",nullable=false)
 	private Empresa empresa;
-	
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -46,7 +46,6 @@ public class Periodo implements Serializable{
 	}
 	
 	
-	@Column(name = "id")
 	public Long getId() {
 	return id;
 	}

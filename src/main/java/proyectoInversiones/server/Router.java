@@ -1,32 +1,17 @@
 package proyectoInversiones.server;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 
 import proyectoInversiones.controllers.CuentasController;
 import proyectoInversiones.controllers.IndicadoresController;
 import proyectoInversiones.controllers.LoginController;
 import proyectoInversiones.controllers.MetodologiasController;
-import proyectoInversiones.repositorio.Repositorio;
 import proyectoInversiones.spark.BooleanHelper;
 import proyectoInversiones.spark.HandlebarsTemplateEngineBuilder;
-import proyectoInversiones.usuarios.Usuario;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import spark.Spark;
 
 public class Router {
-	 private static final String PERSISTENCE_UNIT_NAME = "db";
-	 private static EntityManagerFactory emFactory;
-	 @PersistenceContext(unitName = "db", type = PersistenceContextType.EXTENDED)
-	 private static EntityManager emanager;
-	 private static Repositorio repositorio;
 
 	public static void configure() {
 		
@@ -57,33 +42,4 @@ public class Router {
 
 	}
 
-	public static void setUpDataBase() {
-		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		emanager = emFactory.createEntityManager();
-		repositorio = new Repositorio(emanager);
-	}
-	
-	public static void closeDataBase(){
-		repositorio.cerrar();
-		emFactory.close();
-	}
-	
-	
-    public static List<Usuario> obtenerUsuariosSegunNombre(String nombre){
-    	List<Usuario> usuarioALoguearse = new ArrayList<Usuario>();
-    	
-	usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre").setParameter("filtro","%" + nombre + "%").getResultList();
-
-
-//		System.out.println("Usuario: " + usuarioALoguearse.get(0).getPassword());
-//		Usuario usuarioALoguearse2 = null;
-//		for (int i = 0; i < usuarioALoguearse.size(); i++) {
-//			if (usuarioALoguearse.get(i).getUserTag().equals(nombre)) {
-//				usuarioALoguearse2 = usuarioALoguearse.get(i);
-//			}
-//		}
-
-		return usuarioALoguearse;
-	
-    }
 }

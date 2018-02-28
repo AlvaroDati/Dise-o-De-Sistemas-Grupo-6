@@ -1,6 +1,7 @@
 package proyectoInversiones;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 //import java.beans.Transient;
@@ -8,6 +9,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,10 +22,19 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "cuenta") 
 //@NamedQuery(name = "buscarCuentaPorNombreYEmpresa", query = "SELECT cuenta FROM Cuenta cuenta WHERE cuenta.nombre LIKE :filtro")
-public class Cuenta extends AlgoPersistible{
+public class Cuenta implements Serializable {
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "periodo_id", referencedColumnName = "id")
+	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+//	@Column(name = "nombre")
+//	protected String nombre;
+	
+	
+	@OneToOne(cascade =CascadeType.ALL)
+	@JoinColumn(name = "periodo_id",referencedColumnName = "id")
 	private Periodo periodovinculado;
 	
 	@Column(name = "ebitda")
@@ -39,28 +52,68 @@ public class Cuenta extends AlgoPersistible{
     @Column(name = "capitaltotal")
 	private float capitalTotal;
     
-    @Transient
-    private String empresaAsoc;// = periodoVinculado.getEmpresa().getNombre();
-    @Transient
-    private List<Empresa> empresas;
-    public List<Empresa> getEmpresas() {
-		return empresas;
+//    @Transient
+//    private String empresaAsoc;// = periodoVinculado.getEmpresa().getNombre();
+//    @Transient
+//    private List<Empresa> empresas;
+//    public List<Empresa> getEmpresas() {
+//		return empresas;
+//	}
+//
+//	public void setEmpresas(List<Empresa> empresas) {
+//		this.empresas = empresas;
+//	}
+//
+//	public String getEmpresaAsoc(){
+//    	//empresaAsoc = periodoVinculado.getEmpresa().getNombre();
+//    	return empresaAsoc;
+//    }
+//    
+//    public void setEmpresaAsoc(String unaEmpresa){
+//    	empresaAsoc = unaEmpresa;
+//    }
+    
+    public Long getId() {
+		return id;
 	}
 
-	public void setEmpresas(List<Empresa> empresas) {
-		this.empresas = empresas;
+
+	public Periodo getPeriodovinculado() {
+		return periodovinculado;
 	}
 
-	public String getEmpresaAsoc(){
-    	//empresaAsoc = periodoVinculado.getEmpresa().getNombre();
-    	return empresaAsoc;
-    }
-    
-    public void setEmpresaAsoc(String unaEmpresa){
-    	empresaAsoc = unaEmpresa;
-    }
-    
-    public Periodo getPeriodoVinculado() {
+
+	public float getfCashFlow() {
+		return fCashFlow;
+	}
+
+
+	public float getCapitalTotal() {
+		return capitalTotal;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public void setPeriodovinculado(Periodo periodovinculado) {
+		this.periodovinculado = periodovinculado;
+	}
+
+
+	public void setfCashFlow(float fCashFlow) {
+		this.fCashFlow = fCashFlow;
+	}
+
+
+	public void setCapitalTotal(float capitalTotal) {
+		this.capitalTotal = capitalTotal;
+	}
+
+
+	public Periodo getPeriodoVinculado() {
 		return periodovinculado;
 	}
     

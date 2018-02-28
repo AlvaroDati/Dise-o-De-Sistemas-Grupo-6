@@ -1,42 +1,39 @@
 package proyectoInversiones;
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
-
+@SuppressWarnings("serial")
 @Entity
 @Table (name = "empresas")
-//@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT empresa FROM Empresa empresa WHERE empresa.nombre LIKE :filtro")
-public class Empresa extends AlgoPersistible {
+@NamedQuery(name = "buscarEmpresaPorNombre", query = "SELECT e FROM Empresa e WHERE e.nombre LIKE :filtro")
+public class Empresa implements Serializable {
+	
+	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	private Long id;
+	@Column(name = "nombre")
+	protected String nombre;
 	
 	@Column(name = "iniciodeactividad")
 	private int inicioActividad;
 	
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
 	private List<Periodo> periodos;
 	
-/*
-   @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-   private List<Indicador> indicadores;
-	
-	public List<Indicador> getIndicadores() {
-		return indicadores;
-	}
-	public void setIndicadores(List<Indicador> indicadores) {
-		this.indicadores = indicadores;
-	}
-	public void addIndicador(Indicador indicador){
-		if(indicadores == null) indicadores = new ArrayList<Indicador>();
-		
-		if(!this.getIndicadores().contains(indicador))indicadores.add(indicador);
-	}
-	*/
 	
 	public Empresa(){
 		periodos = new ArrayList<Periodo>();
@@ -45,6 +42,26 @@ public class Empresa extends AlgoPersistible {
 	public Empresa(String nombreEmpresa){
 		nombre = nombreEmpresa;
 	}
+	
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 
 	public int getInicioActividad() {
 		return inicioActividad;

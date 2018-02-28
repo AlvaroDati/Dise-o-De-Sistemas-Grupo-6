@@ -10,6 +10,7 @@ import proyectoInversiones.Indicador;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.indicadores.ArmadorIndicador;
 import proyectoInversiones.indicadores.IndVisitor;
+import proyectoInversiones.repositorio.RepositorioServicio;
 import proyectoInversiones.usuarios.LeerUsuarios;
 import proyectoInversiones.usuarios.Usuario;
 
@@ -37,35 +38,60 @@ public class CalculoIndicadores {
 		}
 		return indicadores;
 	}
-	
-	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)
-			throws IOException {
+
+	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)throws IOException{
+		
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		IndVisitor indVisitor = new IndVisitor();
 		String usuario = usuarioActivo;
 		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+		RepositorioServicio repositorio = RepositorioServicio.getInstance();
+		List<String> expresionIndicadores = new ArrayList<String>();
+		expresionIndicadores = repositorio.buscarIndicadorPorUsuario(usuario);
 		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
-		String archivoUsuario = rutaArchivo.concat(usuario);
-		System.out.println("Archivo del usuario: " + archivoUsuario);
-		File file = new File(archivoUsuario);
-		if (!file.exists()) {
-			file.createNewFile();
-		}
-		
-		repoIndicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(1).getAnio()));
-		
-		
+		Indicador indicador = new Indicador();
+		for (int j = 0; j < listaPeriodos.size(); j++) {
+			int periodo = listaPeriodos.get(j).getAnio();
+			for (int i = 0; i < expresionIndicadores.size(); i++) {
+				indicador.setPeriodo(periodo);
+				System.out.println("Periodo de indicador: "+indicador.getPeriodo());
+					indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa(expresionIndicadores.get(i), empresa,
+							periodo);
+				indicadores.add(indicador);
 
-		for(int i = 0;i<listaPeriodos.size();i++){
-			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
-			
-			
+			}
 		}
-			for(int j = 0;j<indicadores.size();j++){
-					indicadores.get(j).setUsuario(usuarioCreador);
-		}
-					
 		return indicadores;
 	}
 	
+//	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)
+//			throws IOException {
+//		List<Indicador> indicadores = new ArrayList<Indicador>();
+//		IndVisitor indVisitor = new IndVisitor();
+//		String usuario = usuarioActivo;
+//		LeerUsuarios archivoUsuarios = new LeerUsuarios();
+//		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
+//		String archivoUsuario = rutaArchivo.concat(usuario);
+//		System.out.println("Archivo del usuario: " + archivoUsuario);
+//		File file = new File(archivoUsuario);
+//		if (!file.exists()) {
+//			file.createNewFile();
+//		}
+//		
+//		repoIndicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(1).getAnio()));
+//		
+//		
+//
+//		for(int i = 0;i<listaPeriodos.size();i++){
+//			indicadores.addAll(indVisitor.obtenerResultadosIndicadoresUsuarioSegunEmpresa(archivoUsuario, empresa, listaPeriodos.get(i).getAnio()));
+//			
+//			
+//		}
+//			for(int j = 0;j<indicadores.size();j++){
+//					indicadores.get(j).setUsuario(usuarioCreador);
+//		}
+//					
+//		return indicadores;
+//	}
+//	
 }

@@ -40,8 +40,8 @@
 		<!-- 
 		<property name="javax.persistence.jdbc.user" value="yokxnvrgtlwpbt" />
 		<property name="javax.persistence.jdbc.password" value="82ea9932c9243715df65b7238f7df392af6594b55f8bfad7e9a12188d24fec6e" /> 
-		  
 		 -->
+		  
 
 
 		<property name="hibernate.show_sql" value="true" />

@@ -8,11 +8,11 @@ import java.util.Map;
 
 
 import proyectoInversiones.Cuenta;
-import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.Empresa;
-//import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
+import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.repositorio.RepositorioGeneral;
+import proyectoInversiones.repositorio.RepositorioServicio;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,47 +20,29 @@ import spark.Response;
 public class CuentasController{
 	
     static DescargaDrive lectorDrive = new DescargaDrive();
+    static List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();
 
 	public static ModelAndView listar(Request req, Response res) {
-	    Map<String, List<Empresa>> model = new HashMap<>();
-	    
-		
-		try {
-			lectorDrive.obtenerEmpresas();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ArrayList<Empresa> listaEmpresas = new ArrayList<Empresa>();
-		
-	  	listaEmpresas = lectorDrive.getTodasLasEmpresas();
-	  	
-	    model.put("empresasAMostrar", listaEmpresas);
-		return new ModelAndView(model, "Cuentas2.html");
-
+		RepositorioGeneral repoGeneral = new RepositorioGeneral();
+		RepositorioServicio repo= RepositorioServicio.getInstance();
+		empresasEnLaDB = repo.obtenerTodasLasEmpresas();
+		repoGeneral.setEmpresas(empresasEnLaDB);
+		return new ModelAndView(repoGeneral, "Cuentas2.html");
 	}
 	
 	
 public static ModelAndView setearEmpresa(Request req, Response res) {
-		
 		String empresa = req.queryParams("Empresa");
 
 		
 		try{
-			Map<String, List<Cuenta>> model = new HashMap<>();
-						
+			RepositorioGeneral repoGeneral = new RepositorioGeneral();		
 			List<Periodo>periodosEmpresa =  lectorDrive.getPeriodos(new Empresa(empresa));
-			List<Cuenta> cuentasDeEmpresa = setearListaCuentas(periodosEmpresa);
+			repoGeneral.setEmpresas(empresasEnLaDB);
+			repoGeneral.setCuentas(setearListaCuentas(periodosEmpresa));
+			repoGeneral.setEmpresaAsociada(empresa);
 			
-			Cuenta cuentaDeEmpresa = cuentasDeEmpresa.get(0);
-		
-			List<Cuenta> cuentaUnica = new ArrayList<Cuenta>();
-			cuentaDeEmpresa.setEmpresaAsoc(empresa);
-			cuentaUnica.add(cuentaDeEmpresa);
-			model.put("cuentaUnica",cuentaUnica);		
-			model.put("cuentas", cuentasDeEmpresa);
-			return new ModelAndView(model, "Cuentas2.html");
+			return new ModelAndView(repoGeneral, "Cuentas2.html");
 			
 
 		}catch ( Exception e ){

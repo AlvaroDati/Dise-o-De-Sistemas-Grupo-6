@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 public class AlgoPersistible implements Serializable {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	@Column(name = "nombre")
@@ -24,7 +25,6 @@ public class AlgoPersistible implements Serializable {
 		nombre = unNombre;
 	}
 
-	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}

@@ -18,7 +18,7 @@
 
 <div class= "container-fluid bg-dark fixed-top">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Cómo Invierto</a>
+        <a class="navbar-brand" href="/">Donde Invierto</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -86,13 +86,12 @@
 			class="col-lg-6 col-md-6 col-sm-12 col-xs-12 alinearVerticalmente">
 			<form role="form" method="post">
 				<div class="form-group">
-					<input type=text list=browsers id="Empresa" name="Empresa">
-					<!--  name="Empresa" class="form-control input-48" id="Empresa" required>-->
-					<datalist id=browsers>
-						{{#each empresasAMostrar}}
-						<option>{{nombre}} {{/each}}
-					</datalist>
-
+					
+					<select id="Empresa" name="Empresa">
+					{{#each empresas~}}
+						<option value={{~nombre~}}>{{~nombre~}}</option>
+					{{~/each}}
+					</select>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="btn btn-success" value="Mostrar Datos"

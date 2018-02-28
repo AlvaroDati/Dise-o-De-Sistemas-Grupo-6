@@ -18,6 +18,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import proyectoInversiones.DescargaDrive;
+import proyectoInversiones.repositorio.RepositorioServicio;
+
 
 
 public class NuevoLeerArchivo {
@@ -32,25 +35,51 @@ public class NuevoLeerArchivo {
  public void setRuta(String ruta) {
   this.rutaGlobal = ruta;
  }
+public ArrayList<Empresa> leerArchivo() {
 
+//String ruta = "src\\main\\resources\\public\\empresas.json";
+	String ruta ="empresas.json";
 
- 	public ArrayList<Empresa> leerArchivoDrive(InputStream jsonCrudo){
- 			ArrayList<Empresa> empresasDrive = new ArrayList<>();
- 			Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
- 			final Gson gson = new Gson();
- 			final BufferedReader reader = new BufferedReader(new InputStreamReader(jsonCrudo));
- 			empresasDrive = gson.fromJson(reader, tipoEmpresa);
-		return empresasDrive;
+rutaGlobal=ruta;
+
+ArrayList<Empresa> empresas = new ArrayList<>();
+
+try {
+
+ FileReader fr = new FileReader(ruta);
+ Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {}.getType();
+ Gson gson = new Gson();
+ JsonReader reader = new JsonReader(fr);
+ empresas = gson.fromJson(reader, tipoEmpresa);
+ return empresas;
+
+} catch (FileNotFoundException e) {
+ System.out.println("No se encontro el archivo indicado. El path provisto fue: " + ruta);
+ e.printStackTrace();
 }
- 
+
+return empresas;
+
+}
+
+	public ArrayList<Empresa> leerArchivoDrive(InputStream jsonCrudo) {
+		ArrayList<Empresa> empresasDrive = new ArrayList<>();
+		Type tipoEmpresa = new TypeToken<ArrayList<Empresa>>() {
+		}.getType();
+		final Gson gson = new Gson();
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(jsonCrudo));
+		empresasDrive = gson.fromJson(reader, tipoEmpresa);
+		return empresasDrive;
+	}
  
  
 
 
  public boolean validarEmpresa(String empresa) throws IOException {
 
-  lectorDrive.obtenerEmpresas();
-  ArrayList<Empresa> empresas = lectorDrive.getTodasLasEmpresas();
+		RepositorioServicio repo = RepositorioServicio.getInstance();
+
+		List<Empresa> empresas = repo.obtenerTodasLasEmpresas();
   for (Empresa head : empresas) {
    if (head.getNombre().equals(empresa)) {
     return true;
@@ -145,20 +174,20 @@ public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa) throws IOEx
 	 }
 
 
-public List<Periodo> getPeriodos(Empresa empresa) throws IOException {
-	List<Periodo> periodos = new ArrayList<Periodo>();
-	String empresaAsoc = empresa.getNombre();
-	
-	lectorDrive.obtenerEmpresas();
-	ArrayList<Empresa> listaEmpresas = lectorDrive.getTodasLasEmpresas();
-	
-	for(int i = 0;i<listaEmpresas.size();i++){
-		if(listaEmpresas.get(i).getNombre().equals(empresaAsoc)){
-			periodos = listaEmpresas.get(i).getPeriodos();
+	public List<Periodo> getPeriodos(Empresa empresa) throws IOException {
+		List<Periodo> periodos = new ArrayList<Periodo>();
+		String empresaAsoc = empresa.getNombre();
+		RepositorioServicio repo = RepositorioServicio.getInstance();
+
+		List<Empresa> listaEmpresas = repo.obtenerTodasLasEmpresas();
+
+		for (int i = 0; i < listaEmpresas.size(); i++) {
+			if (listaEmpresas.get(i).getNombre().equals(empresaAsoc)) {
+				periodos = listaEmpresas.get(i).getPeriodos();
+			}
 		}
+		return periodos;
 	}
-	return periodos;
-}
 
 	public List<Integer> obtenerPeriodosSegunEmpresa(Empresa empresa) throws IOException {
 		List<Periodo> periodos = this.getPeriodos(empresa);
