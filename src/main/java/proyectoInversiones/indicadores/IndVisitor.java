@@ -476,7 +476,7 @@ public Indicador obtenerResultadosIndicadoresUsuarioSegunEmpresa2(String ruta,Em
 		IndVisitor ind = new IndVisitor();
 		
 		Indicador indi = new Indicador();
-		indi = ind.obtenerResultadoIndicadorSegunEmpresa("hola=EBITDA+20", new Empresa("Apple"), 2016);
+		indi = ind.obtenerResultadoIndicadorSegunEmpresa("hola=50+20", new Empresa("Apple"), 2016);
 		System.out.println(indi.getValorIndicador());
 	}
 	

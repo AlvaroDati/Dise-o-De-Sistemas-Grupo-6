@@ -136,54 +136,32 @@ public class IndicadoresController {
 	public static ModelAndView nuevoInd(Request req, Response res) {
 		String usuario = req.cookie("usuario");
 		String nombreIndicador = req.queryParams("nombreIndicador");
-		String empresaSeleccionada = req.queryParams("Empresa");
 		String expresionIndicador = req.queryParams("valorIndicador");
 		
-		
-		Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
-		System.out.println("cantidad de indicadores"+repoIndicadores.size());
+		RepositorioServicio repo = repositorioServicio.getInstance();
+		List<Indicador> indicadoresUsuario = repo.buscarIndicadorPorUsuario2(usuario);		
+		Stream<Indicador> filtro = indicadoresUsuario.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
+		System.out.println("cantidad de indicadores"+indicadoresUsuario.size());
 
 		Long contador = filtro.count();
 
 		
 		if (contador == 0) {
 			if (nombreIndicador != null  && expresionIndicador != null) {
-				try {
-					System.out.println("cantidad de indicadores 2 "+repoIndicadores.size());
-					String archivoUsuario = rutaArchivo + usuario;
-					System.out.println("archivo del usuario " + archivoUsuario);
-					File file = new File(archivoUsuario);
+				System.out.println("cantidad de indicadores 2 "+repoIndicadores.size());
 
-					if (!file.exists()) {
-						file.createNewFile();
-					}
-					
-					FileWriter fw = new FileWriter(file, true);
-					BufferedWriter bw = new BufferedWriter(fw);
-					//bw.write(empresaSeleccionada.toString() + "(" + nombreIndicador + ")" + "=");
-					bw.write(nombreIndicador  + "=");
-					bw.write(expresionIndicador + "\n"); // numero +
-					bw.close();
-					
-//					Usuario us = new Usuario(usuario,req.cookie("password"));
-//					System.out.println("us: "+us.getUserTag()+"pw:"+us.getUserTag());
-					Indicador indicador = new Indicador();
-					RepositorioServicio repo = repositorioServicio.getInstance();
-					Usuario u = repo.buscarUsuarioPorNombre(usuario);
-					System.out.println("u: "+u.getUserTag()+"pw:"+u.getUserTag());
-					indicador.setUsuario(u);
-					indicador.setNombre(nombreIndicador);
-					indicador.setExpresion(nombreIndicador+"="+expresionIndicador+"\n");
-					
-					repo.getEmanager().getTransaction().begin();
-					 repo.getEmanager().persist(indicador);
-					 repo.getEmanager().getTransaction().commit();
-					
-					res.redirect("/indicadores");
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				Indicador indicador = new Indicador();
+				Usuario u = repo.buscarUsuarioPorNombre(usuario);
+				System.out.println("u: "+u.getUserTag()+"pw:"+u.getUserTag());
+				indicador.setUsuario(u);
+				indicador.setNombre(nombreIndicador);
+				indicador.setExpresion(nombreIndicador+"="+expresionIndicador+"\n");
+				
+				repo.getEmanager().getTransaction().begin();
+				 repo.getEmanager().persist(indicador);
+				 repo.getEmanager().getTransaction().commit();
+				
+				res.redirect("/indicadores");
 			} else {
 				// Tirar excepcion en spark
 			}
@@ -192,4 +170,41 @@ public class IndicadoresController {
 		}
 		return null;
 	}
+	
+	public static ModelAndView modificarInicio(Request req, Response res){
+		RepositorioServicio repo = RepositorioServicio.getInstance();
+		RepositorioGeneral repositorio= new RepositorioGeneral();
+		repositorio.setIndicadoresUsuario(repo.buscarIndicadorPorUsuario2(usuarioActivo));
+		
+		return new ModelAndView(repositorio,"IndicadoresModificar.html");
+	}
+	
+	
+public static ModelAndView modificarIndicador(Request req, Response res){
+	String nombreIndicador = req.queryParams("nombreIndicador");
+	String expresionIndicador = req.queryParams("valorIndicador");
+	Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
+	System.out.println("Cantidad de indicadores: "+repoIndicadores.size());
+
+
+	
+	
+		if (nombreIndicador != null  && expresionIndicador != null) {
+			RepositorioServicio repo = RepositorioServicio.getInstance();
+			RepositorioGeneral repositorio= new RepositorioGeneral();
+			repositorio.setIndicadoresUsuario(repo.buscarIndicadorPorUsuario2(usuarioActivo));
+			repo.cambiarExpresionDeIndicador(nombreIndicador+"="+expresionIndicador,repo.buscarUsuarioPorNombre(usuarioActivo).getId());
+			res.redirect("/indicadores");
+		
+	}else{
+		res.redirect("/indicadores/modificar");
+	}
+
+		return null;
+
+	}
+
 }
+
+
+

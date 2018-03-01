@@ -52,6 +52,19 @@ public class TestPersistencia {
 //		repositorio = new Repositorio(emanager);
 //		//empresasDelJson = archivo.leerArchivo();
 //	}
+//	@Test
+//	public void cambiarExpresionIndicador(){
+//			
+//			Query query = emanager.createQuery("UPDATE Indicador i SET i.expresion='dds=20+20' WHERE i.usuario.id=1");
+//			emanager.getTransaction().begin();
+//			query.executeUpdate();
+//			
+//	}
+//	@After
+//	public void tearDown() throws Exception {
+//		repositorio.cerrar();
+//		emFactory.close();
+//	}
 //	
 //	@Test
 //	public void buscarIndicadorPorUsuario2(){
@@ -64,12 +77,6 @@ public class TestPersistencia {
 //			System.out.println(indicador.get(i).getNombre() + " " + indicador.get(i).getExpresion());
 //		}
 //
-//	}
-//	@After
-//	public void tearDown() throws Exception {
-//		repositorio.cerrar();
-//		emFactory.close();
-//	}
 //	@Test 
 //	public void traerTodasLasEmpresas(){
 //		List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();

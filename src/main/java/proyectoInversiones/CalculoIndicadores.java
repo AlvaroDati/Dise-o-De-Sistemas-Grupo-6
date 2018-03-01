@@ -48,13 +48,12 @@ public class CalculoIndicadores {
 		indicadores = repositorio.buscarIndicadorPorUsuario2(usuario);
 		System.out.println("Indicadores traidos de la base de datos: "+indicadores.size());
 		Indicador indicador = new Indicador();
-		for (int j = 0; j < listaPeriodos.size(); j++) {
-			int periodo = listaPeriodos.get(j).getAnio();
+		for (Periodo periodo:listaPeriodos) {
 			for (int i = 0; i < indicadores.size(); i++) {
-				indicador.setPeriodo(periodo);
+				indicador.setPeriodo(periodo.getAnio());
 				System.out.println("Periodo de indicador: "+indicador.getPeriodo());
 					indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa(indicadores.get(i).getExpresion(), empresa,
-							periodo);
+							periodo.getAnio());
 				indicadoresADevolver.add(indicador);
 				
 			}

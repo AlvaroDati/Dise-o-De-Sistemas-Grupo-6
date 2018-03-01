@@ -30,6 +30,8 @@ public class Router {
 		Spark.post("/indicadores", new IndicadoresController()::setearEmpresa, engine);
 		Spark.get("/indicadores/new", IndicadoresController::nuevoFormulario, engine);
 		Spark.post("/indicadores/new", IndicadoresController::nuevoInd, engine);
+		Spark.get("/indicadores/modificar", IndicadoresController::modificarInicio,engine);
+		Spark.post("/indicadores/modificar", IndicadoresController::modificarIndicador,engine);
 		Spark.get("/metodologias", new MetodologiasController()::listar, engine);
 		Spark.post("/metodologias", new MetodologiasController()::setearMetodologia);
 		Spark.get("/metodologias/show", new MetodologiasController()::listarEmpresas, engine);
