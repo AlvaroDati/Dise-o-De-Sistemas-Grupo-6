@@ -23,6 +23,12 @@ public class  EmpresasRepo extends Repositorio {
 		}
 		return empresasRepo;
 	}
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
 	public Empresa buscarPorId(Long id) {
 		return emanager.find(Empresa.class, id);
 	}

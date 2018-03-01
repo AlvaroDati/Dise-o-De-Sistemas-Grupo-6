@@ -18,6 +18,7 @@ import proyectoInversiones.metodologias.CondicionTaxativa;
 import proyectoInversiones.metodologias.OperacionAgregacion;
 import proyectoInversiones.metodologias.OperacionRelacional;
 import proyectoInversiones.metodologias.OperandoCondicion;
+import proyectoInversiones.repositorio.RepositorioServicio;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -59,9 +60,8 @@ public class MetodologiasController {
 
 		List<Metodologia> metodologias = setearMetodologias();
 		
-		lectorDrive.obtenerEmpresas();
 		
-		List<Empresa> empresas = lectorDrive.getTodasLasEmpresas();
+		List<Empresa> empresas = RepositorioServicio.getInstance().obtenerEmpresas();
 		
 		Metodologia metodologiaFiltrada = new Metodologia(metodologiaBuscada);
 		

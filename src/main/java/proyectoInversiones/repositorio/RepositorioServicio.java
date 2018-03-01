@@ -20,12 +20,13 @@ public class RepositorioServicio {
 	private Repositorio repositorio;
 	private EntityManager emanager;
 	public static RepositorioServicio repositorioServicio;
-	
+	static RepositorioGeneral repositorioGeneral;
 	
 	public RepositorioServicio() {
 		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		emanager = emFactory.createEntityManager();
 		repositorio = new Repositorio(emanager);
+		repositorioGeneral = new RepositorioGeneral();
 	}
 	
 	
@@ -109,6 +110,7 @@ public class RepositorioServicio {
 		}
 	
 		for(int i = 0;i<empresasAPersistir.size();i++){
+		
 			this.persistirEmpresa(empresasAPersistir.get(i));
 		}
 	}
@@ -128,8 +130,10 @@ public class RepositorioServicio {
 	 * 
 	 */
 	
+	
 	public List<Empresa> obtenerTodasLasEmpresas(){
-		return emanager.createQuery("FROM Empresa",Empresa.class).getResultList();
+		repositorioGeneral.setEmpresas(emanager.createQuery("FROM Empresa",Empresa.class).getResultList());
+		return repositorioGeneral.getEmpresas();
 	}
 	
 	
@@ -169,6 +173,18 @@ expresionIndicadores =		emanager.createNativeQuery(query).getResultList();
 		return expresionIndicadores;
 	}
 	
+	public List<Indicador> buscarIndicadorPorUsuario2(String nombre){
+		List<Indicador> indicadores= new ArrayList<Indicador>();
+		Usuario us = this.buscarUsuarioPorNombre(nombre);
+System.out.println("El usuario: " + us.getUserTag() + " de ID: " + us.getId()+" desea extraer sus indicadores de la base de datos");
+		
+		indicadores =		emanager.createQuery("FROM Indicador WHERE usuario_id="+us.getId(),Indicador.class).getResultList();
+
+		for(int i = 0;i<indicadores.size();i++){
+			System.out.println("Indicadores extraidos de la base de datos: "+ indicadores.get(i).getNombre());
+		}
+		return indicadores;
+	}
 	
 	
 	/*
@@ -185,6 +201,17 @@ expresionIndicadores =		emanager.createNativeQuery(query).getResultList();
 	 * MÉTODOS SIN ENTITY
 	 * 
 	 */
+	
+	public List<Empresa> obtenerEmpresas(){
+		if(repositorioGeneral == null){
+			repositorioGeneral = new RepositorioGeneral();
+			this.obtenerTodasLasEmpresas();
+		}
+		if(repositorioGeneral.getEmpresas() == null || repositorioGeneral.getEmpresas().size()==0){
+			this.obtenerTodasLasEmpresas();
+		}
+		return repositorioGeneral.getEmpresas();
+	}
 	public List<Periodo> obtenerTodosLosPeriodos(Empresa empresa){
 		List<Periodo> periodos = new ArrayList<Periodo>();
 		

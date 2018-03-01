@@ -179,7 +179,7 @@ public ArrayList<Cuenta> obtenerCuentasSegunEmpresa(Empresa empresa) throws IOEx
 		String empresaAsoc = empresa.getNombre();
 		RepositorioServicio repo = RepositorioServicio.getInstance();
 
-		List<Empresa> listaEmpresas = repo.obtenerTodasLasEmpresas();
+		List<Empresa> listaEmpresas = repo.obtenerEmpresas();
 
 		for (int i = 0; i < listaEmpresas.size(); i++) {
 			if (listaEmpresas.get(i).getNombre().equals(empresaAsoc)) {

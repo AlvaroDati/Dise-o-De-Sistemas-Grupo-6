@@ -40,28 +40,30 @@ public class CalculoIndicadores {
 	}
 
 	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)throws IOException{
-		
-		List<Indicador> indicadores = new ArrayList<Indicador>();
+		List<Indicador> indicadoresADevolver = new ArrayList<Indicador>();
 		IndVisitor indVisitor = new IndVisitor();
 		String usuario = usuarioActivo;
-		LeerUsuarios archivoUsuarios = new LeerUsuarios();
 		RepositorioServicio repositorio = RepositorioServicio.getInstance();
-		List<String> expresionIndicadores = new ArrayList<String>();
-		expresionIndicadores = repositorio.buscarIndicadorPorUsuario(usuario);
-		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
+		List<Indicador> indicadores = new ArrayList<Indicador>();
+		indicadores = repositorio.buscarIndicadorPorUsuario2(usuario);
+		System.out.println("Indicadores traidos de la base de datos: "+indicadores.size());
 		Indicador indicador = new Indicador();
 		for (int j = 0; j < listaPeriodos.size(); j++) {
 			int periodo = listaPeriodos.get(j).getAnio();
-			for (int i = 0; i < expresionIndicadores.size(); i++) {
+			for (int i = 0; i < indicadores.size(); i++) {
 				indicador.setPeriodo(periodo);
 				System.out.println("Periodo de indicador: "+indicador.getPeriodo());
-					indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa(expresionIndicadores.get(i), empresa,
+					indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa(indicadores.get(i).getExpresion(), empresa,
 							periodo);
-				indicadores.add(indicador);
-
+				indicadoresADevolver.add(indicador);
+				
 			}
 		}
-		return indicadores;
+		
+		for(int i = 0;i<indicadores.size();i++){
+			System.out.println("Indicador: "+indicadores.get(i).getNombre());
+		}
+		return indicadoresADevolver;
 	}
 	
 //	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)

@@ -20,7 +20,7 @@ import org.junit.runners.MethodSorters;
 import proyectoInversiones.Empresa;
 import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
-import proyectoInversiones.cargaBatch.DescargaDrive;
+import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.Indicador;
 import proyectoInversiones.Metodologia;
 import proyectoInversiones.usuarios.LeerUsuarios;
@@ -53,17 +53,28 @@ public class TestPersistencia {
 //		//empresasDelJson = archivo.leerArchivo();
 //	}
 //	
+//	@Test
+//	public void buscarIndicadorPorUsuario2(){
+//		List<Indicador> indicador = new ArrayList<Indicador>();
+//		//Usuario us = this.buscarUsuarioPorNombre(nombre);
+//
+//		indicador = emanager.createQuery("FROM Indicador WHERE usuario_id=" + 1L, Indicador.class).getResultList();
+//		for(int i = 0;i<indicador.size();i++){
+//			
+//			System.out.println(indicador.get(i).getNombre() + " " + indicador.get(i).getExpresion());
+//		}
+//
+//	}
+//	@After
+//	public void tearDown() throws Exception {
+//		repositorio.cerrar();
+//		emFactory.close();
+//	}
 //	@Test 
 //	public void traerTodasLasEmpresas(){
 //		List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();
 //		empresasEnLaDB = emanager.createQuery("FROM Empresa",Empresa.class).getResultList();
 //
-//	}
-//	
-//	@After
-//	public void tearDown() throws Exception {
-//		repositorio.cerrar();
-//		emFactory.close();
 //	}
 //	@Test
 //	public void asdf(){

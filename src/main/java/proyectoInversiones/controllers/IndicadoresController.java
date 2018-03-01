@@ -41,6 +41,7 @@ public class IndicadoresController {
 		RepositorioGeneral repoGeneral = new RepositorioGeneral();
 		RepositorioServicio repo= RepositorioServicio.getInstance();
 		empresasEnLaDB = repo.obtenerTodasLasEmpresas();
+		usuarioActivo = req.cookie("usuario");
 		repoGeneral.setEmpresas(empresasEnLaDB);
 		return new ModelAndView(repoGeneral, "Indicadores2.html");
 	}
@@ -82,13 +83,14 @@ public class IndicadoresController {
 			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
 			repoGeneral.setIndicadores(operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa));
 			repoGeneral.setIndicadoresUsuario(operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa));
+			System.out.println("Indicadores a mostrar"+ repoGeneral.getIndicadoresUsuario().get(0).getNombre());
 			repoGeneral.setEmpresas(empresasEnLaDB);
 			repoIndicadores = repoGeneral.getIndicadores();
 			repoGeneral.setEmpresaAsociada(nombreEmpresa);
 			return new ModelAndView(repoGeneral, "Indicadores2.html");
 		} catch (Exception e){
 			res.cookie("mensajeError", e.getMessage());
-			res.redirect("/cuentas");
+			res.redirect("/indicadores");
 
 		}
 		return null;
