@@ -39,15 +39,17 @@ public class CalculoIndicadores {
 		return indicadores;
 	}
 
-	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)throws IOException{
+	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa,RepositorioServicio repositorio)throws IOException{
 		List<Indicador> indicadoresADevolver = new ArrayList<Indicador>();
 		IndVisitor indVisitor = new IndVisitor();
 		String usuario = usuarioActivo;
-		RepositorioServicio repositorio = RepositorioServicio.getInstance();
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		indicadores = repositorio.buscarIndicadorPorUsuario2(usuario);
 		System.out.println("Indicadores traidos de la base de datos: "+indicadores.size());
 		Indicador indicador = new Indicador();
+		for(int i = 0;i<indicadores.size();i++){
+			System.out.println("Indicador: "+indicadores.get(i).getNombre() + " Expresion: "+indicadores.get(i).getExpresion());
+		}
 		for (Periodo periodo:listaPeriodos) {
 			for (int i = 0; i < indicadores.size(); i++) {
 				indicador.setPeriodo(periodo.getAnio());
@@ -60,7 +62,7 @@ public class CalculoIndicadores {
 		}
 		
 		for(int i = 0;i<indicadores.size();i++){
-			System.out.println("Indicador: "+indicadores.get(i).getNombre());
+			System.out.println("Indicador: "+indicadores.get(i).getNombre() + " Expresion: "+indicadores.get(i).getExpresion());
 		}
 		return indicadoresADevolver;
 	}

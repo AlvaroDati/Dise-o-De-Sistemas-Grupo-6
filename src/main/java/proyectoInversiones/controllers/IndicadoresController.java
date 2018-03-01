@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import javax.persistence.Query;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -47,43 +49,18 @@ public class IndicadoresController {
 	}
 
 	
-//	public  ModelAndView setearEmpresa(Request req, Response res) {
-//		String nombreEmpresa = req.queryParams("Empresa");
-//		Empresa empresa = new Empresa(nombreEmpresa);
-//		try {
-//			Map<String, List<Indicador>> model = new HashMap<>();
-//			
-//			List<Periodo>periodosEmpresa =  lectorDrive.getPeriodos(empresa);
-//			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
-//			List<Indicador> indicadoresDeEmpresa = operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa);
-//			System.out.println(indicadoresDeEmpresa);
-//			List<Indicador> indicadoresUsuario = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa,empresa);
-//			System.out.println(indicadoresUsuario);
-//			repoIndicadores = operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa);
-//			return new ModelAndView(model, "Indicadores2.html");
-//
-//		} catch (Exception e) {
-//			res.cookie("mensajeError", e.getMessage());
-//			res.redirect("/cuentas");
-//		}
-//
-//		return null;
-//
-//	}
-	
 	public  ModelAndView setearEmpresa(Request req, Response res) {
 		String nombreEmpresa = req.queryParams("Empresa");
 		Empresa empresa = new Empresa(nombreEmpresa);
 		try {
 
-			RepositorioGeneral repoGeneral = new RepositorioGeneral();
 			RepositorioServicio repo = RepositorioServicio.getInstance();
+			RepositorioGeneral repoGeneral = new RepositorioGeneral();
 			
 			List<Periodo> periodosEmpresa = repo.obtenerTodosLosPeriodos(empresa);
 			CalculoIndicadores operadorIndicadores = new CalculoIndicadores(usuarioActivo);
 			repoGeneral.setIndicadores(operadorIndicadores.setearListaIndicadores(periodosEmpresa, empresa));
-			repoGeneral.setIndicadoresUsuario(operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa));
-			System.out.println("Indicadores a mostrar"+ repoGeneral.getIndicadoresUsuario().get(0).getNombre());
+			repoGeneral.setIndicadoresUsuario(operadorIndicadores.setearListaIndicadoresUsuario(periodosEmpresa, empresa,repo));
 			repoGeneral.setEmpresas(empresasEnLaDB);
 			repoIndicadores = repoGeneral.getIndicadores();
 			repoGeneral.setEmpresaAsociada(nombreEmpresa);
@@ -97,31 +74,6 @@ public class IndicadoresController {
 	}
 	
 	
-	
-	public List<Indicador> setearListaIndicadoresUsuario(List<Periodo> listaPeriodos,Empresa empresa)throws IOException{
-		
-		List<Indicador> indicadores = new ArrayList<Indicador>();
-		IndVisitor indVisitor = new IndVisitor();
-		String usuario = usuarioActivo;
-		LeerUsuarios archivoUsuarios = new LeerUsuarios();
-		RepositorioServicio repositorio = RepositorioServicio.getInstance();
-		List<String> expresionIndicadores = new ArrayList<String>();
-		expresionIndicadores = repositorio.buscarIndicadorPorUsuario(usuario);
-		Usuario usuarioCreador = archivoUsuarios.obtenerUsuario(usuario);
-		Indicador indicador = new Indicador();
-		for (int j = 0; j < listaPeriodos.size(); j++) {
-			int periodo = listaPeriodos.get(j).getAnio();
-			for (int i = 0; i < expresionIndicadores.size(); i++) {
-				indicador.setPeriodo(periodo);
-				System.out.println("Periodo de indicador: "+indicador.getPeriodo());
-					indicador = indVisitor.obtenerResultadoIndicadorSegunEmpresa(expresionIndicadores.get(i), empresa,
-							periodo);
-				indicadores.add(indicador);
-
-			}
-		}
-		return indicadores;
-	}
 	
 	
 	
@@ -141,7 +93,7 @@ public class IndicadoresController {
 		RepositorioServicio repo = repositorioServicio.getInstance();
 		List<Indicador> indicadoresUsuario = repo.buscarIndicadorPorUsuario2(usuario);		
 		Stream<Indicador> filtro = indicadoresUsuario.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
-		System.out.println("cantidad de indicadores"+indicadoresUsuario.size());
+		System.out.println("Cantidad de indicadores: "+indicadoresUsuario.size());
 
 		Long contador = filtro.count();
 
@@ -186,14 +138,15 @@ public static ModelAndView modificarIndicador(Request req, Response res){
 	Stream<Indicador> filtro = repoIndicadores.stream().filter(ind -> ind.getNombre().equals(nombreIndicador));
 	System.out.println("Cantidad de indicadores: "+repoIndicadores.size());
 
-
-	
-	
-		if (nombreIndicador != null  && expresionIndicador != null) {
+		if (nombreIndicador != null && expresionIndicador != null) {
 			RepositorioServicio repo = RepositorioServicio.getInstance();
-			RepositorioGeneral repositorio= new RepositorioGeneral();
+			RepositorioGeneral repositorio = new RepositorioGeneral();
 			repositorio.setIndicadoresUsuario(repo.buscarIndicadorPorUsuario2(usuarioActivo));
-			repo.cambiarExpresionDeIndicador(nombreIndicador+"="+expresionIndicador,repo.buscarUsuarioPorNombre(usuarioActivo).getId());
+			repo.modificarExpresionIndicador(nombreIndicador + "=" + expresionIndicador,
+					repo.buscarUsuarioPorNombre(usuarioActivo).getId(), nombreIndicador);
+
+//			repo.cambiarExpresionDeIndicador(nombreIndicador + "=" + expresionIndicador,
+//					repo.buscarUsuarioPorNombre(usuarioActivo).getId(), nombreIndicador);
 			res.redirect("/indicadores");
 		
 	}else{

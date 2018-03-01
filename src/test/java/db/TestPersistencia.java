@@ -52,31 +52,73 @@ public class TestPersistencia {
 //		repositorio = new Repositorio(emanager);
 //		//empresasDelJson = archivo.leerArchivo();
 //	}
+//	
 //	@Test
-//	public void cambiarExpresionIndicador(){
-//			
-//			Query query = emanager.createQuery("UPDATE Indicador i SET i.expresion='dds=20+20' WHERE i.usuario.id=1");
-//			emanager.getTransaction().begin();
-//			query.executeUpdate();
-//			
+//	public void modificarIndicador(){
+//		
+//	Indicador indicadorACambiar = new Indicador();
+//		
+//		List<Indicador> indicadores = emanager.createQuery("FROM Indicador i WHERE nombre='dds'").getResultList();
+//		indicadorACambiar = indicadores.get(0);
+//		Indicador aux = new Indicador();
+//			aux=	emanager.find(Indicador.class, indicadorACambiar.getId());
+//		emanager.getTransaction().begin();
+//		aux.setExpresion("dds=50+60");
+//		emanager.getTransaction().commit();
 //	}
+//	
+//	
 //	@After
 //	public void tearDown() throws Exception {
 //		repositorio.cerrar();
 //		emFactory.close();
 //	}
 //	
+//	public Usuario buscarUsuarioPorNombre(String nombre) {
+//		List<Usuario> usuarioALoguearse = new ArrayList<Usuario>();
+//		
+//		usuarioALoguearse = emanager.createNamedQuery("buscarUsuarioPorNombre").setParameter("filtro", "%" + nombre + "%").getResultList();
+//		
+//		System.out.println("Cantidad de usuarios extraídos de la bd: " + usuarioALoguearse.size());
+//		Usuario usuarioALoguearse2 = null;
+//		for (int i = 0; i < usuarioALoguearse.size(); i++) {
+//			if (usuarioALoguearse.get(i).getUserTag().equals(nombre)) {
+//				usuarioALoguearse2 = usuarioALoguearse.get(i);
+//			}
+//		}
+//		
+//		return usuarioALoguearse2;
+//	}
+//	@Test
+//	public void obtenerIndicadoresPorMedioDeUnaNamedQuery(){
+//		List<Indicador> indicadores2 = new ArrayList<Indicador>();
+//		Usuario us = this.buscarUsuarioPorNombre("ivan");
+//		indicadores2=emanager.createNamedQuery("buscarIndicadorPorUsuario").setParameter("filtro", us.getId()).getResultList();
+//		for(int i = 0;i<indicadores2.size();i++){
+//			System.out.println("Indicadores traidos con la NamedQuery: "+indicadores2.get(i).getNombre() + " expresion: "+ indicadores2.get(i).getExpresion());
+//		}
+//	}
 //	@Test
 //	public void buscarIndicadorPorUsuario2(){
 //		List<Indicador> indicador = new ArrayList<Indicador>();
 //		//Usuario us = this.buscarUsuarioPorNombre(nombre);
-//
+//		
 //		indicador = emanager.createQuery("FROM Indicador WHERE usuario_id=" + 1L, Indicador.class).getResultList();
 //		for(int i = 0;i<indicador.size();i++){
 //			
 //			System.out.println(indicador.get(i).getNombre() + " " + indicador.get(i).getExpresion());
 //		}
-//
+//	}
+//	@Test
+//	public void cambiarExpresionIndicador(){
+//		
+//		Query query = emanager.createQuery("UPDATE Indicador i SET i.expresion='dds=20+20' WHERE i.usuario.id=1");
+//		emanager.getTransaction().begin();
+//		query.executeUpdate();
+//		
+//	}
+//	
+
 //	@Test 
 //	public void traerTodasLasEmpresas(){
 //		List<Empresa> empresasEnLaDB = new ArrayList<Empresa>();

@@ -25,9 +25,16 @@ import proyectoInversiones.usuarios.Usuario;
 
 @Entity
 @Table(name = "indicadores")
-@NamedQuery(name = "buscarIndicadorPorUsuario", query = "SELECT u FROM Indicador u WHERE u.usuario.id LIKE :filtro")
+@NamedQuery(name = "buscarIndicadorPorUsuario", query = "SELECT u FROM Indicador u WHERE u.usuario.id  =:filtro")
 public class Indicador  implements Serializable{
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;

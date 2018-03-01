@@ -153,14 +153,14 @@ public class RepositorioServicio {
 		
 		return usuarioALoguearse2;
 	}
-	
-	public List<String> buscarIndicadorPorUsuario(String nombre){
+
+	public List<String> buscarIndicadorPorUsuario(String nombre) {
 		List<Indicador> indicador = new ArrayList<Indicador>();
 		List<String> expresionIndicadores = new ArrayList<String>();
 		Usuario us = this.buscarUsuarioPorNombre(nombre);
-		String query = "select  expresion from indicadores where usuario_id="+us.getId()+";";
+		String query = "select  expresion from indicadores where usuario_id=" + us.getId() + ";";
 
-expresionIndicadores =		emanager.createNativeQuery(query).getResultList();
+		expresionIndicadores = emanager.createNativeQuery(query).getResultList();
 
 		return expresionIndicadores;
 	}
@@ -168,27 +168,42 @@ expresionIndicadores =		emanager.createNativeQuery(query).getResultList();
 	public List<Indicador> buscarIndicadorPorUsuario2(String nombre) {
 		List<Indicador> indicadores = new ArrayList<Indicador>();
 		Usuario us = this.buscarUsuarioPorNombre(nombre);
+
 		System.out.println("El usuario: " + us.getUserTag() + " de ID: " + us.getId()
 				+ " desea extraer sus indicadores de la base de datos");
-
-		indicadores = emanager.createQuery("FROM Indicador WHERE usuario_id=" + us.getId(), Indicador.class).getResultList();
-
+		
+		Query query = emanager.createQuery("FROM Indicador i WHERE i.usuario.id=" + us.getId(), Indicador.class);
+	indicadores= 	query.getResultList();
 		for (int i = 0; i < indicadores.size(); i++) {
-			System.out.println("Indicadores extraidos de la base de datos: " + indicadores.get(i).getNombre());
+			System.out.println("Indicadores extraidos de la base de datos: " + indicadores.get(i).getNombre()+ " expresion: "+indicadores.get(i).getExpresion());
 		}
 		return indicadores;
 	}
 	
 	
-	public void cambiarExpresionDeIndicador(String expresionACambiar,long id){
+	public void cambiarExpresionDeIndicador(String expresionACambiar,long id,String nombreIndicador){
 		System.out.println("Expresion a cambiar: "+ expresionACambiar+ " del ID: "+ id);
-		Query query = emanager.createQuery("UPDATE Indicador i SET i.expresion='" +expresionACambiar+ "' WHERE i.usuario.id="+id);
+		Query query = emanager.createQuery("UPDATE Indicador i SET i.expresion='" +expresionACambiar+ "' WHERE i.usuario.id="+id+" AND nombre='"+nombreIndicador+"'");
 //query.setParameter("expr", expresionACambiar);
 //query.setParameter("usuario", id);
 		emanager.getTransaction().begin();
 		query.executeUpdate();
 		emanager.getTransaction().commit();
 		
+	}
+	
+	
+	
+	public void modificarExpresionIndicador(String expresionACambiar,long id, String nombreIndicador){
+		Indicador indicadorACambiar = new Indicador();
+		
+		List<Indicador> indicadores = emanager.createQuery("FROM Indicador i WHERE nombre='"+nombreIndicador+"'").getResultList();
+		indicadorACambiar = indicadores.get(0);
+		Indicador aux = new Indicador();
+			aux=	emanager.find(Indicador.class, indicadorACambiar.getId());
+		emanager.getTransaction().begin();
+		aux.setExpresion(expresionACambiar);
+		emanager.getTransaction().commit();
 	}
 	
 	/*

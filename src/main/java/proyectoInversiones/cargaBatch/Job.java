@@ -14,27 +14,28 @@ import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
 public class Job {
-	public static void main(String[] args) throws InterruptedException {
+ 
+ public void comenzarCargaBatch() throws InterruptedException {
 
-		try {
-			Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+  try {
+   Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-			JobDetail job = newJob(PruebaScheduler.class).withIdentity("job1", "group1").build();
+   JobDetail job = newJob(PruebaScheduler.class).withIdentity("job1", "group1").build();
 
-			Trigger trigger = newTrigger().withIdentity("trigger", "group1").startNow().withSchedule(simpleSchedule()
-					.withIntervalInSeconds(60).repeatForever())
-					.forJob(job)
-					.build();
+   Trigger trigger = newTrigger().withIdentity("trigger", "group1").startNow().withSchedule(simpleSchedule()
+     .withIntervalInSeconds(180).repeatForever())
+     .forJob(job)
+     .build();
 
-		
-			scheduler.scheduleJob(job, trigger);
+  
+   scheduler.scheduleJob(job, trigger);
 
-			scheduler.start();
-			Thread.sleep(240000);
-			scheduler.shutdown();
+   scheduler.start();
+   Thread.sleep(240000);
+   scheduler.shutdown();
 
-		} catch (SchedulerException se) {
-			se.printStackTrace();
-		}
-	}
+  } catch (SchedulerException se) {
+   se.printStackTrace();
+  }
+ }
 }

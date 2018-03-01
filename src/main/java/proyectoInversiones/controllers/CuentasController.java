@@ -9,6 +9,7 @@ import java.util.Map;
 
 import proyectoInversiones.Cuenta;
 import proyectoInversiones.Empresa;
+import proyectoInversiones.NuevoLeerArchivo;
 import proyectoInversiones.Periodo;
 import proyectoInversiones.DescargaDrive;
 import proyectoInversiones.repositorio.RepositorioGeneral;
@@ -37,8 +38,11 @@ public static ModelAndView setearEmpresa(Request req, Response res) {
 		
 		try{
 			RepositorioGeneral repoGeneral = new RepositorioGeneral();		
-			List<Periodo>periodosEmpresa =  lectorDrive.getPeriodos(new Empresa(empresa));
+			List<Periodo>periodosEmpresa =  new NuevoLeerArchivo().getPeriodos(new Empresa(empresa));
 			repoGeneral.setEmpresas(empresasEnLaDB);
+			for(int i = 0;i<repoGeneral.getEmpresas().size();i++){
+				System.out.println("Empresas a mostrar en /cuentas: " + repoGeneral.getEmpresas().get(i).getNombre());
+			}
 			repoGeneral.setCuentas(setearListaCuentas(periodosEmpresa));
 			repoGeneral.setEmpresaAsociada(empresa);
 			
